@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Taybeen | Coming Soon",
-  description: "Taybeen is preparing a curated shopping experience designed for comfort, quality, and style.",
+  description: "Taybeen is a premium date brand dedicated to purity, taste, and natural nutrition. Every pack is carefully sourced and thoughtfully packed to bring you the finest quality.",
 };
 
 export default function RootLayout({
