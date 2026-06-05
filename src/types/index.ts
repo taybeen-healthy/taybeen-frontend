@@ -1,7 +1,4 @@
-/**
- * Shared TypeScript interfaces for the Taybeen application.
- * Migrated from TB-Dualite React project.
- */
+/** Shared TypeScript interfaces for the Taybeen application. */
 
 /** Represents a date product with its details and display properties. */
 export interface Product {

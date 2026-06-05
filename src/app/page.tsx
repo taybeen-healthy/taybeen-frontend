@@ -1,26 +1,12 @@
 /**
  * Taybeen Landing Page — Main page component.
  *
- * This is the primary entry point for the Taybeen e-commerce landing page.
- * It composes all section components in order to create a single-page
- * application experience within the Next.js App Router.
+ * Composes all section components to create the single-page landing
+ * experience within the Next.js App Router.
  *
  * Marked as "use client" because child components use:
  *   - useState (Navbar mobile menu toggle)
  *   - framer-motion (Hero floating card animations)
- *
- * Section order (matches original React App.tsx):
- *   1. Navbar       — Fixed top navigation with logo, links, and mobile menu
- *   2. Hero         — Main hero with headline, CTAs, and animated image grid
- *   3. FeaturesBar  — Horizontal bar of four key selling points
- *   4. BestSellers  — Product card grid of top-selling date varieties
- *   5. OurStory     — Brand story with image, description, and highlight cards
- *   6. SpecialOffer — Promotional 50% off banner
- *   7. Gifting      — Premium gifting showcase with multi-card grid
- *   8. Testimonials — Customer review cards with ratings
- *   9. Footer       — Site footer with links, newsletter, and copyright
- *
- * Migrated from TB-Dualite (Vite + React) project with full visual fidelity.
  */
 
 "use client";
@@ -38,7 +24,7 @@ import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    /* Root container — matches the original React App.tsx wrapper div */
+    /* Root container */
     <div className="min-h-screen bg-brand-bg selection:bg-brand-primary/30">
 
       {/* Fixed navigation bar */}

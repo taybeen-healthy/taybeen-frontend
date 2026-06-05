@@ -1,6 +1,5 @@
 /**
- * SpecialOffer Section — Promotional banner with offer text and image.
- * Migrated from TB-Dualite React project.
+ * SpecialOffer — Promotional banner with offer text and image.
  */
 
 export const SpecialOffer: React.FC = () => {

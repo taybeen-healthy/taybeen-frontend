@@ -1,7 +1,6 @@
 /**
- * Navbar Section — Fixed navigation bar with logo, desktop links, icons, and mobile menu.
+ * Navbar — Fixed navigation bar with logo, desktop links, icons, and mobile menu.
  * Uses useState for mobile hamburger menu toggle.
- * Migrated from TB-Dualite React project.
  */
 
 "use client";

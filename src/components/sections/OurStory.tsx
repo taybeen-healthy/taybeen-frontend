@@ -1,6 +1,5 @@
 /**
- * OurStory Section — Brand story with image, description, CTA, and highlight cards.
- * Migrated from TB-Dualite React project.
+ * OurStory — Brand story with image, description, CTA, and highlight cards.
  */
 
 import { Button } from "@/components/ui/Button";

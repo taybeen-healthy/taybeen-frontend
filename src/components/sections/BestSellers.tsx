@@ -1,7 +1,6 @@
 /**
- * BestSellers Section — Grid of top-selling date product cards.
+ * BestSellers — Grid of top-selling date product cards.
  * Displays product image, badge, rating stars, price, and add-to-cart button.
- * Migrated from TB-Dualite React project.
  */
 
 import { products } from "@/data/mockData";

@@ -1,10 +1,4 @@
-/**
- * Tailwind CSS Configuration for Taybeen Frontend.
- * Merged from TB-Dualite React project's theme with the existing Next.js config.
- *
- * Brand palette, custom fonts (Poppins, DM Sans), border radii,
- * and box shadows are all carried over to ensure visual parity.
- */
+/** Tailwind CSS configuration — brand design tokens, fonts, and custom utilities. */
 
 import type { Config } from "tailwindcss";
 
@@ -24,7 +18,7 @@ const config: Config = {
         dm: ["var(--font-dm)", "DM Sans", "sans-serif"],
       },
 
-      /* ── Brand Color Palette (from TB-Dualite) ── */
+      /* ── Brand Color Palette ── */
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

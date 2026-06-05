@@ -1,7 +1,6 @@
 /**
- * Footer Section — Site footer with logo, social links, navigation columns,
+ * Footer — Site footer with logo, social links, navigation columns,
  * newsletter subscription, and copyright bar.
- * Migrated from TB-Dualite React project.
  */
 
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";

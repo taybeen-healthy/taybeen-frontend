@@ -1,6 +1,5 @@
 /**
  * Reusable Button component with multiple variants and sizes.
- * Migrated from TB-Dualite React project.
  *
  * Variants: primary | outline | ghost | dark
  * Sizes: sm | md | lg

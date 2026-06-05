@@ -1,10 +1,6 @@
 /**
- * Testimonials Section — Customer reviews grid with navigation arrows.
+ * Testimonials — Customer reviews grid with navigation arrows.
  * Displays quote, rating stars, author details, and product badge for each testimonial.
- * Migrated from TB-Dualite React project.
- *
- * Note: The original had a duplicate `className` on the Quote icon — fixed here
- * by merging both class strings into one.
  */
 
 import { testimonials } from "@/data/mockData";

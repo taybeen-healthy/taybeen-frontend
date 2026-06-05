@@ -1,7 +1,6 @@
 /**
- * FeaturesBar Section — Horizontal bar of key selling points with icons.
+ * FeaturesBar — Horizontal bar of key selling points with icons.
  * Displays: 100% Natural Snacks, No Artificial Additives, Easy Return, 24/7 Support.
- * Migrated from TB-Dualite React project.
  */
 
 import { Leaf, FlaskConical, RotateCcw, Headset } from "lucide-react";

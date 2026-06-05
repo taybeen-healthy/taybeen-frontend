@@ -1,7 +1,6 @@
 /**
- * Gifting Section — Premium gifting showcase with a 12-column grid layout.
+ * Gifting — Premium gifting showcase with a 12-column grid layout.
  * Features a main large card and two smaller cards on the right.
- * Migrated from TB-Dualite React project.
  */
 
 export const Gifting: React.FC = () => {

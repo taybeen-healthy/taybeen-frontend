@@ -1,8 +1,4 @@
-/**
- * Mock data for the Taybeen landing page.
- * Contains product listings and customer testimonials.
- * Migrated from TB-Dualite React project.
- */
+/** Product listings and customer testimonials for the Taybeen landing page. */
 
 import { Product, Testimonial } from "@/types";
 

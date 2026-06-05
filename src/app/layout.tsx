@@ -1,7 +1,6 @@
 /**
- * Root layout for the Taybeen Next.js application.
- * Loads Poppins and DM Sans fonts via next/font/google and applies them as CSS variables.
- * Updated metadata to match the Taybeen brand.
+ * Root layout — configures Poppins and DM Sans fonts via next/font/google,
+ * applies global styles, and sets page-level metadata.
  */
 
 import type { Metadata } from "next";

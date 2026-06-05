@@ -1,7 +1,6 @@
 /**
- * Hero Section — Landing hero with headline, tagline, CTAs, and dual image grid.
+ * Hero — Landing hero with headline, tagline, CTAs, and dual image grid.
  * Uses framer-motion for floating info card animations.
- * Migrated from TB-Dualite React project.
  */
 
 import { Button } from "@/components/ui/Button";
