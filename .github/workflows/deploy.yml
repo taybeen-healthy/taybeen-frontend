@@ -1,0 +1,61 @@
+name: Deploy Taybeen Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Hostinger VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Execute Deploy Script on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            # Exit immediately if any command fails
+            set -e
+
+            # Navigate to project directory
+            cd /root/taybeen-frontend
+            echo "Connected to VPS"
+
+            # Pull the latest code
+            git fetch origin
+            git reset --hard origin/main
+            echo "Git pull completed"
+
+            # Source environmental files to ensure node, pnpm, and pm2 are in the PATH
+            for profile in "$HOME/.bashrc" "$HOME/.profile" "$HOME/.bash_profile"; do
+              if [ -f "$profile" ]; then
+                source "$profile"
+              fi
+            done
+
+            # Export default path locations for pnpm and PM2 in case they are not in the standard SSH PATH
+            export PATH="$HOME/.local/share/pnpm:$PATH"
+            export PATH="$HOME/.npm-global/bin:$PATH"
+            export PATH="/usr/local/bin:$PATH"
+
+            # Install dependencies
+            pnpm install --frozen-lockfile
+            echo "Dependencies installed"
+
+            # Build the Next.js application
+            pnpm build
+            echo "Build successful"
+
+            # Gracefully reload the PM2 process
+            pm2 reload taybeen
+            echo "PM2 reload successful"
+
+            echo "Deployment completed"
