@@ -7,14 +7,15 @@
 
 import { useState } from "react";
 import { User, ShoppingCart, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar: React.FC = () => {
   /* Track mobile menu open/close state */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F6F1E9] bg-opacity-70 backdrop-blur-md px-4 md:px-24 py-4 md:py-6">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F6F1E9] bg-opacity-70 backdrop-blur-md px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12 py-4 md:py-5 lg:py-6">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <img
@@ -26,10 +27,10 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-12">
-          <a href="#" className="font-poppins font-bold text-xl text-brand-brown">Home</a>
-          <a href="#" className="font-poppins font-normal text-xl text-brand-brown">Our Story</a>
-          <a href="#" className="font-poppins font-normal text-xl text-brand-brown">Our Products</a>
-          <a href="#" className="font-poppins font-normal text-xl text-brand-brown">Contact Us</a>
+          <a href="#" className="font-poppins font-bold text-lg text-brand-brown">Home</a>
+          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Story</a>
+          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Products</a>
+          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Contact Us</a>
         </div>
 
         {/* Action Icons + Mobile Menu Toggle */}
@@ -56,14 +57,23 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-[#F6F1E9] border-t border-brand-brown/10 p-6 flex flex-col space-y-4 shadow-xl">
-          <a href="#" className="font-poppins font-bold text-lg text-brand-brown">Home</a>
-          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Story</a>
-          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Products</a>
-          <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Contact Us</a>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="lg:hidden absolute top-full left-0 right-0 bg-[#F6F1E9] border-t border-brand-brown/10 p-6 flex flex-col space-y-4 shadow-xl z-50"
+          >
+            <a href="#" className="font-poppins font-bold text-lg text-brand-brown">Home</a>
+            <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Story</a>
+            <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Our Products</a>
+            <a href="#" className="font-poppins font-normal text-lg text-brand-brown">Contact Us</a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </nav>
   );
 };

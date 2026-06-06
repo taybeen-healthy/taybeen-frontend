@@ -16,21 +16,42 @@ export const FeaturesBar: React.FC = () => {
   ];
 
   return (
-    <div className="bg-brand-green-pale py-8 md:py-4">
-      <div className="max-w-7xl mx-auto px-6 md:px-24 flex flex-col md:flex-row flex-wrap justify-center md:justify-between items-center gap-8 md:gap-4">
-        {features.map((f, i) => (
-          <Fragment key={i}>
-            {/* Feature item */}
-            <div className="flex items-center gap-4 w-full md:w-auto justify-center md:justify-start">
-              <div className="w-7 h-7 flex items-center justify-center shrink-0">{f.icon}</div>
-              <span className="text-brand-brown font-poppins font-semibold text-xl md:text-2xl text-center md:text-left">{f.text}</span>
+    <div className="bg-brand-green-pale py-6 sm:py-7 md:py-8 lg:py-6">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
+        {/* Mobile & Tablet: Vertical stacked layout */}
+        <div className="flex flex-col items-center gap-5 sm:gap-6 lg:hidden">
+          {features.map((f, i) => (
+            <div key={i} className="flex items-center gap-3 sm:gap-4">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shrink-0">
+                {f.icon}
+              </div>
+              <span className="text-brand-brown font-poppins font-semibold text-base sm:text-lg md:text-xl whitespace-nowrap">
+                {f.text}
+              </span>
             </div>
-            {/* Vertical divider between items (desktop only) */}
-            {i < features.length - 1 && (
-              <div className="hidden lg:block w-px h-12 bg-brand-gold"></div>
-            )}
-          </Fragment>
-        ))}
+          ))}
+        </div>
+
+        {/* Desktop: Horizontal layout with dividers */}
+        <div className="hidden lg:flex justify-between items-center gap-4 xl:gap-6">
+          {features.map((f, i) => (
+            <Fragment key={i}>
+              {/* Feature item */}
+              <div className="flex items-center gap-3 xl:gap-4">
+                <div className="w-6 h-6 xl:w-7 xl:h-7 flex items-center justify-center shrink-0">
+                  {f.icon}
+                </div>
+                <span className="text-brand-brown font-poppins font-semibold text-base lg:text-base xl:text-lg 2xl:text-xl whitespace-nowrap">
+                  {f.text}
+                </span>
+              </div>
+              {/* Vertical divider between items */}
+              {i < features.length - 1 && (
+                <div className="w-px h-10 xl:h-12 bg-brand-gold shrink-0"></div>
+              )}
+            </Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );

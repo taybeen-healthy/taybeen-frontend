@@ -8,8 +8,8 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 export const Testimonials: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-brand-bg">
-      <div className="max-w-7xl mx-auto px-6 md:px-24">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-bg">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
 
         {/* ── Section Header with Navigation Arrows ── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-8">
@@ -17,12 +17,12 @@ export const Testimonials: React.FC = () => {
             <div className="inline-block px-4 py-2 rounded-3xl bg-brand-primary/25 border border-[#F6EBDA80] backdrop-blur-sm">
               <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">From Our Community</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-poppins font-bold text-brand-brown leading-tight -tracking-[0.04em]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-serif font-bold text-brand-brown leading-tight -tracking-[0.04em]">
               Dates worth talking about!
             </h2>
           </div>
           {/* Carousel navigation arrows */}
-          <div className="flex items-center gap-4 md:gap-6">
+          <div className="flex items-center justify-start md:justify-end gap-4 md:gap-6 w-full md:w-auto">
             <button className="w-12 h-12 md:w-14 md:h-14 rounded-full border-[1.6px] border-brand-green-light flex items-center justify-center text-brand-green-light hover:bg-brand-green-light hover:text-white transition-all">
               <ChevronLeft size={20} className="md:w-6 md:h-6" />
             </button>
@@ -30,12 +30,13 @@ export const Testimonials: React.FC = () => {
               <ChevronRight size={20} className="md:w-6 md:h-6" />
             </button>
           </div>
+
         </div>
 
         {/* ── Testimonial Cards Grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 xl:gap-8">
           {testimonials.map((t) => (
-            <div key={t.id} className="bg-white p-6 md:p-8 rounded-2xl border border-brand-brown-dark/10 flex flex-col h-auto md:h-[400px]">
+            <div key={t.id} className="bg-white p-5 md:p-6 lg:p-7 xl:p-8 rounded-2xl border border-brand-brown-dark/10 flex flex-col h-auto lg:h-[380px] xl:h-[400px]">
 
               {/* Quote and review text */}
               <div className="space-y-4 md:space-y-5 flex-1 mb-6">
