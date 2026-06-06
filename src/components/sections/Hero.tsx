@@ -6,6 +6,12 @@
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 
+// Import local images from src/public
+import fallingDatesImage from "@/public/7844d57c9be79ee5e7b88ccbc592df37 1.png";
+import datesInWoodenBowlImage from "@/public/Image (Dates in wooden bowl).png";
+import premiumDatesOnPlateImage from "@/public/Image (Premium dates on a plate).png";
+import pileOfPremiumDatesImage from "@/public/Image (Pile of premium dates).png";
+
 export const Hero: React.FC = () => {
   return (
     <section className="relative pt-24 md:pt-32 pb-16 md:pb-20 bg-gradient-to-b from-white to-[#F7A50324] overflow-hidden">
@@ -56,7 +62,7 @@ export const Hero: React.FC = () => {
             {/* Top-left small card — Ajwa Dates */}
             <div className="absolute top-0 left-[20px] lg:top-0 lg:left-0 w-[80px] lg:w-[80px] xl:w-[85px] 2xl:w-[90px] h-[80px] lg:h-[80px] xl:h-[85px] 2xl:h-[90px] rounded-[16px] lg:rounded-[18px] xl:rounded-[20px] overflow-hidden border-[1.6px] lg:border-[2px] border-brand-primary border-opacity-25 shadow-sm lg:shadow-premium z-10">
               <img
-                src="https://s3-alpha-sig.figma.com/img/cc9f/1b5e/6a2aa10b77d50a2a53738530eff845ba?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qOl3te8RaPpOlSzb5JgnonWzVXkzOH6Ne0kbNCLfQovaOI7RO3Efx2P5QyVeYfX1qY4Zt19fzQNN4lnGmmHGTVvSQUsUFb1o40nwm5HX2hnHZjEGMQTB249bzyF5iUbC4HZN9lvxfXg1qmpxyF8469nXK9ZCRUEjt7hK2mzHWHIVy-UI~pptewnZ0EwyCEcmiU1N4cy4SpV-qrQCshdC8z2GmEsTIBboOjyLOvW2DjjF4oxmmc-cbFDuYIwYOFaG8qA46Ga6vjrF2mtI-FXg6xbhfa6oPBIy0JocersSl4nIDA6Cxp1W9gUJ7e91uH7FyY~O9eDriLkolsm~LYFrSA__"
+                src={datesInWoodenBowlImage.src}
                 alt="Ajwa Dates"
                 className="w-full h-full object-cover"
               />
@@ -65,7 +71,7 @@ export const Hero: React.FC = () => {
             {/* Top-right image card — Kalmi Dates */}
             <div className="absolute top-[40px] left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto lg:top-[25px] lg:right-0 w-[220px] lg:w-[210px] xl:w-[245px] 2xl:w-[270px] h-[300px] lg:h-[280px] xl:h-[320px] 2xl:h-[350px] rounded-[24px] lg:rounded-[32px] xl:rounded-[40px] overflow-hidden shadow-premium border-[2.4px] lg:border-[2px] border-brand-primary border-opacity-25 z-10">
               <img
-                src="https://s3-alpha-sig.figma.com/img/2dff/23f9/ba8253a209241a43ec270cb9f4d27fab?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=sxfvpXon4VjOj23i8LiiF6nyoK6qQnTHCargOpEP0TlrWDowdAcRjUu78QigbLNIudx~iy8qqUbf6y9EJOs6EWLiT-Wg3fNTrggPZx3-uzxPW6bXhNmaAwBbXGqwQM1XmyEB6OruP2gETcHa5-1KG0lYX7xgqEtWIwDbwHGa8ntSye0udtJ2PybNx~XriVAPk87S-Qx3UJUHZqcsxZeCh5ML1mfgCOek1Sw6U21niNGyw3Ny7lRotPUnmDq5i7LxR6n3ZGe-U8g1KmTW5gdW7dQGq5FQEoj9xiei3rV3IPMDxQ9rr~W5vEupLEuotAxebZL1TxcgIBTV05J1k8TjyA__"
+                src={premiumDatesOnPlateImage.src}
                 alt="Kalmi Dates"
                 className="w-full h-full object-cover"
               />
@@ -83,7 +89,7 @@ export const Hero: React.FC = () => {
             {/* Bottom-left image card — Sukkary Dates (Hidden on mobile/tablet) */}
             <div className="hidden lg:block absolute lg:top-[175px] xl:top-[185px] 2xl:top-[195px] lg:left-[70px] xl:left-[85px] 2xl:left-[95px] lg:w-[210px] xl:w-[245px] 2xl:w-[270px] lg:h-[280px] xl:h-[310px] 2xl:h-[340px] lg:rounded-[32px] xl:rounded-[40px] overflow-hidden shadow-premium lg:border-[2px] border-brand-primary border-opacity-25 z-[5]">
               <img
-                src="https://s3-alpha-sig.figma.com/img/014e/7516/579b84dc7ce36649207b116fdaf381c6?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=nM4OhWdZKZv8JVeE27KFn7RbRt04rZ3XxeC3U1DSuyQmqtVn1qfZE9qPxEpQR26ZwhacTT~0Z21T3ugF65zHryrXs~tX2tMdMajs2EN5NukmA0fm~OasK1clgaTQHdlAyOd-AWYPEsWInABQfdsIYMYLzi1wsrhDgyD3hGFgarxauxcSP2R4FZmsah5DiQtreM2eAS9LUZ5lwGUvM~4vbVhUykJh8TBOl3rTNRfE6bjtC2mCiZtHHqJreiYrSWH9aPtMHjJkytEjmSvvDMZoHZNKdXAzPwIsqb7jOn3DC2I5Y9TnGrY-rn8lL1V6iASdn7FozA~tEyW9VrpaPwG30AA__"
+                src={fallingDatesImage.src}
                 alt="Sukkary Dates"
                 className="w-full h-full object-cover"
               />
@@ -101,7 +107,7 @@ export const Hero: React.FC = () => {
             {/* Bottom-right small card — Safawi Dates */}
             <div className="absolute bottom-[30px] right-[20px] lg:bottom-[5px] lg:right-[5px] xl:bottom-[5px] xl:right-[10px] 2xl:bottom-[5px] 2xl:right-[10px] w-[80px] lg:w-[80px] xl:w-[85px] 2xl:w-[90px] h-[80px] lg:h-[80px] xl:h-[85px] 2xl:h-[90px] rounded-[16px] lg:rounded-[18px] xl:rounded-[20px] overflow-hidden border-[1.6px] lg:border-[2px] border-brand-primary border-opacity-25 shadow-sm lg:shadow-premium z-10">
               <img
-                src="https://s3-alpha-sig.figma.com/img/4899/d334/711770072c9bfcfcf8508aa89b253dc0?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SLlbyyUfITqA37JRfy5Q7hfABOEHkYU-OweiBylX4UBGM5lRQa6tAT79ytldlaTt0bw~-t63uYKIgeH17HpirLrYsCoMOKVUJCOFjXeJAGr887flJQLvSOySwzOCMfGIS6lcDJj1fonNJLWjPKSv2D-vKs4ztDfn3YPqeSVmDw2N-N648VlUc3yB3BABeiAiDy9yrmICpZc4ot0~GEYew6Arok0Biqo0y848vohmvmZ41DL1DK6yAyQxSZNoGI7ps3GlYQs6XkFomZ4nwtaGJn1-dMyt9GvURJuj-nLvxaRW-VMV70HoUsEv69MGtJbgA6WJkLLgag8hEwhteJv52Q__"
+                src={pileOfPremiumDatesImage.src}
                 alt="Safawi Dates"
                 className="w-full h-full object-cover"
               />

@@ -89,7 +89,7 @@ export const Footer: React.FC = () => {
 
         {/* ── Bottom Copyright Bar ── */}
         <div className="pt-8 border-t border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-          <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Tevin Premium Dates. All rights reserved. CI CD Test</p>
+          <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Tevin Premium Dates. All rights reserved.</p>
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-brand-green-light font-poppins text-[10px] md:text-xs">
             <a href="#" className="hover:underline">Privacy Policy</a>
             <a href="#" className="hover:underline">Terms of Service</a>
