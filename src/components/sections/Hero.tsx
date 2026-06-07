@@ -137,7 +137,7 @@ export const Hero: React.FC = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="absolute top-[80px] right-[10px] w-24 bg-brand-green rounded-xl p-2 text-center shadow-xl z-30 md:top-[80px] md:right-[-30px] md:w-[110px] md:h-[80px] md:flex md:flex-col md:justify-center lg:top-[86px] lg:right-[-32px] lg:w-[118px] lg:h-[90px] xl:top-[95px] xl:right-[-35px] xl:w-[130px] xl:h-[90px] 2xl:top-[104px] 2xl:right-[-38px] 2xl:w-[142px] 2xl:h-[120px]"
+              className="absolute top-[80px] right-[10px] w-24 bg-[#2C3A1A] rounded-xl p-2 text-center shadow-xl z-30 md:top-[80px] md:right-[-30px] md:w-[110px] md:h-[80px] md:flex md:flex-col md:justify-center lg:top-[86px] lg:right-[-32px] lg:w-[118px] lg:h-[90px] xl:top-[95px] xl:right-[-35px] xl:w-[130px] xl:h-[90px] 2xl:top-[104px] 2xl:right-[-38px]"
             >
               <p className="text-white/70 font-poppins font-medium text-[8px] md:text-[9px] lg:text-[10px] xl:text-[11px] 2xl:text-[12px] leading-tight">
                 Natural energy
