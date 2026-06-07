@@ -5,6 +5,8 @@
  * Sizes: sm | md | lg
  */
 
+import { cn } from "@/lib/utils";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "outline" | "ghost" | "dark";
   size?: "sm" | "md" | "lg";
@@ -20,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   /* Base styles shared by all button variants */
   const baseStyles =
-    "inline-flex items-center justify-center font-poppins transition-all duration-200 rounded-lg";
+    "inline-flex items-center justify-center font-poppins leading-none transition-all duration-200 rounded-lg";
 
   /* Visual variant styles */
   const variants = {
@@ -40,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={cn(baseStyles, variants[variant], sizes[size], className)}
       {...props}
     >
       {children}

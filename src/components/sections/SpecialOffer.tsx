@@ -14,14 +14,14 @@ export const SpecialOffer: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-6xl font-serif font-bold text-brand-brown leading-[1.1] -tracking-[0.025em]">
               Unlock upto 50% on your first order
             </h2>
-            <p className="text-brand-green font-poppins text-sm sm:text-base lg:text-base xl:text-lg leading-relaxed max-w-xl">
+            <p className="text-brand-green mx-auto lg:mx-0 font-poppins text-sm sm:text-base lg:text-base xl:text-lg leading-relaxed max-w-xl">
               Join 8,000+ health-conscious Indian families. <br className="hidden md:block" />
               Get exclusive early access to new varieties, seasonal hampers, and wellness content — straight to your inbox.
             </p>
           </div>
 
           {/* ── Right Column: Promotional Image ── */}
-          <div className="w-full lg:w-auto lg:flex-shrink-0 max-w-[300px] sm:max-w-[340px] lg:max-w-[320px] xl:max-w-[360px] 2xl:max-w-[400px] aspect-square rounded-2xl lg:rounded-3xl overflow-hidden relative">
+          <div className="w-full lg:w-auto lg:flex-shrink-0 max-w-[300px] sm:max-w-[340px] lg:max-w-[320px] xl:max-w-[360px] 2xl:max-w-[400px] aspect-square rounded-xl overflow-hidden relative">
             <img
               src="https://s3-alpha-sig.figma.com/img/872e/ecfe/b923789118b00da9da7053d0ccee2cbf?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=UCZlVwukV~Gf99gJ9tdWNNcdGp99KTJQyy8HgNYWaw2OccoU-L81mX3qa6BcpPsLgd4NLOULMIuSqgFIAnasNhb2WRo4o42kzPrTIKlrzMIxiTTuHFvHETO4JqyLSpTd-2P2ZXd-91xMQa4YUq5sOmKq70kFS3PP4NHEhq4M2folPJjlZTBHfRar4vIzd9MvAT~DDQelGxzC37PDlBuUCL0VgYZQIwwOJYWsOeeq9b9oMo1Y2VHjtsjB8nblK0jI~rJap2SyV2sDnBXCEaQ7w7yMhiQ01L0lGa~BG3NOqJgTsOKZA3yMNJuYXfwRd71Hqz-f1LbS~1e0mzcfswOx6Q__"
               alt="Dates Bowl"
