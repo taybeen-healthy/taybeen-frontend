@@ -3,14 +3,14 @@
  */
 
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2 } from "lucide-react";
+import { Leaf, Apple, Award } from "lucide-react";
 
 export const OurStory: React.FC = () => {
   /* Highlight cards data — key brand values */
   const highlights = [
-    { title: "Mindfully Sourced", desc: "Premium non-GMO ingredients" },
-    { title: "Balanced Nutrition", desc: "Diverse range of snack types" },
-    { title: "Conscious Choices", desc: "No palm oil, no artificial flavours" },
+    { title: "Mindfully Sourced", desc: "Premium non-GMO ingredients", icon: Leaf },
+    { title: "Balanced Nutrition", desc: "Diverse range of snack types", icon: Apple },
+    { title: "Conscious Choices", desc: "No palm oil, no artificial flavours", icon: Award },
   ];
 
   return (
@@ -45,7 +45,7 @@ export const OurStory: React.FC = () => {
                 </p>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <Button variant="primary" className="rounded-full border border-brand-gold w-full sm:w-auto px-6 sm:px-8">
+                <Button variant="primary" className="rounded-full border border-brand-gold w-full sm:w-auto px-6 sm:px-8 cursor-pointer">
                   Learn More About Us
                 </Button>
               </div>
@@ -55,37 +55,40 @@ export const OurStory: React.FC = () => {
             <div className="space-y-3 sm:space-y-4">
               {/* Mobile/Tablet: All cards stacked vertically */}
               <div className="flex flex-col gap-3 sm:gap-4 lg:hidden">
-                {highlights.map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 border border-brand-brown/10 rounded-xl bg-white/50 backdrop-blur-sm"
-                  >
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-brand-primary flex items-center justify-center text-[#F6F1E9] shrink-0">
-                      <CheckCircle2 size={20} className="sm:w-6 sm:h-6" />
+                {highlights.map((h, i) => {
+                  const Icon = h.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 border border-brand-brown/10 rounded-xl bg-white/50 backdrop-blur-sm"
+                    >
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-brand-primary flex items-center justify-center text-[#F6F1E9] shrink-0">
+                        <Icon size={20} className="sm:w-6 sm:h-6" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="text-brand-green font-poppins font-bold text-sm sm:text-base">
+                          {h.title}
+                        </h4>
+                        <p className="text-brand-green-light font-poppins text-xs sm:text-sm">
+                          {h.desc}
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-left">
-                      <h4 className="text-brand-green font-poppins font-bold text-sm sm:text-base">
-                        {h.title}
-                      </h4>
-                      <p className="text-brand-green-light font-poppins text-xs sm:text-sm">
-                        {h.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
-              {/* Desktop: 2 cards in row, 1 below */}
-              <div className="hidden lg:block">
-                {/* First row: 2 cards */}
-                <div className="grid grid-cols-2 gap-3 xl:gap-4 mb-3 xl:mb-4">
-                  {highlights.slice(0, 2).map((h, i) => (
+              {/* Desktop: 2-column grid for all cards */}
+              <div className="hidden lg:grid grid-cols-2 gap-3 xl:gap-4">
+                {highlights.map((h, i) => {
+                  const Icon = h.icon;
+                  return (
                     <div
                       key={i}
                       className="flex items-center gap-3 xl:gap-4 p-4 xl:p-5 border border-brand-brown/10 rounded-xl bg-white/50 backdrop-blur-sm"
                     >
                       <div className="w-9 h-9 xl:w-10 xl:h-10 rounded-full bg-brand-primary flex items-center justify-center text-[#F6F1E9] shrink-0">
-                        <CheckCircle2 size={18} className="xl:w-5 xl:h-5" />
+                        <Icon size={18} className="xl:w-5 xl:h-5" />
                       </div>
                       <div className="text-left">
                         <h4 className="text-brand-green font-poppins font-bold text-sm xl:text-base">
@@ -96,23 +99,8 @@ export const OurStory: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                  ))}
-                </div>
-                
-                {/* Second row: 1 card full width */}
-                <div className="flex items-center gap-3 xl:gap-4 p-4 xl:p-5 border border-brand-brown/10 rounded-xl bg-white/50 backdrop-blur-sm">
-                  <div className="w-9 h-9 xl:w-10 xl:h-10 rounded-full bg-brand-primary flex items-center justify-center text-[#F6F1E9] shrink-0">
-                    <CheckCircle2 size={18} className="xl:w-5 xl:h-5" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="text-brand-green font-poppins font-bold text-sm xl:text-base">
-                      {highlights[2].title}
-                    </h4>
-                    <p className="text-brand-green-light font-poppins text-xs xl:text-sm">
-                      {highlights[2].desc}
-                    </p>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
