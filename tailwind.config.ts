@@ -16,6 +16,7 @@ const config: Config = {
         sans: ["var(--font-poppins)", "sans-serif"],
         poppins: ["var(--font-poppins)", "Poppins", "sans-serif"],
         dm: ["var(--font-dm)", "DM Sans", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
       },
 
       /* ── Brand Color Palette ── */
