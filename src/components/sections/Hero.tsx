@@ -10,12 +10,6 @@ import datesInWoodenBowlImage from "@/public/Image (Dates in wooden bowl).png";
 import premiumDatesOnPlateImage from "@/public/Image (Premium dates on a plate).png";
 import pileOfPremiumDatesImage from "@/public/Image (Pile of premium dates).png";
 
-// Import local images from src/public
-import fallingDatesImage from "@/public/7844d57c9be79ee5e7b88ccbc592df37 1.png";
-import datesInWoodenBowlImage from "@/public/Image (Dates in wooden bowl).png";
-import premiumDatesOnPlateImage from "@/public/Image (Premium dates on a plate).png";
-import pileOfPremiumDatesImage from "@/public/Image (Pile of premium dates).png";
-
 export const Hero: React.FC = () => {
   return (
     <section
