@@ -77,12 +77,12 @@ export const testimonials: Testimonial[] = [
   {
     id: "2",
     quote:
-      "\"I recommend Taybeen's Ajwa dates to every one of my clients who needs a natural iron supplement. The quality is consistently exceptional — fresh, moist, and exactly as described. Nothing like the dry dates you find in local stores.\"",
-    author: "Priya Sharma",
-    role: "Nutritionist",
-    location: "Mumbai",
+      "\"The Mejdool dates are incredibly soft and sweet, like caramel fudge. They are the perfect natural sweet treat and a great source of energy before my workouts. My family absolutely loves them!\"",
+    author: "Rahul Verma",
+    role: "Fitness Coach",
+    location: "Delhi",
     rating: 5,
-    productName: "Ajwa Dates",
+    productName: "Mejdool Dates",
   },
   {
     id: "3",
@@ -91,7 +91,37 @@ export const testimonials: Testimonial[] = [
     author: "Priya Sharma",
     role: "Nutritionist",
     location: "Mumbai",
-    rating: 5,
+    rating: 4,
     productName: "Ajwa Dates",
+  },
+  {
+    id: "4",
+    quote:
+      "\"We ordered the festive hampers for corporate gifting this year. The feedback from our clients was overwhelming - they loved the premium presentation and the rich, authentic taste of the Safawi dates.\"",
+    author: "Sneha Patel",
+    role: "HR Director",
+    location: "Bangalore",
+    rating: 5,
+    productName: "Safawi Dates",
+  },
+  {
+    id: "5",
+    quote:
+      "\"Mabroom dates are my absolute favorite. They are semi-dry and have a balanced, subtle sweetness that isn't overpowering. Outstanding quality, clean packaging, and very fast shipping!\"",
+    author: "Amit Kapoor",
+    role: "Food Blogger",
+    location: "Pune",
+    rating: 5,
+    productName: "Mabroom Dates",
+  },
+  {
+    id: "6",
+    quote:
+      "\"Every single date in the package was perfect - soft, clean, and delicious. You can really taste the difference when dates are sourced fresh. Will definitely be a regular customer!\"",
+    author: "Neha Sen",
+    role: "Home Chef",
+    location: "Kolkata",
+    rating: 5,
+    productName: "Premium Collection",
   },
 ];
