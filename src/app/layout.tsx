@@ -5,6 +5,7 @@
 
 import type { Metadata } from "next";
 import { Poppins, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,21 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-dm",
+});
+
+/* Playfair Display — serif font for headings */
+const playfair = localFont({
+  src: [
+    {
+      path: "../../public/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf",
+      style: "normal",
+    },
+    {
+      path: "../../public/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf",
+      style: "italic",
+    },
+  ],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +56,8 @@ export default function RootLayout({
           "min-h-screen font-sans antialiased",
           poppins.variable,
           poppins.className,
-          dmSans.variable
+          dmSans.variable,
+          playfair.variable
         )}
       >
         {children}
