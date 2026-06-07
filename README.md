@@ -42,36 +42,32 @@ A production-grade, fully responsive Next.js frontend application built with Nex
 
 ```text
 taybeen-frontend/
+├── public/                          # Static assets
+│   ├── Playfair_Display/            # Local Playfair Display serif font
+│   └── ...                          # Image assets
+│
 ├── src/
 │   ├── app/                         # Next.js App Router
-│   │   ├── layout.tsx               # Root layout with providers
+│   │   ├── layout.tsx               # Root layout with font configurations
 │   │   └── page.tsx                 # Home page
 │   │
 │   ├── components/                  # Reusable UI components
-│   │   └── (organized by feature)
+│   │   ├── layout/                  # App-wide structural elements (Navbar, Footer)
+│   │   ├── sections/                # Single-page sections (Hero, BestSellers, etc.)
+│   │   └── ui/                      # Reusable UI primitives (Button)
 │   │
-│   ├── features/                    # Feature-based modules
-│   │   └── (domain logic + UI + hooks)
+│   ├── data/                        # Static data and configurations
+│   │   └── mockData.ts              # Mock application data
 │   │
 │   ├── lib/                         # Utilities & helpers
 │   │   └── utils.ts                 # Common utility functions
 │   │
-│   ├── hooks/                       # Reusable React hooks
-│   │
-│   ├── types/                       # Global TypeScript types
-│   │
-│   ├── constants/                   # Global constants
-│   │
 │   ├── styles/                      # Global CSS
 │   │   └── globals.css              # Tailwind entry point
 │   │
-│   └── providers/                   # React Context providers
-│
-├── public/                          # Static assets
-│   ├── images/
-│   ├── fonts/
-│   └── icons/
-│
+│   └── types/                       # Global TypeScript types
+│       └── index.ts                 # Shared types
+```
 ├── package.json
 ├── tsconfig.json                    # TypeScript configuration
 ├── next.config.mjs                  # Next.js configuration
@@ -164,7 +160,7 @@ pnpm start
 
 ### Data Flow
 
-- Static data files in `/src/constants/` for non-dynamic content
+- Static data files in `/src/data/` for non-dynamic content
 - API routes for backend communication (if applicable)
 - React Context for global state management
 - Custom hooks for reusable logic
