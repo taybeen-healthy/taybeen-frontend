@@ -1,21 +1,13 @@
-/**
- * Footer — Site footer with logo, social links, navigation columns,
- * centered newsletter subscription, and copyright bar.
- */
-
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-brand-bg border-t border-[#E5E5E5] lg:border-t-0 pt-16 sm:pt-20 lg:pt-16 pb-10 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
-        {/* Top border line for desktop layout */}
         <div className="hidden lg:block border-t border-[#A69797] mb-16" />
 
-        {/* ── Main Footer Grid (4 Columns) ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16 lg:mb-8">
 
-          {/* Brand Column — Logo, description, social links */}
           <div className="space-y-6 text-left">
             <div className="flex justify-start">
               <img
@@ -27,7 +19,6 @@ export const Footer: React.FC = () => {
             <p className="text-brand-brown-dark font-poppins text-sm leading-relaxed max-w-xs">
               India&apos;s most trusted source for premium, authenticated date varieties — sourced directly from Saudi Arabia, Jordan, and Iran.
             </p>
-            {/* Social media icons */}
             <div className="flex items-center justify-start gap-4">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
                 <a key={i} href="#" className="w-10 h-10 rounded-full bg-brand-green-pale flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all">
@@ -37,7 +28,6 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Navigation Column — Products */}
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">OUR PRODUCTS</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
@@ -49,7 +39,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Navigation Column — Support */}
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">SUPPORT</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
@@ -60,7 +49,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Navigation Column — Company */}
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">COMPANY</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
@@ -74,7 +62,6 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* ── Newsletter Subscription Area (Centered Below Grid) ── */}
         <div className="flex flex-col items-center justify-center text-center space-y-6 mb-8 lg:mb-16 max-w-2xl mx-auto">
           <p className="text-brand-brown font-serif font-bold text-xl md:text-[1.75rem] leading-snug lg:whitespace-nowrap">
             Be the first to know about <span className="text-brand-primary">new collections</span> and <span className="text-brand-primary">exclusive offers!</span>
@@ -91,7 +78,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Bottom Copyright Bar ── */}
         <div className="pt-8 lg:pt-0 border-t lg:border-t-0 border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
           <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Taybeen Premium Dates. All rights reserved.</p>
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-brand-green-light font-poppins text-[10px] md:text-xs">

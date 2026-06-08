@@ -1,12 +1,7 @@
-/**
- * OurStory — Brand story with image, description, CTA, and highlight cards.
- */
-
 import { Button } from "@/components/ui/Button";
 import { Leaf, Apple, Award } from "lucide-react";
 
 export const OurStory: React.FC = () => {
-  /* Highlight cards data — key brand values */
   const highlights = [
     { title: "Mindfully Sourced", desc: "Premium non-GMO ingredients", icon: Leaf },
     { title: "Balanced Nutrition", desc: "Diverse range of snack types", icon: Apple },
@@ -18,7 +13,6 @@ export const OurStory: React.FC = () => {
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 md:gap-12 lg:gap-16 xl:gap-20">
 
-          {/* ── Left Column: Image ── */}
           <div className="w-full lg:flex-1 lg:max-w-[45%] relative flex justify-center lg:justify-start">
             <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-none aspect-[4/5] sm:aspect-[10/11] lg:h-[480px] xl:h-[520px] 2xl:h-[550px] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg">
               <img
@@ -29,9 +23,7 @@ export const OurStory: React.FC = () => {
             </div>
           </div>
 
-          {/* ── Right Column: Text Content + Highlights ── */}
           <div className="flex-1 w-full space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-9 xl:space-y-10 text-center lg:text-left">
-            {/* Main Content */}
             <div className="space-y-4 sm:space-y-5 md:space-y-6">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-serif font-bold text-brand-brown">
                 Our Story
@@ -51,9 +43,7 @@ export const OurStory: React.FC = () => {
               </div>
             </div>
 
-            {/* Highlight cards */}
             <div className="space-y-3 sm:space-y-4">
-              {/* Mobile/Tablet: All cards stacked vertically */}
               <div className="flex flex-col gap-3 sm:gap-4 lg:hidden">
                 {highlights.map((h, i) => {
                   const Icon = h.icon;
@@ -78,7 +68,6 @@ export const OurStory: React.FC = () => {
                 })}
               </div>
 
-              {/* Desktop: 2-column grid for all cards */}
               <div className="hidden lg:grid grid-cols-2 gap-3 xl:gap-4">
                 {highlights.map((h, i) => {
                   const Icon = h.icon;
