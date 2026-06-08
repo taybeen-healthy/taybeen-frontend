@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const SpecialOffer: React.FC = () => {
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-bg">
@@ -16,10 +18,12 @@ export const SpecialOffer: React.FC = () => {
           </div>
 
           <div className="w-full lg:w-auto lg:flex-shrink-0 max-w-[300px] sm:max-w-[340px] lg:max-w-[320px] xl:max-w-[360px] 2xl:max-w-[400px] aspect-square rounded-xl overflow-hidden relative">
-            <img
+            <Image
               src="https://s3-alpha-sig.figma.com/img/872e/ecfe/b923789118b00da9da7053d0ccee2cbf?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=UCZlVwukV~Gf99gJ9tdWNNcdGp99KTJQyy8HgNYWaw2OccoU-L81mX3qa6BcpPsLgd4NLOULMIuSqgFIAnasNhb2WRo4o42kzPrTIKlrzMIxiTTuHFvHETO4JqyLSpTd-2P2ZXd-91xMQa4YUq5sOmKq70kFS3PP4NHEhq4M2folPJjlZTBHfRar4vIzd9MvAT~DDQelGxzC37PDlBuUCL0VgYZQIwwOJYWsOeeq9b9oMo1Y2VHjtsjB8nblK0jI~rJap2SyV2sDnBXCEaQ7w7yMhiQ01L0lGa~BG3NOqJgTsOKZA3yMNJuYXfwRd71Hqz-f1LbS~1e0mzcfswOx6Q__"
               alt="Dates Bowl"
-              className="w-full h-full object-cover scale-125"
+              fill
+              sizes="(max-width: 640px) 300px, (max-width: 768px) 340px, (max-width: 1024px) 320px, 400px"
+              className="object-cover scale-125"
             />
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Leaf, Apple, Award } from "lucide-react";
 
@@ -14,11 +15,13 @@ export const OurStory: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 md:gap-12 lg:gap-16 xl:gap-20">
 
           <div className="w-full lg:flex-1 lg:max-w-[45%] relative flex justify-center lg:justify-start">
-            <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-none aspect-[4/5] sm:aspect-[10/11] lg:h-[480px] xl:h-[520px] 2xl:h-[550px] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg">
-              <img
+            <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-none aspect-[4/5] sm:aspect-[10/11] lg:h-[480px] xl:h-[520px] 2xl:h-[550px] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg relative">
+              <Image
                 src="https://s3-alpha-sig.figma.com/img/67d8/0cc5/654d01deade95e42e47d2afd1c672c85?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=EtcZsw8GNS-OxeKl46DCvxfUgEdEpLqCLMMbEUgljhUDaI3YklwMWlpwKXuDs-JHzyXkJu52Gs3oDTkUg2HIP1v1SQLMwcF5Bkdm7NrMo0oA9NEngwz3n9-61GachZN8a0WFEUt5BylQW6xw9GUDN4eh8Nc85bpxeA0O0P9Qux9OXgn~7cIMPvaS1P~IrkD9BikOFKNh~MCDdQbLc~gD4gl9BaD5BPPuTOovtdqnaHAKddVlsFsUSqeNDCxeIHZ66lSgfvB-qm188qIwLMW8LqXXjmy9BXp6D4teladN-PcRRJoAMWK31jWOR4EJOaxKCI1ZbF1KVUPK1A~l9~JaNA__"
                 alt="Our Story"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 400px, (max-width: 1024px) 450px, 50vw"
+                className="object-cover"
               />
             </div>
           </div>

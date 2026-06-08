@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Star, ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
 
@@ -22,10 +23,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
       className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
     >
       <div className="relative h-[200px] lg:h-[210px] xl:h-[220px] 2xl:h-[230px] bg-brand-bg overflow-hidden">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          fill
+          sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 340px, 25vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         {product.badge && (
           <div
