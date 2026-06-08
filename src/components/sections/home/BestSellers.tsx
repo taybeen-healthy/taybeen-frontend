@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { products } from "@/data/mockData";
 import { ArrowRight } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
-import { ProductCard } from "@/components/products/ProductCard";
-import { ComingSoonModal } from "@/components/products/ComingSoonModal";
+import { ProductCard } from "@/components/features/products/ProductCard";
+import { ComingSoonModal } from "@/components/features/products/ComingSoonModal";
 import { Product } from "@/types";
 
 export const BestSellers: React.FC = () => {

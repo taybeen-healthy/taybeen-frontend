@@ -6,7 +6,7 @@ import { X, Star, ArrowRight } from "lucide-react";
 import { LiaWhatsapp } from "react-icons/lia";
 import { motion } from "framer-motion";
 import { Product } from "@/types";
-import comingSoonImage from "../../../public/ComingSoon Dates.png";
+import comingSoonImage from "../../../../public/ComingSoon Dates.png";
 
 interface ComingSoonModalProps {
   product: Product;
