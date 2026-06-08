@@ -12,10 +12,7 @@ import pileOfPremiumDatesImage from "../../../public/Image (Pile of premium date
 
 export const Hero: React.FC = () => {
   return (
-    <section
-      className="relative pt-24 md:pt-32 pb-8 md:pb-20 overflow-hidden"
-      style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, rgba(247, 165, 3, 0.14) 100%)" }}
-    >
+    <section className="relative pt-24 md:pt-32 pb-8 md:pb-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12 lg:gap-12 xl:gap-0">
           {/* ── Left Column: Text Content ── */}

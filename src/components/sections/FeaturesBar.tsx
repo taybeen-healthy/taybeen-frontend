@@ -16,7 +16,7 @@ export const FeaturesBar: React.FC = () => {
   ];
 
   return (
-    <div className="bg-brand-green-pale py-6 sm:py-7 md:py-8 lg:py-6">
+    <div className="py-6 sm:py-7 md:py-8 lg:py-6">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         {/* Mobile & Tablet: Vertical stacked layout */}
         <div className="flex flex-col items-center gap-5 sm:gap-6 lg:hidden">

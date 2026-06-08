@@ -32,11 +32,14 @@ export default function Home() {
 
       {/* Main content area — all landing page sections */}
       <main>
-        {/* Hero section with headline, CTAs, and animated image grid */}
-        <Hero />
+        {/* Continuous gradient covering both Hero and FeaturesBar sections */}
+        <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, rgba(247, 165, 3, 0.14) 100%)" }}>
+          {/* Hero section with headline, CTAs, and animated image grid */}
+          <Hero />
 
-        {/* Feature highlights strip (100% Natural, No Additives, etc.) */}
-        <FeaturesBar />
+          {/* Feature highlights strip (100% Natural, No Additives, etc.) */}
+          <FeaturesBar />
+        </div>
 
         {/* Best selling date product cards */}
         <BestSellers />
