@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
-import fallingDatesImage from "../../../public/7844d57c9be79ee5e7b88ccbc592df37 1.png";
-import datesInWoodenBowlImage from "../../../public/Image (Dates in wooden bowl).png";
-import premiumDatesOnPlateImage from "../../../public/Image (Premium dates on a plate).png";
-import pileOfPremiumDatesImage from "../../../public/Image (Pile of premium dates).png";
+import fallingDatesImage from "../../../../public/7844d57c9be79ee5e7b88ccbc592df37 1.png";
+import datesInWoodenBowlImage from "../../../../public/Image (Dates in wooden bowl).png";
+import premiumDatesOnPlateImage from "../../../../public/Image (Premium dates on a plate).png";
+import pileOfPremiumDatesImage from "../../../../public/Image (Pile of premium dates).png";
 
 export const Hero: React.FC = () => {
   return (
@@ -45,18 +46,23 @@ export const Hero: React.FC = () => {
 
           <div className="flex-1 w-full max-w-[340px] sm:max-w-[380px] md:max-w-[540px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[700px] mx-auto relative min-h-[420px] sm:min-h-[460px] md:h-[480px] lg:h-[515px] xl:h-[570px] 2xl:h-[620px] mt-6 lg:mt-0">
             <div className="absolute top-0 left-[20px] w-[80px] h-[80px] rounded-[16px] border-[1.6px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:top-[20px] md:left-[170px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:top-[21px] lg:left-[182px] lg:w-[86px] lg:h-[86px] lg:rounded-[22px] xl:top-[24px] xl:left-[201px] xl:w-[95px] xl:h-[95px] xl:rounded-[24px] 2xl:top-[26px] 2xl:left-[220px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[26px]">
-              <img
-                src={datesInWoodenBowlImage.src}
+              <Image
+                src={datesInWoodenBowlImage}
                 alt="Ajwa Dates"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 80px, (max-width: 1024px) 86px, 104px"
+                className="object-cover"
               />
             </div>
 
             <div className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[220px] h-[300px] rounded-[24px] border-[1.6px] border-[#FFDA8C] shadow-premium z-10 overflow-hidden md:translate-x-0 md:left-auto md:right-[10px] md:top-[20px] md:w-[240px] md:h-[340px] md:rounded-[36px] md:border-[2px] lg:top-[21px] lg:right-[11px] lg:w-[258px] lg:h-[365px] lg:rounded-[40px] xl:top-[24px] xl:right-[12px] xl:w-[284px] xl:h-[404px] xl:rounded-[44px] 2xl:top-[26px] 2xl:right-[13px] 2xl:w-[310px] 2xl:h-[440px] 2xl:rounded-[48px]">
-              <img
-                src={premiumDatesOnPlateImage.src}
+              <Image
+                src={premiumDatesOnPlateImage}
                 alt="Kalmi Dates"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 640px) 220px, (max-width: 768px) 240px, (max-width: 1024px) 258px, 310px"
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-4 lg:bottom-5 xl:bottom-6 left-4 lg:left-5 xl:left-6">
@@ -70,10 +76,13 @@ export const Hero: React.FC = () => {
             </div>
 
             <div className="hidden md:block absolute md:top-[120px] md:left-[10px] md:w-[240px] md:h-[340px] md:rounded-[36px] md:border-[2px] border-[#FFDA8C] shadow-premium z-[5] overflow-hidden lg:top-[128px] lg:left-[11px] lg:w-[258px] lg:h-[365px] lg:rounded-[40px] xl:top-[142px] xl:left-[12px] xl:w-[284px] xl:h-[404px] xl:rounded-[44px] 2xl:top-[155px] 2xl:left-[13px] 2xl:w-[310px] 2xl:h-[440px] 2xl:rounded-[48px]">
-              <img
-                src={fallingDatesImage.src}
+              <Image
+                src={fallingDatesImage}
                 alt="Sukkary Dates"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 240px, (max-width: 1024px) 258px, 310px"
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-4 lg:bottom-5 xl:bottom-6 left-4 lg:left-5 xl:left-6">
@@ -87,10 +96,12 @@ export const Hero: React.FC = () => {
             </div>
 
             <div className="absolute bottom-2 right-[20px] w-[80px] h-[80px] rounded-[16px] border-[1.6px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:bottom-[80px] md:right-[-30px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:bottom-[86px] lg:right-[-32px] lg:w-[86px] lg:h-[86px] lg:rounded-[18px] xl:bottom-[95px] xl:right-[-35px] xl:w-[95px] xl:h-[95px] xl:rounded-[20px] 2xl:bottom-[104px] 2xl:right-[-38px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[22px]">
-              <img
-                src={pileOfPremiumDatesImage.src}
+              <Image
+                src={pileOfPremiumDatesImage}
                 alt="Safawi Dates"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 80px, (max-width: 1024px) 86px, 104px"
+                className="object-cover"
               />
             </div>
 

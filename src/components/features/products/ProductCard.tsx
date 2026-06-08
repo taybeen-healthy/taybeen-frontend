@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Star, ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
 
@@ -19,13 +20,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
           onClick();
         }
       }}
-      className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 hover:shadow-md cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+      className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
     >
       <div className="relative h-[200px] lg:h-[210px] xl:h-[220px] 2xl:h-[230px] bg-brand-bg overflow-hidden">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          fill
+          sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 340px, 25vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         />
         {product.badge && (
           <div
@@ -75,6 +78,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
             <button
               onClick={(e) => {
                 e.stopPropagation();
+                onClick();
               }}
               className="w-9 h-9 md:w-10 md:h-10 bg-brand-green text-white rounded-full flex items-center justify-center hover:bg-brand-green-light active:scale-95 transition-all duration-300 shadow-[0_4px_12px_rgba(74,94,40,0.15)] cursor-pointer group/btn"
               aria-label="Add to cart"

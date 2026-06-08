@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export const Gifting: React.FC = () => {
   return (
@@ -21,10 +22,12 @@ export const Gifting: React.FC = () => {
             </div>
 
             <div className="bg-white rounded-2xl overflow-hidden relative group min-h-[400px] lg:min-h-0 lg:flex-1">
-              <img
+              <Image
                 src="https://s3-alpha-sig.figma.com/img/09a7/959c/665a5e022a30a5e6bdac4cdf87b661c6?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=LeRFZIoy7Aqv9M6stGfbkh9I7SHqyWO2u8naUp4BiD8FhD89JhOJ0DdUdoZbijwMu8~axfBpjZ-6vFOmMKoX5W0HyfW0NFWUBeSoAp8bcOhDuPNtzyGHVlwzcaIUieiAJpb-JPedY2~vdLBkRiiZEQNn-Nk8QtK8a4nkj7savDNWv4JIKmgekE6721TA0TdvA8uFRJmNjS3-NihN5ElRO-PAbOHGHFHT-u2GsUSsgDpig1OvPm7qbQ3g~IgAuoEYme8wTuJZSZdt6ji3LcYfuT0Lk7xBkEZbl2iAupWf8X66LDUsSxyNfVMX62tzs~uKctN56OQ3Eiz55aIIZagrvA__"
                 alt="Festive Diwali Hamper"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 md:top-6 md:left-6 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
                 <span className="text-white font-poppins text-xs md:text-sm font-semibold">Most Popular</span>
@@ -44,10 +47,12 @@ export const Gifting: React.FC = () => {
           <div className="col-span-12 lg:col-span-5 flex flex-col gap-6 lg:h-full justify-between lg:min-h-0">
 
             <div className="bg-brand-primary rounded-2xl overflow-hidden relative group w-full h-[220px] sm:h-[260px] lg:h-full lg:flex-1 lg:min-h-0">
-              <img
+              <Image
                 src="https://s3-alpha-sig.figma.com/img/adf2/f70a/bf44c05647e6b6c385b5b929b1e66cd5?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Is5mrUedAqnQTmJlXilPLheck97DIIEKPXN6ewWKO8omnkJ319-ivvWavGL6fem9u74U78r~k2LKCq27TLELovKXeq0K9BesUzzl9V2IHb9qwRxmZ4SkKMDTprmgKwnkslJeOfmGpXa9Gley1DUltu8wgBqkP0t-fYq0g43Kb1~lN8fY0Vi8fevR7SkNw44ZiDUwEDvDzk24T6QHQBbudK~pjn4wqbEd5mZoEnq1n6F6Rp7Liwv7zq7hxgaCfwxYwIGh0c9AOZ~bwRUBmr6WNGE2vmUlGcCVfr-KswJgSxpcboNEwEwHkbiNgU~VL9pA0ec5zV6YHutO8Hjiwz73NQ__"
                 alt="Premium Date Collection"
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-brand-green-light/80 backdrop-blur-sm">
                 <span className="text-white font-poppins text-xs md:text-sm font-semibold">Best Seller</span>
@@ -58,10 +63,12 @@ export const Gifting: React.FC = () => {
             </div>
 
             <div className="bg-brand-primary rounded-2xl overflow-hidden relative group w-full h-[220px] sm:h-[260px] lg:h-full lg:flex-1 lg:min-h-0">
-              <img
+              <Image
                 src="https://s3-alpha-sig.figma.com/img/d4a6/fa5a/8d5d8bcc3afc4b8d1ce862a552272063?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=J0Pf7DR5yhcsAhayzXMZi5kywWvrO637siNzabZSZzqHiFo4cwPcnu60G8yP3PmxHwtl0ALpl-cvqLWcUcF476fRLS8rcZ3AvvEF7bEgtowKU4fnBVlSgL3YcR854lh5S~-a8EIiNzdJ9vpUMNt28bvWh7YcT35Lf0YGIFMllwYHk-lLK~3vpVdVx6a8SSSLZPsaGZjrlBWOgF57X6iRZQyJ~5OrUCO2XHFPB8q2gxL9tGInBKOm2zwRMf8C27qeJMQpaq5Ymk~o0Av4VDNJEiqs8fNrcGSw4L4kssJ-548kNcXsnSyZ9JoNGr~CDC6wdk1Oo2G2tsYrhlj3I35Ixw__"
                 alt="Curated Wellness Box"
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover opacity-90 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-brand-green/80 backdrop-blur-sm">
                 <span className="text-white font-poppins text-xs md:text-sm font-semibold">New</span>

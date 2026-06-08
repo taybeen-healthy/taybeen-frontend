@@ -6,7 +6,7 @@ import { X, Star, ArrowRight } from "lucide-react";
 import { LiaWhatsapp } from "react-icons/lia";
 import { motion } from "framer-motion";
 import { Product } from "@/types";
-import comingSoonImage from "../../../public/ComingSoon Dates.png";
+import comingSoonImage from "../../../../public/ComingSoon Dates.png";
 
 interface ComingSoonModalProps {
   product: Product;
@@ -37,7 +37,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
   }, [onClose]);
 
   const messageText = `Hi Taybeen, I'm interested in ordering ${product.name} (${product.weight}) for ₹${product.price}.`;
-  const whatsappUrl = `https://wa.me/919999999999?text=${encodeURIComponent(messageText)}`;
+  const whatsappUrl = `https://wa.me/919867805123?text=${encodeURIComponent(messageText)}`;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10">
@@ -106,7 +106,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
             <p className="text-brand-brown/90 font-poppins text-xs sm:text-sm font-semibold tracking-wide mb-1 md:mb-2">
               Pack Size: {product.weight} · Price: ₹{product.price}
             </p>
-            
+
             <div className="flex items-center gap-1.5 text-brand-primary">
               {[...Array(5)].map((_, i) => (
                 <Star
