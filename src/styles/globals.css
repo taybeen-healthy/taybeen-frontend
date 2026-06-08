@@ -14,4 +14,28 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #4A5E28 #FDFAF3;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #FDFAF3;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4A5E28;
+    border-radius: 9999px;
+    border: 2px solid #FDFAF3;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #768C3A;
+  }
 }

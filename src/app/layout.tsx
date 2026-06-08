@@ -1,29 +1,20 @@
-/**
- * Root layout — configures Poppins and DM Sans fonts via next/font/google,
- * applies global styles, and sets page-level metadata.
- */
-
 import type { Metadata } from "next";
 import { Poppins, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
-
-/* Poppins — primary font used across the entire site */
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-poppins",
 });
 
-/* DM Sans — secondary font used for small labels and captions */
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-dm",
 });
 
-/* Playfair Display — serif font for headings */
 const playfair = localFont({
   src: [
     {

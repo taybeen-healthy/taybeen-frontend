@@ -1,14 +1,9 @@
-/**
- * SpecialOffer — Promotional banner with offer text and image.
- */
-
 export const SpecialOffer: React.FC = () => {
   return (
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-bg">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-12 lg:gap-16 xl:gap-20">
 
-          {/* ── Left Column: Offer Text ── */}
           <div className="flex-1 space-y-5 md:space-y-6 lg:space-y-7 text-center lg:text-left">
             <h4 className="text-brand-primary font-poppins font-bold text-lg sm:text-xl md:text-2xl">Special Offer!</h4>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-6xl font-serif font-bold text-brand-brown leading-[1.1] -tracking-[0.025em]">
@@ -20,7 +15,6 @@ export const SpecialOffer: React.FC = () => {
             </p>
           </div>
 
-          {/* ── Right Column: Promotional Image ── */}
           <div className="w-full lg:w-auto lg:flex-shrink-0 max-w-[300px] sm:max-w-[340px] lg:max-w-[320px] xl:max-w-[360px] 2xl:max-w-[400px] aspect-square rounded-xl overflow-hidden relative">
             <img
               src="https://s3-alpha-sig.figma.com/img/872e/ecfe/b923789118b00da9da7053d0ccee2cbf?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=UCZlVwukV~Gf99gJ9tdWNNcdGp99KTJQyy8HgNYWaw2OccoU-L81mX3qa6BcpPsLgd4NLOULMIuSqgFIAnasNhb2WRo4o42kzPrTIKlrzMIxiTTuHFvHETO4JqyLSpTd-2P2ZXd-91xMQa4YUq5sOmKq70kFS3PP4NHEhq4M2folPJjlZTBHfRar4vIzd9MvAT~DDQelGxzC37PDlBuUCL0VgYZQIwwOJYWsOeeq9b9oMo1Y2VHjtsjB8nblK0jI~rJap2SyV2sDnBXCEaQ7w7yMhiQ01L0lGa~BG3NOqJgTsOKZA3yMNJuYXfwRd71Hqz-f1LbS~1e0mzcfswOx6Q__"

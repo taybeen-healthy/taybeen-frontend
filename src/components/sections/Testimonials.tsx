@@ -1,10 +1,5 @@
 "use client";
 
-/**
- * Testimonials — Customer reviews grid with navigation arrows.
- * Displays quote, rating stars, author details, and product badge for each testimonial.
- */
-
 import { useState, useEffect } from "react";
 import { testimonials } from "@/data/mockData";
 import { Star, ChevronLeft, ChevronRight, Quote, User } from "lucide-react";
@@ -13,7 +8,7 @@ import { motion } from "framer-motion";
 export const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
-  const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,7 +36,6 @@ export const Testimonials: React.FC = () => {
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  // Helper to build circular array of visible testimonials
   const visibleTestimonials = [];
   for (let i = 0; i < itemsPerPage; i++) {
     const targetIndex = (activeIndex + i) % testimonials.length;
@@ -54,7 +48,6 @@ export const Testimonials: React.FC = () => {
   const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
     return (
       <div className="bg-white p-5 md:p-6 lg:p-7 xl:p-8 rounded-2xl border border-brand-brown/20 flex flex-col h-full text-left">
-        {/* Quote and review text */}
         <div className="space-y-4 md:space-y-5 flex-1 mb-6">
           <div className="flex items-center gap-1">
             <Quote size={28} fill="currentColor" className="text-brand-primary rotate-180" />
@@ -62,15 +55,12 @@ export const Testimonials: React.FC = () => {
           <p className="text-brand-green font-poppins text-sm leading-[1.8]">
             {testimonial.quote}
           </p>
-          {/* Product name badge */}
           <div className="inline-block px-4 py-1 rounded-2xl bg-[#FFEABF]">
             <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">{testimonial.productName}</span>
           </div>
         </div>
 
-        {/* Author details and star rating */}
         <div className="pt-6 border-t border-brand-brown/10 space-y-4">
-          {/* Star rating */}
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star
@@ -83,7 +73,6 @@ export const Testimonials: React.FC = () => {
               />
             ))}
           </div>
-          {/* Author avatar and info */}
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#FFDA8C]/20 border-[1.6px] border-[#FFDA8C] flex items-center justify-center text-[#F7A503]">
               <User className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
@@ -102,7 +91,6 @@ export const Testimonials: React.FC = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-bg overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
 
-        {/* ── Section Header with Navigation Arrows ── */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-8">
           <div className="space-y-4 text-left">
             <div className="inline-block px-4 py-2 rounded-3xl bg-brand-primary/25 border border-[#F6EBDA80] backdrop-blur-sm">
@@ -112,7 +100,6 @@ export const Testimonials: React.FC = () => {
               Dates worth talking about!
             </h2>
           </div>
-          {/* Carousel navigation arrows */}
           <div className="flex items-center justify-start md:justify-end gap-4 md:gap-6 w-full md:w-auto">
             <button
               onClick={prevTestimonial}
@@ -129,7 +116,6 @@ export const Testimonials: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Testimonial Carousel Grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6 xl:gap-8 overflow-hidden py-2 px-1">
           {visibleTestimonials.map(({ item, index }) => (
             <motion.div
@@ -144,7 +130,6 @@ export const Testimonials: React.FC = () => {
           ))}
         </div>
 
-        {/* Slider pagination dots */}
         <div className="flex justify-center items-center gap-2 mt-8">
           {testimonials.map((_, index) => (
             <button

@@ -1,8 +1,5 @@
-/** Product listings and customer testimonials for the Taybeen landing page. */
-
 import { Product, Testimonial } from "@/types";
 
-/** Premium date varieties featured on the landing page. */
 export const products: Product[] = [
   {
     id: "1",
@@ -62,7 +59,6 @@ export const products: Product[] = [
   },
 ];
 
-/** Customer testimonials displayed on the landing page. */
 export const testimonials: Testimonial[] = [
   {
     id: "1",
