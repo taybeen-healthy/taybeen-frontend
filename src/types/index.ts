@@ -9,6 +9,7 @@ export interface Product {
   image: string;
   badge?: string;
   badgeColor?: string;
+  category?: string;
 }
 
 export interface Testimonial {

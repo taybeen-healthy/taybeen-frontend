@@ -1,14 +1,87 @@
 import React from "react";
 import Image from "next/image";
-import { Star, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
+import { Badge } from "@/components/ui/Badge";
+import { StarRating } from "@/components/ui/StarRating";
 
 interface ProductCardProps {
   product: Product;
   onClick: () => void;
+  className?: string;
+  variant?: "default" | "catalog";
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onClick,
+  className,
+  variant = "default",
+}) => {
+  const isCatalog = variant === "catalog";
+
+  const getBadgeVariant = () => {
+    if (!product.badge) return "default";
+    const text = product.badge.toLowerCase();
+    if (text.includes("seller")) return "best-seller";
+    if (text.includes("new")) return "new";
+    if (text.includes("rare") || text.includes("sacred")) return "rare";
+    return "default";
+  };
+
+  if (isCatalog) {
+    return (
+      <div
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onClick();
+          }
+        }}
+        className={
+          className ||
+          "w-full bg-white rounded-2xl overflow-hidden flex flex-col h-full shadow-sm transition-all duration-300 border border-[#C4A482]/40 hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+        }
+      >
+        <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-white p-2">
+          <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#F6F1E9]">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              priority
+            />
+          </div>
+
+          {product.badge && (
+            <Badge
+              text={product.badge}
+              variant={getBadgeVariant()}
+              className="absolute top-4 left-4 hidden lg:block"
+              style={product.badgeColor ? { backgroundColor: product.badgeColor } : undefined}
+            />
+          )}
+        </div>
+
+        <div className="p-4 md:p-5 flex-1 flex flex-col justify-between">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-1 lg:gap-4 w-full">
+            <h3 className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-serif font-bold text-brand-brown leading-snug group-hover:text-brand-green transition-colors duration-200 text-left line-clamp-2">
+              {product.name}
+            </h3>
+            <span className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-poppins font-bold text-[#5A3E2B] whitespace-nowrap">
+              ₹{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       onClick={onClick}
@@ -20,72 +93,77 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
           onClick();
         }
       }}
-      className="w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+      className={
+        className ||
+        "w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+      }
     >
-      <div className="relative h-[200px] lg:h-[210px] xl:h-[220px] 2xl:h-[230px] bg-brand-bg overflow-hidden">
+      <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-[#F6F1E9] shadow-sm group-hover:shadow-md transition-shadow duration-300">
         <Image
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 340px, 25vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          priority
         />
+
         {product.badge && (
-          <div
-            className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-white text-[9px] md:text-[10px] font-poppins font-bold uppercase tracking-wider shadow-sm select-none"
-            style={{ backgroundColor: product.badgeColor }}
-          >
-            {product.badge}
-          </div>
+          <Badge
+            text={product.badge}
+            variant={getBadgeVariant()}
+            className="absolute top-3.5 left-3.5"
+            style={product.badgeColor ? { backgroundColor: product.badgeColor } : undefined}
+          />
         )}
+
         <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-brand-brown text-[9px] md:text-[10px] font-poppins font-bold shadow-sm border border-white/30 select-none">
-          {product.weight}
+          {product.weight || "500g"}
         </div>
       </div>
 
-      <div className="p-5 md:p-6 flex-1 flex flex-col">
-        <div className="space-y-2 mb-4">
-          <h3 className="text-lg md:text-xl font-serif font-bold text-brand-brown leading-snug">
+      <div className="p-4 md:p-5 flex-1 flex flex-col justify-between">
+        <div className="space-y-1.5">
+          <h3 className="text-base sm:text-lg md:text-xl font-serif font-bold text-brand-brown leading-snug group-hover:text-brand-green transition-colors duration-200 line-clamp-2">
             {product.name}
           </h3>
-          <p className="text-[#7D6B5E] font-poppins text-xs md:text-sm leading-relaxed line-clamp-2">
-            {product.description}
-          </p>
+          {product.description && (
+            <p className="text-[#7D6B5E] font-poppins text-xs leading-relaxed line-clamp-2">
+              {product.description}
+            </p>
+          )}
+          <div className="pt-1">
+            <span className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-brand-brown">
+              ₹{product.price}
+            </span>
+          </div>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-[#F5EDE0] space-y-4 md:space-y-5">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-0.5 text-brand-primary">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  size={13}
-                  className="w-3.5 h-3.5 md:w-4 md:h-4"
-                  fill={i < Math.floor(product.rating) ? "#F7A503" : "transparent"}
-                  stroke="#F7A503"
-                  strokeWidth={1.5}
-                />
-              ))}
-            </div>
-            <span className="text-xs md:text-sm font-poppins text-brand-brown/80 font-medium">
-              {product.rating}{" "}
-              <span className="text-[#8D7F75] font-normal">({product.reviewsCount.toLocaleString()})</span>
+        <div className="mt-4 pt-3 border-t border-[#F5EDE0] flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <StarRating
+              rating={product.rating || 4.9}
+              size={12}
+              className="[&_svg]:!w-3 [&_svg]:md:!w-3.5 [&_svg]:!h-3 [&_svg]:md:!h-3.5"
+            />
+            <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
+              {product.rating || 4.9}{" "}
+              <span className="text-[#8D7F75] font-normal">
+                ({(product.reviewsCount || 120).toLocaleString()})
+              </span>
             </span>
           </div>
 
-          <div className="flex items-center justify-between pt-1">
-            <span className="text-xl md:text-2xl font-poppins font-bold text-brand-brown">₹{product.price}</span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onClick();
-              }}
-              className="w-9 h-9 md:w-10 md:h-10 bg-brand-green text-white rounded-full flex items-center justify-center hover:bg-brand-green-light active:scale-95 transition-all duration-300 shadow-[0_4px_12px_rgba(74,94,40,0.15)] cursor-pointer group/btn"
-              aria-label="Add to cart"
-            >
-              <ShoppingCart size={16} className="md:w-[18px] md:h-[18px] transition-transform duration-300" />
-            </button>
-          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick();
+            }}
+            className="w-8 h-8 md:w-9 md:h-9 bg-brand-green text-white rounded-full flex items-center justify-center hover:bg-brand-green-light active:scale-95 transition-all duration-300 shadow-[0_4px_12px_rgba(74,94,40,0.15)] cursor-pointer group/btn"
+            aria-label="Add to cart"
+          >
+            <ShoppingCart size={14} className="md:w-[16px] md:h-[16px]" />
+          </button>
         </div>
       </div>
     </div>

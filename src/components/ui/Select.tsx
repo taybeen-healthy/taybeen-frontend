@@ -31,7 +31,6 @@ export const Select: React.FC<SelectProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Normalize options array
   const normalizedOptions: SelectOption[] = options.map((opt) => {
     if (typeof opt === "string") {
       return { label: opt, value: opt };
@@ -39,10 +38,8 @@ export const Select: React.FC<SelectProps> = ({
     return opt;
   });
 
-  // Find currently selected option object
   const selectedOption = normalizedOptions.find((opt) => opt.value === value);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
