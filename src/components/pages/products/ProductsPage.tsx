@@ -10,26 +10,7 @@ import { ProductCard } from "@/components/features/products/ProductCard";
 import { ComingSoonModal } from "@/components/features/products/ComingSoonModal";
 import { products } from "@/data/products";
 import { Product } from "@/types";
-
-const getPaginationRange = (currentPage: number, totalPages: number) => {
-  if (totalPages <= 3) {
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
-  }
-
-  if (currentPage === totalPages) {
-    return [totalPages - 1, totalPages];
-  }
-
-  if (currentPage + 1 === totalPages) {
-    return [currentPage, totalPages];
-  }
-
-  if (currentPage + 2 === totalPages) {
-    return [currentPage, currentPage + 1, totalPages];
-  }
-
-  return [currentPage, currentPage + 1, '...', totalPages];
-};
+import { Pagination } from "@/components/ui/Pagination";
 
 const CATEGORIES = [
   "All Products",
@@ -209,73 +190,15 @@ export default function ProductsPage() {
               )}
 
               {/* Working Pagination Section */}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-start gap-2 mt-12 md:mt-16">
-                  {/* Previous Arrow */}
-                  <button
-                    onClick={() => {
-                      setCurrentPage((prev) => Math.max(prev - 1, 1));
-                      window.scrollTo({ top: 300, behavior: "smooth" });
-                    }}
-                    disabled={currentPage === 1}
-                    className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-lg font-poppins font-semibold text-xs md:text-sm transition-all duration-300 border ${
-                      currentPage === 1
-                        ? "opacity-40 cursor-not-allowed bg-[#FAF6EE]/50 border-[#C4A482]/20 text-[#5A3E2B]/50"
-                        : "bg-[#FAF6EE] border border-[#C4A482]/40 text-[#5A3E2B] hover:bg-[#F6F1E9]"
-                    }`}
-                    aria-label="Previous page"
-                  >
-                    &lt;
-                  </button>
-
-                  {getPaginationRange(currentPage, totalPages).map((pageNum, index) => {
-                    if (pageNum === '...') {
-                      return (
-                        <span
-                          key={`dots-${index}`}
-                          className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center font-poppins font-semibold text-xs md:text-sm text-[#5A3E2B]/60 select-none"
-                        >
-                          ...
-                        </span>
-                      );
-                    }
-                    const isActive = pageNum === currentPage;
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => {
-                          setCurrentPage(pageNum as number);
-                          window.scrollTo({ top: 300, behavior: "smooth" });
-                        }}
-                        className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-lg font-poppins font-semibold text-xs md:text-sm transition-all duration-300 border ${
-                          isActive
-                            ? "bg-[#4A5E28] text-white border-[#4A5E28] shadow-[0_4px_12px_rgba(74,94,40,0.15)]"
-                            : "bg-[#FAF6EE] border border-[#C4A482]/40 text-[#5A3E2B] hover:bg-[#F6F1E9]"
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-
-                  {/* Next Arrow */}
-                  <button
-                    onClick={() => {
-                      setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-                      window.scrollTo({ top: 300, behavior: "smooth" });
-                    }}
-                    disabled={currentPage === totalPages}
-                    className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-lg font-poppins font-semibold text-xs md:text-sm transition-all duration-300 border ${
-                      currentPage === totalPages
-                        ? "opacity-40 cursor-not-allowed bg-[#FAF6EE]/50 border-[#C4A482]/20 text-[#5A3E2B]/50"
-                        : "bg-[#FAF6EE] border border-[#C4A482]/40 text-[#5A3E2B] hover:bg-[#F6F1E9]"
-                    }`}
-                    aria-label="Next page"
-                  >
-                    &gt;
-                  </button>
-                </div>
-              )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => {
+                  setCurrentPage(page);
+                  window.scrollTo({ top: 300, behavior: "smooth" });
+                }}
+                className="mt-12 md:mt-16"
+              />
             </div>
 
           </div>

@@ -138,7 +138,6 @@ export const products: Product[] = [
     image: "/Image (Premium dates on a plate).png",
     category: "Custom Orders"
   },
-  // Duplicated / Expanded Products for paging compatibility
   {
     id: "mejdool-medium",
     name: "Mejdool Jordan Premium Medium Dates",

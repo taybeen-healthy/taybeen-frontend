@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import { Section } from "@/components/ui/Section";
+import { Tag } from "@/components/ui/Tag";
 import fallingDatesImage from "../../../../public/7844d57c9be79ee5e7b88ccbc592df37 1.png";
 import datesInWoodenBowlImage from "../../../../public/Image (Dates in wooden bowl).png";
 import premiumDatesOnPlateImage from "../../../../public/Image (Premium dates on a plate).png";
@@ -8,17 +10,14 @@ import pileOfPremiumDatesImage from "../../../../public/Image (Pile of premium d
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative pt-24 md:pt-32 pb-8 md:pb-20 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
-        <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12 lg:gap-12 xl:gap-0">
-          <div className="flex-1 w-full lg:w-auto space-y-6 md:space-y-8 lg:space-y-6 xl:space-y-7 2xl:space-y-8 text-center lg:text-left lg:pr-4 xl:pr-8">
-            <div className="inline-block px-4 py-2 rounded-3xl bg-brand-primary bg-opacity-25 border border-[#F6EBDA80] backdrop-blur-sm">
-              <span className="text-brand-green font-poppins font-semibold text-sm md:text-base">
-                100% Natural &amp; Organic
-              </span>
-            </div>
+    <Section bg="none" overflowHidden={true} className="relative pt-24 sm:pt-24 md:pt-32 lg:pt-32 pb-8 sm:pb-8 md:pb-20 lg:pb-20">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12 lg:gap-12 xl:gap-0">
+        <div className="flex-1 w-full lg:w-auto space-y-6 md:space-y-8 lg:space-y-6 xl:space-y-7 2xl:space-y-8 text-center lg:text-left lg:pr-4 xl:pr-8">
+          <Tag variant="primary-light" className="px-4 py-2 text-sm md:text-base">
+            100% Natural &amp; Organic
+          </Tag>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-serif font-bold leading-[1.1] text-black">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-serif font-bold leading-[1.1] text-black">
               Rediscover <br className="hidden md:block" />
               the Power of <br className="hidden md:block" />{" "}
               <span className="text-brand-primary font-serif">Dates.</span>
@@ -30,7 +29,7 @@ export const Hero: React.FC = () => {
               to refined sugar.
             </p>
 
-            <p className="text-base md:text-lg lg:text-base xl:text-base 2xl:text-lg font-serif font-medium text-brand-green italic">
+            <p className="text-base md:text-lg lg:text-base xl:text-base 2xl:text-lg font-serif font-medium text-brand-green">
               One date a day. A lifetime of difference.
             </p>
 
@@ -146,7 +145,6 @@ export const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </Section>
   );
 };

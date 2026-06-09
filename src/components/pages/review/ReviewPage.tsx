@@ -22,16 +22,13 @@ export default function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col lg:flex-row">
-      {/* SUCCESS OVERLAY */}
       {isSuccess && (
         <ReviewSuccessModal onReset={handleReset} />
       )}
 
-      {/* LEFT COLUMN: Logo & Form (55%) */}
       <div className="flex-1 lg:w-[55%] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-12 xl:px-20 bg-white">
         <div className="max-w-2xl mx-auto w-full">
           
-          {/* Header Link back to home */}
           <div className="mb-6 lg:mb-8 text-left">
             <Link
               href="/"
@@ -41,7 +38,6 @@ export default function ReviewPage() {
             </Link>
           </div>
 
-          {/* Desktop Header Layout */}
           <div className="hidden lg:flex flex-col items-center text-center mb-8 space-y-4">
             <Image
               src={logoUrl}
@@ -62,7 +58,6 @@ export default function ReviewPage() {
             </div>
           </div>
 
-          {/* Mobile Header Layout */}
           <div className="flex lg:hidden flex-col items-center text-center mb-8">
             <div className="w-full max-w-[315px] aspect-[3/4] relative mb-6 rounded-xl overflow-hidden bg-white border border-[#F2EADA] mx-auto">
               <Image
@@ -92,13 +87,11 @@ export default function ReviewPage() {
             </div>
           </div>
 
-          {/* Form */}
           <ReviewForm key={submitCount} onSubmitSuccess={() => setIsSuccess(true)} />
 
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Image Display (45%) */}
       <div className="hidden lg:flex lg:w-[45%] bg-white items-center justify-center border-l border-[#F2EADA] p-12 sticky top-0 h-screen select-none">
         <div className="relative w-full h-full max-h-[85vh] flex items-center justify-center">
           <Image
