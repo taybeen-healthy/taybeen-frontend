@@ -123,19 +123,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="p-4 md:p-5 flex-1 flex flex-col justify-between">
-        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-1 lg:gap-4">
-          <div className="space-y-1 flex-1">
-            <h3 className="text-base sm:text-lg md:text-xl font-serif font-bold text-brand-brown leading-snug group-hover:text-brand-green transition-colors duration-200 line-clamp-2">
-              {product.name}
-            </h3>
-            {product.description && (
-              <p className="text-[#7D6B5E] font-poppins text-xs leading-relaxed line-clamp-1">
-                {product.description}
-              </p>
-            )}
-          </div>
-
-          <div className="flex items-baseline gap-1.5 lg:flex-col lg:items-end lg:gap-0 mt-1 lg:mt-0">
+        <div className="space-y-1.5">
+          <h3 className="text-base sm:text-lg md:text-xl font-serif font-bold text-brand-brown leading-snug group-hover:text-brand-green transition-colors duration-200 line-clamp-2">
+            {product.name}
+          </h3>
+          {product.description && (
+            <p className="text-[#7D6B5E] font-poppins text-xs leading-relaxed line-clamp-2">
+              {product.description}
+            </p>
+          )}
+          <div className="pt-1">
             <span className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-brand-brown">
               ₹{product.price}
             </span>
