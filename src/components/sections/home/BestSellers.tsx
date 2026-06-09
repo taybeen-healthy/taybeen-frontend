@@ -32,7 +32,7 @@ export const BestSellers: React.FC = () => {
             </h2>
           </div>
           <div className="w-full md:w-auto text-left md:text-right space-y-2">
-            <a href="#" className="flex items-center md:justify-end gap-2 text-brand-green font-poppins font-semibold hover:underline">
+            <a href="/products" className="flex items-center md:justify-end gap-2 text-brand-green font-poppins font-semibold hover:underline">
               View all varieties <ArrowRight size={16} />
             </a>
             <p className="text-brand-green-light font-poppins text-xs md:text-sm">Free shipping on all orders above ₹999</p>
