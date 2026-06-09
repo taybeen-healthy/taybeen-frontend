@@ -1,12 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { User, ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CartDrawer } from "./CartDrawer";
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMenuOpen || isCartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen, isCartOpen]);
 
   return (
     <>
@@ -35,7 +48,10 @@ export const Navbar: React.FC = () => {
               <User size={24} className="md:w-8 md:h-8" strokeWidth={2} />
             </button>
             <div className="hidden lg:block relative">
-              <button className="text-brand-brown hover:text-brand-brown/70 transition-colors">
+              <button
+                onClick={() => setIsCartOpen(true)}
+                className="text-brand-brown hover:text-brand-brown/70 transition-colors"
+              >
                 <ShoppingCart size={24} className="md:w-8 md:h-8" strokeWidth={2} />
               </button>
               <span className="absolute -top-1 -right-1 bg-brand-primary w-2 md:w-2.5 h-2 md:h-2.5 rounded-full border border-white"></span>
@@ -110,7 +126,11 @@ export const Navbar: React.FC = () => {
 
                 <a
                   href="#"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    setIsCartOpen(true);
+                  }}
                   className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
                 >
                   <span>Cart</span>
@@ -141,6 +161,8 @@ export const Navbar: React.FC = () => {
           </>
         )}
       </AnimatePresence>
+
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 };
