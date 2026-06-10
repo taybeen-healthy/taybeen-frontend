@@ -8,6 +8,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
+  flexRowDirection?: "row" | "row-reverse";
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -15,6 +16,7 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   className = "",
+  flexRowDirection = "row-reverse",
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -55,7 +57,9 @@ export const Modal: React.FC<ModalProps> = ({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: "spring", duration: 0.5, bounce: 0.12 }}
-        className={`relative z-10 w-full max-w-md md:max-w-4xl lg:max-w-5xl max-h-[96vh] bg-white rounded-2xl overflow-hidden shadow-premium flex flex-col md:flex-row-reverse border border-[#F2EADA] select-text ${className}`}
+        className={`relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl max-h-[96vh] bg-white rounded-2xl overflow-y-auto shadow-premium flex flex-col ${
+          flexRowDirection === "row-reverse" ? "lg:flex-row-reverse" : "lg:flex-row"
+        } border border-[#F2EADA] select-text ${className}`}
       >
         {children}
       </motion.div>

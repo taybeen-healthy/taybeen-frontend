@@ -7,7 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/features/products/ProductCard";
-import { ComingSoonModal } from "@/components/features/products/ComingSoonModal";
+import { ProductDetailModal } from "@/components/features/products/ProductDetailModal";
 import { products } from "@/data/products";
 import { CATEGORIES, CATEGORY_DETAILS } from "@/data/categories";
 import { Product } from "@/types";
@@ -206,7 +206,7 @@ export default function ProductsPage() {
 
       <AnimatePresence>
         {isModalOpen && selectedProduct && (
-          <ComingSoonModal
+          <ProductDetailModal
             product={selectedProduct}
             onClose={() => setIsModalOpen(false)}
           />

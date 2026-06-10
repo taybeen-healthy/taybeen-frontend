@@ -1,5 +1,19 @@
 import { Product } from "@/types";
 
+const DATE_BENEFITS = [
+  "Rich in essential vitamins and minerals like Potassium, Magnesium, and Iron.",
+  "100% natural energy booster, perfect as a pre-workout or healthy midday snack.",
+  "High source of dietary fiber, promoting healthy digestion and heart health.",
+  "Naturally sweet with no added sugar, preservatives, or artificial additives."
+];
+
+const GIFT_BENEFITS = [
+  "Handpicked premium date assortment, carefully selected for size and quality.",
+  "Presented in an elegant, luxury custom packaging ideal for corporate or family gifting.",
+  "Nutritious selection that makes a thoughtful, health-conscious present.",
+  "Comes with customizable personalized greeting card options."
+];
+
 export const products: Product[] = [
   {
     id: "mejdool-jumbo",
@@ -12,7 +26,10 @@ export const products: Product[] = [
     image: "/Image (Dates in wooden bowl).png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "ajwa-premium",
@@ -25,7 +42,10 @@ export const products: Product[] = [
     image: "/Image (Pile of premium dates).png",
     badge: "New",
     badgeColor: "#4A5E28",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "festive-hamper",
@@ -38,7 +58,10 @@ export const products: Product[] = [
     image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
-    category: "Gift Hampers"
+    category: "Gift Hampers",
+    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["500 g", "1 kg", "2 kg"]
   },
   {
     id: "mebroom-premium",
@@ -51,7 +74,10 @@ export const products: Product[] = [
     image: "/Image (Premium dates on a plate).png",
     badge: "Sacred & Rare",
     badgeColor: "#5A3E2B",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "sukkari-premium",
@@ -62,7 +88,10 @@ export const products: Product[] = [
     rating: 4.8,
     reviewsCount: 310,
     image: "/Image (Dates in wooden bowl).png",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "mebroom-jumbo",
@@ -73,7 +102,10 @@ export const products: Product[] = [
     rating: 4.9,
     reviewsCount: 195,
     image: "/Image (Pile of premium dates).png",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "almond-stuffed",
@@ -86,7 +118,10 @@ export const products: Product[] = [
     image: "/Image (Dates in wooden bowl).png",
     badge: "New",
     badgeColor: "#4A5E28",
-    category: "Stuffed Dates"
+    category: "Stuffed Dates",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["200 g", "400 g", "800 g"]
   },
   {
     id: "walnut-stuffed",
@@ -99,7 +134,10 @@ export const products: Product[] = [
     image: "/Image (Premium dates on a plate).png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
-    category: "Stuffed Dates"
+    category: "Stuffed Dates",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["200 g", "400 g", "800 g"]
   },
   {
     id: "corporate-gifting-hamper",
@@ -112,7 +150,10 @@ export const products: Product[] = [
     image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
-    category: "Corporate Gifting"
+    category: "Corporate Gifting",
+    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["1 kg", "1.5 kg", "3 kg"]
   },
   {
     id: "wellness-dates-box",
@@ -125,7 +166,10 @@ export const products: Product[] = [
     image: "/Image (Dates in wooden bowl).png",
     badge: "New",
     badgeColor: "#4A5E28",
-    category: "Wellness Boxes"
+    category: "Wellness Boxes",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["400 g", "800 g", "1.6 kg"]
   },
   {
     id: "custom-orders-selection",
@@ -136,7 +180,10 @@ export const products: Product[] = [
     rating: 4.9,
     reviewsCount: 29,
     image: "/Image (Premium dates on a plate).png",
-    category: "Custom Orders"
+    category: "Custom Orders",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["500 g", "1 kg", "2 kg"]
   },
   {
     id: "mejdool-medium",
@@ -147,7 +194,10 @@ export const products: Product[] = [
     rating: 4.7,
     reviewsCount: 184,
     image: "/Image (Dates in wooden bowl).png",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "ajwa-jumbo",
@@ -160,7 +210,10 @@ export const products: Product[] = [
     image: "/Image (Pile of premium dates).png",
     badge: "Sacred & Rare",
     badgeColor: "#5A3E2B",
-    category: "Plain Dates"
+    category: "Plain Dates",
+    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["250 g", "500 g", "1 kg"]
   },
   {
     id: "stuffed-pistachio",
@@ -173,7 +226,10 @@ export const products: Product[] = [
     image: "/Image (Premium dates on a plate).png",
     badge: "New",
     badgeColor: "#4A5E28",
-    category: "Stuffed Dates"
+    category: "Stuffed Dates",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["200 g", "400 g", "800 g"]
   },
   {
     id: "stuffed-hazelnut",
@@ -184,7 +240,10 @@ export const products: Product[] = [
     rating: 4.9,
     reviewsCount: 61,
     image: "/Image (Dates in wooden bowl).png",
-    category: "Stuffed Dates"
+    category: "Stuffed Dates",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: DATE_BENEFITS,
+    weightOptions: ["200 g", "400 g", "800 g"]
   },
   {
     id: "royal-gift-box",
@@ -197,7 +256,10 @@ export const products: Product[] = [
     image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
-    category: "Gift Hampers"
+    category: "Gift Hampers",
+    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["600 g", "1.2 kg", "2.4 kg"]
   },
   {
     id: "executive-box",
@@ -208,7 +270,10 @@ export const products: Product[] = [
     rating: 4.9,
     reviewsCount: 33,
     image: "/Image (Dates in wooden bowl).png",
-    category: "Corporate Gifting"
+    category: "Corporate Gifting",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["500 g", "1 kg", "2 kg"]
   },
   {
     id: "wellness-platter",
@@ -221,7 +286,10 @@ export const products: Product[] = [
     image: "/Image (Premium dates on a plate).png",
     badge: "New",
     badgeColor: "#4A5E28",
-    category: "Wellness Boxes"
+    category: "Wellness Boxes",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["375 g", "750 g", "1.5 kg"]
   },
   {
     id: "custom-party-platter",
@@ -232,6 +300,9 @@ export const products: Product[] = [
     rating: 5.0,
     reviewsCount: 19,
     image: "/Image (Pile of premium dates).png",
-    category: "Custom Orders"
+    category: "Custom Orders",
+    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    benefits: GIFT_BENEFITS,
+    weightOptions: ["900 g", "1.8 kg", "3.6 kg"]
   }
 ];

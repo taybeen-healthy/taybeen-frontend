@@ -71,7 +71,6 @@ export const Navbar: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -81,7 +80,6 @@ export const Navbar: React.FC = () => {
               className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-md z-40"
             />
 
-            {/* Menu Panel */}
             <motion.div
               initial={{ clipPath: "inset(0% 0% 100% 0% round 0px 0px 20px 20px)" }}
               animate={{ clipPath: "inset(0% 0% 0% 0% round 0px 0px 20px 20px)" }}

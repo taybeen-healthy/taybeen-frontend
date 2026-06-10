@@ -37,7 +37,6 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className={`flex items-center justify-start gap-2 ${className}`}>
-      {/* Previous Arrow */}
       <button
         onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
         disabled={currentPage === 1}
@@ -78,7 +77,6 @@ export const Pagination: React.FC<PaginationProps> = ({
         );
       })}
 
-      {/* Next Arrow */}
       <button
         onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
         disabled={currentPage === totalPages}

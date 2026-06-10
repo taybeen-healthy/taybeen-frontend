@@ -10,6 +10,9 @@ export interface Product {
   badge?: string;
   badgeColor?: string;
   category?: string;
+  images?: string[];
+  benefits?: string[];
+  weightOptions?: string[];
 }
 
 export interface Testimonial {

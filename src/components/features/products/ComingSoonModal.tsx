@@ -22,7 +22,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
   const whatsappUrl = `https://wa.me/919867805123?text=${encodeURIComponent(messageText)}`;
 
   return (
-    <Modal isOpen={true} onClose={onClose} className="md:h-[660px]">
+    <Modal isOpen={true} onClose={onClose} className="lg:h-[660px]">
       <button
         onClick={onClose}
         className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-8 h-8 sm:w-10 sm:h-10 bg-white/80 hover:bg-white text-brand-brown hover:text-black rounded-full flex items-center justify-center border border-[#F2EADA] transition-all cursor-pointer shadow-sm active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary"
@@ -31,7 +31,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
         <X size={18} className="sm:w-5 sm:h-5" />
       </button>
 
-      <div className="relative w-full md:w-[50%] h-[200px] sm:h-[240px] md:h-full flex-shrink-0 overflow-hidden border-b md:border-b-0 md:border-l border-[#F2EADA] p-4 md:p-8 flex items-center justify-center bg-white">
+      <div className="relative w-full lg:w-[50%] h-[200px] sm:h-[240px] lg:h-full flex-shrink-0 overflow-hidden border-b lg:border-b-0 lg:border-l border-[#F2EADA] p-4 lg:p-8 flex items-center justify-center bg-white">
         <Image
           src={comingSoonImage}
           alt="Taybeen Premium Dates"
@@ -40,7 +40,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
         />
       </div>
 
-      <div className="flex-1 p-5 sm:p-8 md:p-10 lg:p-14 overflow-y-auto flex flex-col justify-center items-center text-center h-auto md:h-full select-text">
+      <div className="flex-1 p-5 sm:p-8 lg:p-10 xl:p-14 overflow-y-auto flex flex-col justify-center items-center text-center h-auto lg:h-full select-text">
         <Image
           src="https://s3-alpha-sig.figma.com/img/aef5/42bb/91997904de2c2fba272a345f8e640566?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FkHOx1DQ9tCpg2LfaGWPEahyYclX5a07TKu8PWLxLk3iSdpazH8XGXMYe8TpS23YZfpwXmAz-AZkM9jf3WSWFX3VM7Aol9uKZzY~iTeh~XLi7tXNle78G63lxxLQsPO5qF8O6dnYVoDlAuoYEhEHcTABf7RhrrYHPEjF-NOwpyfzVfQpmobUjFvJamM7vfxxCNehvQ3s5ioKA0OXGibBcUyQ7xhKg4IL70pP9yeI4c5N~6yvjoAM2Qw-6rj2rMslOTohfYJjBMV~ghZpoHtXxEAcXfXSM5Vz00H93O0yHKZ915D0kFsATfjYNighrCUBoONcchwDqXihkU0x1-M4ug__"
           alt="Taybeen Logo"
@@ -64,7 +64,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
           })()}
         </h2>
 
-        <p className="text-[#7D6B5E] font-poppins text-xs sm:text-sm md:text-sm lg:text-base leading-relaxed max-w-md mx-auto mb-4 md:mb-5 text-center line-clamp-3 md:line-clamp-none">
+        <p className="text-[#7D6B5E] font-poppins text-xs sm:text-sm lg:text-base leading-relaxed max-w-md mx-auto mb-4 md:mb-5 text-center line-clamp-3 lg:line-clamp-none">
           {product.description}
         </p>
 

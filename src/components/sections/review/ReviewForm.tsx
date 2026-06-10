@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { Star, Upload, X, ArrowRight } from "lucide-react";
 import { Select } from "@/components/ui/Select";
 
@@ -100,7 +101,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
-      {/* Full Name & Email grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div>
           <label htmlFor="fullName" className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm mb-2 block text-left">
@@ -145,7 +145,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         </div>
       </div>
 
-      {/* Product Purchased */}
+
       <Select
         label="Product Purchased"
         required
@@ -165,7 +165,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         error={errors.productPurchased}
       />
 
-      {/* Rating */}
       <div>
         <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm mb-2 block text-left">
           How would you rate your experience?*
@@ -196,9 +195,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         )}
       </div>
 
-      {/* Textarea & Photos Layout Grid (Responsive) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-        {/* Share Experience Textarea */}
         <div>
           <label htmlFor="experience" className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm mb-2 block text-left">
             Share your experience*
@@ -226,7 +223,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
           )}
         </div>
 
-        {/* Photo Upload Zone */}
         <div>
           <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm mb-2 block text-left">
             Add Photos (Optional)
@@ -256,7 +252,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         </div>
       </div>
 
-      {/* Thumbnail Previews */}
       {previews.length > 0 && (
         <div className="space-y-2 animate-in fade-in duration-300">
           <p className="text-brand-brown font-poppins text-xs font-semibold text-left">
@@ -265,10 +260,12 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
           <div className="flex flex-wrap gap-3 p-3 bg-white border border-[#D1C7BD]/60 rounded-lg">
             {previews.map((src, index) => (
               <div key={index} className="relative w-16 h-16 rounded-md overflow-hidden border border-[#D1C7BD] shadow-sm group/thumb">
-                <img
+                <Image
                   src={src}
                   alt={`Preview ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  unoptimized
                 />
                 <button
                   type="button"
@@ -284,7 +281,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         </div>
       )}
 
-      {/* Consent Checkbox */}
       <div className="flex items-start gap-3 pt-1 select-none">
         <input
           type="checkbox"
@@ -298,7 +294,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         </label>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         disabled={isSubmitting}
