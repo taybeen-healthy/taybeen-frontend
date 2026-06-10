@@ -27,3 +27,8 @@ export interface Feature {
   title: string;
   icon: string;
 }
+
+export interface CategoryDetail {
+  title: string;
+  description: string;
+}
