@@ -224,7 +224,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
           </>
         ) : (
           <>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/signup" className="text-[#4A5E28] font-semibold hover:underline">
               Sign Up
             </Link>
