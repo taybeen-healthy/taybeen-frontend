@@ -3,6 +3,7 @@ import { Poppins, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+import { CartProvider } from "@/context/CartContext";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -216,7 +217,9 @@ export default function RootLayout({
             __html: JSON.stringify(productListSchema),
           }}
         />
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

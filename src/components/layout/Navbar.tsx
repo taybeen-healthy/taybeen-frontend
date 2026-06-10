@@ -6,10 +6,11 @@ import Link from "next/link";
 import { User, ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CartDrawer } from "@/components/features/cart/CartDrawer";
+import { useCart } from "@/context/CartContext";
 
 export const Navbar: React.FC = () => {
+  const { isCartOpen, setIsCartOpen, cartCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     if (isMenuOpen || isCartOpen) {
@@ -55,7 +56,11 @@ export const Navbar: React.FC = () => {
               >
                 <ShoppingCart size={24} className="md:w-8 md:h-8" strokeWidth={2} />
               </button>
-              <span className="absolute -top-1 -right-1 bg-brand-primary w-2 md:w-2.5 h-2 md:h-2.5 rounded-full border border-white"></span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-brand-primary min-w-[18px] h-[18px] px-1 rounded-full border border-white flex items-center justify-center text-[9px] font-bold text-white font-poppins">
+                  {cartCount}
+                </span>
+              )}
             </div>
 
             <button

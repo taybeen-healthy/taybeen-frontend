@@ -35,3 +35,10 @@ export interface CategoryDetail {
   title: string;
   description: string;
 }
+
+export interface CartItem {
+  product: Product;
+  selectedWeight: string;
+  quantity: number;
+  priceAtSelection: number;
+}

@@ -7,6 +7,7 @@ import { Product } from "@/types";
 import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
 import { Select } from "@/components/ui/Select";
+import { useCart } from "@/context/CartContext";
 
 interface ProductDetailModalProps {
   product: Product;
@@ -17,6 +18,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   product,
   onClose,
 }) => {
+  const { addToCart, setIsCartOpen } = useCart();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<"description" | "benefits">("description");
   const [selectedWeight, setSelectedWeight] = useState(product.weightOptions?.[0] || product.weight);
@@ -64,7 +66,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   const handleAddToCart = () => {
-    alert(`Added ${quantity} x ${product.name} (${selectedWeight}) to cart!`);
+    addToCart(product, selectedWeight, quantity);
+    onClose();
+    setIsCartOpen(true);
   };
 
   return (
