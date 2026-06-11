@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-bg border-t border-[#E5E5E5] lg:border-t-0 pt-16 sm:pt-20 lg:pt-16 pb-10 md:pb-12">
+    <footer className="bg-brand-bg border-t border-[#E5E5E5] lg:border-t-0 pt-10 lg:pt-12 pb-10 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="hidden lg:block border-t border-[#A69797] mb-16" />
 
@@ -48,7 +49,7 @@ export const Footer: React.FC = () => {
               <li><a href="#" className="hover:text-brand-primary">FAQ</a></li>
               <li><a href="#" className="hover:text-brand-primary">Shipping &amp; Returns</a></li>
               <li><a href="#" className="hover:text-brand-primary">Track Order</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Contact Us</a></li>
+              <li><Link href="/contact" className="hover:text-brand-primary">Contact Us</Link></li>
             </ul>
           </div>
 

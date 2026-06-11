@@ -13,7 +13,7 @@ export default function SignInPage() {
           src="/authBg.png"
           alt="Botanical Background"
           fill
-          className="object-contain md:object-cover object-top opacity-100"
+          className="object-cover object-[90%_top] md:object-cover md:object-top opacity-100"
           priority
         />
       </div>

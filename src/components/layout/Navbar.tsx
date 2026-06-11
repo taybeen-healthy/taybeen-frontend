@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
             <Link href="/" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Home</Link>
             <a href="#" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Story</a>
             <Link href="/products" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Products</Link>
-            <a href="#" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Contact Us</a>
+            <Link href="/contact" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Contact Us</Link>
           </div>
 
           <div className="flex items-center space-x-4 md:space-x-8">
@@ -153,13 +153,13 @@ export const Navbar: React.FC = () => {
                   My Account
                 </Link>
                 
-                <a
-                  href="#"
+                <Link
+                  href="/contact"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#5A3E2B] font-poppins font-semibold text-sm text-[#FDFAF3] hover:bg-[#432E20] transition-colors text-center"
                 >
                   Contact Us
-                </a>
+                </Link>
               </div>
             </motion.div>
           </>
