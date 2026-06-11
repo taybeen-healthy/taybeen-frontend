@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">COMPANY</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><a href="#" className="hover:text-brand-primary">Our Story</a></li>
+              <li><Link href="/our-story" className="hover:text-brand-primary">Our Story</Link></li>
               <li><a href="#" className="hover:text-brand-primary">Sourcing &amp; Quality</a></li>
               <li><a href="#" className="hover:text-brand-primary">Certifications</a></li>
             </ul>

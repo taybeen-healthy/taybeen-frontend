@@ -40,7 +40,7 @@ export const Navbar: React.FC = () => {
 
           <div className="hidden lg:flex items-center space-x-12">
             <Link href="/" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Home</Link>
-            <a href="#" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Story</a>
+            <Link href="/our-story" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Story</Link>
             <Link href="/products" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Products</Link>
             <Link href="/contact" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Contact Us</Link>
           </div>
@@ -106,14 +106,14 @@ export const Navbar: React.FC = () => {
                 
                 <div className="border-t border-[#5A3E2B]/15" />
                 
-                <a
-                  href="#"
+                <Link
+                  href="/our-story"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
                 >
                   <span>Our Story</span>
                   <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
-                </a>
+                </Link>
                 
                 <div className="border-t border-[#5A3E2B]/15" />
                 

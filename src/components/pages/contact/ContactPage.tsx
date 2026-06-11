@@ -50,7 +50,7 @@ export default function ContactPage() {
         {/* Form and Contact Information Section */}
         <section className="bg-[#FDFAF3] z-20 relative pt-10 lg:pt-14 px-6 md:px-12 lg:px-20 xl:px-24">
           <div className="max-w-[1200px] mx-auto flex flex-col-reverse lg:flex-row justify-between items-start gap-12 lg:gap-20">
-            
+
             {/* Left Column: Quick Connect & Customer Service */}
             <div className="w-full lg:w-[42%] text-left space-y-12">
               <div>
@@ -151,7 +151,7 @@ export default function ContactPage() {
                   type="submit"
                   className="w-full sm:w-[260px] bg-[#5A3E2B] hover:bg-[#432E20] text-[#FDFAF3] py-4 rounded-lg font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer"
                 >
-                  SUMBIT
+                  SUBMIT
                 </button>
               </div>
             </form>
