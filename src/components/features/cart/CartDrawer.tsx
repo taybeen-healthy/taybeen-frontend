@@ -5,18 +5,43 @@ import Image from "next/image";
 import { ShoppingCart, X, Plus, Minus, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const formatOrderDate = (date: Date): string => {
+  const day = date.getDate();
+  const monthNames = ["June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May"];
+  // Note: let's resolve month from index properly using actual JS date month
+  const actualMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = actualMonths[date.getMonth()];
+  const year = date.getFullYear();
+
+  let suffix = "th";
+  if (day === 1 || day === 21 || day === 31) suffix = "st";
+  else if (day === 2 || day === 22) suffix = "nd";
+  else if (day === 3 || day === 23) suffix = "rd";
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  return `${day}${suffix} ${month} ${year} ${hours}:${minutes} ${ampm}`;
+};
+
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
+  const router = useRouter();
   const {
     cartItems,
     updateQuantity,
     removeFromCart,
     cartCount,
+    clearCart,
   } = useCart();
 
   const subtotal = cartItems.reduce(
@@ -31,7 +56,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const freeShippingProgress = Math.min((subtotal / shippingThreshold) * 100, 100);
 
   const handleCheckout = () => {
-    alert("Proceeding to checkout with total amount: ₹" + total.toLocaleString("en-IN"));
+    const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000).toString().padStart(4, '0')}`;
+    const placedOn = formatOrderDate(new Date());
+    const itemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+    const orderObject = {
+      id: orderId,
+      placedOn: placedOn,
+      itemsCount: itemsCount,
+      items: cartItems.map(item => ({
+        id: item.product.id,
+        name: item.product.name,
+        weight: item.selectedWeight,
+        quantity: item.quantity,
+        price: item.priceAtSelection
+      })),
+      total: total
+    };
+
+    localStorage.setItem("taybeen_last_order", JSON.stringify(orderObject));
+    clearCart();
+    onClose();
+    router.push("/order-confirmed");
   };
 
   return (
