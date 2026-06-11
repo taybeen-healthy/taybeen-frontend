@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StarRating } from "@/components/ui/StarRating";
+import { homeData } from "@/data/homeData";
 
 export const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -84,10 +85,10 @@ export const Testimonials: React.FC = () => {
   return (
     <Section bg="cream" overflowHidden={true}>
       <SectionHeader
-        tag="From Our Community"
+        tag={homeData.testimonials.tag}
         tagVariant="primary-light"
         tagClassName="text-brand-brown"
-        title={<span className="-tracking-[0.04em]">Dates worth talking about!</span>}
+        title={<span className="-tracking-[0.04em]">{homeData.testimonials.title}</span>}
         actions={
           <div className="flex items-center justify-start md:justify-end gap-4 md:gap-6 w-full md:w-auto">
             <button

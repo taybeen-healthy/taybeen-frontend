@@ -1,13 +1,19 @@
 import { Leaf, FlaskConical, RotateCcw, Headset } from "lucide-react";
 import { Fragment } from "react";
+import { homeData } from "@/data/homeData";
 
 export const FeaturesBar: React.FC = () => {
-  const features = [
-    { icon: <Leaf className="text-brand-brown" />, text: "100% Natural Snacks" },
-    { icon: <FlaskConical className="text-brand-brown" />, text: "No Artificial Additives" },
-    { icon: <RotateCcw className="text-brand-brown" />, text: "Easy Return" },
-    { icon: <Headset className="text-brand-brown" />, text: "24/7 Support" },
+  const icons = [
+    <Leaf className="text-brand-brown" key="leaf" />,
+    <FlaskConical className="text-brand-brown" key="flask" />,
+    <RotateCcw className="text-brand-brown" key="rotate" />,
+    <Headset className="text-brand-brown" key="headset" />
   ];
+
+  const features = homeData.features.map((f, i) => ({
+    icon: icons[i],
+    text: f.text
+  }));
 
   return (
     <div className="py-6 sm:py-7 md:py-8 lg:py-6">

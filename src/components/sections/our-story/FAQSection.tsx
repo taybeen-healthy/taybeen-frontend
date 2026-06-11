@@ -6,13 +6,13 @@ import { Plus } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { faqs, FaqItem } from "@/data/faqs";
 
-interface FaqAccordionItemProps {
+interface FAQAccordionItemProps {
   item: FaqItem;
   isOpen: boolean;
   onToggle: () => void;
 }
 
-const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({ item, isOpen, onToggle }) => {
+const FAQAccordionItem: React.FC<FAQAccordionItemProps> = ({ item, isOpen, onToggle }) => {
   return (
     <div className="border-b border-[#5A3E2B]/10">
       <button
@@ -55,7 +55,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({ item, isOpen, onTog
   );
 };
 
-export const FaqSection: React.FC = () => {
+export const FAQSection: React.FC = () => {
   const [openId, setOpenId] = useState<string | null>(null);
 
   const handleToggle = (id: string) => {
@@ -81,7 +81,7 @@ export const FaqSection: React.FC = () => {
         {/* Right Column: FAQ Accordion List */}
         <div className="border-t border-[#5A3E2B]/10">
           {faqs.map((item) => (
-            <FaqAccordionItem
+            <FAQAccordionItem
               key={item.id}
               item={item}
               isOpen={openId === item.id}
@@ -94,4 +94,4 @@ export const FaqSection: React.FC = () => {
   );
 };
 
-export default FaqSection;
+export default FAQSection;
