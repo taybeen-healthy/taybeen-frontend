@@ -3,10 +3,11 @@ import { Product, Testimonial } from "@/types";
 export const products: Product[] = [
   {
     id: "1",
-    name: "Mejdool Dates",
+    name: "Medjool Dates",
     description:
       "The 'King of Dates' - large, soft, and intensely caramel - sweet fudge like texture. Exceptionally rich in natural sugar and potassium.",
-    price: 499,
+    price: 1300,
+    originalPrice: 1500,
     weight: "500g",
     rating: 4.9,
     reviewsCount: 1240,
@@ -20,7 +21,8 @@ export const products: Product[] = [
     name: "Ajwa Dates",
     description:
       "From the holy city of Madinah. Dark, soft and uniquely flavoured with a dry finish. Revered for centuries for their extraordinary health properties.",
-    price: 799,
+    price: 750,
+    originalPrice: 1000,
     weight: "500g",
     rating: 5.0,
     reviewsCount: 840,
@@ -31,29 +33,29 @@ export const products: Product[] = [
   },
   {
     id: "3",
-    name: "Safawi Dates",
+    name: "Kalmi Dates",
     description:
-      "Moist, tender, and moderately sweet with a deep chocolately undertone. A favourite for daily snacking and excellent source of iron and fibre.",
-    price: 549,
+      "Moist, dark, and highly nutritious dates with a rich texture, perfect for regular daily snacking and health goals.",
+    price: 600,
+    originalPrice: 800,
     weight: "500g",
-    rating: 4.5,
+    rating: 4.8,
     reviewsCount: 470,
-    image:
-      "https://s3-alpha-sig.figma.com/img/4899/d334/711770072c9bfcfcf8508aa89b253dc0?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SLlbyyUfITqA37JRfy5Q7hfABOEHkYU-OweiBylX4UBGM5lRQa6tAT79ytldlaTt0bw~-t63uYKIgeH17HpirLrYsCoMOKVUJCOFjXeJAGr887flJQLvSOySwzOCMfGIS6lcDJj1fonNJLWjPKSv2D-vKs4ztDfn3YPqeSVmDw2N-N648VlUc3yB3BABeiAiDy9yrmICpZc4ot0~GEYew6Arok0Biqo0y848vohmvmZ41DL1DK6yAyQxSZNoGI7ps3GlYQs6XkFomZ4nwtaGJn1-dMyt9GvURJuj-nLvxaRW-VMV70HoUsEv69MGtJbgA6WJkLLgag8hEwhteJv52Q__",
+    image: "/Image (Premium dates on a plate).png",
     badge: "New Arrival",
     badgeColor: "#768C3A",
   },
   {
     id: "4",
-    name: "Mabroom Dates",
+    name: "Sugai Dates",
     description:
-      "Long, slender and semi-dry with a rich, concentrated sweetness. Less sugar making them ideal for health-conscious snackers.",
-    price: 499,
+      "Distinctive dual-toned dates with a golden crispy base and a soft, sweet body, offering a unique texture and pleasant crunch.",
+    price: 550,
+    originalPrice: 700,
     weight: "500g",
     rating: 4.9,
-    reviewsCount: 1240,
-    image:
-      "https://s3-alpha-sig.figma.com/img/9a6c/3043/a1c315d1b0aa88dd1fbe7b668c1e160e?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FAmNQjNon-~NjOtIknLAEMCPbDk59lLJP1RUU3YvoorM-rn4ztIMVEJXvPNAFTHq208FYoZSRU7hXtGXYSX-7c3NtyWbLQdisapsVAqqClKE9Ir3PcTQ0FdpolJH0T7hZneGw64NJZQiFMRngPkKzzxuqq-XumKXANOdRlvK~uvSxvYkIb77fGT~Rwn7t5o8wbZ2--mLYuC9WzLmYWEOxW-CxNOBQidFMaxdXKl2IByqRpntrEfPkZsELZsZPwJk9mgSUZAtaGUOWHQYycU1FSicOSCh37XhT5rTXSbi586NzN33I-iFwL7x3MhR~lFlWyXPh~-eIBPs54fl4Iuwmw__",
+    reviewsCount: 310,
+    image: "/Image (Pile of premium dates).png",
     badge: "Chef's Pick",
     badgeColor: "#4A5E28",
   },

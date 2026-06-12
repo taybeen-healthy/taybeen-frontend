@@ -43,6 +43,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   const currentPrice = getPriceForWeight(selectedWeight, product.weight, product.price);
+  const currentOriginalPrice = product.originalPrice 
+    ? getPriceForWeight(selectedWeight, product.weight, product.originalPrice)
+    : undefined;
 
   const handleShare = async () => {
     const shareUrl = window.location.href;
@@ -132,8 +135,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         </div>
 
         <div className="mb-5">
-          <div className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
-            ₹{currentPrice.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <span className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
+              ₹{currentPrice.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+            {currentOriginalPrice && (
+              <>
+                <span className="text-base sm:text-lg text-brand-brown/60 line-through font-poppins font-medium">
+                  ₹{currentOriginalPrice.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+                <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
+                  ({Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}% OFF)
+                </span>
+              </>
+            )}
           </div>
           <div className="text-xs sm:text-sm text-brand-green-light font-poppins mt-0.5">
             Inclusive of all taxes

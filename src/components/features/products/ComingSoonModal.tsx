@@ -69,8 +69,19 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
         </p>
 
         <div className="flex flex-col items-center mb-4 md:mb-6">
-          <p className="text-brand-brown/90 font-poppins text-xs sm:text-sm font-semibold tracking-wide mb-1 md:mb-2">
-            Pack Size: {product.weight} · Price: ₹{product.price}
+          <p className="text-brand-brown/90 font-poppins text-xs sm:text-sm font-semibold tracking-wide mb-1 md:mb-2 flex items-center justify-center gap-1.5 flex-wrap">
+            <span>Pack Size: {product.weight}</span>
+            <span>·</span>
+            <span>Price:</span>
+            {product.originalPrice ? (
+              <>
+                <span className="line-through text-brand-brown/60">₹{product.originalPrice}</span>
+                <span className="text-brand-brown">₹{product.price}</span>
+                <span className="text-[#768C3A]">({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)</span>
+              </>
+            ) : (
+              <span>₹{product.price}</span>
+            )}
           </p>
 
           <div className="flex items-center gap-1.5 text-brand-primary">

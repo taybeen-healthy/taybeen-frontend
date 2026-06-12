@@ -73,9 +73,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <h3 className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-serif font-bold text-brand-brown leading-snug group-hover:text-brand-green transition-colors duration-200 text-left line-clamp-2">
               {product.name}
             </h3>
-            <span className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-poppins font-bold text-[#5A3E2B] whitespace-nowrap">
-              ₹{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-            </span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {product.originalPrice ? (
+                <>
+                  <span className="text-[10px] sm:text-xs text-[#5A3E2B]/60 line-through font-poppins font-medium">
+                    ₹{product.originalPrice}
+                  </span>
+                  <span className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-poppins font-bold text-[#5A3E2B] whitespace-nowrap">
+                    ₹{product.price}
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-[#768C3A] font-poppins font-semibold">
+                    ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
+                  </span>
+                </>
+              ) : (
+                <span className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-poppins font-bold text-[#5A3E2B] whitespace-nowrap">
+                  ₹{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -132,10 +148,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {product.description}
             </p>
           )}
-          <div className="pt-1">
-            <span className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-brand-brown">
-              ₹{product.price}
-            </span>
+          <div className="pt-1 flex items-center gap-2 flex-wrap">
+            {product.originalPrice ? (
+              <>
+                <span className="text-sm sm:text-base text-brand-brown/60 line-through font-poppins font-medium">
+                  ₹{product.originalPrice}
+                </span>
+                <span className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-brand-brown">
+                  ₹{product.price}
+                </span>
+                <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
+                  ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
+                </span>
+              </>
+            ) : (
+              <span className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-brand-brown">
+                ₹{product.price}
+              </span>
+            )}
           </div>
         </div>
 
