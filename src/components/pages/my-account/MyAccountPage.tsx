@@ -8,8 +8,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
 import { orderHistory } from "@/data/myAccountData";
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
+import { Hero } from "@/components/layout/Hero";
 import {
-  AccountHero,
   AccountSidebar,
   AccountDashboard,
   RecentOrderHistory,
@@ -90,7 +90,7 @@ export const MyAccountPage: React.FC = () => {
         <Navbar />
         
         {/* Banner Image Strip */}
-        <AccountHero />
+        <Hero />
 
         {/* Main Content Area */}
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-20 pt-8 sm:pt-10">

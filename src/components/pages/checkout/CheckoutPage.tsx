@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/context/CartContext";
 import { CheckoutAddressForm, CheckoutStep } from "@/types/checkout";
-import { AccountHero } from "@/components/my-account";
+import { Hero } from "@/components/layout/Hero";
 import {
   CheckoutForm,
   CheckoutReview,
@@ -256,7 +256,7 @@ export const CheckoutPage: React.FC = () => {
         <Navbar />
 
         {/* Banner Image Strip */}
-        <AccountHero />
+        <Hero />
 
         {/* Content Wrapper */}
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-24 pt-8 sm:pt-12 w-full">
@@ -264,6 +264,18 @@ export const CheckoutPage: React.FC = () => {
             
             {/* Left Column: Form Address Entry or Review Cards */}
             <div className="flex-1 w-full space-y-6">
+              {/* Mobile-only Order Summary panel (rendered on top for small viewports) */}
+              <div className="lg:hidden w-full">
+                <CheckoutOrderSummary
+                  cartItems={cartItems}
+                  subtotal={subtotal}
+                  shippingCost={shippingCost}
+                  total={total}
+                  step={step}
+                  onProceed={handleProceedAction}
+                />
+              </div>
+
               {step === "form" ? (
                 <CheckoutForm
                   shippingForm={shippingForm}
@@ -289,18 +301,6 @@ export const CheckoutPage: React.FC = () => {
                   onPaymentSubmit={handleProceedAction}
                 />
               )}
-
-              {/* Mobile-only Order Summary panel */}
-              <div className="lg:hidden w-full">
-                <CheckoutOrderSummary
-                  cartItems={cartItems}
-                  subtotal={subtotal}
-                  shippingCost={shippingCost}
-                  total={total}
-                  step={step}
-                  onProceed={handleProceedAction}
-                />
-              </div>
             </div>
 
             {/* Right Column: Order Summary Sidebar (Desktop only) */}
