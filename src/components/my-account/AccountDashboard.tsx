@@ -40,7 +40,6 @@ export const AccountDashboard: React.FC<AccountDashboardProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-6 lg:gap-8 w-full">
-      {/* Top Row: Profile Card & Billing Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 xl:gap-8">
         <div className="h-full">
           <AccountProfileCard profile={profile} onEdit={onEditProfile} />
@@ -50,7 +49,6 @@ export const AccountDashboard: React.FC<AccountDashboardProps> = ({
         </div>
       </div>
 
-      {/* Bottom Row: Full-width Recent Order History */}
       <div className="w-full">
         <RecentOrderHistory
           activeTab="dashboard"

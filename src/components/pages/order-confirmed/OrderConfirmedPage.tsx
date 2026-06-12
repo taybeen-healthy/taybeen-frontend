@@ -62,23 +62,18 @@ export const OrderConfirmedPage: React.FC = () => {
       <div>
         <Navbar />
 
-        {/* Hero checkmark and background */}
         <OrderConfirmedHeader />
 
-        {/* Order Details & Summary Content Card block */}
         <main className="relative z-20 px-6 md:px-12 lg:px-20 xl:px-24 pb-16 md:pb-0 -mt-4 sm:-mt-8">
           <div className="max-w-[800px] mx-auto space-y-8">
-            {/* Summary details card */}
             <OrderSummaryCard
               orderId={orderInfo.id}
               placedOn={orderInfo.placedOn}
               itemsCount={orderInfo.itemsCount}
             />
 
-            {/* CTAs */}
             <OrderActions />
 
-            {/* Support details note */}
             <div className="pt-2">
               <OrderSupportNote />
             </div>

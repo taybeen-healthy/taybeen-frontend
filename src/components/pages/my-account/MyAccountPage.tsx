@@ -98,13 +98,10 @@ export const MyAccountPage: React.FC = () => {
       <div>
         <Navbar />
         
-        {/* Banner Image Strip */}
         <Hero />
 
-        {/* Main Content Area */}
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-20 pt-8 sm:pt-10">
           
-          {/* Mobile Layout: Stacked vertically */}
           <div className="flex flex-col lg:hidden gap-6">
             <AccountSidebar activeTab={activeTab} onTabChange={handleTabChange} />
             {activeTab === "dashboard" && (
@@ -153,14 +150,11 @@ export const MyAccountPage: React.FC = () => {
             )}
           </div>
 
-          {/* Desktop Layout: Multi-column sidebar grid */}
           <div className="hidden lg:flex gap-8 items-start">
-            {/* Left Column: Navigation Sidebar */}
             <div className="w-[260px] xl:w-[280px] flex-shrink-0">
               <AccountSidebar activeTab={activeTab} onTabChange={handleTabChange} />
             </div>
 
-            {/* Right Column: Cards & Order History */}
             <div className="flex-1 flex flex-col gap-8">
               {activeTab === "dashboard" && (
                 <AccountDashboard
@@ -221,19 +215,16 @@ export const MyAccountPage: React.FC = () => {
 
       <Footer />
 
-      {/* Logout Confirmation Modal */}
       <Modal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
         className="!max-w-md !flex-col p-6 text-center select-none font-poppins"
       >
         <div className="w-full space-y-5">
-          {/* Header icon */}
           <div className="mx-auto w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600 mb-2 border border-red-100">
             <LogOut size={22} />
           </div>
 
-          {/* Title & Description */}
           <div className="space-y-1.5">
             <h3 className="font-serif text-xl font-bold text-brand-brown">
               Log Out
@@ -243,7 +234,6 @@ export const MyAccountPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Action buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={() => setIsLogoutModalOpen(false)}

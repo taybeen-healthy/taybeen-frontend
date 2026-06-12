@@ -38,7 +38,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
 
   return (
     <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-4 sm:p-5 lg:p-7 shadow-sm text-left font-poppins select-none">
-      {/* Header Block */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#C4A482]/20 pb-4 mb-6">
         <div>
           <button
@@ -61,13 +60,11 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
         </div>
       </div>
 
-      {/* Progress Timeline Tracker */}
       <div className="bg-[#F6F1E9]/40 border border-[#C4A482]/20 rounded-2xl p-5 sm:p-6 mb-6">
         <h3 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-6">
           Order Status
         </h3>
         <div className="relative flex flex-col md:flex-row justify-between gap-6 md:gap-4 md:items-center">
-          {/* Desktop connecting lines */}
           <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-0.5 bg-[#C4A482]/15 hidden md:block z-0">
             <div
               className="h-full bg-[#768C3A] transition-all duration-500"
@@ -77,7 +74,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
             />
           </div>
 
-          {/* Mobile connecting lines */}
           <div className="absolute left-[22px] top-[22px] bottom-[22px] w-0.5 bg-[#C4A482]/15 md:hidden z-0">
             <div
               className="w-full bg-[#768C3A] transition-all duration-500"
@@ -124,9 +120,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
         </div>
       </div>
 
-      {/* Address Blocks */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Shipping Address */}
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 shadow-sm text-left">
           <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest uppercase block mb-3">
             Shipping Address
@@ -152,7 +146,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
           </div>
         </div>
 
-        {/* Billing Address */}
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 shadow-sm text-left">
           <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest uppercase block mb-3">
             Billing Address
@@ -179,15 +172,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
         </div>
       </div>
 
-      {/* Items List & Price Breakdown */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
-        {/* Left Column: Items List */}
         <div className="flex-1 w-full space-y-4">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-1">
             Order Items
           </h3>
 
-          {/* Desktop Table View */}
           <div className="hidden sm:block overflow-hidden border border-[#C4A482]/20 rounded-2xl bg-white">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
@@ -232,7 +222,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
             </table>
           </div>
 
-          {/* Mobile Stack View */}
           <div className="sm:hidden space-y-3">
             {order.items.map((item, idx) => (
               <div
@@ -267,7 +256,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Pricing Summary Card */}
         <div className="w-full lg:w-[320px] xl:w-[350px] shrink-0 space-y-4">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-1 lg:opacity-0 pointer-events-none select-none">
             Summary Details

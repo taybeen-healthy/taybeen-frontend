@@ -140,14 +140,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
-      {/* Shipping address form */}
       <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-7 md:p-8 shadow-sm text-left font-poppins">
         <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-brand-brown mb-6 tracking-wide">
           Shipping Information
         </h2>
 
         <div className="space-y-5">
-          {/* Name Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
@@ -175,7 +173,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             </div>
           </div>
 
-          {/* Street Address */}
           <div className="space-y-1.5">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               Street Address<span className="text-red-500">*</span>
@@ -189,7 +186,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             />
           </div>
 
-          {/* City */}
           <div className="space-y-1.5">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               City<span className="text-red-500">*</span>
@@ -203,7 +199,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             />
           </div>
 
-          {/* Country & Zip */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Select
               label="Country"
@@ -229,7 +224,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             </div>
           </div>
 
-          {/* State & Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Select
               label="State/ Province"
@@ -266,7 +260,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             </div>
           </div>
 
-          {/* Billing same Toggler */}
           <div className="space-y-3 pt-5 border-t border-[#C4A482]/15">
             <span className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               My billing and shipping address are the same
@@ -295,7 +288,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             </div>
           </div>
 
-          {/* Gift Message Component */}
           <CheckoutGiftMessage
             isOpen={giftMessageOpen}
             onOpenChange={onGiftMessageOpenChange}
@@ -306,7 +298,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
         </div>
       </div>
 
-      {/* Conditional Billing address form */}
       {!isBillingSame && (
         <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-7 md:p-8 shadow-sm text-left font-poppins animate-fadeIn">
           <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-brand-brown mb-6 tracking-wide">
@@ -314,7 +305,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           </h2>
 
           <div className="space-y-5">
-            {/* Name Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
@@ -342,7 +332,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               </div>
             </div>
 
-            {/* Street Address */}
             <div className="space-y-1.5">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                 Street Address<span className="text-red-500">*</span>
@@ -356,7 +345,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               />
             </div>
 
-            {/* City */}
             <div className="space-y-1.5">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                 City<span className="text-red-500">*</span>
@@ -370,7 +358,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               />
             </div>
 
-            {/* Country & Zip */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Select
                 label="Country"
@@ -396,7 +383,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               </div>
             </div>
 
-            {/* State & Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Select
                 label="State/ Province"

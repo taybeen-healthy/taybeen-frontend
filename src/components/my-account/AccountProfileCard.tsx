@@ -20,7 +20,6 @@ export const AccountProfileCard: React.FC<AccountProfileCardProps> = ({
 
   return (
     <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl flex flex-row lg:flex-col items-center lg:justify-center p-4 sm:p-5 lg:p-8 shadow-sm h-full gap-4 lg:gap-4 font-poppins select-none">
-      {/* Circular Avatar Placeholder */}
       <div className="w-16 h-16 lg:w-24 lg:h-24 rounded-full border border-brand-brown/15 flex items-center justify-center text-[#7D6B5E] bg-[#FDFBF7] flex-shrink-0 overflow-hidden">
         {profile.avatarUrl ? (
           <img 
@@ -33,7 +32,6 @@ export const AccountProfileCard: React.FC<AccountProfileCardProps> = ({
         )}
       </div>
 
-      {/* Profile Info */}
       <div className="flex-1 lg:flex-none lg:text-center text-left min-w-0">
         <h3 className="font-serif text-base sm:text-lg lg:text-2xl font-bold text-brand-brown leading-tight truncate">
           {fullName}
@@ -43,7 +41,6 @@ export const AccountProfileCard: React.FC<AccountProfileCardProps> = ({
         </p>
       </div>
 
-      {/* Action Link */}
       <div className="lg:mt-1 flex-shrink-0">
         <button
           onClick={(e) => {

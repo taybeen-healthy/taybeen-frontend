@@ -255,16 +255,12 @@ export const CheckoutPage: React.FC = () => {
       <div>
         <Navbar />
 
-        {/* Banner Image Strip */}
         <Hero />
 
-        {/* Content Wrapper */}
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-24 pt-8 sm:pt-12 w-full">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start w-full">
             
-            {/* Left Column: Form Address Entry or Review Cards */}
             <div className="flex-1 w-full space-y-6">
-              {/* Mobile-only Order Summary panel (rendered on top for small viewports) */}
               <div className="lg:hidden w-full">
                 <CheckoutOrderSummary
                   cartItems={cartItems}
@@ -303,7 +299,6 @@ export const CheckoutPage: React.FC = () => {
               )}
             </div>
 
-            {/* Right Column: Order Summary Sidebar (Desktop only) */}
             <div className="hidden lg:block w-[380px] xl:w-[420px] flex-shrink-0">
               <CheckoutOrderSummary
                 cartItems={cartItems}

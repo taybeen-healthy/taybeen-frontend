@@ -227,18 +227,14 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
 
   return (
     <div className="w-full space-y-8 font-poppins">
-      {/* Account Settings Form Card */}
       <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl shadow-sm text-left">
-        {/* Header Block */}
         <div className="px-5 py-4 sm:px-7 sm:py-5 border-b border-[#C4A482]/20">
           <h2 className="font-serif text-lg sm:text-xl font-bold text-brand-brown">
             Account Settings
           </h2>
         </div>
 
-        {/* Form Body */}
         <form onSubmit={handleProfileSubmit} className="p-5 sm:p-7 md:p-8 space-y-6">
-          {/* Success Banner */}
           {profileSuccess && (
             <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm font-medium animate-fadeIn">
               <CheckCircle size={18} className="text-green-600 flex-shrink-0" />
@@ -247,7 +243,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
           )}
 
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            {/* Left: Avatar with Edit Button */}
             <div className="relative group">
               <div
                 onClick={triggerFileSelect}
@@ -280,10 +275,8 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
               />
             </div>
 
-            {/* Right: Input Fields */}
             <div className="flex-1 w-full space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* First Name */}
                 <div className="space-y-1.5 text-left">
                   <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                     First Name<span className="text-red-500">*</span>
@@ -297,7 +290,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                   />
                 </div>
 
-                {/* Last Name */}
                 <div className="space-y-1.5 text-left">
                   <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                     Last Name<span className="text-red-500">*</span>
@@ -312,7 +304,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 </div>
               </div>
 
-              {/* Email */}
               <div className="space-y-1.5 text-left">
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                   Email<span className="text-red-500">*</span>
@@ -326,7 +317,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 />
               </div>
 
-              {/* Phone Number */}
               <div className="space-y-1.5 text-left">
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
                   Phone Number<span className="text-red-500">*</span>
@@ -349,7 +339,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 )}
               </div>
 
-              {/* Save Button */}
               <div className="pt-2">
                 <Button
                   type="submit"
@@ -365,18 +354,14 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
         </form>
       </div>
 
-      {/* Billing Address Form Card */}
       <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl shadow-sm text-left">
-        {/* Header Block */}
         <div className="px-5 py-4 sm:px-7 sm:py-5 border-b border-[#C4A482]/20">
           <h2 className="font-serif text-lg sm:text-xl font-bold text-brand-brown">
             Billing Address
           </h2>
         </div>
 
-        {/* Form Body */}
         <form onSubmit={handleBillingSubmit} className="p-5 sm:p-7 md:p-8 space-y-5">
-          {/* Success Banner */}
           {billingSuccess && (
             <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm font-medium animate-fadeIn">
               <CheckCircle size={18} className="text-green-600 flex-shrink-0" />
@@ -384,7 +369,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             </div>
           )}
 
-          {/* First Name & Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5 text-left">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
@@ -412,7 +396,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             </div>
           </div>
 
-          {/* Street Address */}
           <div className="space-y-1.5 text-left">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               Street Address<span className="text-red-500">*</span>
@@ -426,9 +409,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             />
           </div>
 
-          {/* Country & State */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Country Dropdown */}
             <Select
               label="Country"
               required
@@ -439,7 +420,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
               searchable
             />
 
-            {/* State Dropdown */}
             <Select
               label="State/Province"
               required
@@ -453,7 +433,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             />
           </div>
 
-          {/* Postal Code */}
           <div className="space-y-1.5 text-left">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               Postal Code<span className="text-red-500">*</span>
@@ -467,7 +446,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             />
           </div>
 
-          {/* Email & Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5 text-left">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
@@ -504,7 +482,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
             </div>
           </div>
 
-          {/* Centered Save Button */}
           <div className="pt-4 flex justify-center">
             <Button
               type="submit"

@@ -65,7 +65,6 @@ export const FAQSection: React.FC = () => {
   return (
     <Section bg="cream" className="py-12 sm:py-16 md:py-20 lg:py-24" id="faq">
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.8fr] gap-10 lg:gap-16 xl:gap-20 items-start">
-        {/* Left Column: Title and Description */}
         <div className="space-y-4 text-left lg:sticky lg:top-28">
           <span className="text-[10px] sm:text-xs font-poppins font-bold tracking-[0.2em] text-[#768C3A] uppercase block">
             QUESTIONS
@@ -78,7 +77,6 @@ export const FAQSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Right Column: FAQ Accordion List */}
         <div className="border-t border-[#5A3E2B]/10">
           {faqs.map((item) => (
             <FAQAccordionItem

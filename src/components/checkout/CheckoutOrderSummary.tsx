@@ -27,7 +27,6 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
         Order Summary
       </h3>
 
-      {/* Cart items list */}
       <div className="space-y-4 max-h-[350px] overflow-y-auto pr-1">
         {cartItems.map((item, index) => {
           const itemImage = item.product.images?.[0] || item.product.image;
@@ -64,7 +63,6 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
         })}
       </div>
 
-      {/* Pricing breakdown summary */}
       <div className="mt-6 border-t border-[#C4A482]/15 pt-4 space-y-2.5">
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
           <span>Cart Subtotal</span>
@@ -77,7 +75,6 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
           </span>
         </div>
 
-        {/* Total Price display */}
         <div className="border-t border-[#C4A482]/15 mt-3 pt-3 flex justify-between items-center text-sm sm:text-base">
           <span className="font-bold text-[#3A2418]">Order Total</span>
           <span className="font-bold text-[#3A2418] text-base sm:text-lg">
@@ -86,10 +83,8 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
         </div>
       </div>
 
-      {/* Action Button inside Order Summary (For Form step on desktop, and for all steps on mobile viewports) */}
       {(step === "form" || typeof window !== "undefined") && (
         <>
-          {/* Form state button display or Mobile review button display */}
           <div className={`${step === "review" ? "lg:hidden" : ""} mt-6 pt-2`}>
             <Button
               onClick={onProceed}

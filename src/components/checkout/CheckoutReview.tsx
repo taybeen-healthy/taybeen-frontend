@@ -26,7 +26,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
 
-        {/* Shipping address review card */}
         <div className="bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl p-5 relative flex flex-col justify-between min-h-[140px]">
           <div className="space-y-2.5">
             <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest block">
@@ -52,7 +51,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
           </button>
         </div>
 
-        {/* Billing address review card */}
         <div className="bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl p-5 relative flex flex-col justify-between min-h-[140px]">
           <div className="space-y-2.5">
             <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest block">
@@ -97,7 +95,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
 
       </div>
 
-      {/* Terms & disclaimer */}
       <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
         By placing an order you agree to our{" "}
         <a href="#" className="underline hover:text-brand-brown">
@@ -109,7 +106,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
         </a>
       </div>
 
-      {/* Desktop-only Action Payment button */}
       <div className="hidden lg:flex pt-6">
         <Button
           onClick={onPaymentSubmit}
