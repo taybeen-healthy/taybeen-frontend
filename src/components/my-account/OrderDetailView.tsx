@@ -278,7 +278,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
               <div className="flex justify-between font-medium">
                 <span>Shipping</span>
                 <span className="font-semibold text-[#3A2418]">
-                  {order.shippingCost === 0 ? "Free" : `₹${order.shippingCost.toFixed(2)}`}
+                  {order.shippingCost === undefined || order.shippingCost === 0 ? "Free" : `₹${order.shippingCost.toFixed(2)}`}
                 </span>
               </div>
               <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-baseline">
