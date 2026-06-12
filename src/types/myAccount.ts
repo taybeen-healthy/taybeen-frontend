@@ -37,3 +37,5 @@ export interface BillingAddressForm {
 }
 
 export type MyAccountTab = "dashboard" | "orders" | "settings";
+
+

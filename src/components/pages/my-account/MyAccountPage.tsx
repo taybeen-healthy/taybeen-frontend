@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -41,6 +41,38 @@ export const MyAccountPage: React.FC = () => {
     phone: "+91 98765 43210",
   });
 
+  useEffect(() => {
+    try {
+      const storedProfile = localStorage.getItem("taybeen_profile");
+      if (storedProfile) {
+        setProfile(JSON.parse(storedProfile));
+      }
+      const storedBilling = localStorage.getItem("taybeen_billing");
+      if (storedBilling) {
+        setBilling(JSON.parse(storedBilling));
+      }
+    } catch (e) {
+      console.error("Failed to load profile/billing from localStorage", e);
+    }
+  }, []);
+
+  const handleSaveProfile = (newProfile: AccountProfileForm) => {
+    setProfile(newProfile);
+    try {
+      localStorage.setItem("taybeen_profile", JSON.stringify(newProfile));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleSaveBilling = (newBilling: BillingAddressForm) => {
+    setBilling(newBilling);
+    try {
+      localStorage.setItem("taybeen_billing", JSON.stringify(newBilling));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const [orders] = useState(orderHistory);
 
@@ -80,8 +112,8 @@ export const MyAccountPage: React.FC = () => {
               <AccountSettingsForm
                 profile={profile}
                 billing={billing}
-                onSaveProfile={setProfile}
-                onSaveBilling={setBilling}
+                onSaveProfile={handleSaveProfile}
+                onSaveBilling={handleSaveBilling}
               />
             )}
             {activeTab === "orders" && (
@@ -138,8 +170,8 @@ export const MyAccountPage: React.FC = () => {
                   <AccountSettingsForm
                     profile={profile}
                     billing={billing}
-                    onSaveProfile={setProfile}
-                    onSaveBilling={setBilling}
+                    onSaveProfile={handleSaveProfile}
+                    onSaveBilling={handleSaveBilling}
                   />
                 </div>
               )}

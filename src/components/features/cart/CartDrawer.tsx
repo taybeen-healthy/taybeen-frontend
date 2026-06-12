@@ -56,28 +56,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const freeShippingProgress = Math.min((subtotal / shippingThreshold) * 100, 100);
 
   const handleCheckout = () => {
-    const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000).toString().padStart(4, '0')}`;
-    const placedOn = formatOrderDate(new Date());
-    const itemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
-    const orderObject = {
-      id: orderId,
-      placedOn: placedOn,
-      itemsCount: itemsCount,
-      items: cartItems.map(item => ({
-        id: item.product.id,
-        name: item.product.name,
-        weight: item.selectedWeight,
-        quantity: item.quantity,
-        price: item.priceAtSelection
-      })),
-      total: total
-    };
-
-    localStorage.setItem("taybeen_last_order", JSON.stringify(orderObject));
-    clearCart();
     onClose();
-    router.push("/order-confirmed");
+    router.push("/checkout");
   };
 
   return (

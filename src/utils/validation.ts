@@ -90,3 +90,11 @@ export const validateStateProvince = (state: string): string | null => {
   }
   return null;
 };
+
+export const validateCity = (city: string): string | null => {
+  if (!city.trim()) {
+    return "City is required";
+  }
+  return null;
+};
+
