@@ -38,4 +38,40 @@ export interface BillingAddressForm {
 
 export type MyAccountTab = "dashboard" | "orders" | "settings";
 
+export interface OrderDetailItem {
+  name: string;
+  price: number;
+  quantity: number;
+  weight: string;
+  image: string;
+}
+
+export interface OrderAddressBlock {
+  name: string;
+  company?: string;
+  addressLine: string;
+  email: string;
+  phone: string;
+}
+
+export interface OrderDetail {
+  id: string;
+  date: string;
+  total: number;
+  status: string;
+  paymentMethod: string;
+  subtotal: number;
+  gst?: number;
+  shippingCost?: number;
+  billingAddress: OrderAddressBlock;
+  shippingAddress: OrderAddressBlock;
+  items: OrderDetailItem[];
+  progressSteps: Array<{
+    label: string;
+    completed: boolean;
+    stepNumber: string;
+  }>;
+}
+
+
 

@@ -26,6 +26,7 @@ interface AccountDashboardProps {
   onEditProfile: () => void;
   onEditBilling: () => void;
   onTabChange: (tab: string) => void;
+  onViewDetails?: (orderId: string) => void;
 }
 
 export const AccountDashboard: React.FC<AccountDashboardProps> = ({
@@ -35,6 +36,7 @@ export const AccountDashboard: React.FC<AccountDashboardProps> = ({
   onEditProfile,
   onEditBilling,
   onTabChange,
+  onViewDetails,
 }) => {
   return (
     <div className="flex flex-col gap-6 lg:gap-8 w-full">
@@ -54,6 +56,7 @@ export const AccountDashboard: React.FC<AccountDashboardProps> = ({
           activeTab="dashboard"
           onTabChange={onTabChange}
           orders={orders}
+          onViewDetails={onViewDetails}
         />
       </div>
     </div>

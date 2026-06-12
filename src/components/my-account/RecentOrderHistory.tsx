@@ -6,12 +6,14 @@ interface RecentOrderHistoryProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   orders: OrderHistoryItem[];
+  onViewDetails?: (orderId: string) => void;
 }
 
 export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
   activeTab,
   onTabChange,
   orders = [],
+  onViewDetails,
 }) => {
   const displayedOrders = activeTab === "dashboard" ? orders.slice(0, 4) : orders;
 
@@ -77,12 +79,17 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
                 </td>
                 {/* Action */}
                 <td className="py-4 px-4 text-right align-middle">
-                  <a
-                    href="#"
-                    className="text-[#768C3A] hover:underline font-semibold text-xs sm:text-sm whitespace-nowrap"
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onViewDetails) {
+                        onViewDetails(order.id);
+                      }
+                    }}
+                    className="text-[#768C3A] hover:underline font-semibold text-xs sm:text-sm whitespace-nowrap bg-transparent border-0 cursor-pointer focus:outline-none"
                   >
                     View details
-                  </a>
+                  </button>
                 </td>
               </tr>
             ))}

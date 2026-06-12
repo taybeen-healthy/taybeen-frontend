@@ -14,6 +14,7 @@ import {
   AccountDashboard,
   RecentOrderHistory,
   AccountSettingsForm,
+  OrderDetailView,
 } from "@/components/my-account";
 
 export const MyAccountPage: React.FC = () => {
@@ -40,6 +41,8 @@ export const MyAccountPage: React.FC = () => {
     email: "1234@gmil.com",
     phone: "+91 98765 43210",
   });
+
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
 
   useEffect(() => {
     try {
@@ -81,7 +84,13 @@ export const MyAccountPage: React.FC = () => {
       setIsLogoutModalOpen(true);
     } else {
       setActiveTab(tab);
+      setSelectedOrderId(null);
     }
+  };
+
+  const handleViewDetails = (orderId: string) => {
+    setActiveTab("orders");
+    setSelectedOrderId(orderId);
   };
 
   return (
@@ -106,6 +115,7 @@ export const MyAccountPage: React.FC = () => {
                 onEditProfile={() => setActiveTab("settings")}
                 onEditBilling={() => setActiveTab("settings")}
                 onTabChange={handleTabChange}
+                onViewDetails={handleViewDetails}
               />
             )}
             {activeTab === "settings" && (
@@ -117,11 +127,19 @@ export const MyAccountPage: React.FC = () => {
               />
             )}
             {activeTab === "orders" && (
-              <RecentOrderHistory
-                activeTab={activeTab}
-                onTabChange={handleTabChange}
-                orders={orders}
-              />
+              selectedOrderId ? (
+                <OrderDetailView
+                  orderId={selectedOrderId}
+                  onBack={() => setSelectedOrderId(null)}
+                />
+              ) : (
+                <RecentOrderHistory
+                  activeTab={activeTab}
+                  onTabChange={handleTabChange}
+                  orders={orders}
+                  onViewDetails={setSelectedOrderId}
+                />
+              )
             )}
             {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && (
               <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
@@ -152,16 +170,25 @@ export const MyAccountPage: React.FC = () => {
                   onEditProfile={() => setActiveTab("settings")}
                   onEditBilling={() => setActiveTab("settings")}
                   onTabChange={handleTabChange}
+                  onViewDetails={handleViewDetails}
                 />
               )}
 
               {activeTab === "orders" && (
                 <div className="w-full">
-                  <RecentOrderHistory
-                    activeTab={activeTab}
-                    onTabChange={handleTabChange}
-                    orders={orders}
-                  />
+                  {selectedOrderId ? (
+                    <OrderDetailView
+                      orderId={selectedOrderId}
+                      onBack={() => setSelectedOrderId(null)}
+                    />
+                  ) : (
+                    <RecentOrderHistory
+                      activeTab={activeTab}
+                      onTabChange={handleTabChange}
+                      orders={orders}
+                      onViewDetails={setSelectedOrderId}
+                    />
+                  )}
                 </div>
               )}
 
@@ -239,5 +266,6 @@ export const MyAccountPage: React.FC = () => {
     </div>
   );
 };
+
 
 export default MyAccountPage;
