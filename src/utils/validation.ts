@@ -48,3 +48,45 @@ export const validateAcceptTerms = (accept: boolean): string | null => {
   }
   return null;
 };
+
+export const validateFirstName = (firstName: string): string | null => {
+  if (!firstName.trim()) {
+    return "First name is required";
+  }
+  return null;
+};
+
+export const validateLastName = (lastName: string): string | null => {
+  if (!lastName.trim()) {
+    return "Last name is required";
+  }
+  return null;
+};
+
+export const validateStreetAddress = (address: string): string | null => {
+  if (!address.trim()) {
+    return "Street address is required";
+  }
+  return null;
+};
+
+export const validatePostalCode = (code: string): string | null => {
+  if (!code.trim()) {
+    return "Postal code is required";
+  }
+  return null;
+};
+
+export const validateCountry = (country: string): string | null => {
+  if (!country.trim()) {
+    return "Country is required";
+  }
+  return null;
+};
+
+export const validateStateProvince = (state: string): string | null => {
+  if (!state.trim() || state === "Please select a region or state") {
+    return "State/Province is required";
+  }
+  return null;
+};

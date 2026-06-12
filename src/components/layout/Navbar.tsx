@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-4 md:space-x-8">
-            <Link href="/signin" className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors">
+            <Link href="/my-account" className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors">
               <User size={24} className="md:w-8 md:h-8" strokeWidth={2} />
             </Link>
             <div className="hidden lg:block relative">
@@ -146,7 +146,7 @@ export const Navbar: React.FC = () => {
 
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <Link
-                  href="/signin"
+                  href="/my-account"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center justify-center py-3.5 px-4 rounded-xl border border-[#5A3E2B]/40 font-poppins font-semibold text-sm text-[#5A3E2B] bg-[#FDFAF3] hover:bg-black/5 transition-colors text-center"
                 >

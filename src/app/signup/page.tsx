@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import SignUpPage from "@/components/pages/auth/SignUpPage";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Create Account | Taybeen Premium Dates",
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <SignUpPage />;
+  redirect("/my-account");
 }
