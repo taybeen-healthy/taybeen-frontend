@@ -260,8 +260,8 @@ export const CheckoutPage: React.FC = () => {
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-24 pt-8 sm:pt-12 w-full">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start w-full">
             
-            <div className="flex-1 w-full space-y-6">
-              <div className="lg:hidden w-full">
+            <div className="flex-1 w-full">
+              <div className="lg:hidden w-full mb-6">
                 <CheckoutOrderSummary
                   cartItems={cartItems}
                   subtotal={subtotal}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Package, Truck, Mail } from "lucide-react";
+import { Package, Truck, Mail, Download } from "lucide-react";
 import { orderConfirmedData } from "@/data/orderConfirmedData";
 
 interface OrderSummaryCardProps {
@@ -124,6 +124,19 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <span className="text-sm font-poppins font-medium text-brand-brown">
+          Need a copy of your invoice?
+        </span>
+        <button
+          type="button"
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all text-xs font-bold font-poppins cursor-pointer select-none shadow-sm hover:shadow active:scale-[0.98]"
+        >
+          <Download size={14} />
+          Download Invoice
+        </button>
       </div>
     </div>
   );
