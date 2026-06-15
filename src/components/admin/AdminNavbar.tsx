@@ -1,0 +1,49 @@
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Bell, User } from "lucide-react";
+
+export const AdminNavbar: React.FC = () => {
+  return (
+    <nav className="w-full bg-[#FDFAF3] border-b border-[#C4A482]/20 px-6 md:px-8 lg:px-10 xl:px-12 py-4 select-none">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+        {/* Left Side: Brand Logo */}
+        <div className="flex items-center">
+          <Link href="/admin">
+            <Image
+              src="/TaybeenLogo.png"
+              alt="Taybeen Logo"
+              width={120}
+              height={54}
+              className="h-[32px] sm:h-[36px] md:h-[40px] w-auto object-contain cursor-pointer"
+              priority
+            />
+          </Link>
+        </div>
+
+        {/* Right Side: Admin Utilities */}
+        <div className="flex items-center gap-6 sm:gap-8">
+          <button
+            type="button"
+            className="text-[#5A3E2B] hover:text-[#5A3E2B]/80 hover:bg-black/[0.02] p-2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5A3E2B]/20"
+            aria-label="Notifications"
+          >
+            <Bell size={20} strokeWidth={2} />
+          </button>
+          
+          <button
+            type="button"
+            className="text-[#5A3E2B] hover:text-[#5A3E2B]/80 hover:bg-black/[0.02] p-2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5A3E2B]/20"
+            aria-label="Admin Profile"
+          >
+            <User size={20} strokeWidth={2} />
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default AdminNavbar;
