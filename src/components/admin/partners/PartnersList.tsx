@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, SlidersHorizontal, Eye, Trash2, Copy, Check, Boxes, CheckCircle2, Clock, Tags } from "lucide-react";
+import { Plus, Eye, Trash2, Copy, Check, Boxes, CheckCircle2, Clock, Tags } from "lucide-react";
 import { partnersKpis, adminPartnersList } from "@/data/admin/partnersData";
-import { cn, formatIndianCurrency } from "@/lib/utils";
+import { formatIndianCurrency } from "@/lib/utils";
+import { SearchBar } from "@/components/ui/SearchBar";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 
 export const PartnersList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const handleCopy = (code: string) => {
@@ -30,26 +35,13 @@ export const PartnersList: React.FC = () => {
     }
   };
 
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case "Approved":
-        return "bg-brand-green text-white";
-      case "Pending":
-        return "bg-amber-500 text-white";
-      case "Expired":
-        return "bg-red-500 text-white";
-      default:
-        return "bg-gray-500 text-white";
-    }
-  };
-
   const filteredPartners = adminPartnersList.filter((partner) => {
     const term = searchQuery.toLowerCase();
-    return (
-      partner.name.toLowerCase().includes(term) ||
+    const matchesSearch = partner.name.toLowerCase().includes(term) ||
       partner.email.toLowerCase().includes(term) ||
-      partner.couponCode.toLowerCase().includes(term)
-    );
+      partner.couponCode.toLowerCase().includes(term);
+    const matchesStatus = statusFilter === "All" || partner.status === statusFilter;
+    return matchesSearch && matchesStatus;
   });
 
   return (
@@ -65,13 +57,13 @@ export const PartnersList: React.FC = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="border border-[#5A3E2B] text-brand-brown hover:bg-[#5A3E2B] hover:text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold cursor-pointer transition-all">
+          <Button variant="outline" size="sm">
             Manage Vendors
-          </button>
-          <button className="bg-brand-green hover:bg-[#3A4E1B] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-all">
+          </Button>
+          <Button variant="dark" size="sm" className="gap-2">
             <Plus size={16} />
             <span>Invite</span>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -137,31 +129,24 @@ export const PartnersList: React.FC = () => {
       {/* Filter and Search Bar */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Search */}
-        <div className="relative w-full md:max-w-md">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search vendors"
-            className="w-full bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
-          />
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8D7F75]">
-            <SearchIcon />
-          </div>
-        </div>
+        <SearchBar 
+          value={searchQuery} 
+          onChange={setSearchQuery} 
+          placeholder="Search vendors..." 
+          className="md:max-w-md" 
+        />
 
         {/* Filter select tags */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center bg-white border border-[#C4A482]/20 rounded-xl px-4 py-2.5">
-            <select
-              className="bg-transparent text-sm text-[#8D7F75] font-medium focus:outline-none cursor-pointer pr-4"
-              defaultValue="All"
-            >
-              <option value="All">All Statuses</option>
-              <option value="Approved">Approved</option>
-              <option value="Pending">Pending</option>
-              <option value="Expired">Expired</option>
-            </select>
+          <div className="relative flex items-center bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl px-2 py-0.5 w-44">
+            <Select
+              value={statusFilter}
+              onChange={(value) => setStatusFilter(value)}
+              options={["All", "Approved", "Pending", "Expired"]}
+              placeholder="All Statuses"
+              variant="borderless"
+              className="w-full"
+            />
           </div>
         </div>
       </div>
@@ -258,12 +243,17 @@ export const PartnersList: React.FC = () => {
 
                   {/* Status column */}
                   <td className="py-4 px-6">
-                    <span className={cn(
-                      "inline-block px-4 py-1.5 rounded-full text-xs font-bold shadow-sm",
-                      getStatusBadgeClass(partner.status)
-                    )}>
-                      {partner.status}
-                    </span>
+                    <Badge
+                      text={partner.status}
+                      variant={
+                        partner.status === "Approved"
+                          ? "success"
+                          : partner.status === "Pending"
+                          ? "pending"
+                          : "error"
+                      }
+                      className="inline-block"
+                    />
                   </td>
 
                   {/* Actions column */}
@@ -286,34 +276,30 @@ export const PartnersList: React.FC = () => {
         {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Previous
-            </button>
-            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm">
+            </Button>
+            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm select-none">
               1
             </button>
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-// Simple SearchIcon SVG fallback to keep layout self-contained and accurate
-const SearchIcon = () => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    fill="none" 
-    viewBox="0 0 24 24" 
-    strokeWidth={1.5} 
-    stroke="currentColor" 
-    className="w-5 h-5"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.637 10.637z" />
-  </svg>
-);
 
 export default PartnersList;

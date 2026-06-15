@@ -3,14 +3,27 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Bell, User } from "lucide-react";
+import { Bell, User, Menu } from "lucide-react";
 
-export const AdminNavbar: React.FC = () => {
+interface AdminNavbarProps {
+  onMenuToggle: () => void;
+}
+
+export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onMenuToggle }) => {
   return (
     <nav className="w-full bg-[#FDFAF3] border-b border-[#C4A482]/20 px-6 md:px-8 lg:px-10 xl:px-12 py-4 select-none">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-        {/* Left Side: Brand Logo */}
-        <div className="flex items-center">
+        {/* Left Side: Brand Logo & Hamburger Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onMenuToggle}
+            className="lg:hidden text-[#5A3E2B] hover:text-brand-green hover:bg-brand-green-pale/50 p-2 rounded-lg transition-all focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+          >
+            <Menu size={22} strokeWidth={2.5} />
+          </button>
+          
           <Link href="/admin">
             <Image
               src="/TaybeenLogo.png"

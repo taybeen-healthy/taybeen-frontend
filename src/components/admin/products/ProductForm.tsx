@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
+import { Textarea } from "@/components/ui/Textarea";
 
 export const ProductForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -61,95 +64,83 @@ export const ProductForm: React.FC = () => {
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
           
           <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+            <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
               Product Name*
             </label>
-            <input
+            <Input
               type="text"
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Enter Product Name"
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
+            />
+          </div>
+
+          <div className="space-y-1.5 text-left flex flex-col justify-end">
+            <Select
+              required
+              label="Category"
+              value={formData.category}
+              onChange={(value) => setFormData({ ...formData, category: value })}
+              options={["Dates", "Hampers", "Gifts"]}
+              placeholder="Select Category"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
-              Category*
-            </label>
-            <select
-              required
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
-            >
-              <option value="">Select Category</option>
-              <option value="Dates">Dates</option>
-              <option value="Hampers">Hampers</option>
-              <option value="Gifts">Gifts</option>
-            </select>
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+            <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
               Price*
             </label>
-            <input
+            <Input
               type="number"
               step="0.01"
               required
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: e.target.value })}
               placeholder="0.00"
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+            <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
               Discount (%)
             </label>
-            <input
+            <Input
               type="number"
               value={formData.discount}
               onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
               placeholder="00"
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+            <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
               Stock quantity
             </label>
-            <input
+            <Input
               type="number"
               value={formData.stock}
               onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
               placeholder="00"
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
             <span className="text-[10px] text-[#8D7F75] block mt-1">
               Leave empty or 0 for out of stock
             </span>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
-              Stock Unit*
-            </label>
-            <select
+          <div className="space-y-1.5 text-left flex flex-col justify-end">
+            <Select
               required
+              label="Stock Unit"
               value={formData.unit}
-              onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
-            >
-              <option value="">Select Category</option>
-              <option value="kg">kg (Kilogram)</option>
-              <option value="g">g (Gram)</option>
-              <option value="pcs">pcs (Pieces)</option>
-            </select>
+              onChange={(value) => setFormData({ ...formData, unit: value })}
+              options={[
+                { label: "kg (Kilogram)", value: "kg" },
+                { label: "g (Gram)", value: "g" },
+                { label: "pcs (Pieces)", value: "pcs" },
+              ]}
+              placeholder="Select Unit"
+            />
             <span className="text-[10px] text-[#8D7F75] block mt-1">
               Select the unit for stock measurement.
             </span>
@@ -161,47 +152,45 @@ export const ProductForm: React.FC = () => {
       {/* Description & Benefits */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="space-y-1.5">
-          <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+          <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
             Description
           </label>
-          <textarea
+          <Textarea
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             placeholder="Enter product description"
             rows={5}
-            className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
+          <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
             Benefits
           </label>
-          <textarea
+          <Textarea
             value={formData.benefits}
             onChange={(e) => setFormData({ ...formData, benefits: e.target.value })}
             placeholder="Enter Benefits"
             rows={5}
-            className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
           />
         </div>
       </div>
 
       {/* Form Action Triggers */}
       <div className="flex flex-wrap items-center gap-4">
-        <button
+        <Button
           type="button"
+          variant="outline"
           onClick={handleCancel}
-          className="border border-[#5A3E2B] text-brand-brown hover:bg-[#5A3E2B] hover:text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-200"
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           type="submit"
-          className="bg-brand-green hover:bg-[#3A4E1B] text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-200"
+          variant="dark"
         >
           Add Product
-        </button>
+        </Button>
       </div>
 
     </form>
@@ -209,3 +198,4 @@ export const ProductForm: React.FC = () => {
 };
 
 export default ProductForm;
+

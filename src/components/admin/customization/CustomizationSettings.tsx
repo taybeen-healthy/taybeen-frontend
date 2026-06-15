@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import { Upload } from "lucide-react";
 import { initialCustomizationData } from "@/data/admin/customizationData";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 
 export const CustomizationSettings: React.FC = () => {
   const [settings, setSettings] = useState(initialCustomizationData);
@@ -62,14 +66,13 @@ export const CustomizationSettings: React.FC = () => {
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                 Main Heading
               </label>
-              <input
+              <Input
                 type="text"
                 value={settings.hero.mainHeading}
                 onChange={(e) => setSettings({
                   ...settings,
                   hero: { ...settings.hero, mainHeading: e.target.value }
                 })}
-                className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
               />
             </div>
 
@@ -78,28 +81,26 @@ export const CustomizationSettings: React.FC = () => {
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                   Heading 2
                 </label>
-                <input
+                <Input
                   type="text"
                   value={settings.hero.heading2}
                   onChange={(e) => setSettings({
                     ...settings,
                     hero: { ...settings.hero, heading2: e.target.value }
                   })}
-                  className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
                 />
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                   Heading 3
                 </label>
-                <input
+                <Input
                   type="text"
                   value={settings.hero.heading3}
                   onChange={(e) => setSettings({
                     ...settings,
                     hero: { ...settings.hero, heading3: e.target.value }
                   })}
-                  className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
                 />
               </div>
             </div>
@@ -108,14 +109,13 @@ export const CustomizationSettings: React.FC = () => {
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                 Supporting Text
               </label>
-              <textarea
+              <Textarea
                 value={settings.hero.supportingText}
                 onChange={(e) => setSettings({
                   ...settings,
                   hero: { ...settings.hero, supportingText: e.target.value }
                 })}
                 rows={4}
-                className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ export const CustomizationSettings: React.FC = () => {
             {settings.hero.highlights.map((hl, idx) => (
               <div key={idx} className="space-y-1.5">
                 <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">Highlight {idx + 1}</span>
-                <input
+                <Input
                   type="text"
                   value={hl}
                   onChange={(e) => {
@@ -141,7 +141,6 @@ export const CustomizationSettings: React.FC = () => {
                       hero: { ...settings.hero, highlights: newHl }
                     });
                   }}
-                  className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
                 />
               </div>
             ))}
@@ -149,12 +148,12 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="pt-2">
-          <button
+          <Button
             onClick={() => handleSave("hero")}
-            className="bg-[#3A2418] hover:bg-black text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            variant="primary"
           >
             Save
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -184,28 +183,26 @@ export const CustomizationSettings: React.FC = () => {
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                   Section Label
                 </label>
-                <input
+                <Input
                   type="text"
                   value={settings.story.sectionLabel}
                   onChange={(e) => setSettings({
                     ...settings,
                     story: { ...settings.story, sectionLabel: e.target.value }
                   })}
-                  className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
                 />
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                   Heading
                 </label>
-                <input
+                <Input
                   type="text"
                   value={settings.story.heading}
                   onChange={(e) => setSettings({
                     ...settings,
                     story: { ...settings.story, heading: e.target.value }
                   })}
-                  className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
                 />
               </div>
             </div>
@@ -214,14 +211,13 @@ export const CustomizationSettings: React.FC = () => {
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                 Description
               </label>
-              <textarea
+              <Textarea
                 value={settings.story.description}
                 onChange={(e) => setSettings({
                   ...settings,
                   story: { ...settings.story, description: e.target.value }
                 })}
                 rows={4}
-                className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
               />
             </div>
           </div>
@@ -235,10 +231,10 @@ export const CustomizationSettings: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {settings.story.brandValues.map((val, idx) => (
               <div key={idx} className="border border-gray-100 rounded-xl p-4 bg-[#FDFAF3]/50 space-y-3">
-                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">Card 1</span>
+                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">Card {idx + 1}</span>
                 
                 <div className="space-y-1">
-                  <input
+                  <Input
                     type="text"
                     value={val.title}
                     onChange={(e) => {
@@ -250,12 +246,12 @@ export const CustomizationSettings: React.FC = () => {
                       });
                     }}
                     placeholder="Title"
-                    className="w-full bg-white border border-[#C4A482]/40 rounded-lg py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-primary"
+                    className="py-2 px-3 text-xs"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <textarea
+                  <Textarea
                     value={val.description}
                     onChange={(e) => {
                       const newVals = [...settings.story.brandValues];
@@ -267,7 +263,7 @@ export const CustomizationSettings: React.FC = () => {
                     }}
                     placeholder="Description"
                     rows={3}
-                    className="w-full bg-white border border-[#C4A482]/40 rounded-lg py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
+                    className="py-2 px-3 text-xs min-h-[80px]"
                   />
                 </div>
               </div>
@@ -276,12 +272,12 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="pt-2">
-          <button
+          <Button
             onClick={() => handleSave("story")}
-            className="bg-[#3A2418] hover:bg-black text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            variant="primary"
           >
             Save
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -296,7 +292,7 @@ export const CustomizationSettings: React.FC = () => {
             <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
               Offer Badge Text
             </label>
-            <input
+            <Input
               type="text"
               value={settings.offer.badgeText}
               onChange={(e) => setSettings({
@@ -304,32 +300,24 @@ export const CustomizationSettings: React.FC = () => {
                 offer: { ...settings.offer, badgeText: e.target.value }
               })}
               placeholder="Special Offer"
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
-              Offer Heading
-            </label>
-            <select
+          <div className="space-y-1.5 text-left flex flex-col justify-end">
+            <Select
+              label="Offer Heading"
               value={settings.offer.heading}
-              onChange={(e) => setSettings({
+              onChange={(value) => setSettings({
                 ...settings,
-                offer: { ...settings.offer, heading: e.target.value }
+                offer: { ...settings.offer, heading: value }
               })}
-              className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3.5 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary cursor-pointer"
-            >
-              <option value="Unlock Up to 50% Off on Your First Order">
-                Unlock Up to 50% Off on Your First Order
-              </option>
-              <option value="Exclusive Festive Collection Discount">
-                Exclusive Festive Collection Discount
-              </option>
-              <option value="Corporate Gifting Special Pricing">
-                Corporate Gifting Special Pricing
-              </option>
-            </select>
+              options={[
+                "Unlock Up to 50% Off on Your First Order",
+                "Exclusive Festive Collection Discount",
+                "Corporate Gifting Special Pricing"
+              ]}
+              placeholder="Select Heading"
+            />
           </div>
         </div>
 
@@ -337,24 +325,23 @@ export const CustomizationSettings: React.FC = () => {
           <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
             Description
           </label>
-          <textarea
+          <Textarea
             value={settings.offer.description}
             onChange={(e) => setSettings({
               ...settings,
               offer: { ...settings.offer, description: e.target.value }
             })}
             rows={4}
-            className="w-full bg-white border border-[#C4A482]/40 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary resize-none"
           />
         </div>
 
         <div className="pt-2">
-          <button
+          <Button
             onClick={() => handleSave("offer")}
-            className="bg-[#3A2418] hover:bg-black text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            variant="primary"
           >
             Save
-          </button>
+          </Button>
         </div>
       </div>
 

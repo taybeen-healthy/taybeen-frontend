@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Clock, CheckCircle2, XCircle, Eye, Trash2, HelpCircle } from "lucide-react";
 import { reviewsKpis, adminReviewsList } from "@/data/admin/reviewsData";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 export const ReviewsList: React.FC = () => {
   const getKpiIcon = (iconName: string) => {
@@ -18,19 +19,6 @@ export const ReviewsList: React.FC = () => {
         return <XCircle className="w-5 h-5 text-red-500" />;
       default:
         return <HelpCircle className="w-5 h-5" />;
-    }
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case "Approved":
-        return "bg-brand-green text-white";
-      case "Pending":
-        return "bg-amber-500 text-white";
-      case "Rejected":
-        return "bg-red-500 text-white";
-      default:
-        return "bg-gray-500 text-white";
     }
   };
 
@@ -151,12 +139,17 @@ export const ReviewsList: React.FC = () => {
 
                   {/* Status badge */}
                   <td className="py-4 px-6">
-                    <span className={cn(
-                      "inline-block px-4 py-1.5 rounded-full text-xs font-bold shadow-sm",
-                      getStatusBadgeClass(review.status)
-                    )}>
-                      {review.status}
-                    </span>
+                    <Badge
+                      text={review.status}
+                      variant={
+                        review.status === "Approved"
+                          ? "success"
+                          : review.status === "Pending"
+                          ? "pending"
+                          : "error"
+                      }
+                      className="inline-block"
+                    />
                   </td>
 
                   {/* Actions */}
@@ -179,15 +172,25 @@ export const ReviewsList: React.FC = () => {
         {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Previous
-            </button>
-            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm">
+            </Button>
+            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm select-none">
               1
             </button>
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>

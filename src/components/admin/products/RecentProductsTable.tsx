@@ -3,7 +3,9 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
 import { recentProducts } from "@/data/admin/productsData";
-import { cn, formatIndianCurrency } from "@/lib/utils";
+import { formatIndianCurrency } from "@/lib/utils";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 export const RecentProductsTable: React.FC = () => {
   return (
@@ -52,14 +54,17 @@ export const RecentProductsTable: React.FC = () => {
                 <td className="py-4 px-4 font-semibold">{product.stock}</td>
                 
                 <td className="py-4 px-4">
-                  <span className={cn(
-                    "inline-block px-3.5 py-1.5 rounded-full text-xs font-bold text-white shadow-sm",
-                    product.status === "In Stock" && "bg-brand-green",
-                    product.status === "Low Stock" && "bg-amber-500",
-                    product.status === "Out of Stock" && "bg-red-500"
-                  )}>
-                    {product.status}
-                  </span>
+                  <Badge 
+                    text={product.status}
+                    variant={
+                      product.status === "In Stock"
+                        ? "success"
+                        : product.status === "Low Stock"
+                        ? "pending"
+                        : "error"
+                    }
+                    className="inline-block"
+                  />
                 </td>
 
                 <td className="py-4 px-4">
@@ -79,9 +84,9 @@ export const RecentProductsTable: React.FC = () => {
       </div>
 
       <div className="flex justify-start pt-2">
-        <button className="bg-brand-green hover:bg-[#3A4E1B] text-white px-8 py-3.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-200">
+        <Button variant="dark" size="sm">
           Load More Products
-        </button>
+        </Button>
       </div>
     </div>
   );

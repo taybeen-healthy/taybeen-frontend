@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { RefreshCw, Search, Eye, Trash2 } from "lucide-react";
+import { RefreshCw, Eye, Trash2 } from "lucide-react";
 import { customersKpis, adminCustomersList } from "@/data/admin/customersData";
 import { formatIndianCurrency } from "@/lib/utils";
+import { SearchBar } from "@/components/ui/SearchBar";
+import { Button } from "@/components/ui/Button";
 
 export const CustomersList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,10 +31,10 @@ export const CustomersList: React.FC = () => {
             Manage and view all customer information
           </p>
         </div>
-        <button className="bg-brand-green hover:bg-[#3A4E1B] text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-all">
+        <Button variant="dark" size="sm" className="gap-2">
           <RefreshCw size={16} />
           <span>Refresh</span>
-        </button>
+        </Button>
       </div>
 
       {/* KPI Cards Row */}
@@ -73,16 +75,12 @@ export const CustomersList: React.FC = () => {
 
       {/* Search Input Filter */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm">
-        <div className="relative w-full">
-          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8D7F75]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search customers by name, email or phone number..."
-            className="w-full bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
-          />
-        </div>
+        <SearchBar 
+          value={searchQuery} 
+          onChange={setSearchQuery} 
+          placeholder="Search customers by name, email or phone number..."
+          className="max-w-none" 
+        />
       </div>
 
       {/* Table grid */}
@@ -174,15 +172,25 @@ export const CustomersList: React.FC = () => {
         {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Previous
-            </button>
-            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm">
+            </Button>
+            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm select-none">
               1
             </button>
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { 
   Download, 
-  Search, 
   SlidersHorizontal, 
   BarChart3, 
   Eye, 
@@ -14,7 +13,11 @@ import {
   IndianRupee 
 } from "lucide-react";
 import { ordersKpis, adminOrdersList } from "@/data/admin/ordersData";
-import { cn, formatIndianCurrency } from "@/lib/utils";
+import { formatIndianCurrency } from "@/lib/utils";
+import { SearchBar } from "@/components/ui/SearchBar";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 
 export const OrdersList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,21 +35,6 @@ export const OrdersList: React.FC = () => {
         return <IndianRupee className="w-5 h-5 text-brand-green" />;
       default:
         return <Boxes className="w-5 h-5" />;
-    }
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case "Completed":
-        return "bg-brand-green text-white";
-      case "Pending":
-        return "bg-amber-500 text-white";
-      case "In Transit":
-        return "bg-blue-500 text-white";
-      case "Cancelled":
-        return "bg-red-500 text-white";
-      default:
-        return "bg-gray-500 text-white";
     }
   };
 
@@ -69,10 +57,10 @@ export const OrdersList: React.FC = () => {
             Manage and track all customer orders
           </p>
         </div>
-        <button className="bg-brand-green hover:bg-[#3A4E1B] text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-all">
+        <Button variant="dark" size="sm" className="gap-2">
           <Download size={16} />
           <span>Export</span>
-        </button>
+        </Button>
       </div>
 
       {/* KPI Cards Row */}
@@ -137,38 +125,31 @@ export const OrdersList: React.FC = () => {
       {/* Filter and Search Bar */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Search */}
-        <div className="relative w-full md:max-w-md">
-          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8D7F75]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search orders"
-            className="w-full bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-primary"
-          />
-        </div>
+        <SearchBar 
+          value={searchQuery} 
+          onChange={setSearchQuery} 
+          placeholder="Search orders..." 
+          className="md:max-w-md" 
+        />
 
         {/* Filter select tags */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl px-4 py-2.5">
-            <BarChart3 size={16} className="text-[#8D7F75] mr-2" />
-            <select
+          <div className="relative flex items-center bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl px-2 py-0.5 w-44">
+            <BarChart3 size={16} className="text-[#8D7F75] ml-2 absolute left-2 pointer-events-none" />
+            <Select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-transparent text-sm text-[#8D7F75] font-medium focus:outline-none cursor-pointer pr-4"
-            >
-              <option value="All">All Status</option>
-              <option value="Completed">Completed</option>
-              <option value="Pending">Pending</option>
-              <option value="In Transit">In Transit</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
+              onChange={(value) => setStatusFilter(value)}
+              options={["All", "Completed", "Pending", "In Transit", "Cancelled"]}
+              placeholder="All Status"
+              variant="borderless"
+              className="pl-6 w-full"
+            />
           </div>
           
-          <button className="border border-[#C4A482]/20 hover:border-brand-primary/40 rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 bg-[#FDFAF3] text-sm text-[#8D7F75] font-medium cursor-pointer transition-all">
+          <Button variant="outline" size="sm" className="gap-2 px-6 py-2.5 h-10">
             <SlidersHorizontal size={16} />
             <span>Filter</span>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -225,12 +206,19 @@ export const OrdersList: React.FC = () => {
 
                     {/* Status badge */}
                     <td className="py-4 px-6">
-                      <span className={cn(
-                        "inline-block px-4 py-1.5 rounded-full text-xs font-bold shadow-sm",
-                        getStatusBadgeClass(order.status)
-                      )}>
-                        {order.status}
-                      </span>
+                      <Badge
+                        text={order.status}
+                        variant={
+                          order.status === "Completed"
+                            ? "success"
+                            : order.status === "Pending"
+                            ? "pending"
+                            : order.status === "In Transit"
+                            ? "info"
+                            : "error"
+                        }
+                        className="inline-block"
+                      />
                     </td>
 
                     {/* Actions icons */}
@@ -263,15 +251,25 @@ export const OrdersList: React.FC = () => {
             Showing 1-{filteredOrders.length} of {filteredOrders.length} orders.
           </span>
           <div className="flex items-center gap-2">
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Previous
-            </button>
-            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm">
+            </Button>
+            <button className="bg-brand-green text-white font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm select-none">
               1
             </button>
-            <button className="border border-[#C4A482]/30 rounded-lg py-2.5 px-4 bg-white text-[#8D7F75] hover:border-brand-primary/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <Button
+              variant="outline"
+              size="sm"
+              className="py-2.5 px-4 text-xs font-semibold h-9"
+              disabled
+            >
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>
