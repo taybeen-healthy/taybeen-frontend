@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { AdminAuthLayout, AdminSignInForm } from "@/components/admin-auth";
+import { AdminAuthLayout, AdminSignInForm } from "@/components/admin/auth";
 
 export const metadata: Metadata = {
   title: "Admin Sign In | Taybeen Premium Dates",

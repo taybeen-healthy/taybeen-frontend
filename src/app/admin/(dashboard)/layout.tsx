@@ -1,5 +1,5 @@
 import React from "react";
-import AdminNavbar from "@/components/admin/AdminNavbar";
+import AdminNavbar from "@/components/admin/layout/AdminNavbar";
 
 interface AdminDashboardLayoutProps {
   children: React.ReactNode;

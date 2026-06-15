@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { User, ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CartDrawer } from "@/components/features/cart/CartDrawer";
+import { CartDrawer } from "@/components/user/cart/CartDrawer";
 import { useCart } from "@/context/CartContext";
 
 export const Navbar: React.FC = () => {
