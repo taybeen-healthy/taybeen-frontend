@@ -12,20 +12,27 @@ export const Footer: React.FC = () => {
 
           <div className="space-y-6 text-left">
             <div className="flex justify-start">
-              <Image
-                src="https://s3-alpha-sig.figma.com/img/aef5/42bb/91997904de2c2fba272a345f8e640566?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FkHOx1DQ9tCpg2LfaGWPEahyYclX5a07TKu8PWLxLk3iSdpazH8XGXMYe8TpS23YZfpwXmAz-AZkM9jf3WSWFX3VM7Aol9uKZzY~iTeh~XLi7tXNle78G63lxxLQsPO5qF8O6dnYVoDlAuoYEhEHcTABf7RhrrYHPEjF-NOwpyfzVfQpmobUjFvJamM7vfxxCNehvQ3s5ioKA0OXGibBcUyQ7xhKg4IL70pP9yeI4c5N~6yvjoAM2Qw-6rj2rMslOTohfYJjBMV~ghZpoHtXxEAcXfXSM5Vz00H93O0yHKZ915D0kFsATfjYNighrCUBoONcchwDqXihkU0x1-M4ug__"
-                alt="Taybeen Logo"
-                width={160}
-                height={80}
-                className="h-20 lg:h-[72px] w-auto object-contain"
-              />
+              <Link href="/">
+                <Image
+                  src="/TaybeenLogo.png"
+                  alt="Taybeen Logo"
+                  width={160}
+                  height={80}
+                  className="h-20 lg:h-[72px] w-auto object-contain cursor-pointer"
+                />
+              </Link>
             </div>
             <p className="text-brand-brown-dark font-poppins text-sm leading-relaxed max-w-xs">
               India&apos;s most trusted source for premium, authenticated date varieties — sourced directly from Saudi Arabia, Jordan, and Iran.
             </p>
             <div className="flex items-center justify-start gap-4">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-brand-green-pale flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all">
+              {[
+                { Icon: Facebook, url: "https://facebook.com/taybeen" },
+                { Icon: Twitter, url: "https://twitter.com/taybeen" },
+                { Icon: Instagram, url: "https://instagram.com/taybeen" },
+                { Icon: Youtube, url: "https://youtube.com/taybeen" },
+              ].map(({ Icon, url }, i) => (
+                <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-brand-green-pale flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all">
                   <Icon size={18} />
                 </a>
               ))}
@@ -35,20 +42,20 @@ export const Footer: React.FC = () => {
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">OUR PRODUCTS</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><a href="#" className="hover:text-brand-primary">Premium Collection</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Festive Hampers</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Corporate Gifting</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Wellness Boxes</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Custom Orders</a></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Premium Collection</Link></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Festive Hampers</Link></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Corporate Gifting</Link></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Wellness Boxes</Link></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Custom Orders</Link></li>
             </ul>
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">SUPPORT</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><a href="#" className="hover:text-brand-primary">FAQ</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Shipping &amp; Returns</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Track Order</a></li>
+              <li><Link href="/contact" className="hover:text-brand-primary">FAQ</Link></li>
+              <li><Link href="/contact" className="hover:text-brand-primary">Shipping &amp; Returns</Link></li>
+              <li><Link href="/contact" className="hover:text-brand-primary">Track Order</Link></li>
               <li><Link href="/contact" className="hover:text-brand-primary">Contact Us</Link></li>
             </ul>
           </div>
@@ -57,8 +64,8 @@ export const Footer: React.FC = () => {
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">COMPANY</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
               <li><Link href="/our-story" className="hover:text-brand-primary">Our Story</Link></li>
-              <li><a href="#" className="hover:text-brand-primary">Sourcing &amp; Quality</a></li>
-              <li><a href="#" className="hover:text-brand-primary">Certifications</a></li>
+              <li><Link href="/our-story" className="hover:text-brand-primary">Sourcing &amp; Quality</Link></li>
+              <li><Link href="/our-story" className="hover:text-brand-primary">Certifications</Link></li>
             </ul>
           </div>
 
@@ -85,9 +92,9 @@ export const Footer: React.FC = () => {
         <div className="pt-8 lg:pt-0 border-t lg:border-t-0 border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
           <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Taybeen Premium Dates. All rights reserved.</p>
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-brand-green-light font-poppins text-[10px] md:text-xs">
-            <a href="#" className="hover:underline">Privacy Policy</a>
-            <a href="#" className="hover:underline">Terms of Service</a>
-            <a href="#" className="hover:underline">Cookie Policy</a>
+            <Link href="/" className="hover:underline">Privacy Policy</Link>
+            <Link href="/" className="hover:underline">Terms of Service</Link>
+            <Link href="/" className="hover:underline">Cookie Policy</Link>
           </div>
         </div>
 

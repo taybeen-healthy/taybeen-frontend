@@ -11,8 +11,7 @@ export const products: Product[] = [
     weight: "500g",
     rating: 4.9,
     reviewsCount: 1240,
-    image:
-      "https://s3-alpha-sig.figma.com/img/aeca/036a/d00b3d5c0a23c50c2a5904a3a0bf4f97?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=GuokJ9-TOZuO0ffk4-kkXrIoviFFAYL7jnEhuGCXqCr0yTJVZM~8YWk90F9Jj3zUbYhWbBQUNfrsFOpJLeTb5kv6UeGqh3aZ2jCzLs0bPicHnOaDWmfX2kasIyYI5kTC6LrYzyigYOOybS2Lk4GjfjSehMTfdvB3UpIUWgTPdCDkMpX9E4oy-LNIT6yTp2Sj5i-VKN03~EnDr6roo-aLdedfZW52OSMRpx-XD-crYcRBpnwARTcVeQ5AtS8McCryUavYAm0JhNeboBVPu8d6nlzuhoFf3Tc5Y37itJFsy22q7PAsD6ANkscok-Seb5~4yFgFwXXQvwELO7F4MvDv2w__",
+    image: "/Image (Premium dates on a plate).png",
     badge: "Best Seller",
     badgeColor: "#F7A503",
   },
@@ -26,8 +25,7 @@ export const products: Product[] = [
     weight: "500g",
     rating: 5.0,
     reviewsCount: 840,
-    image:
-      "https://s3-alpha-sig.figma.com/img/cc9f/1b5e/6a2aa10b77d50a2a53738530eff845ba?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=qOl3te8RaPpOlSzb5JgnonWzVXkzOH6Ne0kbNCLfQovaOI7RO3Efx2P5QyVeYfX1qY4Zt19fzQNN4lnGmmHGTVvSQUsUFb1o40nwm5HX2hnHZjEGMQTB249bzyF5iUbC4HZN9lvxfXg1qmpxyF8469nXK9ZCRUEjt7hK2mzHWHIVy-UI~pptewnZ0EwyCEcmiU1N4cy4SpV-qrQCshdC8z2GmEsTIBboOjyLOvW2DjjF4oxmmc-cbFDuYIwYOFaG8qA46Ga6vjrF2mtI-FXg6xbhfa6oPBIy0JocersSl4nIDA6Cxp1W9gUJ7e91uH7FyY~O9eDriLkolsm~LYFrSA__",
+    image: "/Image (Dates in wooden bowl).png",
     badge: "Sacred & Rare",
     badgeColor: "#2C3A1A",
   },

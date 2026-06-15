@@ -28,14 +28,16 @@ export const Navbar: React.FC = () => {
       <nav className={`fixed top-0 left-0 right-0 z-50 bg-[#F6F1E9] bg-opacity-0 px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16 py-4 md:py-5 lg:py-4 ${isMenuOpen ? "backdrop-blur-none lg:backdrop-blur-md" : "backdrop-blur-md"}`}>
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center">
-            <Image
-              src="https://s3-alpha-sig.figma.com/img/aef5/42bb/91997904de2c2fba272a345f8e640566?Expires=1781481600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FkHOx1DQ9tCpg2LfaGWPEahyYclX5a07TKu8PWLxLk3iSdpazH8XGXMYe8TpS23YZfpwXmAz-AZkM9jf3WSWFX3VM7Aol9uKZzY~iTeh~XLi7tXNle78G63lxxLQsPO5qF8O6dnYVoDlAuoYEhEHcTABf7RhrrYHPEjF-NOwpyfzVfQpmobUjFvJamM7vfxxCNehvQ3s5ioKA0OXGibBcUyQ7xhKg4IL70pP9yeI4c5N~6yvjoAM2Qw-6rj2rMslOTohfYJjBMV~ghZpoHtXxEAcXfXSM5Vz00H93O0yHKZ915D0kFsATfjYNighrCUBoONcchwDqXihkU0x1-M4ug__"
-              alt="Taybeen Logo"
-              width={150}
-              height={68}
-              className="h-[42px] md:h-12 lg:h-[52px] xl:h-[60px] 2xl:h-[68px] w-auto object-contain"
-              priority
-            />
+            <Link href="/">
+              <Image
+                src="/TaybeenLogo.png"
+                alt="Taybeen Logo"
+                width={120}
+                height={54}
+                className="h-[36px] md:h-10 lg:h-[40px] xl:h-[44px] w-auto object-contain cursor-pointer"
+                priority
+              />
+            </Link>
           </div>
 
           <div className="hidden lg:flex items-center space-x-12">
@@ -94,7 +96,7 @@ export const Navbar: React.FC = () => {
             >
               <div className="flex flex-col">
                 <div className="border-t border-[#5A3E2B]/15" />
-                
+
                 <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
@@ -103,9 +105,9 @@ export const Navbar: React.FC = () => {
                   <span>Home</span>
                   <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
                 </Link>
-                
+
                 <div className="border-t border-[#5A3E2B]/15" />
-                
+
                 <Link
                   href="/our-story"
                   onClick={() => setIsMenuOpen(false)}
@@ -114,9 +116,9 @@ export const Navbar: React.FC = () => {
                   <span>Our Story</span>
                   <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
                 </Link>
-                
+
                 <div className="border-t border-[#5A3E2B]/15" />
-                
+
                 <Link
                   href="/products"
                   onClick={() => setIsMenuOpen(false)}
@@ -125,7 +127,7 @@ export const Navbar: React.FC = () => {
                   <span>Our Products</span>
                   <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
                 </Link>
-                
+
                 <div className="border-t border-[#5A3E2B]/15" />
 
                 <a
@@ -140,7 +142,7 @@ export const Navbar: React.FC = () => {
                   <span>Cart</span>
                   <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
                 </a>
-                
+
                 <div className="border-t border-[#5A3E2B]/15" />
               </div>
 
@@ -152,7 +154,7 @@ export const Navbar: React.FC = () => {
                 >
                   My Account
                 </Link>
-                
+
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}

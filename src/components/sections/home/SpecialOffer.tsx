@@ -21,7 +21,7 @@ export const SpecialOffer: React.FC = () => {
           </p>
         </div>
 
-        <div className="w-full lg:w-auto lg:flex-shrink-0 max-w-[300px] sm:max-w-[340px] lg:max-w-[320px] xl:max-w-[360px] 2xl:max-w-[400px] aspect-square rounded-xl overflow-hidden relative">
+        <div className="w-[300px] sm:w-[340px] lg:w-[320px] xl:w-[360px] 2xl:w-[400px] lg:flex-shrink-0 aspect-square rounded-xl overflow-hidden relative mx-auto lg:mx-0">
           <Image
             src={specialOffer.imageUrl}
             alt="Dates Bowl"
