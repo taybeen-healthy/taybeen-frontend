@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { CartItem } from "@/types";
 import { CheckoutStep } from "@/types/checkout";
+import { formatIndianCurrency } from "@/lib/utils";
 
 interface CheckoutOrderSummaryProps {
   cartItems: CartItem[];
@@ -56,7 +57,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
                 </div>
               </div>
               <div className="font-bold text-xs sm:text-sm text-[#3A2418] flex-shrink-0">
-                ₹{(item.priceAtSelection * item.quantity).toLocaleString("en-IN")}
+                ₹{formatIndianCurrency(item.priceAtSelection * item.quantity)}
               </div>
             </div>
           );
@@ -66,7 +67,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
       <div className="mt-6 border-t border-[#C4A482]/15 pt-4 space-y-2.5">
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
           <span>Cart Subtotal</span>
-          <span className="font-semibold text-[#3A2418]">₹{subtotal.toLocaleString("en-IN")}</span>
+          <span className="font-semibold text-[#3A2418]">₹{formatIndianCurrency(subtotal)}</span>
         </div>
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
           <span>Shipping & Handling</span>
@@ -78,7 +79,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
         <div className="border-t border-[#C4A482]/15 mt-3 pt-3 flex justify-between items-center text-sm sm:text-base">
           <span className="font-bold text-[#3A2418]">Order Total</span>
           <span className="font-bold text-[#3A2418] text-base sm:text-lg">
-            ₹{total.toLocaleString("en-IN")}
+            ₹{formatIndianCurrency(total)}
           </span>
         </div>
       </div>

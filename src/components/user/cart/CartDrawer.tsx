@@ -6,6 +6,7 @@ import { ShoppingCart, X, Plus, Minus, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import { formatIndianCurrency } from "@/lib/utils";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -209,7 +210,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           </div>
 
                           <span className="font-poppins font-bold text-sm sm:text-base text-[#3A2418]">
-                            ₹{itemPrice.toLocaleString("en-IN")}
+                            ₹{formatIndianCurrency(itemPrice)}
                           </span>
                         </div>
                       </div>
@@ -233,7 +234,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <div className="flex justify-between items-center font-poppins text-sm text-[#7D6B5E]">
                     <span>Subtotal</span>
                     <span className="font-semibold text-[#3A2418]">
-                      ₹{subtotal.toLocaleString("en-IN")}
+                      ₹{formatIndianCurrency(subtotal)}
                     </span>
                   </div>
 
@@ -247,7 +248,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   <div className="border-t border-[#5A3E2B]/10 my-2 pt-2.5 flex justify-between items-center font-poppins">
                     <span className="text-base font-bold text-[#3A2418]">Total</span>
                     <span className="text-lg font-bold text-[#3A2418]">
-                      ₹{total.toLocaleString("en-IN")}
+                      ₹{formatIndianCurrency(total)}
                     </span>
                   </div>
                 </div>

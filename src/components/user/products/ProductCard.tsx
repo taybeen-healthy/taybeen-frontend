@@ -4,6 +4,7 @@ import { ShoppingCart } from "lucide-react";
 import { Product } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { StarRating } from "@/components/ui/StarRating";
+import { formatIndianCurrency, formatIndianNumber } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -88,7 +89,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </>
               ) : (
                 <span className="text-xs sm:text-sm md:text-base lg:text-base xl:text-lg font-poppins font-bold text-[#5A3E2B] whitespace-nowrap">
-                  ₹{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  ₹{formatIndianCurrency(product.price, 2)}
                 </span>
               )}
             </div>
@@ -179,7 +180,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
               {product.rating || 4.9}{" "}
               <span className="text-[#8D7F75] font-normal">
-                ({(product.reviewsCount || 120).toLocaleString()})
+                ({formatIndianNumber(product.reviewsCount || 120)})
               </span>
             </span>
           </div>

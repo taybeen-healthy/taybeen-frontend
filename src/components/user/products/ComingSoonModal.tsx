@@ -7,6 +7,7 @@ import { LiaWhatsapp } from "react-icons/lia";
 import { Product } from "@/types";
 import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
+import { formatIndianNumber } from "@/lib/utils";
 import comingSoonImage from "../../../../public/ComingSoon Dates.png";
 
 interface ComingSoonModalProps {
@@ -87,7 +88,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
           <div className="flex items-center gap-1.5 text-brand-primary">
             <StarRating rating={product.rating} size={14} />
             <span className="text-xs font-poppins text-[#8D7F75] font-normal ml-1">
-              ({product.reviewsCount.toLocaleString()} reviews)
+              ({formatIndianNumber(product.reviewsCount)} reviews)
             </span>
           </div>
         </div>
