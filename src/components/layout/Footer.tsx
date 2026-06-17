@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-6 lg:pt-10 xl:pt-0">
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">OUR PRODUCTS</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><Link href="/products" className="hover:text-brand-primary">Premium Collection</Link></li>
+              <li><Link href="/products" className="hover:text-brand-primary">Premium Dates</Link></li>
               <li><Link href="/products" className="hover:text-brand-primary">Festive Hampers</Link></li>
               <li><Link href="/products" className="hover:text-brand-primary">Corporate Gifting</Link></li>
               <li><Link href="/products" className="hover:text-brand-primary">Wellness Boxes</Link></li>
@@ -52,22 +52,23 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
-            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">ABOUT US</h4>
+            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">COMPANY</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
+              <li><Link href="/" className="hover:text-brand-primary">Home</Link></li>
               <li><Link href="/our-story" className="hover:text-brand-primary">Our Story</Link></li>
-              <li><Link href="/our-story" className="hover:text-brand-primary">Sourcing & Quality</Link></li>
-              <li><Link href="/our-story" className="hover:text-brand-primary">Health Benefits</Link></li>
-              <li><Link href="/our-story" className="hover:text-brand-primary">FAQs</Link></li>
+              <li><Link href="/terms-and-conditions" className="hover:text-brand-primary">Terms & Conditions</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-brand-primary">Privacy Policy</Link></li>
+              <li><Link href="/partnerships" className="hover:text-brand-primary">Affiliate & Coupons</Link></li>
             </ul>
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
-            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">CONTACT</h4>
+            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">SUPPORT</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><Link href="/contact" className="hover:text-brand-primary">Get in Touch</Link></li>
-              <li><span className="text-brand-brown/80">support@taybeen.com</span></li>
-              <li><span className="text-brand-brown/80">+91 98765 43210</span></li>
-              <li><Link href="/contact" className="hover:text-brand-primary">Bulk Inquiry</Link></li>
+              <li><Link href="/" className="hover:text-brand-primary">FAQ</Link></li>
+              <li><Link href="/" className="hover:text-brand-primary">Shipping & Returns</Link></li>
+              <li><Link href="/" className="hover:text-brand-primary">Track Order</Link></li>
+              <li><Link href="/contact" className="hover:text-brand-primary">Contact Us</Link></li>
             </ul>
           </div>
 
