@@ -24,6 +24,7 @@ export interface Testimonial {
   location: string;
   rating: number;
   productName: string;
+  image?: string;
 }
 
 export interface Feature {

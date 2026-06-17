@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { testimonials } from "@/data/user/mockData";
 import { ChevronLeft, ChevronRight, Quote, User } from "lucide-react";
 import { motion } from "framer-motion";
@@ -52,6 +53,17 @@ export const Testimonials: React.FC = () => {
   const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
     return (
       <div className="bg-white p-5 md:p-6 lg:p-7 xl:p-8 rounded-2xl border border-brand-brown/20 flex flex-col h-full text-left">
+        {testimonial.image && (
+          <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-5 flex-shrink-0">
+            <Image
+              src={testimonial.image}
+              alt={testimonial.productName}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+
         <div className="space-y-4 md:space-y-5 flex-1 mb-6">
           <div className="flex items-center gap-1">
             <Quote size={28} fill="currentColor" className="text-brand-primary rotate-180" />
@@ -59,12 +71,12 @@ export const Testimonials: React.FC = () => {
           <p className="text-brand-green font-poppins text-sm leading-[1.8]">
             {testimonial.quote}
           </p>
-          <div className="inline-block px-4 py-1 rounded-2xl bg-[#FFEABF]">
-            <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">{testimonial.productName}</span>
-          </div>
         </div>
 
         <div className="pt-6 border-t border-brand-brown/10 space-y-4">
+          <div className="inline-block px-4 py-1 rounded-2xl bg-[#FFEABF]">
+            <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">{testimonial.productName}</span>
+          </div>
           <div className="flex items-center gap-1">
             <StarRating rating={testimonial.rating} size={14} className="md:scale-[1.14] origin-left" />
           </div>

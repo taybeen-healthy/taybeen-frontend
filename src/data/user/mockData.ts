@@ -69,6 +69,7 @@ export const testimonials: Testimonial[] = [
     location: "Mumbai",
     rating: 5,
     productName: "Ajwa Dates",
+    image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
   },
   {
     id: "2",
@@ -79,6 +80,7 @@ export const testimonials: Testimonial[] = [
     location: "Delhi",
     rating: 5,
     productName: "Mejdool Dates",
+    image: "/Image (Premium dates on a plate).png",
   },
   {
     id: "3",
@@ -89,6 +91,7 @@ export const testimonials: Testimonial[] = [
     location: "Mumbai",
     rating: 4,
     productName: "Ajwa Dates",
+    image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
   },
   {
     id: "4",
@@ -99,6 +102,7 @@ export const testimonials: Testimonial[] = [
     location: "Bangalore",
     rating: 5,
     productName: "Safawi Dates",
+    image: "/Image (Pile of premium dates).png",
   },
   {
     id: "5",
@@ -109,6 +113,7 @@ export const testimonials: Testimonial[] = [
     location: "Pune",
     rating: 5,
     productName: "Mabroom Dates",
+    image: "/ComingSoon Dates.png",
   },
   {
     id: "6",
@@ -119,5 +124,6 @@ export const testimonials: Testimonial[] = [
     location: "Kolkata",
     rating: 5,
     productName: "Premium Collection",
+    image: "/OurProducts Header.png",
   },
 ];
