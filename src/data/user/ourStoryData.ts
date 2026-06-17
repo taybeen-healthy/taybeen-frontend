@@ -50,10 +50,11 @@ export const ourStoryData: OurStoryData = {
     quote: "I started Taybeen because I was tired of compromising. Tired of snacks that claimed to be natural but came with a list of ingredients that read like a chemistry paper.",
     paragraphs: [
       "Dates were always the answer for me — but finding good dates in India felt impossible. The ones at supermarkets were old, or coated, or just... sad. So I decided to go find the good ones myself.",
+      "They have always been close to my heart, not just for their rich taste but for their natural goodness. My vision is to make dates a convenient, healthy snack that people can enjoy anywhere—while traveling, working, or on the go. In a world full of processed snacks, dates offer a wholesome, nourishing, and satisfying alternative.",
       "We're still a small team. That's intentional. It means I can still personally approve every supplier. Every variety we add to the range has been tasted, tested, and obsessed over."
     ],
     name: "Mohd Arif",
-    role: "Founder & CEO, Taybeen",
+    role: "Founder & CEO, Taybeen Pure Energy",
     imagePath: "/Image (Pile of premium dates).png"
   }
 };
