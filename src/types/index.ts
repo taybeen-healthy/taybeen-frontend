@@ -44,3 +44,5 @@ export interface CartItem {
   quantity: number;
   priceAtSelection: number;
 }
+
+export * from "./legal";

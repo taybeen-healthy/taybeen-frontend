@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">SUPPORT</h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
               <li><Link href="/" className="hover:text-brand-primary">FAQ</Link></li>
-              <li><Link href="/" className="hover:text-brand-primary">Shipping & Returns</Link></li>
+              <li><Link href="/shipping-and-delivery" className="hover:text-brand-primary">Shipping & Returns</Link></li>
               <li><Link href="/" className="hover:text-brand-primary">Track Order</Link></li>
               <li><Link href="/contact" className="hover:text-brand-primary">Contact Us</Link></li>
             </ul>
@@ -93,8 +93,8 @@ export const Footer: React.FC = () => {
         <div className="pt-8 lg:pt-0 border-t lg:border-t-0 border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
           <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Taybeen Premium Dates. All rights reserved.</p>
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-brand-green-light font-poppins text-[10px] md:text-xs">
-            <Link href="/" className="hover:underline">Privacy Policy</Link>
-            <Link href="/" className="hover:underline">Terms of Service</Link>
+            <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+            <Link href="/terms-and-conditions" className="hover:underline">Terms of Service</Link>
             <Link href="/" className="hover:underline">Cookie Policy</Link>
           </div>
         </div>
