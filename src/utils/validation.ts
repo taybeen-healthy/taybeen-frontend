@@ -97,4 +97,3 @@ export const validateCity = (city: string): string | null => {
   }
   return null;
 };
-

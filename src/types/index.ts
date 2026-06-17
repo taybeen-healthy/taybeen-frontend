@@ -46,3 +46,4 @@ export interface CartItem {
 }
 
 export * from "./legal";
+export * from "./partnerships";

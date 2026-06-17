@@ -40,6 +40,20 @@ export const PrivacyPolicyPage: React.FC = () => {
               return <p key={idx}>{p}</p>;
             })}
           </div>
+
+          <div className="mt-12 pt-6 border-t border-[#C4A482]/25 text-left">
+            <p className="text-brand-green-light font-poppins text-xs">
+              Developed and maintained by{" "}
+              <a
+                href="https://aadityag975pf.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-[#F7A503] font-semibold"
+              >
+                Aaditya Gunjal
+              </a>
+            </p>
+          </div>
         </main>
       </div>
       <Footer />
