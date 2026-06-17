@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { GoogleIcon } from "@/components/ui/Icons";
+import { useRouter } from "next/navigation";
+import { ForgotPasswordModal } from "./ForgotPasswordModal";
 import {
   validateFullName,
   validateEmail,
@@ -20,6 +22,7 @@ interface AuthFormProps {
 
 export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const isSignUp = type === "signup";
+  const router = useRouter();
 
   // Form Fields State
   const [fullName, setFullName] = useState("");
@@ -36,6 +39,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
 
   // Errors State
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -74,9 +78,38 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     e.preventDefault();
     if (validate()) {
       if (isSignUp) {
+        // Split full name into first and last name
+        const names = fullName.trim().split(/\s+/);
+        const firstName = names[0] || "";
+        const lastName = names.slice(1).join(" ") || "";
+        localStorage.setItem(
+          "taybeen_profile",
+          JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phone: phone.replace(/\s+/g, ""), // ensure E.164
+            avatarUrl: undefined,
+          })
+        );
         alert("Account created successfully!");
+        router.push("/my-account");
       } else {
+        const storedProfile = localStorage.getItem("taybeen_profile");
+        if (!storedProfile) {
+          localStorage.setItem(
+            "taybeen_profile",
+            JSON.stringify({
+              firstName: "Maryam",
+              lastName: "Ali",
+              email,
+              phone: "+919876543210",
+              avatarUrl: undefined,
+            })
+          );
+        }
         alert("Signed in successfully!");
+        router.push("/my-account");
       }
     }
   };
@@ -184,9 +217,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               />
               <span className="text-[#4A5E28]">Remember me</span>
             </label>
-            <Link href="#" className="text-[#4A5E28] hover:underline font-semibold">
+            <button
+              type="button"
+              onClick={() => setIsForgotPasswordOpen(true)}
+              className="text-[#4A5E28] hover:underline font-semibold bg-transparent border-0 cursor-pointer focus:outline-none"
+            >
               Forgot Password?
-            </Link>
+            </button>
           </div>
         )}
 
@@ -231,6 +268,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
           </>
         )}
       </div>
+
+      <ForgotPasswordModal
+        isOpen={isForgotPasswordOpen}
+        onClose={() => setIsForgotPasswordOpen(false)}
+      />
     </div>
   );
 };

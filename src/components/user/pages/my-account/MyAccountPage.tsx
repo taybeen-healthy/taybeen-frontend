@@ -228,7 +228,8 @@ export const MyAccountPage: React.FC = () => {
       <Modal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
-        className="!max-w-md !flex-col p-6 text-center select-none font-poppins"
+        isSplit={false}
+        className="p-6 text-center select-none font-poppins"
       >
         <div className="w-full space-y-5">
           <div className="mx-auto w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600 mb-2 border border-red-100">

@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,6 +11,7 @@ interface ModalProps {
   children: React.ReactNode;
   className?: string;
   flexRowDirection?: "row" | "row-reverse";
+  isSplit?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -17,7 +20,15 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   className = "",
   flexRowDirection = "row-reverse",
+  isSplit = true,
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -39,9 +50,17 @@ export const Modal: React.FC<ModalProps> = ({
     };
   }, [onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  const flexClasses = isSplit
+    ? `${flexRowDirection === "row-reverse" ? "lg:flex-row-reverse" : "lg:flex-row"}`
+    : "flex-col";
+
+  const sizeClasses = isSplit
+    ? "max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl"
+    : "max-w-md";
+
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 select-none">
       <motion.div
         initial={{ opacity: 0 }}
@@ -57,13 +76,18 @@ export const Modal: React.FC<ModalProps> = ({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: "spring", duration: 0.5, bounce: 0.12 }}
-        className={`relative z-10 w-full max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl max-h-[96vh] bg-white rounded-2xl overflow-y-auto shadow-premium flex flex-col ${
-          flexRowDirection === "row-reverse" ? "lg:flex-row-reverse" : "lg:flex-row"
-        } border border-[#F2EADA] select-text ${className}`}
+        className={cn(
+          "relative z-10 w-full max-h-[96vh] bg-white rounded-2xl overflow-y-auto shadow-premium flex flex-col border border-[#F2EADA] select-text",
+          sizeClasses,
+          flexClasses,
+          className
+        )}
       >
         {children}
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };
+
 export default Modal;
