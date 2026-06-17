@@ -16,7 +16,6 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onMenuToggle }) => {
   return (
     <nav className="w-full bg-[#FDFAF3] border-b border-[#C4A482]/20 px-6 md:px-8 lg:px-10 xl:px-12 py-4 select-none">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-        {/* Left Side: Brand Logo & Hamburger Toggle */}
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -39,7 +38,6 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onMenuToggle }) => {
           </Link>
         </div>
 
-        {/* Right Side: Admin Utilities */}
         <div className="flex items-center gap-6 sm:gap-8">
           <button
             type="button"

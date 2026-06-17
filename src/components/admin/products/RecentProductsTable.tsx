@@ -30,7 +30,6 @@ export const RecentProductsTable: React.FC = () => {
           <tbody className="divide-y divide-gray-100 text-sm text-[#3A2418]">
             {recentProducts.map((product) => (
               <tr key={product.id} className="hover:bg-gray-50/40 transition-colors">
-                {/* Product name & thumbnail */}
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-[#FDFAF3] border border-gray-100 flex items-center justify-center overflow-hidden shrink-0">

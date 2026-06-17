@@ -46,7 +46,6 @@ export const ProductForm: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-6">
         
-        {/* Left Column: Product Image Upload */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-semibold text-brand-brown block">
             Product Images
@@ -60,7 +59,6 @@ export const ProductForm: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Input fields grid (occupies 2/3 space) */}
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
           
           <div className="space-y-1.5">
@@ -149,7 +147,6 @@ export const ProductForm: React.FC = () => {
         </div>
       </div>
 
-      {/* Description & Benefits */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="space-y-1.5">
           <label className="text-[#3A2418] font-poppins font-semibold text-xs md:text-sm block">
@@ -176,7 +173,6 @@ export const ProductForm: React.FC = () => {
         </div>
       </div>
 
-      {/* Form Action Triggers */}
       <div className="flex flex-wrap items-center gap-4">
         <Button
           type="button"

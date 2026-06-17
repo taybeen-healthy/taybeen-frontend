@@ -112,7 +112,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop Blur Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -122,7 +121,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
             className="fixed inset-0 bg-black/40 backdrop-blur-md z-50"
           />
 
-          {/* Right-Side Drawer Container */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -130,7 +128,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
             transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
             className="fixed inset-y-0 right-0 w-full max-w-[450px] bg-[#FDFAF3] z-[55] shadow-2xl flex flex-col select-none border-l border-[#F2EADA] font-poppins"
           >
-            {/* Header */}
             <div className="px-6 py-5 flex items-center justify-between border-b border-[#5A3E2B]/15 bg-white">
               <div className="flex items-center gap-2.5">
                 <h3 className="font-poppins font-bold text-lg sm:text-xl text-[#3A2418]">
@@ -151,7 +148,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
               </button>
             </div>
 
-            {/* Subheader */}
             <div className="flex items-center justify-between px-6 py-3.5 bg-gray-50 border-b border-gray-100/80">
               <span className="text-xs font-semibold text-gray-505 text-gray-500">
                 {unreadCount} unread
@@ -166,7 +162,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
               )}
             </div>
 
-            {/* Notifications List */}
             <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
               {notifications.length === 0 ? (
                 <div className="py-12 text-center text-gray-400 text-sm">
@@ -181,12 +176,10 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
                       n.isUnread ? "bg-white" : "bg-white opacity-70"
                     }`}
                   >
-                    {/* Left side icon */}
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${getIconBg(n.type)}`}>
                       {getIcon(n.type)}
                     </div>
 
-                    {/* Middle content */}
                     <div className="flex-1 text-left space-y-1 pr-4">
                       <div className="flex items-center justify-between">
                         <h4 className="text-sm font-bold text-brand-brown leading-tight">
@@ -201,7 +194,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
                       </span>
                     </div>
 
-                    {/* Right side unread dot */}
                     {n.isUnread && (
                       <div className="absolute right-6 top-6 flex items-center justify-center">
                         <span className={`w-2.5 h-2.5 rounded-full ${getDotColor(n.type)}`} />
@@ -212,7 +204,6 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
               )}
             </div>
 
-            {/* Footer view button */}
             <div className="p-5 border-t border-gray-100 bg-white">
               <button
                 onClick={onClose}

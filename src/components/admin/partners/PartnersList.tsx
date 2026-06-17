@@ -46,7 +46,6 @@ export const PartnersList: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins">
-      {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-brand-brown">
@@ -67,9 +66,7 @@ export const PartnersList: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        {/* Card 1: Total Affiliates */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Total Affiliates</h4>
@@ -83,7 +80,6 @@ export const PartnersList: React.FC = () => {
           </div>
         </div>
 
-        {/* Card 2: Verified */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Verified</h4>
@@ -97,7 +93,6 @@ export const PartnersList: React.FC = () => {
           </div>
         </div>
 
-        {/* Card 3: Pending Requests */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Pending Requests</h4>
@@ -111,7 +106,6 @@ export const PartnersList: React.FC = () => {
           </div>
         </div>
 
-        {/* Card 4: Total sales via affiliates */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Total sales via affiliates</h4>
@@ -126,9 +120,7 @@ export const PartnersList: React.FC = () => {
         </div>
       </div>
 
-      {/* Filter and Search Bar */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        {/* Search */}
         <SearchBar 
           value={searchQuery} 
           onChange={setSearchQuery} 
@@ -136,7 +128,6 @@ export const PartnersList: React.FC = () => {
           className="md:max-w-md" 
         />
 
-        {/* Filter select tags */}
         <div className="flex items-center gap-3">
           <div className="relative flex items-center bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl px-2 py-0.5 w-44">
             <Select
@@ -151,7 +142,6 @@ export const PartnersList: React.FC = () => {
         </div>
       </div>
 
-      {/* Table Container */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl overflow-hidden shadow-sm">
         <div className="w-full overflow-x-auto">
           <table className="w-full min-w-[800px] border-collapse">
@@ -168,7 +158,6 @@ export const PartnersList: React.FC = () => {
             <tbody className="divide-y divide-gray-100 text-sm text-[#3A2418]">
               {filteredPartners.map((partner) => (
                 <tr key={partner.id} className="hover:bg-gray-50/40 transition-colors">
-                  {/* Customer Column */}
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-brand-primary/10 text-brand-primary font-bold text-sm flex items-center justify-center select-none shrink-0">
@@ -185,7 +174,6 @@ export const PartnersList: React.FC = () => {
                     </div>
                   </td>
 
-                  {/* Contact Column */}
                   <td className="py-4 px-6">
                     <div className="flex flex-col">
                       <span className="font-semibold text-[#3A2418] leading-tight">
@@ -197,7 +185,6 @@ export const PartnersList: React.FC = () => {
                     </div>
                   </td>
 
-                  {/* Coupon Code Column */}
                   <td className="py-4 px-6">
                     {partner.couponCode === "Not generated" ? (
                       <span className="text-brand-green font-semibold">
@@ -225,7 +212,6 @@ export const PartnersList: React.FC = () => {
                     )}
                   </td>
 
-                  {/* Sales Column */}
                   <td className="py-4 px-6">
                     {partner.salesAmount === -1 ? (
                       <span className="text-[#8D7F75] font-semibold">-</span>
@@ -241,7 +227,6 @@ export const PartnersList: React.FC = () => {
                     )}
                   </td>
 
-                  {/* Status column */}
                   <td className="py-4 px-6">
                     <Badge
                       text={partner.status}
@@ -256,7 +241,6 @@ export const PartnersList: React.FC = () => {
                     />
                   </td>
 
-                  {/* Actions column */}
                   <td className="py-4 px-6">
                     <div className="flex items-center justify-center gap-4">
                       <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="View affiliate">
@@ -273,7 +257,6 @@ export const PartnersList: React.FC = () => {
           </table>
         </div>
 
-        {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
             <Button

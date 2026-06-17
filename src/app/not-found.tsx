@@ -5,7 +5,6 @@ import { Home } from "lucide-react";
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-[#FDFAF3] flex flex-col justify-between relative overflow-hidden font-sans selection:bg-[#5A3E2B]/10">
-      {/* Background Pattern */}
       <div className="absolute top-0 left-0 right-0 h-[46vh] min-h-[380px] lg:h-[48vh] z-0 select-none pointer-events-none border-b border-[#5A3E2B]/10 bg-[#FDFAF3]">
         <Image
           src="/authBg.png"
@@ -16,7 +15,6 @@ export default function NotFound() {
         />
       </div>
 
-      {/* Header Logo */}
       <header className="z-10 relative w-full px-6 py-6 md:px-12 flex justify-center">
         <Link href="/">
           <Image
@@ -30,7 +28,6 @@ export default function NotFound() {
         </Link>
       </header>
 
-      {/* Main Content Card */}
       <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12 z-10 relative">
         <div className="w-full max-w-[800px] bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-10 shadow-[0_15px_45px_rgba(90,62,43,0.08)] flex flex-col items-center text-center">
           <span className="text-[#F7A503] font-serif text-7xl sm:text-8xl font-bold leading-none select-none tracking-tight">
@@ -58,7 +55,6 @@ export default function NotFound() {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="z-10 relative py-6 text-center select-none font-poppins">
         <p className="text-[11px] sm:text-xs text-brand-brown/50">
           © {new Date().getFullYear()} Taybeen Premium Dates. All rights reserved.

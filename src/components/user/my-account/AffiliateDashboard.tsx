@@ -46,7 +46,6 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
   return (
     <div className="flex flex-col gap-6 lg:gap-8 w-full text-left font-poppins">
-      {/* Header Title Section */}
       <div className="space-y-1.5">
         <h1 className="font-serif font-bold text-[#5A3E2B] text-2xl sm:text-3xl md:text-4xl leading-tight">
           Your affiliate dashboard
@@ -56,9 +55,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         </p>
       </div>
 
-      {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-        {/* KPI 1: Total Sales */}
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
             <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
@@ -76,7 +73,6 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
           </div>
         </div>
 
-        {/* KPI 2: Orders Placed */}
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
             <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
@@ -94,7 +90,6 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
           </div>
         </div>
 
-        {/* KPI 3: Coupon Status */}
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
             <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
@@ -112,7 +107,6 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         </div>
       </div>
 
-      {/* Your Details Section */}
       <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm">
         <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl mb-4 pb-2 border-b border-[#C4A482]/15">
           Your details
@@ -134,7 +128,6 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         </div>
       </div>
 
-      {/* Your Coupon Section */}
       <div className="space-y-4">
         <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">
           Your coupon
@@ -182,19 +175,16 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
             </div>
           </div>
 
-          {/* Decorative circular Taybeen monogram badge */}
           <div className="hidden sm:flex items-center justify-center flex-shrink-0 mr-4">
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg relative overflow-hidden group select-none">
               <span className="font-serif font-bold text-4xl text-[#F7A503] drop-shadow-md">T</span>
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
-              {/* Subtle outer glow on hover */}
               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_15px_rgba(247,165,3,0.2)]" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Referral Orders Table */}
       <div className="space-y-4">
         <div className="flex justify-between items-center pb-2 border-b border-[#C4A482]/15">
           <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">

@@ -48,7 +48,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
   return (
     <>
-      {/* Mobile Menu Backdrop */}
       {isMobileOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black/45 z-40 transition-opacity duration-300 backdrop-blur-[2px]"
@@ -56,7 +55,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         />
       )}
 
-      {/* Sidebar Container */}
       <aside
         className={cn(
           "bg-[#FDFAF3] border-r border-[#C4A482]/20 h-full transition-all duration-300 select-none z-45 flex flex-col justify-between py-6 shadow-[4px_0_24px_rgba(74,94,40,0.01)]",
@@ -68,7 +66,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         )}
       >
         <div className="flex flex-col gap-6 w-full">
-          {/* Top Logo and Close Button (Mobile Only) */}
           <div className="flex items-center justify-between px-6 pb-4 border-b border-[#C4A482]/10 lg:hidden">
             <Image
               src="/TaybeenLogo.png"
@@ -86,7 +83,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             </button>
           </div>
 
-          {/* Top Toggle Button (Desktop Hamburger Toggle) */}
           <div className={cn(
             "hidden lg:flex items-center w-full h-10 shrink-0",
             isExpanded ? "justify-between px-6" : "justify-center"
@@ -105,7 +101,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             </button>
           </div>
 
-          {/* Navigation Links */}
           <nav className={cn(
             "flex flex-col gap-1.5 w-full",
             isExpanded ? "px-3" : "px-0 items-center"
@@ -129,7 +124,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                       : "text-[#5A3E2B] hover:text-brand-green hover:bg-brand-green-pale/30"
                   )}
                 >
-                  {/* Active Indicator Bar */}
                   {isActive && (
                     <div className={cn(
                       "absolute top-1/2 -translate-y-1/2 w-[3.5px] h-7 bg-[#F7A503] rounded-r-md",
@@ -145,14 +139,12 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                     )} 
                   />
                   
-                  {/* Label (hidden on desktop collapsed) */}
                   {(isExpanded || isMobileOpen) && (
                     <span className="whitespace-nowrap animate-in fade-in slide-in-from-left-2 duration-300 delay-300">
                       {item.label}
                     </span>
                   )}
 
-                  {/* Tooltip on collapsed desktop view */}
                   {!isExpanded && !isMobileOpen && (
                     <div className="absolute left-16 bg-[#3A2418] text-white text-[11px] py-1.5 px-3 rounded-lg shadow-lg opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 font-poppins font-semibold border border-[#C4A482]/20">
                       {item.label}
@@ -164,7 +156,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           </nav>
         </div>
 
-        {/* Footer Info */}
         <div className={cn(
           "border-t border-[#C4A482]/10 text-left w-full h-14 flex items-center shrink-0",
           isExpanded || isMobileOpen ? "px-6" : "justify-center"

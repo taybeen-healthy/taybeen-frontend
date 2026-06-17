@@ -24,7 +24,6 @@ export const ReviewsList: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins">
-      {/* Header Row */}
       <div>
         <h1 className="font-serif text-3xl font-bold text-brand-brown">
           Customer Reviews
@@ -34,9 +33,7 @@ export const ReviewsList: React.FC = () => {
         </p>
       </div>
 
-      {/* KPI Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        {/* Card 1: Total Reviews */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Total Reviews</h4>
@@ -47,7 +44,6 @@ export const ReviewsList: React.FC = () => {
           </span>
         </div>
 
-        {/* Card 2: Pending */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Pending</h4>
@@ -58,7 +54,6 @@ export const ReviewsList: React.FC = () => {
           </span>
         </div>
 
-        {/* Card 3: Approved */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Approved</h4>
@@ -69,7 +64,6 @@ export const ReviewsList: React.FC = () => {
           </span>
         </div>
 
-        {/* Card 4: Rejected */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-brand-brown/70">Rejected</h4>
@@ -81,7 +75,6 @@ export const ReviewsList: React.FC = () => {
         </div>
       </div>
 
-      {/* Reviews Table */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl overflow-hidden shadow-sm">
         <div className="w-full overflow-x-auto">
           <table className="w-full min-w-[768px] border-collapse">
@@ -98,7 +91,6 @@ export const ReviewsList: React.FC = () => {
             <tbody className="divide-y divide-gray-100 text-sm text-[#3A2418]">
               {adminReviewsList.map((review) => (
                 <tr key={review.id} className="hover:bg-gray-50/40 transition-colors">
-                  {/* Customer */}
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-brand-primary/10 text-brand-primary font-bold text-sm flex items-center justify-center select-none shrink-0">
@@ -115,7 +107,6 @@ export const ReviewsList: React.FC = () => {
                     </div>
                   </td>
 
-                  {/* Contact */}
                   <td className="py-4 px-6">
                     <div className="flex flex-col">
                       <span className="font-semibold text-[#3A2418] leading-tight">
@@ -127,17 +118,14 @@ export const ReviewsList: React.FC = () => {
                     </div>
                   </td>
 
-                  {/* Product Reviewed */}
                   <td className="py-4 px-6 font-medium text-[#3A2418]">
                     {review.productName}
                   </td>
 
-                  {/* Date */}
                   <td className="py-4 px-6 font-semibold text-[#8D7F75]">
                     {review.date}
                   </td>
 
-                  {/* Status badge */}
                   <td className="py-4 px-6">
                     <Badge
                       text={review.status}
@@ -152,7 +140,6 @@ export const ReviewsList: React.FC = () => {
                     />
                   </td>
 
-                  {/* Actions */}
                   <td className="py-4 px-6">
                     <div className="flex items-center justify-center gap-4">
                       <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="Moderate Review">
@@ -169,7 +156,6 @@ export const ReviewsList: React.FC = () => {
           </table>
         </div>
 
-        {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
             <Button

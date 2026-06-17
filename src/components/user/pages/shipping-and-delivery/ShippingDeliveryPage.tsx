@@ -14,17 +14,14 @@ export const ShippingDeliveryPage: React.FC = () => {
       <div>
         <Navbar />
 
-        {/* Reusable Header Image Banner */}
         <Hero src="/OurProducts Header.png" alt="Shipping & Delivery Header Banner" />
 
-        {/* Page Content Container */}
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-12 sm:py-16 md:py-20 text-left font-poppins">
           <h1 className="font-serif font-bold text-brand-brown text-3xl sm:text-4xl md:text-5xl leading-tight mb-10 pb-5 border-b border-[#C4A482]/25">
             {title}
           </h1>
 
           <div className="space-y-10">
-            {/* Processing Time */}
             <div>
               <h2 className="font-serif font-bold text-brand-brown text-lg sm:text-xl md:text-2xl mb-4">
                 {sections.processingTime.title}
@@ -36,7 +33,6 @@ export const ShippingDeliveryPage: React.FC = () => {
               ))}
             </div>
 
-            {/* Shipping rates */}
             <div>
               <h2 className="font-serif font-bold text-brand-brown text-lg sm:text-xl md:text-2xl mb-4">
                 {sections.shippingRates.title}
@@ -48,7 +44,6 @@ export const ShippingDeliveryPage: React.FC = () => {
               ))}
             </div>
 
-            {/* Returns Policy */}
             <div>
               <h2 className="font-serif font-bold text-brand-brown text-lg sm:text-xl md:text-2xl mb-4">
                 {sections.returnsPolicy.title}
@@ -84,7 +79,6 @@ export const ShippingDeliveryPage: React.FC = () => {
               )}
             </div>
 
-            {/* Replacements Refunds */}
             <div>
               <h2 className="font-serif font-bold text-brand-brown text-lg sm:text-xl md:text-2xl mb-4">
                 {sections.replacementsRefunds.title}

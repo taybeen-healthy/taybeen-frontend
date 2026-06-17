@@ -43,7 +43,6 @@ export const DashboardOverview: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins">
-      {/* Top Title & Date Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-brand-brown">
@@ -56,12 +55,10 @@ export const DashboardOverview: React.FC = () => {
         </div>
       </div>
 
-      {/* Overview Card with Alert Boxes */}
       <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
         <h2 className="text-lg font-bold text-brand-brown mb-6">Overview</h2>
         <div className="flex flex-col xl:flex-row items-stretch justify-between gap-8">
           
-          {/* Welcome Text block */}
           <div className="flex flex-col justify-center text-left max-w-sm">
             <h3 className="text-xl sm:text-2xl font-bold text-brand-brown mb-2">
               Welcome back, Admin!
@@ -71,14 +68,12 @@ export const DashboardOverview: React.FC = () => {
             </p>
           </div>
 
-          {/* Quick Alert metrics box grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1">
             {overviewAlerts.map((alert) => (
               <div 
                 key={alert.id} 
                 className="border border-brand-green/20 bg-brand-green-pale/10 rounded-xl overflow-hidden flex flex-col justify-between text-center min-w-[110px]"
               >
-                {/* Count & Label */}
                 <div className="p-4 flex-1 flex flex-col justify-center items-center">
                   <span className={cn(
                     "text-2xl font-bold font-poppins mb-1",
@@ -90,7 +85,6 @@ export const DashboardOverview: React.FC = () => {
                     {alert.label}
                   </span>
                 </div>
-                {/* Status bottom bar */}
                 <div className="bg-[#768C3A]/10 border-t border-[#768C3A]/20 py-2 text-[10px] font-semibold text-[#4A5E28]">
                   {alert.actionText}
                 </div>
@@ -101,7 +95,6 @@ export const DashboardOverview: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Stat Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {dashboardKpis.map((kpi) => {
           const isUp = kpi.trendDirection === "up";
@@ -110,13 +103,11 @@ export const DashboardOverview: React.FC = () => {
               key={kpi.id} 
               className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-4 hover:border-brand-primary/30 transition-all duration-300"
             >
-              {/* Card Header */}
               <div className="flex items-center justify-between">
                 <div className={cn("p-2.5 rounded-xl", getKpiIconBg(kpi.iconType))}>
                   {getKpiIcon(kpi.iconType)}
                 </div>
                 
-                {/* Trend Badge */}
                 <div className={cn(
                   "flex items-center gap-0.5 px-2.5 py-1 rounded-full text-[10px] font-bold",
                   isUp 
@@ -128,7 +119,6 @@ export const DashboardOverview: React.FC = () => {
                 </div>
               </div>
 
-              {/* Value and Label info */}
               <div className="space-y-1">
                 <span className="text-2xl font-bold font-poppins text-[#3A2418]">
                   {kpi.value}
@@ -138,7 +128,6 @@ export const DashboardOverview: React.FC = () => {
                 </h4>
               </div>
 
-              {/* Card Footer subtext */}
               <div className="border-t border-gray-100 pt-3 text-[11px] text-[#8D7F75]">
                 {kpi.subtext}
               </div>
@@ -147,17 +136,14 @@ export const DashboardOverview: React.FC = () => {
         })}
       </div>
 
-      {/* Revenue & Best Sellers Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Revenue Overview chart card */}
         <div className="lg:col-span-2 bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="text-lg font-bold text-brand-brown">Revenue</h3>
               <p className="text-xs text-[#8D7F75]">Income overview across periods</p>
             </div>
-            {/* Period tabs */}
             <div className="flex bg-[#F5F2EA] p-1 rounded-xl w-fit">
               {(["Today", "Weekly", "Monthly", "Yearly"] as const).map((tab) => (
                 <button
@@ -176,20 +162,16 @@ export const DashboardOverview: React.FC = () => {
             </div>
           </div>
 
-          {/* Bar Chart drawing with pure CSS layout */}
           <div className="flex-1 flex flex-col justify-end min-h-[280px]">
-            {/* Chart Area */}
             <div className="relative w-full h-[220px] flex items-end justify-between gap-2 px-2 border-b border-gray-100 pb-1">
               {revenueChartData.map((dataPoint) => {
                 // calculate max height relative to 850k limit
                 const heightPercent = `${Math.min(95, (dataPoint.amount / 850000) * 100)}%`;
                 return (
                   <div key={dataPoint.month} className="flex-1 flex flex-col items-center group relative h-full justify-end">
-                    {/* Hover tooltip */}
                     <div className="absolute bottom-full mb-2 bg-[#5A3E2B] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md font-semibold font-poppins z-20">
                       ₹{formatIndianCurrency(dataPoint.amount)}
                     </div>
-                    {/* Bar graphic */}
                     <div 
                       style={{ height: heightPercent }}
                       className="w-full sm:w-8 bg-[#768C3A] rounded-t-lg hover:bg-brand-green transition-all duration-300 cursor-pointer"
@@ -199,7 +181,6 @@ export const DashboardOverview: React.FC = () => {
               })}
             </div>
 
-            {/* X Axis Labels */}
             <div className="w-full flex justify-between gap-2 px-2 pt-3">
               {revenueChartData.map((dataPoint) => (
                 <span key={dataPoint.month} className="flex-1 text-[11px] text-[#8D7F75] font-medium text-center">
@@ -210,7 +191,6 @@ export const DashboardOverview: React.FC = () => {
           </div>
         </div>
 
-        {/* Best Sellers card */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -224,21 +204,17 @@ export const DashboardOverview: React.FC = () => {
               </Link>
             </div>
 
-            {/* Ranking list */}
             <div className="divide-y divide-gray-100">
               {bestSellers.map((item) => (
                 <div key={item.rank} className="py-4 flex items-center gap-4 text-left">
-                  {/* Rank number */}
                   <span className="text-sm font-bold text-[#8D7F75] w-4 shrink-0">
                     {item.rank}
                   </span>
 
-                  {/* Thumbnail */}
                   <div className="w-12 h-12 rounded-lg bg-[#FDFAF3] border border-gray-100 flex items-center justify-center overflow-hidden shrink-0">
                     <div className="text-xs font-bold text-brand-brown/40">Dates</div>
                   </div>
 
-                  {/* Name and Sold details */}
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-bold text-[#3A2418] truncate">
                       {item.name}
@@ -247,7 +223,6 @@ export const DashboardOverview: React.FC = () => {
                       {item.soldUnits} units
                     </p>
                     
-                    {/* Visual Progress Bar */}
                     <div className="w-full h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
                       <div 
                         className="h-full bg-[#768C3A] rounded-full"
@@ -256,7 +231,6 @@ export const DashboardOverview: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Revenue count */}
                   <span className="text-sm font-bold text-[#3A2418] shrink-0 font-poppins">
                     {item.revenue}
                   </span>

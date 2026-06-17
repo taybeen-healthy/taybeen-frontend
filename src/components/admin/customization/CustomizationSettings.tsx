@@ -38,7 +38,6 @@ export const CustomizationSettings: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins pb-12">
-      {/* Page Header */}
       <div>
         <h1 className="font-serif text-3xl font-bold text-brand-brown">
           Admin Customization
@@ -48,14 +47,12 @@ export const CustomizationSettings: React.FC = () => {
         </p>
       </div>
 
-      {/* SECTION 1: HERO */}
       <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
           Hero Section
         </h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column: Image Uploads */}
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
@@ -80,7 +77,6 @@ export const CustomizationSettings: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Heading Inputs */}
           <div className="lg:col-span-2 space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
@@ -141,7 +137,6 @@ export const CustomizationSettings: React.FC = () => {
           </div>
         </div>
 
-        {/* Bullet Key Highlights */}
         <div className="space-y-3 pt-4">
           <label className="text-sm font-semibold text-brand-brown block">
             Key Highlights
@@ -177,14 +172,12 @@ export const CustomizationSettings: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 2: OUR STORY */}
       <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
           Our Story
         </h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left: Sourcing Image */}
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
               Section Image
@@ -196,7 +189,6 @@ export const CustomizationSettings: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Story Copy fields */}
           <div className="lg:col-span-2 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
@@ -243,7 +235,6 @@ export const CustomizationSettings: React.FC = () => {
           </div>
         </div>
 
-        {/* Brand Values cards */}
         <div className="space-y-3 pt-4">
           <label className="text-sm font-semibold text-brand-brown block">
             Brand Values
@@ -301,7 +292,6 @@ export const CustomizationSettings: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 3: OFFER BANNER */}
       <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
           Offer Banner
@@ -365,7 +355,6 @@ export const CustomizationSettings: React.FC = () => {
         </div>
       </div>
 
-      {/* SECTION 4: MANAGE DELIVERY */}
       <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
           Manage Delivery

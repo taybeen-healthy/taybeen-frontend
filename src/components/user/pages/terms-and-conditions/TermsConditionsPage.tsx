@@ -14,10 +14,8 @@ export const TermsConditionsPage: React.FC = () => {
       <div>
         <Navbar />
 
-        {/* Reusable Header Image Banner */}
         <Hero src="/OurProducts Header.png" alt="Terms & Conditions Header Banner" />
 
-        {/* Page Content Container */}
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-12 sm:py-16 md:py-20 text-left font-poppins">
           <h1 className="font-serif font-bold text-brand-brown text-3xl sm:text-4xl md:text-5xl leading-tight mb-10 pb-5 border-b border-[#C4A482]/25">
             {title}

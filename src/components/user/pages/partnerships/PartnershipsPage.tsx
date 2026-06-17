@@ -117,13 +117,10 @@ export const PartnershipsPage: React.FC = () => {
       <div>
         <Navbar />
 
-        {/* Reusable Header Image Banner */}
         <Hero src="/OurProducts Header.png" alt="Become a Taybeen Affiliate Banner" />
 
-        {/* Page Content Container */}
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-12 sm:py-16 md:py-20 text-left font-poppins">
 
-          {/* Header Title Section */}
           <div className="mb-10 text-left space-y-4">
             <h1 className="font-serif font-bold text-[#5A3E2B] text-3xl sm:text-4xl md:text-5xl leading-tight">
               {title}
@@ -133,7 +130,6 @@ export const PartnershipsPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Terms & Conditions Card */}
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 shadow-sm mb-12">
             <h2 className="font-serif font-bold text-[#5A3E2B] text-xl sm:text-2xl mb-6 pb-3 border-b border-[#C4A482]/15">
               {termsHeading}
@@ -157,7 +153,6 @@ export const PartnershipsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Affiliate Application Section */}
           {!isSubmitted ? (
             <div className="space-y-8">
               <h2 className="font-serif font-bold text-[#5A3E2B] text-2xl sm:text-3xl border-b border-[#C4A482]/25 pb-4">
@@ -166,7 +161,6 @@ export const PartnershipsPage: React.FC = () => {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {/* First Name */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm font-semibold block">
                       First Name*
@@ -181,7 +175,6 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* Last Name */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       Last Name*
@@ -196,7 +189,6 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* Email */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       Email
@@ -211,7 +203,6 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* Phone */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       Phone Number
@@ -226,7 +217,6 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* City */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       City
@@ -240,7 +230,6 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* Occupation */}
                   <div className="space-y-2">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       Occupation
@@ -255,7 +244,6 @@ export const PartnershipsPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Reason Textarea */}
                 <div className="space-y-2">
                   <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                     Why do you want to be a Taybeen affiliate?
@@ -270,7 +258,6 @@ export const PartnershipsPage: React.FC = () => {
                   />
                 </div>
 
-                {/* Agree Checkbox */}
                 <div className="space-y-2 pt-2">
                   <label className="flex gap-3 items-start cursor-pointer group text-left">
                     <input
@@ -295,7 +282,6 @@ export const PartnershipsPage: React.FC = () => {
                   )}
                 </div>
 
-                {/* Submit button */}
                 <div className="pt-2">
                   <Button
                     type="submit"

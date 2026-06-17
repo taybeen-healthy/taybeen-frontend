@@ -87,7 +87,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
       isSplit={false}
       className="p-6 sm:p-8 flex flex-col text-center font-poppins relative select-none"
     >
-      {/* Close button */}
       <button
         onClick={resetStateAndClose}
         className="absolute right-4 top-4 text-brand-brown/40 hover:text-brand-brown transition-colors focus:outline-none cursor-pointer"
@@ -144,7 +143,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
           </div>
 
           <div className="space-y-4 pt-2">
-            {/* New Password */}
             <Input
               type={showPassword ? "text" : "password"}
               placeholder="New Password"
@@ -166,7 +164,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
               }
             />
 
-            {/* Confirm Password */}
             <Input
               type={showConfirm ? "text" : "password"}
               placeholder="Confirm Password"
@@ -188,7 +185,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
               }
             />
 
-            {/* Validation hint */}
             <p className="text-left text-[#768C3A] text-[10px] sm:text-xs leading-normal pl-1">
               Password must be at least 6 characters
             </p>

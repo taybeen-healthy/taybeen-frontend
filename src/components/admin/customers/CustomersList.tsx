@@ -21,7 +21,6 @@ export const CustomersList: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins">
-      {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-brand-brown">
@@ -37,9 +36,7 @@ export const CustomersList: React.FC = () => {
         </Button>
       </div>
 
-      {/* KPI Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1: Total Customers */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <h4 className="text-sm font-bold text-brand-brown/70">Total Customers</h4>
           <span className="text-3xl font-bold font-poppins text-[#3A2418]">
@@ -50,7 +47,6 @@ export const CustomersList: React.FC = () => {
           </div>
         </div>
 
-        {/* Card 2: Total Orders */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <h4 className="text-sm font-bold text-brand-brown/70">Total Orders</h4>
           <span className="text-3xl font-bold font-poppins text-[#3A2418]">
@@ -61,7 +57,6 @@ export const CustomersList: React.FC = () => {
           </div>
         </div>
 
-        {/* Card 3: Total Revenue */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-3">
           <h4 className="text-sm font-bold text-brand-brown/70">Total Revenue</h4>
           <span className="text-3xl font-bold font-poppins text-[#3A2418]">
@@ -73,7 +68,6 @@ export const CustomersList: React.FC = () => {
         </div>
       </div>
 
-      {/* Search Input Filter */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm">
         <SearchBar 
           value={searchQuery} 
@@ -83,7 +77,6 @@ export const CustomersList: React.FC = () => {
         />
       </div>
 
-      {/* Table grid */}
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl overflow-hidden shadow-sm">
         <div className="w-full overflow-x-auto">
           <table className="w-full min-w-[768px] border-collapse">
@@ -101,7 +94,6 @@ export const CustomersList: React.FC = () => {
               {filteredCustomers.length > 0 ? (
                 filteredCustomers.map((customer) => (
                   <tr key={customer.id} className="hover:bg-gray-50/40 transition-colors">
-                    {/* Customer */}
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-brand-primary/10 text-brand-primary font-bold text-sm flex items-center justify-center select-none shrink-0">
@@ -118,7 +110,6 @@ export const CustomersList: React.FC = () => {
                       </div>
                     </td>
 
-                    {/* Contact */}
                     <td className="py-4 px-6">
                       <div className="flex flex-col">
                         <span className="font-semibold text-[#3A2418] leading-tight">
@@ -130,22 +121,18 @@ export const CustomersList: React.FC = () => {
                       </div>
                     </td>
 
-                    {/* Orders */}
                     <td className="py-4 px-6 font-bold text-[#8D7F75]">
                       {customer.ordersCount < 10 ? `0${customer.ordersCount}` : customer.ordersCount}
                     </td>
 
-                    {/* Total Spent */}
                     <td className="py-4 px-6 font-bold font-poppins text-[#3A2418]">
                       ₹{formatIndianCurrency(customer.totalSpent)}
                     </td>
 
-                    {/* Joined */}
                     <td className="py-4 px-6 font-semibold text-[#8D7F75]">
                       {customer.joinedDate}
                     </td>
 
-                    {/* Actions */}
                     <td className="py-4 px-6">
                       <div className="flex items-center justify-center gap-4">
                         <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="View Info">
@@ -169,7 +156,6 @@ export const CustomersList: React.FC = () => {
           </table>
         </div>
 
-        {/* Pagination Row */}
         <div className="p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75]">
           <div className="flex items-center gap-2">
             <Button
