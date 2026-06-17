@@ -11,7 +11,8 @@ import { Hero } from "@/components/layout/Hero";
 import {
   CheckoutForm,
   CheckoutReview,
-  CheckoutOrderSummary
+  CheckoutOrderSummary,
+  CouponCard
 } from "@/components/user/checkout";
 import {
   validateFirstName,
@@ -99,6 +100,12 @@ export const CheckoutPage: React.FC = () => {
     }
   }, []);
 
+  // Coupon / Promo Code State
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [discountAmount, setDiscountAmount] = useState<number>(0);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [couponSuccess, setCouponSuccess] = useState<string | null>(null);
+
   // Calculations
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.priceAtSelection * item.quantity,
@@ -106,7 +113,47 @@ export const CheckoutPage: React.FC = () => {
   );
   const shippingThreshold = 999;
   const shippingCost = subtotal >= shippingThreshold ? 0 : 79;
-  const total = subtotal + shippingCost;
+  
+  const discount = appliedCoupon ? discountAmount : 0;
+  const total = Math.max(0, subtotal + shippingCost - discount);
+
+  const handleApplyCoupon = (code: string): boolean => {
+    if (!code) return false;
+    
+    if (code === "TAYBEEN10" || code === "WELCOME10") {
+      const discountVal = Math.round(subtotal * 0.1);
+      setAppliedCoupon(code);
+      setDiscountAmount(discountVal);
+      setCouponSuccess(`Coupon "${code}" applied! You saved 10% (₹${discountVal})`);
+      setCouponError(null);
+      return true;
+    } else if (code === "WELCOME100" || code === "WELCOME") {
+      const discountVal = 100;
+      setAppliedCoupon(code);
+      setDiscountAmount(discountVal);
+      setCouponSuccess(`Coupon "${code}" applied! You saved ₹100`);
+      setCouponError(null);
+      return true;
+    } else if (code === "FIRST50") {
+      const discountVal = Math.round(subtotal * 0.5);
+      setAppliedCoupon(code);
+      setDiscountAmount(discountVal);
+      setCouponSuccess(`Coupon "${code}" applied! You saved 50% (₹${discountVal})`);
+      setCouponError(null);
+      return true;
+    } else {
+      setCouponError("Invalid coupon code. Please try again.");
+      setCouponSuccess(null);
+      return false;
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setDiscountAmount(0);
+    setCouponSuccess(null);
+    setCouponError(null);
+  };
 
   // Validate form addresses
   const validateForm = () => {
@@ -267,8 +314,18 @@ export const CheckoutPage: React.FC = () => {
                   subtotal={subtotal}
                   shippingCost={shippingCost}
                   total={total}
+                  discount={discount}
                   step={step}
                   onProceed={handleProceedAction}
+                />
+                <CouponCard
+                  appliedCoupon={appliedCoupon}
+                  onApplyCoupon={handleApplyCoupon}
+                  onRemoveCoupon={handleRemoveCoupon}
+                  couponError={couponError}
+                  couponSuccess={couponSuccess}
+                  setCouponError={setCouponError}
+                  setCouponSuccess={setCouponSuccess}
                 />
               </div>
 
@@ -305,8 +362,18 @@ export const CheckoutPage: React.FC = () => {
                 subtotal={subtotal}
                 shippingCost={shippingCost}
                 total={total}
+                discount={discount}
                 step={step}
                 onProceed={handleProceedAction}
+              />
+              <CouponCard
+                appliedCoupon={appliedCoupon}
+                onApplyCoupon={handleApplyCoupon}
+                onRemoveCoupon={handleRemoveCoupon}
+                couponError={couponError}
+                couponSuccess={couponSuccess}
+                setCouponError={setCouponError}
+                setCouponSuccess={setCouponSuccess}
               />
             </div>
 

@@ -12,6 +12,7 @@ interface CheckoutOrderSummaryProps {
   total: number;
   step: CheckoutStep;
   onProceed: () => void;
+  discount?: number;
 }
 
 export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
@@ -21,6 +22,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
   total,
   step,
   onProceed,
+  discount = 0,
 }) => {
   return (
     <div className="w-full bg-[#FDFAF3] border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm text-left font-poppins">
@@ -69,6 +71,12 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
           <span>Cart Subtotal</span>
           <span className="font-semibold text-[#3A2418]">₹{formatIndianCurrency(subtotal)}</span>
         </div>
+        {discount > 0 && (
+          <div className="flex justify-between items-center text-xs sm:text-sm text-green-600 font-medium">
+            <span>Coupon Discount</span>
+            <span>- ₹{formatIndianCurrency(discount)}</span>
+          </div>
+        )}
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
           <span>Shipping & Handling</span>
           <span className="font-semibold text-[#3A2418]">
