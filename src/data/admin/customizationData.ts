@@ -40,4 +40,9 @@ export const initialCustomizationData: AdminCustomizationConfig = {
     heading: "Unlock Up to 50% Off on Your First Order",
     description: "Experience premium date varieties today. Subscribe to our newsletter or create an account to receive an instant coupon for storewide discounts.",
   },
+  delivery: {
+    maximumAmount: "999.00",
+    deliveryCharges: "150.00",
+    gstPercent: "18",
+  },
 };

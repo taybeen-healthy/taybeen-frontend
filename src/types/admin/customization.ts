@@ -27,8 +27,15 @@ export interface OfferBannerCustomization {
   description: string;
 }
 
+export interface DeliveryCustomization {
+  maximumAmount: string;
+  deliveryCharges: string;
+  gstPercent: string;
+}
+
 export interface AdminCustomizationConfig {
   hero: HeroCustomization;
   story: OurStoryCustomization;
   offer: OfferBannerCustomization;
+  delivery: DeliveryCustomization;
 }

@@ -11,9 +11,29 @@ import { Select } from "@/components/ui/Select";
 export const CustomizationSettings: React.FC = () => {
   const [settings, setSettings] = useState(initialCustomizationData);
 
-  const handleSave = (section: "hero" | "story" | "offer") => {
+  const [categories, setCategories] = useState<string[]>([
+    "Premium Dates",
+    "Stuffed Dates",
+    "Chocolate Dates",
+    "Gift Boxes",
+  ]);
+  const [newCategory, setNewCategory] = useState("");
+  const [showCategories, setShowCategories] = useState(false);
+
+  const handleSave = (section: "hero" | "story" | "offer" | "delivery") => {
     console.log(`Saving ${section} customization settings:`, settings[section]);
     alert(`${section.toUpperCase()} settings saved successfully!`);
+  };
+
+  const handleAddCategory = () => {
+    if (!newCategory.trim()) return;
+    if (categories.some((c) => c.toLowerCase() === newCategory.trim().toLowerCase())) {
+      alert("Category already exists!");
+      return;
+    }
+    setCategories([...categories, newCategory.trim()]);
+    alert(`Category "${newCategory.trim()}" added successfully!`);
+    setNewCategory("");
   };
 
   return (
@@ -342,6 +362,130 @@ export const CustomizationSettings: React.FC = () => {
           >
             Save
           </Button>
+        </div>
+      </div>
+
+      {/* SECTION 4: MANAGE DELIVERY */}
+      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
+          Manage Delivery
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
+              Maximum Amount
+            </label>
+            <Input
+              type="text"
+              value={settings.delivery.maximumAmount}
+              onChange={(e) => setSettings({
+                ...settings,
+                delivery: { ...settings.delivery, maximumAmount: e.target.value }
+              })}
+              placeholder="0.00"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
+              Delivery Charges
+            </label>
+            <Input
+              type="text"
+              value={settings.delivery.deliveryCharges}
+              onChange={(e) => setSettings({
+                ...settings,
+                delivery: { ...settings.delivery, deliveryCharges: e.target.value }
+              })}
+              placeholder="00"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
+              GST %
+            </label>
+            <Input
+              type="text"
+              value={settings.delivery.gstPercent}
+              onChange={(e) => setSettings({
+                ...settings,
+                delivery: { ...settings.delivery, gstPercent: e.target.value }
+              })}
+              placeholder="00"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+          <div className="md:col-span-2 space-y-1.5">
+            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
+              Add new product category
+            </label>
+            <Input
+              type="text"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder="Enter Category"
+            />
+          </div>
+
+          <div className="flex items-center justify-start h-[46px] pb-1">
+            <button
+              type="button"
+              onClick={() => setShowCategories(!showCategories)}
+              className="text-[#768C3A] hover:text-brand-green font-semibold text-sm cursor-pointer transition-colors"
+            >
+              {showCategories ? "Hide All Categories" : "View All Categories"}
+            </button>
+          </div>
+        </div>
+
+        {showCategories && (
+          <div className="border border-dashed border-[#C4A482]/30 rounded-xl p-4 bg-[#FDFAF3]/30 space-y-2.5 animate-in fade-in duration-200">
+            <h4 className="text-xs font-bold text-brand-brown uppercase tracking-wider">
+              Active Categories ({categories.length})
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white border border-[#C4A482]/20 px-3 py-1.5 rounded-full text-xs text-brand-brown flex items-center gap-1.5"
+                >
+                  <span>{cat}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (confirm(`Are you sure you want to delete category "${cat}"?`)) {
+                        setCategories(categories.filter((c) => c !== cat));
+                      }
+                    }}
+                    className="text-red-500 hover:text-red-700 font-bold text-[10px] ml-1"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="pt-2 flex gap-3">
+          <Button
+            onClick={() => handleSave("delivery")}
+            variant="primary"
+          >
+            Save Delivery Settings
+          </Button>
+          {newCategory.trim() && (
+            <Button
+              onClick={handleAddCategory}
+              variant="outline"
+            >
+              Add Category
+            </Button>
+          )}
         </div>
       </div>
 
