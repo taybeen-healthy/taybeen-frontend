@@ -20,7 +20,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
   onClose,
 }) => {
   const messageText = `Hi Taybeen, I'm interested in ordering ${product.name} (${product.weight}) for ₹${product.price}.`;
-  const whatsappUrl = `https://wa.me/919867805123?text=${encodeURIComponent(messageText)}`;
+  const whatsappUrl = `https://wa.me/919958544930?text=${encodeURIComponent(messageText)}`;
 
   return (
     <Modal isOpen={true} onClose={onClose} className="lg:h-[660px]">
