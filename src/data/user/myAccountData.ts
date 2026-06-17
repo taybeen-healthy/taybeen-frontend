@@ -1,4 +1,4 @@
-import { OrderHistoryItem, UserProfile, BillingAddress, OrderDetail } from "@/types/myAccount";
+import { OrderHistoryItem, UserProfile, BillingAddress, OrderDetail, AffiliateDashboardInfo } from "@/types/myAccount";
 
 export const userProfile: UserProfile = {
   name: "Maryam Ali",
@@ -53,14 +53,14 @@ export const orderDetailsData: Record<string, OrderDetail> = {
       company: "Tech Solutions Inc.",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     shippingAddress: {
       name: "Maryam Ali",
       company: "Tech Solutions Inc.",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     items: [
       {
@@ -91,13 +91,13 @@ export const orderDetailsData: Record<string, OrderDetail> = {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     shippingAddress: {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     items: [
       {
@@ -128,13 +128,13 @@ export const orderDetailsData: Record<string, OrderDetail> = {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     shippingAddress: {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     items: [
       {
@@ -165,13 +165,13 @@ export const orderDetailsData: Record<string, OrderDetail> = {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     shippingAddress: {
       name: "Maryam Ali",
       addressLine: "Flat 402, Green Valley Apartments, Baner, Pune, Maharashtra 411045",
       email: "maryam.ali@gmail.com",
-      phone: "+91 98765 43210"
+      phone: "+919876543210"
     },
     items: [
       {
@@ -189,5 +189,32 @@ export const orderDetailsData: Record<string, OrderDetail> = {
       { label: "Delivered", completed: true, stepNumber: "04" }
     ]
   }
+};
+
+export const affiliateDashboardData: AffiliateDashboardInfo = {
+  totalSales: 8400,
+  salesSince: "10 May 2026",
+  ordersPlaced: 9,
+  couponCode: "MARYAM10",
+  couponStatus: "Active",
+  couponDescription: "10% off for anyone who uses your code",
+  referralLink: "taybeen.in/ref?code=MARYAM10",
+  details: {
+    fullName: "Maryam Ali",
+    email: "maryamali@gmail.com",
+    phone: "+91 98001 23456",
+    city: "Pune, Maharashtra",
+    occupation: "Nutritionist",
+    approvedOn: "10 May 2026",
+  },
+  orders: [
+    {
+      orderId: "TYB-20481",
+      date: "11 Jun 2026",
+      item: "Mejool Dates 500g",
+      amount: 499,
+      paymentStatus: "Paid",
+    },
+  ],
 };
 

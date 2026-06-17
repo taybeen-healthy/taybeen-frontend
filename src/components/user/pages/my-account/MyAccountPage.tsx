@@ -6,7 +6,7 @@ import { LogOut } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
-import { orderHistory } from "@/data/user/myAccountData";
+import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData";
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
 import { Hero } from "@/components/layout/Hero";
 import {
@@ -15,6 +15,7 @@ import {
   RecentOrderHistory,
   AccountSettingsForm,
   OrderDetailView,
+  AffiliateDashboard,
 } from "@/components/user/my-account";
 
 export const MyAccountPage: React.FC = () => {
@@ -27,7 +28,7 @@ export const MyAccountPage: React.FC = () => {
     firstName: "Maryam",
     lastName: "Ali",
     email: "maryam.ali@gmail.com",
-    phone: "+91 98765 43210",
+    phone: "+919876543210",
     avatarUrl: undefined,
   });
 
@@ -39,7 +40,7 @@ export const MyAccountPage: React.FC = () => {
     stateProvince: "Maharashtra",
     postalCode: "411045",
     email: "1234@gmil.com",
-    phone: "+91 98765 43210",
+    phone: "+919876543210",
   });
 
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
@@ -138,7 +139,10 @@ export const MyAccountPage: React.FC = () => {
                 />
               )
             )}
-            {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && (
+            {activeTab === "affiliate" && (
+              <AffiliateDashboard data={affiliateDashboardData} />
+            )}
+            {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && activeTab !== "affiliate" && (
               <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
                 <h3 className="font-serif text-lg font-bold text-brand-brown mb-2 capitalize">
                   {activeTab.replace("-", " ")}
@@ -197,7 +201,13 @@ export const MyAccountPage: React.FC = () => {
                 </div>
               )}
 
-              {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && (
+              {activeTab === "affiliate" && (
+                <div className="w-full">
+                  <AffiliateDashboard data={affiliateDashboardData} />
+                </div>
+              )}
+
+              {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && activeTab !== "affiliate" && (
                 <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
                   <h3 className="font-serif text-lg md:text-xl font-bold text-brand-brown mb-2 capitalize">
                     {activeTab.replace("-", " ")}

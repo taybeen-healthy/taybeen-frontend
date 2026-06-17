@@ -36,7 +36,36 @@ export interface BillingAddressForm {
   phone: string;
 }
 
-export type MyAccountTab = "dashboard" | "orders" | "settings";
+export type MyAccountTab = "dashboard" | "orders" | "settings" | "affiliate";
+
+export interface AffiliateOrder {
+  orderId: string;
+  date: string;
+  item: string;
+  amount: number;
+  paymentStatus: string;
+}
+
+export interface AffiliateDetails {
+  fullName: string;
+  email: string;
+  phone: string;
+  city: string;
+  occupation: string;
+  approvedOn: string;
+}
+
+export interface AffiliateDashboardInfo {
+  totalSales: number;
+  salesSince: string;
+  ordersPlaced: number;
+  couponCode: string;
+  couponStatus: "Active" | "Inactive" | "Pending";
+  couponDescription: string;
+  referralLink: string;
+  details: AffiliateDetails;
+  orders: AffiliateOrder[];
+}
 
 export interface OrderDetailItem {
   name: string;

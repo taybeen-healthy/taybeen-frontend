@@ -1,5 +1,5 @@
 import React from "react";
-import { LayoutGrid, History, ShoppingCart, Settings, LogOut, LucideIcon } from "lucide-react";
+import { LayoutGrid, History, ShoppingCart, Settings, LogOut, Users, LucideIcon } from "lucide-react";
 
 interface SidebarItem {
   id: string;
@@ -11,6 +11,7 @@ const menuItems: SidebarItem[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutGrid },
   { id: "orders", label: "Order history", icon: History },
   { id: "cart", label: "Shopping Cart", icon: ShoppingCart },
+  { id: "affiliate", label: "Affiliate & Coupon", icon: Users },
   { id: "settings", label: "Settings", icon: Settings },
   { id: "logout", label: "Log-out", icon: LogOut },
 ];
