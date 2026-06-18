@@ -9,6 +9,17 @@ export interface AdminPartner {
   salesAmount: number; // can be 0 or negative for none
   ordersCount: number;
   status: "Approved" | "Pending" | "Expired";
+  
+  // Extended fields for details and coupon generation
+  city?: string;
+  occupation?: string;
+  joinedDate?: string;
+  whyJoin?: string;
+  discountOffered?: string;
+  couponStatus?: "Active" | "Expired" | "None";
+  couponDetails?: string;
+  refLink?: string;
+  couponExpiryDate?: string;
 }
 
 export interface PartnersKpis {

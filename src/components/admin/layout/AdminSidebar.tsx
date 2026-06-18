@@ -41,7 +41,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
     { label: "Products", href: "/admin/products", icon: Package },
     { label: "All orders", href: "/admin/orders", icon: ClipboardList },
     { label: "Customers", href: "/admin/customers", icon: Users },
-    { label: "Vendors", href: "/admin/partners", icon: Store },
+    { label: "Affilates", href: "/admin/partners", icon: Store },
     { label: "Reviews", href: "/admin/reviews", icon: FileText },
     { label: "Admin Customization", href: "/admin/customization", icon: Settings },
   ];

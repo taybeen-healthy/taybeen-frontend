@@ -8,8 +8,13 @@ import { SearchBar } from "@/components/ui/SearchBar";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
+import { AdminPartner } from "@/types/admin/partners";
+import { AffiliateDetailsModal } from "./AffiliateDetailsModal";
 
 export const PartnersList: React.FC = () => {
+  const [partners, setPartners] = useState<AdminPartner[]>(adminPartnersList);
+  const [selectedPartner, setSelectedPartner] = useState<AdminPartner | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -19,6 +24,16 @@ export const PartnersList: React.FC = () => {
     setCopiedCode(code);
     setTimeout(() => setCopiedCode(null), 2000);
   };
+
+  const handleUpdatePartner = (updatedPartner: AdminPartner) => {
+    setPartners((prev) =>
+      prev.map((p) => (p.id === updatedPartner.id ? updatedPartner : p))
+    );
+    if (selectedPartner?.id === updatedPartner.id) {
+      setSelectedPartner(updatedPartner);
+    }
+  };
+
 
   const getKpiIcon = (iconName: string) => {
     switch (iconName) {
@@ -35,7 +50,7 @@ export const PartnersList: React.FC = () => {
     }
   };
 
-  const filteredPartners = adminPartnersList.filter((partner) => {
+  const filteredPartners = partners.filter((partner) => {
     const term = searchQuery.toLowerCase();
     const matchesSearch = partner.name.toLowerCase().includes(term) ||
       partner.email.toLowerCase().includes(term) ||
@@ -49,7 +64,7 @@ export const PartnersList: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-brand-brown">
-            Partners & coupons
+            Affiliate Partners & coupons
           </h1>
           <p className="text-xs text-[#8D7F75] mt-1">
             Manage affiliate partners, their coupon codes, and sales performance
@@ -57,7 +72,7 @@ export const PartnersList: React.FC = () => {
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" size="sm">
-            Manage Vendors
+            Manage Affiliates
           </Button>
           <Button variant="dark" size="sm" className="gap-2">
             <Plus size={16} />
@@ -121,11 +136,11 @@ export const PartnersList: React.FC = () => {
       </div>
 
       <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <SearchBar 
-          value={searchQuery} 
-          onChange={setSearchQuery} 
-          placeholder="Search vendors..." 
-          className="md:max-w-md" 
+        <SearchBar
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search Affiliates..."
+          className="md:max-w-md"
         />
 
         <div className="flex items-center gap-3">
@@ -234,8 +249,8 @@ export const PartnersList: React.FC = () => {
                         partner.status === "Approved"
                           ? "success"
                           : partner.status === "Pending"
-                          ? "pending"
-                          : "error"
+                            ? "pending"
+                            : "error"
                       }
                       className="inline-block"
                     />
@@ -243,10 +258,23 @@ export const PartnersList: React.FC = () => {
 
                   <td className="py-4 px-6">
                     <div className="flex items-center justify-center gap-4">
-                      <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="View affiliate">
+                      <button
+                        onClick={() => {
+                          setSelectedPartner(partner);
+                          setIsModalOpen(true);
+                        }}
+                        className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer"
+                        aria-label="View affiliate"
+                      >
                         <Eye size={18} />
                       </button>
-                      <button className="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded transition-colors cursor-pointer" aria-label="Delete affiliate">
+                      <button
+                        onClick={() => {
+                          setPartners((prev) => prev.filter((p) => p.id !== partner.id));
+                        }}
+                        className="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                        aria-label="Delete affiliate"
+                      >
                         <Trash2 size={18} />
                       </button>
                     </div>
@@ -281,6 +309,17 @@ export const PartnersList: React.FC = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && selectedPartner && (
+        <AffiliateDetailsModal
+          partner={selectedPartner}
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedPartner(null);
+          }}
+          onUpdatePartner={handleUpdatePartner}
+        />
+      )}
     </div>
   );
 };
