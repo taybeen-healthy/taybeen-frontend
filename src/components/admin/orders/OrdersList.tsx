@@ -66,14 +66,11 @@ export const OrdersList: React.FC = () => {
 
   const filteredOrders = orders
     .filter((order) => {
-      // 1. Search Query
       const matchesSearch = order.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         order.id.toLowerCase().includes(searchQuery.toLowerCase());
 
-      // 2. Status Filter
       const matchesStatus = statusFilter === "All" || order.status === statusFilter;
 
-      // 3. Price Range Filter
       let matchesPrice = true;
       if (priceRange === "under500") {
         matchesPrice = order.totalAmount < 500;
@@ -83,7 +80,6 @@ export const OrdersList: React.FC = () => {
         matchesPrice = order.totalAmount > 750;
       }
 
-      // 4. Payment Method Filter
       let matchesPayment = true;
       if (paymentFilter === "cod") {
         matchesPayment = order.paymentMethod.toLowerCase().includes("cash");
@@ -229,7 +225,6 @@ export const OrdersList: React.FC = () => {
                 </button>
               </div>
 
-              {/* Sort Order */}
               <div className="space-y-1.5 mt-3">
                 <label className="text-[10px] font-bold text-[#8D7F75] uppercase tracking-wider block">
                   Sort by Date
@@ -260,7 +255,6 @@ export const OrdersList: React.FC = () => {
                 </div>
               </div>
 
-              {/* Price Range */}
               <div className="space-y-1.5 mt-3">
                 <label className="text-[10px] font-bold text-[#8D7F75] uppercase tracking-wider block">
                   Order Total
@@ -277,7 +271,6 @@ export const OrdersList: React.FC = () => {
                 </select>
               </div>
 
-              {/* Payment Method */}
               <div className="space-y-1.5 mt-3">
                 <label className="text-[10px] font-bold text-[#8D7F75] uppercase tracking-wider block">
                   Payment Method

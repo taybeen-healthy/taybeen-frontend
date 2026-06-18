@@ -24,7 +24,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const isSignUp = type === "signup";
   const router = useRouter();
 
-  // Form Fields State
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -33,11 +32,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // Visibility Toggles
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Errors State
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
 
@@ -78,7 +75,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     e.preventDefault();
     if (validate()) {
       if (isSignUp) {
-        // Split full name into first and last name
         const names = fullName.trim().split(/\s+/);
         const firstName = names[0] || "";
         const lastName = names.slice(1).join(" ") || "";

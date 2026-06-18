@@ -17,11 +17,9 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
 }) => {
   const [step, setStep] = useState<"email" | "reset" | "success">("email");
   
-  // State for Frame 1 (Email Link request)
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
 
-  // State for Frame 2 (Create New Password)
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -41,7 +39,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
     setEmailError(null);
     setIsLoading(true);
 
-    // Simulate API delay and transition
     setTimeout(() => {
       setIsLoading(false);
       setStep("reset");
@@ -60,7 +57,6 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
     if (passwordErr || confirmErr) return;
     setIsLoading(true);
 
-    // Simulate API reset delay
     setTimeout(() => {
       setIsLoading(false);
       setStep("success");

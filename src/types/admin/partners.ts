@@ -10,7 +10,6 @@ export interface AdminPartner {
   ordersCount: number;
   status: "Approved" | "Pending" | "Expired";
   
-  // Extended fields for details and coupon generation
   city?: string;
   occupation?: string;
   joinedDate?: string;

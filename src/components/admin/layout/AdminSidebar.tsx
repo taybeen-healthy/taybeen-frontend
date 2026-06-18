@@ -58,9 +58,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <aside
         className={cn(
           "bg-[#FDFAF3] border-r border-[#C4A482]/20 h-full transition-all duration-300 select-none z-45 flex flex-col justify-between py-6 shadow-[4px_0_24px_rgba(74,94,40,0.01)]",
-          // Desktop sizing
           isExpanded ? "w-64" : "w-[76px]",
-          // Mobile sizing and behavior
           "fixed lg:relative inset-y-0 left-0 lg:translate-x-0 transform",
           isMobileOpen ? "translate-x-0 w-64 pt-6 h-screen top-0 z-50" : "-translate-x-full lg:translate-x-0"
         )}

@@ -16,7 +16,6 @@ interface CartDrawerProps {
 const formatOrderDate = (date: Date): string => {
   const day = date.getDate();
   const monthNames = ["June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May"];
-  // Note: let's resolve month from index properly using actual JS date month
   const actualMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const month = actualMonths[date.getMonth()];
   const year = date.getFullYear();

@@ -95,19 +95,16 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
   onSaveProfile,
   onSaveBilling,
 }) => {
-  // Local state for profile form
   const [profileForm, setProfileForm] = useState<AccountProfileForm>({ ...profile });
   const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
   const [profileSuccess, setProfileSuccess] = useState(false);
 
-  // Local state for billing form
   const [billingForm, setBillingForm] = useState<BillingAddressForm>({ ...billing });
   const [billingErrors, setBillingErrors] = useState<Record<string, string>>({});
   const [billingSuccess, setBillingSuccess] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Dynamic list of countries with flag images (renders flags correctly on all OS)
   const countryOptions = getCountryOptions().map((c) => ({
     value: c.name,
     label: (
@@ -124,10 +121,8 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     searchString: c.name,
   }));
 
-  // Dynamic list of states for selected country
   const stateOptions = getStateOptions(billingForm.country);
 
-  // Handle country dropdown changes (resets selected state)
   const handleCountryChange = (countryName: string) => {
     const states = getStateOptions(countryName);
     const firstStateName = states.length > 0 ? states[0].value : "";
@@ -138,7 +133,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     }));
   };
 
-  // Avatar upload handler
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -151,7 +145,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     fileInputRef.current?.click();
   };
 
-  // Profile save validation and submit
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
@@ -180,7 +173,6 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     setTimeout(() => setProfileSuccess(false), 4000);
   };
 
-  // Billing save validation and submit
   const handleBillingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};

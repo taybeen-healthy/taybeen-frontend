@@ -33,7 +33,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
     );
   }
 
-  // Count how many steps are completed
   const completedStepsCount = order.progressSteps.filter((s) => s.completed).length;
 
   return (

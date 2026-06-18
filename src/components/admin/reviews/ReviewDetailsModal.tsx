@@ -42,7 +42,6 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
         <X size={18} />
       </button>
 
-      {/* Sticky Header Section */}
       <div className="p-6 md:p-8 pb-3 shrink-0 select-text text-left pr-16 md:pr-20">
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-brown">
           Customer Review Details
@@ -51,9 +50,7 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
 
       <div className="border-b border-[#C4A482]/10 mx-6 md:mx-8" />
 
-      {/* Scrollable Content Section */}
       <div className="flex-1 overflow-y-auto px-6 md:px-8 py-6 space-y-6 select-text text-left pr-4 sm:pr-6">
-        {/* Customer & Order Metadata row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/40 border border-[#C4A482]/15 rounded-2xl p-4 sm:p-5">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-brand-primary/15 text-brand-primary font-bold text-lg flex items-center justify-center select-none shrink-0 border border-[#F7A503]/20">
@@ -89,9 +86,7 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* 2-Column Product Detail Layout */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
-          {/* Left: Product Images (2 columns) */}
           <div className="md:col-span-2 space-y-3">
             <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-white border border-[#C4A482]/20 shadow-sm flex items-center justify-center">
               <img
@@ -101,7 +96,6 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
               />
             </div>
             
-            {/* Clickable Small Image Thumbnails */}
             {review.images.length > 1 && (
               <div className="flex gap-2">
                 {review.images.map((img, i) => (
@@ -125,7 +119,6 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
             )}
           </div>
 
-          {/* Right: Product review details (3 columns) */}
           <div className="md:col-span-3 space-y-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="text-xl font-bold uppercase tracking-wide text-brand-brown">
@@ -144,7 +137,6 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
               />
             </div>
 
-            {/* Rating Stars block */}
             <div className="space-y-1">
               <span className="text-[10px] font-bold text-[#768C3A] tracking-wider uppercase block">
                 Rating
@@ -161,14 +153,12 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
               </div>
             </div>
 
-            {/* Comment block */}
             <div className="space-y-1 bg-white border border-[#C4A482]/15 rounded-2xl p-4 shadow-sm">
               <p className="text-xs sm:text-sm text-brand-brown/90 leading-relaxed font-medium">
                 &ldquo;{review.comment}&rdquo;
               </p>
             </div>
 
-            {/* Status Change Moderation buttons */}
             <div className="space-y-2">
               <span className="text-[10px] font-bold text-brand-brown/70 tracking-widest uppercase block">
                 Review Status Moderation
@@ -199,7 +189,6 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Action Bottom Section */}
         <div className="pt-2">
           <button
             onClick={handleSave}

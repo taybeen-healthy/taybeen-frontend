@@ -89,7 +89,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
         <X size={18} />
       </button>
 
-      {/* Sticky Header Section */}
       <div className="p-6 shrink-0 select-text text-left font-poppins pr-16 md:pr-20">
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-brown">
           Order Details
@@ -99,9 +98,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
         </p>
       </div>
 
-      {/* Scrollable Content Section */}
       <div className="flex-1 overflow-y-auto px-6 md:px-8 pb-8 space-y-6 select-text text-left font-poppins pr-4 sm:pr-6">
-        {/* Card 1: Status & Date */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm flex flex-row items-center justify-between gap-4">
           <div className="flex flex-col gap-1.5">
             <span className="text-[10px] font-bold text-brand-brown/70 tracking-widest uppercase">
@@ -124,7 +121,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Card 2: Customer Information */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-4">
             Customer Information
@@ -167,7 +163,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Card 3: Shipping Address */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-2.5">
             Shipping Address
@@ -177,7 +172,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </p>
         </div>
 
-        {/* Card 4: Order Items */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-4">
             Order Items ({order.itemsCount})
@@ -213,7 +207,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Card 5: Price Summary */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
           <div className="space-y-3 text-xs sm:text-sm text-brand-brown font-medium">
             <div className="flex justify-between items-center">
@@ -245,7 +238,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Card 6: Update Order Status */}
         <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
           <h3 className="font-serif text-base font-bold text-brand-brown mb-4">
             Update Order Status
@@ -265,7 +257,6 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Print Invoice Button */}
         <div className="pt-2">
           <button
             onClick={() => window.print()}

@@ -88,11 +88,9 @@ export const PartnershipsPage: React.FC = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      // Optional: Save to local storage for demo tracking
       try {
         const applications = JSON.parse(
           localStorage.getItem("taybeen_affiliate_applications") || "[]"

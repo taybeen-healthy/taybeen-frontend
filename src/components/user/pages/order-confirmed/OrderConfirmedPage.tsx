@@ -31,7 +31,6 @@ export const OrderConfirmedPage: React.FC = () => {
           itemsCount: parsed.itemsCount || 1
         });
       } else {
-        // Fallback matching mockups
         setOrderInfo({
           id: "TYB-2024-0056",
           placedOn: "11th June 2026 5:30 pm",

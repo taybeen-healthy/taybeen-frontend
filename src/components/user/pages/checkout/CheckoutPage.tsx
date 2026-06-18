@@ -59,7 +59,6 @@ export const CheckoutPage: React.FC = () => {
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [billingErrors, setBillingErrors] = useState<Record<string, string>>({});
 
-  // Load profile / address values on mount to prefill form
   useEffect(() => {
     try {
       const storedProfileStr = localStorage.getItem("taybeen_profile");
@@ -84,7 +83,6 @@ export const CheckoutPage: React.FC = () => {
 
       setShippingForm(defaultShipping);
 
-      // If user saved a billing address, default the separate billing address state to it too
       setBillingForm({
         firstName: billingData?.firstName || "",
         lastName: billingData?.lastName || "",
@@ -100,13 +98,11 @@ export const CheckoutPage: React.FC = () => {
     }
   }, []);
 
-  // Coupon / Promo Code State
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
   const [discountAmount, setDiscountAmount] = useState<number>(0);
   const [couponError, setCouponError] = useState<string | null>(null);
   const [couponSuccess, setCouponSuccess] = useState<string | null>(null);
 
-  // Calculations
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.priceAtSelection * item.quantity,
     0
@@ -155,12 +151,10 @@ export const CheckoutPage: React.FC = () => {
     setCouponError(null);
   };
 
-  // Validate form addresses
   const validateForm = () => {
     const sErrors: Record<string, string> = {};
     const bErrors: Record<string, string> = {};
 
-    // Validate shipping
     const sFirstNameErr = validateFirstName(shippingForm.firstName);
     if (sFirstNameErr) sErrors.firstName = sFirstNameErr;
 
@@ -185,7 +179,6 @@ export const CheckoutPage: React.FC = () => {
     const sPhoneErr = validatePhone(shippingForm.phone);
     if (sPhoneErr) sErrors.phone = sPhoneErr;
 
-    // Validate billing if distinct
     if (!isBillingSame) {
       const bFirstNameErr = validateFirstName(billingForm.firstName);
       if (bFirstNameErr) bErrors.firstName = bFirstNameErr;
@@ -226,7 +219,6 @@ export const CheckoutPage: React.FC = () => {
         setStep("review");
       }
     } else {
-      // Place Order
       const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000).toString().padStart(4, '0')}`;
       
       const date = new Date();
@@ -270,7 +262,6 @@ export const CheckoutPage: React.FC = () => {
     }
   };
 
-  // If cart is empty and we loaded, show browse fallback
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-brand-bg flex flex-col justify-between selection:bg-brand-primary/30">

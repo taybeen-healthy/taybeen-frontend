@@ -32,16 +32,13 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
         <X size={18} />
       </button>
 
-      {/* Sticky Header Section */}
       <div className="p-6 md:p-8 pb-3 shrink-0 select-text text-left font-poppins pr-16 md:pr-20">
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-brown">
           Customer Details
         </h2>
       </div>
 
-      {/* Scrollable Content Section */}
       <div className="flex-1 overflow-y-auto px-6 md:px-8 pb-8 space-y-6 select-text text-left font-poppins pr-4 sm:pr-6">
-        {/* Avatar Profile Block */}
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-brand-primary/15 text-brand-primary font-bold text-2xl flex items-center justify-center select-none shrink-0 border border-[#F7A503]/20">
             {customer.initial}
@@ -58,7 +55,6 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
 
         <div className="border-t border-[#C4A482]/10" />
 
-        {/* 2x2 Grid stats cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-white border border-[#C4A482]/20 rounded-2xl p-5 shadow-sm">
             <span className="text-[10px] font-bold text-[#768C3A] tracking-wider uppercase block">
@@ -94,7 +90,6 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Recent Orders Section */}
         <div className="space-y-3">
           <h4 className="font-serif text-lg font-bold text-brand-brown">
             Recent Orders
@@ -140,7 +135,6 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
           )}
         </div>
 
-        {/* Action Buttons */}
         <div className="pt-2">
           <button
             onClick={onClose}

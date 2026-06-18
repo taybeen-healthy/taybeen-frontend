@@ -21,7 +21,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Load cart items from localStorage on mount
   useEffect(() => {
     try {
       const storedCart = localStorage.getItem("taybeen_cart");
@@ -34,7 +33,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsInitialized(true);
   }, []);
 
-  // Save cart items to localStorage when they change
   useEffect(() => {
     if (isInitialized) {
       try {
@@ -63,12 +61,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       );
 
       if (existingItemIndex > -1) {
-        // Item already exists with this weight, increment quantity
         const newItems = [...prevItems];
         newItems[existingItemIndex].quantity += quantity;
         return newItems;
       } else {
-        // Item is new
         return [...prevItems, { product, selectedWeight: weight, quantity, priceAtSelection }];
       }
     });

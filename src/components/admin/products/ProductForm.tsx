@@ -22,7 +22,6 @@ export const ProductForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitting Product:", formData);
-    // Reset or call parent callback
   };
 
   const handleCancel = () => {

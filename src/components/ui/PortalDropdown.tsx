@@ -44,7 +44,6 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
         
         let top = rect.bottom + window.scrollY;
         
-        // Auto-position upwards if it would go off the bottom of the viewport
         if (spaceBelow < menuHeight && rect.top > spaceBelow) {
           top = rect.top + window.scrollY - menuHeight - 4;
         }
@@ -58,7 +57,6 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
 
     if (isOpen) {
       const handle = requestAnimationFrame(updateCoords);
-      // Using capturing phase (true) for scroll event to handle scrolling inside local scroll containers
       window.addEventListener("scroll", updateCoords, true);
       window.addEventListener("resize", updateCoords);
       
@@ -92,7 +90,6 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
 
   return createPortal(
     <div className="fixed inset-0 z-[90] pointer-events-none">
-      {/* Overlay to block click event propagation and allow simple click-away */}
       <div className="absolute inset-0 pointer-events-auto" onClick={onClose} />
       
       <motion.div

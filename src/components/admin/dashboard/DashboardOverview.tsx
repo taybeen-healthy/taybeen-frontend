@@ -9,7 +9,6 @@ import { cn, formatIndianCurrency } from "@/lib/utils";
 export const DashboardOverview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"Today" | "Weekly" | "Monthly" | "Yearly">("Monthly");
 
-  // Helper to get Lucide icons for stats
   const getKpiIcon = (type: string) => {
     const baseClass = "w-5 h-5";
     switch (type) {
@@ -165,7 +164,6 @@ export const DashboardOverview: React.FC = () => {
           <div className="flex-1 flex flex-col justify-end min-h-[280px]">
             <div className="relative w-full h-[220px] flex items-end justify-between gap-2 px-2 border-b border-gray-100 pb-1">
               {revenueChartData.map((dataPoint) => {
-                // calculate max height relative to 850k limit
                 const heightPercent = `${Math.min(95, (dataPoint.amount / 850000) * 100)}%`;
                 return (
                   <div key={dataPoint.month} className="flex-1 flex flex-col items-center group relative h-full justify-end">

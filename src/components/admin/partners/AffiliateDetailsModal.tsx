@@ -20,12 +20,10 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
   onClose,
   onUpdatePartner,
 }) => {
-  // Local states to handle flow transitions and inputs
   const [currentStatus, setCurrentStatus] = useState<AdminPartner["status"]>(partner.status);
   const [couponStatus, setCouponStatus] = useState<AdminPartner["couponStatus"]>(partner.couponStatus || "None");
   const [isGeneratingCoupon, setIsGeneratingCoupon] = useState(false);
 
-  // Form Inputs
   const [couponCodeInput, setCouponCodeInput] = useState(
     partner.couponCode && partner.couponCode !== "Not generated" && partner.couponCode !== "-"
       ? partner.couponCode
@@ -38,7 +36,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
       : ""
   );
 
-  // Feedback states
   const [copiedLink, setCopiedLink] = useState(false);
   const [shared, setShared] = useState(false);
 
@@ -53,7 +50,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
     setTimeout(() => setShared(false), 2000);
   };
 
-  // Reject flow
   const handleReject = () => {
     const updated: AdminPartner = {
       ...partner,
@@ -66,7 +62,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
     onClose();
   };
 
-  // Delete Coupon flow
   const handleDeleteCoupon = () => {
     const todayStr = new Date().toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -86,7 +81,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
     onUpdatePartner(updated);
   };
 
-  // Generate Coupon Flow (used for pending request approval AND regenerating expired/deleted coupons)
   const handleGenerateCoupon = () => {
     if (!couponCodeInput.trim()) return alert("Please enter a coupon code");
     if (!discountValueInput.trim()) return alert("Please enter a discount value");
@@ -112,12 +106,10 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
 
     onUpdatePartner(updated);
     
-    // Reset state & close
     setIsGeneratingCoupon(false);
     onClose();
   };
 
-  // Get Subtitle based on status
   const getSubtitle = () => {
     if (currentStatus === "Pending") {
       return "Affiliate request — pending review";
@@ -135,7 +127,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
       isSplit={false}
       className="max-w-xl w-full bg-[#FDFAF3] p-0 overflow-hidden max-h-[92vh] flex flex-col relative font-poppins text-left"
     >
-      {/* Close button */}
       <button
         onClick={onClose}
         className="absolute top-6 right-6 z-50 w-9 h-9 bg-white hover:bg-[#F2EADA]/40 text-brand-brown hover:text-black rounded-full flex items-center justify-center border border-[#F2EADA] transition-all cursor-pointer shadow-sm active:scale-95 focus:outline-none"
@@ -144,7 +135,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
         <X size={18} />
       </button>
 
-      {/* Header section */}
       <div className="p-6 md:p-8 pb-4 shrink-0 select-text pr-16">
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-brown">
           {partner.name}
@@ -156,10 +146,8 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
 
       <div className="border-b border-[#C4A482]/10 mx-6 md:mx-8" />
 
-      {/* Scrollable contents */}
       <div className="flex-1 overflow-y-auto px-6 md:px-8 py-6 space-y-6 select-text text-sm text-[#3A2418]">
         
-        {/* Section 1: PERSONAL DETAILS */}
         <div className="space-y-3">
           <h3 className="text-xs font-bold text-[#768C3A] tracking-wider uppercase">
             Personal Details
@@ -219,8 +207,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
           </div>
         </div>
 
-        {/* Section 2: Conditional blocks */}
-        {/* State A: Sales / Past Performance (if Approved or Expired) */}
         {(currentStatus === "Approved" || currentStatus === "Expired") && (
           <div className="space-y-3">
             <h3 className="text-xs font-bold text-[#768C3A] tracking-wider uppercase">
@@ -258,7 +244,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
           </div>
         )}
 
-        {/* State B: Why They Want to Be an Affiliate (if Pending) */}
         {currentStatus === "Pending" && partner.whyJoin && (
           <div className="space-y-3">
             <h3 className="text-xs font-bold text-[#768C3A] tracking-wider uppercase">
@@ -272,13 +257,11 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
           </div>
         )}
 
-        {/* Section 3: Coupon details or creation flow */}
         <div className="space-y-4 pt-1">
           <h3 className="text-xs font-bold text-[#768C3A] tracking-wider uppercase block">
             Coupon
           </h3>
 
-          {/* Active coupon view */}
           {currentStatus === "Approved" && couponStatus === "Active" && (
             <div className="space-y-4">
               <div className="border border-dashed border-[#C4A482] rounded-2xl p-5 bg-[#FDFAF3] flex flex-col gap-3 relative overflow-hidden">
@@ -316,7 +299,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
                 </div>
               </div>
 
-              {/* Action buttons under active coupon */}
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={handleDeleteCoupon}
@@ -339,7 +321,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
             </div>
           )}
 
-          {/* Expired coupon view */}
           {currentStatus === "Expired" && couponStatus === "Expired" && !isGeneratingCoupon && (
             <div className="space-y-4">
               <div className="border border-dashed border-[#C4A482]/50 rounded-2xl p-5 bg-[#FDFAF3] flex flex-col gap-3 opacity-80">
@@ -354,7 +335,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
                 </p>
               </div>
 
-              {/* Expired regeneration form fields */}
               <div className="space-y-4 pt-2">
                 <div className="space-y-1.5 text-left">
                   <label className="text-xs font-bold text-brand-brown/70 block">
@@ -393,11 +373,9 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
             </div>
           )}
 
-          {/* Pending Approval / No Coupon flow */}
           {((currentStatus === "Pending" && !isGeneratingCoupon) || (couponStatus === "None" && !isGeneratingCoupon && currentStatus !== "Pending")) && (
             <div className="space-y-4">
               {currentStatus === "Pending" ? (
-                /* Pending approval primary screen bottom action buttons */
                 <div className="flex gap-3 pt-2">
                   <button
                     onClick={() => setIsGeneratingCoupon(true)}
@@ -413,7 +391,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
                   </button>
                 </div>
               ) : (
-                /* No coupon generated (after delete) generation state inputs */
                 <div className="space-y-4">
                   <div className="border border-dashed border-[#C4A482]/40 rounded-2xl p-6 bg-[#FDFAF3] flex flex-col items-center justify-center text-center">
                     <Ticket className="text-[#C4A482]/60 w-8 h-8 mb-2" />
@@ -488,7 +465,6 @@ export const AffiliateDetailsModal: React.FC<AffiliateDetailsModalProps> = ({
             </div>
           )}
 
-          {/* Conditional coupon generation flow for pending request (after clicking Approve) */}
           {currentStatus === "Pending" && isGeneratingCoupon && (
             <div className="space-y-4">
               <div className="border border-dashed border-[#C4A482]/40 rounded-2xl p-6 bg-[#FDFAF3] flex flex-col items-center justify-center text-center">

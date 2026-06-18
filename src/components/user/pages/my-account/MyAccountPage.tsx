@@ -23,7 +23,6 @@ export const MyAccountPage: React.FC = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const router = useRouter();
 
-  // Lifted user profile and billing address state
   const [profile, setProfile] = useState<AccountProfileForm>({
     firstName: "Maryam",
     lastName: "Ali",

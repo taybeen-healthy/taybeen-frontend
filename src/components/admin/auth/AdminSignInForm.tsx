@@ -11,7 +11,6 @@ export const AdminSignInForm: React.FC = () => {
   const router = useRouter();
   const { title, subtitle, labels } = adminAuthData;
 
-  // Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -38,7 +37,6 @@ export const AdminSignInForm: React.FC = () => {
 
     setIsLoading(true);
     try {
-      // Simulate successful administrative sign in
       await new Promise((resolve) => setTimeout(resolve, 800));
       router.push("/admin");
     } catch (err) {
