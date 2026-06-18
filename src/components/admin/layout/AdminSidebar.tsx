@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { 
-  Home, 
-  Package, 
-  ClipboardList, 
-  Users, 
-  Store, 
-  FileText, 
+import {
+  Home,
+  Package,
+  ClipboardList,
+  Users,
+  Store,
+  FileText,
   Settings,
   Menu,
   X,
@@ -116,8 +116,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   onClick={onClose}
                   className={cn(
                     "flex items-center rounded-xl transition-all duration-200 group relative font-poppins text-sm font-medium h-12 shrink-0",
-                    isExpanded 
-                      ? "w-full gap-4 px-3.5" 
+                    isExpanded
+                      ? "w-full gap-4 px-3.5"
                       : "w-12 justify-center",
                     isActive
                       ? "bg-brand-green-pale text-brand-green font-semibold"
@@ -131,14 +131,14 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                     )} />
                   )}
 
-                  <Icon 
-                    size={20} 
+                  <Icon
+                    size={20}
                     className={cn(
-                      "shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[6deg]",
+                      "shrink-0 transition-all duration-300",
                       isActive ? "text-brand-green" : "text-[#8D7F75] group-hover:text-brand-green"
-                    )} 
+                    )}
                   />
-                  
+
                   {(isExpanded || isMobileOpen) && (
                     <span className="whitespace-nowrap animate-in fade-in slide-in-from-left-2 duration-300 delay-300">
                       {item.label}
