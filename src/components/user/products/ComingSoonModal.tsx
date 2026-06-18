@@ -106,7 +106,11 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
             rel="noopener noreferrer"
             className="w-full sm:w-auto border border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-poppins font-semibold text-xs sm:text-sm rounded-full py-3.5 px-10 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer group shadow-sm hover:shadow"
           >
-            <WhatsAppIcon width={22} height={22} className="group-hover:scale-105 transition-transform" />
+            <WhatsAppIcon
+              width={22}
+              height={22}
+              className="group-hover:scale-105 transition-transform"
+            />
             Chat on WhatsApp
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
