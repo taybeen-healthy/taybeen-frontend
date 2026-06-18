@@ -6,9 +6,14 @@ import { customersKpis, adminCustomersList } from "@/data/admin/customersData";
 import { formatIndianCurrency } from "@/lib/utils";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { Button } from "@/components/ui/Button";
+import { CustomerDetailsModal } from "./CustomerDetailsModal";
+import { AdminCustomer } from "@/types/admin/customers";
+
 
 export const CustomersList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCustomer, setSelectedCustomer] = useState<AdminCustomer | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredCustomers = adminCustomersList.filter((customer) => {
     const term = searchQuery.toLowerCase();
@@ -135,7 +140,14 @@ export const CustomersList: React.FC = () => {
 
                     <td className="py-4 px-6">
                       <div className="flex items-center justify-center gap-4">
-                        <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="View Info">
+                        <button 
+                          onClick={() => {
+                            setSelectedCustomer(customer);
+                            setIsModalOpen(true);
+                          }}
+                          className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" 
+                          aria-label="View Info"
+                        >
                           <Eye size={18} />
                         </button>
                         <button className="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded transition-colors cursor-pointer" aria-label="Delete User">
@@ -180,6 +192,16 @@ export const CustomersList: React.FC = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && selectedCustomer && (
+        <CustomerDetailsModal
+          customer={selectedCustomer}
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedCustomer(null);
+          }}
+        />
+      )}
     </div>
   );
 };

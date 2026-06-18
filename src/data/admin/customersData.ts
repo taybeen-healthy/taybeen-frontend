@@ -18,6 +18,20 @@ export const adminCustomersList: AdminCustomer[] = [
     ordersCount: 2,
     totalSpent: 499,
     joinedDate: "12/06/26",
+    recentOrders: [
+      {
+        id: "ORD-2026-00007",
+        date: "12/06/26",
+        amount: 499,
+        status: "Pending",
+      },
+      {
+        id: "ORD-2026-00001",
+        date: "12/06/26",
+        amount: 499,
+        status: "Completed",
+      },
+    ],
   },
   {
     id: "cust-2",
@@ -28,6 +42,14 @@ export const adminCustomersList: AdminCustomer[] = [
     ordersCount: 1,
     totalSpent: 798,
     joinedDate: "10/06/26",
+    recentOrders: [
+      {
+        id: "ORD-2026-00002",
+        date: "10/06/26",
+        amount: 798,
+        status: "Pending",
+      },
+    ],
   },
   {
     id: "cust-3",
@@ -38,5 +60,13 @@ export const adminCustomersList: AdminCustomer[] = [
     ordersCount: 3,
     totalSpent: 1797,
     joinedDate: "08/06/26",
+    recentOrders: [
+      {
+        id: "ORD-2026-00003",
+        date: "08/06/26",
+        amount: 599,
+        status: "In Transit",
+      },
+    ],
   },
 ];

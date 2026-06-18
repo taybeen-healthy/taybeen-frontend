@@ -1,12 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Clock, CheckCircle2, XCircle, Eye, Trash2, HelpCircle } from "lucide-react";
 import { reviewsKpis, adminReviewsList } from "@/data/admin/reviewsData";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { ReviewDetailsModal } from "./ReviewDetailsModal";
+import { AdminReview } from "@/types/admin/reviews";
+
 
 export const ReviewsList: React.FC = () => {
+  const [reviews, setReviews] = useState<AdminReview[]>(adminReviewsList);
+  const [selectedReview, setSelectedReview] = useState<AdminReview | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleUpdateStatus = (reviewId: string, newStatus: AdminReview["status"]) => {
+    setReviews((prev) =>
+      prev.map((r) => (r.id === reviewId ? { ...r, status: newStatus } : r))
+    );
+  };
   const getKpiIcon = (iconName: string) => {
     switch (iconName) {
       case "total":
@@ -89,7 +101,7 @@ export const ReviewsList: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-sm text-[#3A2418]">
-              {adminReviewsList.map((review) => (
+              {reviews.map((review) => (
                 <tr key={review.id} className="hover:bg-gray-50/40 transition-colors">
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
@@ -142,7 +154,14 @@ export const ReviewsList: React.FC = () => {
 
                   <td className="py-4 px-6">
                     <div className="flex items-center justify-center gap-4">
-                      <button className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" aria-label="Moderate Review">
+                      <button 
+                        onClick={() => {
+                          setSelectedReview(review);
+                          setIsModalOpen(true);
+                        }}
+                        className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer" 
+                        aria-label="Moderate Review"
+                      >
                         <Eye size={18} />
                       </button>
                       <button className="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded transition-colors cursor-pointer" aria-label="Delete Review">
@@ -180,6 +199,17 @@ export const ReviewsList: React.FC = () => {
           </div>
         </div>
       </div>
+      {isModalOpen && selectedReview && (
+        <ReviewDetailsModal
+          review={selectedReview}
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedReview(null);
+          }}
+          onUpdateStatus={handleUpdateStatus}
+        />
+      )}
     </div>
   );
 };

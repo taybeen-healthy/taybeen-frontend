@@ -7,6 +7,10 @@ export interface AdminReview {
   productName: string;
   date: string;
   status: "Approved" | "Pending" | "Rejected";
+  orderId: string;
+  rating: number;
+  comment: string;
+  images: string[];
 }
 
 export interface ReviewsKpis {

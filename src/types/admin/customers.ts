@@ -1,3 +1,10 @@
+export interface AdminCustomerRecentOrder {
+  id: string;
+  date: string;
+  amount: number;
+  status: string;
+}
+
 export interface AdminCustomer {
   id: string;
   name: string;
@@ -7,6 +14,7 @@ export interface AdminCustomer {
   ordersCount: number;
   totalSpent: number;
   joinedDate: string;
+  recentOrders?: AdminCustomerRecentOrder[];
 }
 
 export interface CustomersKpis {
