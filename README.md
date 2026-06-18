@@ -23,11 +23,11 @@ Standard template storefronts separate checkout and administrator management int
 
 ## Live demo
 
-| Item                 | Link                                                  |
-| -------------------- | ----------------------------------------------------- |
-| Storefront (Hostinger)  | <https://taybeen.com>                    |
-| Admin Panel (Hostinger) | <https://taybeen.com/admin>              |
-| Source               | <https://github.com/taybeen-healthy/taybeen-frontend> |
+| Item                    | Link                                                  |
+| ----------------------- | ----------------------------------------------------- |
+| Storefront (Hostinger)  | <https://taybeen.com>                                 |
+| Admin Panel (Hostinger) | <https://taybeen.com/admin>                           |
+| Source                  | <https://github.com/taybeen-healthy/taybeen-frontend> |
 
 ### Try it — seeded credentials
 
