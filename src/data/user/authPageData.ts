@@ -5,5 +5,5 @@ export interface AuthPageConfig {
 
 export const authPageData: AuthPageConfig = {
   backgroundImage: "/authBg.png",
-  backgroundAlt: "Botanical Background"
+  backgroundAlt: "Botanical Background",
 };

@@ -57,12 +57,8 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
               {review.customerInitial}
             </div>
             <div>
-              <h4 className="font-bold text-brand-brown leading-tight">
-                {review.customerName}
-              </h4>
-              <span className="text-xs text-[#8D7F75] font-semibold">
-                {review.customerEmail}
-              </span>
+              <h4 className="font-bold text-brand-brown leading-tight">{review.customerName}</h4>
+              <span className="text-xs text-[#8D7F75] font-semibold">{review.customerEmail}</span>
             </div>
           </div>
 
@@ -71,17 +67,13 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
               <span className="text-[10px] font-bold text-[#8D7F75] uppercase tracking-wider block">
                 Order ID
               </span>
-              <span className="font-bold mt-1 block font-poppins">
-                {review.orderId}
-              </span>
+              <span className="font-bold mt-1 block font-poppins">{review.orderId}</span>
             </div>
             <div>
               <span className="text-[10px] font-bold text-[#8D7F75] uppercase tracking-wider block">
                 Date
               </span>
-              <span className="font-semibold mt-1 block">
-                {review.date}
-              </span>
+              <span className="font-semibold mt-1 block">{review.date}</span>
             </div>
           </div>
         </div>
@@ -95,7 +87,7 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
                 className="w-full h-full object-cover select-none pointer-events-none"
               />
             </div>
-            
+
             {review.images.length > 1 && (
               <div className="flex gap-2">
                 {review.images.map((img, i) => (
@@ -130,8 +122,8 @@ export const ReviewDetailsModal: React.FC<ReviewDetailsModalProps> = ({
                   currentStatus === "Approved"
                     ? "success"
                     : currentStatus === "Pending"
-                    ? "pending"
-                    : "error"
+                      ? "pending"
+                      : "error"
                 }
                 className="inline-block"
               />

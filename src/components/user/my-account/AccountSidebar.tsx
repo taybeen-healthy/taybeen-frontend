@@ -1,5 +1,13 @@
 import React from "react";
-import { LayoutGrid, History, ShoppingCart, Settings, LogOut, Users, LucideIcon } from "lucide-react";
+import {
+  LayoutGrid,
+  History,
+  ShoppingCart,
+  Settings,
+  LogOut,
+  Users,
+  LucideIcon,
+} from "lucide-react";
 
 interface SidebarItem {
   id: string;
@@ -23,10 +31,7 @@ interface AccountSidebarProps {
   onTabChange: (tab: string) => void;
 }
 
-export const AccountSidebar: React.FC<AccountSidebarProps> = ({
-  activeTab,
-  onTabChange,
-}) => {
+export const AccountSidebar: React.FC<AccountSidebarProps> = ({ activeTab, onTabChange }) => {
   const { setIsCartOpen } = useCart();
 
   return (
@@ -52,10 +57,7 @@ export const AccountSidebar: React.FC<AccountSidebarProps> = ({
                     : "text-[#7D6B5E] hover:text-brand-brown hover:bg-black/5 font-medium"
                 }`}
               >
-                <Icon
-                  size={18}
-                  className={isActive ? "text-[#F7A503]" : "text-[#7D6B5E]"}
-                />
+                <Icon size={18} className={isActive ? "text-[#F7A503]" : "text-[#7D6B5E]"} />
                 <span>{item.label}</span>
               </button>
             </li>

@@ -18,8 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variants = {
     primary: "bg-brand-brown text-white hover:bg-opacity-90",
-    outline:
-      "border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white",
+    outline: "border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white",
     ghost: "text-brand-brown hover:bg-brand-brown hover:bg-opacity-5",
     dark: "bg-brand-green text-white hover:bg-opacity-90",
   };
@@ -31,10 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button
-      className={cn(baseStyles, variants[variant], sizes[size], className)}
-      {...props}
-    >
+    <button className={cn(baseStyles, variants[variant], sizes[size], className)} {...props}>
       {children}
     </button>
   );

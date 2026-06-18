@@ -11,10 +11,10 @@ interface OrderSummaryCardProps {
 export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
   orderId,
   placedOn,
-  itemsCount
+  itemsCount,
 }) => {
   const { labels } = orderConfirmedData;
-  
+
   const itemsText = itemsCount === 1 ? "1 item" : `${itemsCount} items`;
 
   return (
@@ -47,9 +47,7 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
               {labels.itemsLabel}
             </span>
-            <p className="text-sm font-poppins font-semibold text-[#3A2418] mt-0.5">
-              {itemsText}
-            </p>
+            <p className="text-sm font-poppins font-semibold text-[#3A2418] mt-0.5">{itemsText}</p>
           </div>
         </div>
 

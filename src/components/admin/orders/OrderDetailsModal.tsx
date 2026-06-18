@@ -38,7 +38,8 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
   };
 
   const getStatusButtonStyle = (buttonStatus: AdminOrder["status"]) => {
-    const isCurrent = order.status === buttonStatus ||
+    const isCurrent =
+      order.status === buttonStatus ||
       (buttonStatus === "Shipped" && order.status === "In Transit");
 
     switch (buttonStatus) {
@@ -93,9 +94,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
         <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-brown">
           Order Details
         </h2>
-        <p className="text-xs text-[#8D7F75] mt-1 font-semibold tracking-wide">
-          {order.hexId}
-        </p>
+        <p className="text-xs text-[#8D7F75] mt-1 font-semibold tracking-wide">{order.hexId}</p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 md:px-8 pb-8 space-y-6 select-text text-left font-poppins pr-4 sm:pr-6">
@@ -130,9 +129,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
               <span className="text-[10px] font-bold text-[#768C3A] tracking-wider uppercase">
                 Name
               </span>
-              <p className="font-semibold text-brand-brown mt-1">
-                {order.customerName}
-              </p>
+              <p className="font-semibold text-brand-brown mt-1">{order.customerName}</p>
             </div>
             <div>
               <span className="text-[10px] font-bold text-[#768C3A] tracking-wider uppercase">
@@ -156,9 +153,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
               <span className="text-[10px] font-bold text-[#768C3A] tracking-wider uppercase">
                 Payment Method
               </span>
-              <p className="font-semibold text-brand-brown mt-1">
-                {order.paymentMethod}
-              </p>
+              <p className="font-semibold text-brand-brown mt-1">{order.paymentMethod}</p>
             </div>
           </div>
         </div>
@@ -184,16 +179,10 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
               >
                 <div className="flex items-center gap-3">
                   <div className="w-14 h-14 relative bg-white border border-[#C4A482]/20 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm font-bold text-brand-brown">
-                      {item.name}
-                    </span>
+                    <span className="text-sm font-bold text-brand-brown">{item.name}</span>
                     <span className="text-xs text-[#8D7F75] font-semibold mt-1">
                       Qty: {item.quantity}
                     </span>
@@ -211,26 +200,18 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
           <div className="space-y-3 text-xs sm:text-sm text-brand-brown font-medium">
             <div className="flex justify-between items-center">
               <span className="text-[#8D7F75] font-semibold">Shipping</span>
-              <span className="font-bold">
-                {formatPriceValue(order.shipping)}
-              </span>
+              <span className="font-bold">{formatPriceValue(order.shipping)}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#8D7F75] font-semibold">Subtotal</span>
-              <span className="font-bold">
-                {formatPriceValue(order.subtotal)}
-              </span>
+              <span className="font-bold">{formatPriceValue(order.subtotal)}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-[#8D7F75] font-semibold">Tax</span>
-              <span className="font-bold">
-                ₹{formatIndianCurrency(order.tax)}
-              </span>
+              <span className="font-bold">₹{formatIndianCurrency(order.tax)}</span>
             </div>
             <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-center">
-              <span className="font-serif text-base font-bold text-brand-brown">
-                Total
-              </span>
+              <span className="font-serif text-base font-bold text-brand-brown">Total</span>
               <span className="font-poppins text-lg font-bold text-brand-brown">
                 ₹{formatIndianCurrency(order.total)}
               </span>
@@ -243,17 +224,19 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
             Update Order Status
           </h3>
           <div className="flex flex-wrap gap-2.5">
-            {(["Pending", "Processing", "Shipped", "Completed", "Cancelled"] as const).map((status) => (
-              <button
-                key={status}
-                onClick={() => onUpdateStatus(order.id, status)}
-                className={`py-2 px-4 text-xs font-semibold rounded-lg border transition-all cursor-pointer focus:outline-none select-none active:scale-95 ${getStatusButtonStyle(
-                  status
-                )}`}
-              >
-                {status}
-              </button>
-            ))}
+            {(["Pending", "Processing", "Shipped", "Completed", "Cancelled"] as const).map(
+              (status) => (
+                <button
+                  key={status}
+                  onClick={() => onUpdateStatus(order.id, status)}
+                  className={`py-2 px-4 text-xs font-semibold rounded-lg border transition-all cursor-pointer focus:outline-none select-none active:scale-95 ${getStatusButtonStyle(
+                    status
+                  )}`}
+                >
+                  {status}
+                </button>
+              )
+            )}
           </div>
         </div>
 

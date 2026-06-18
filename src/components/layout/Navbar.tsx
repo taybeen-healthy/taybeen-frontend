@@ -25,7 +25,9 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-[#F6F1E9] bg-opacity-0 px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16 py-4 md:py-5 lg:py-4 ${isMenuOpen ? "backdrop-blur-none lg:backdrop-blur-md" : "backdrop-blur-md"}`}>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 bg-[#F6F1E9] bg-opacity-0 px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16 py-4 md:py-5 lg:py-4 ${isMenuOpen ? "backdrop-blur-none lg:backdrop-blur-md" : "backdrop-blur-md"}`}
+      >
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/">
@@ -41,14 +43,37 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-12">
-            <Link href="/" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Home</Link>
-            <Link href="/our-story" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Story</Link>
-            <Link href="/products" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Our Products</Link>
-            <Link href="/contact" className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200">Contact Us</Link>
+            <Link
+              href="/"
+              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+            >
+              Home
+            </Link>
+            <Link
+              href="/our-story"
+              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+            >
+              Our Story
+            </Link>
+            <Link
+              href="/products"
+              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+            >
+              Our Products
+            </Link>
+            <Link
+              href="/contact"
+              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+            >
+              Contact Us
+            </Link>
           </div>
 
           <div className="flex items-center space-x-4 md:space-x-8">
-            <Link href="/my-account" className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors">
+            <Link
+              href="/my-account"
+              className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors"
+            >
               <User size={24} className="md:w-8 md:h-8" strokeWidth={2} />
             </Link>
             <div className="hidden lg:block relative">
@@ -91,7 +116,7 @@ export const Navbar: React.FC = () => {
               initial={{ clipPath: "inset(0% 0% 100% 0% round 0px 0px 20px 20px)" }}
               animate={{ clipPath: "inset(0% 0% 0% 0% round 0px 0px 20px 20px)" }}
               exit={{ clipPath: "inset(0% 0% 100% 0% round 0px 0px 20px 20px)" }}
-              transition={{ duration: 0.50, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="lg:hidden fixed top-0 left-0 right-0 bg-[#FDFAF3] rounded-b-[20px] z-[45] flex flex-col px-6 pt-24 pb-8 shadow-premium overflow-hidden"
             >
               <div className="flex flex-col">

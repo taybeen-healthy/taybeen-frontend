@@ -35,9 +35,7 @@ export const PartnershipsPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -100,10 +98,7 @@ export const PartnershipsPage: React.FC = () => {
           id: `APP-${Date.now()}`,
           date: new Date().toLocaleDateString(),
         });
-        localStorage.setItem(
-          "taybeen_affiliate_applications",
-          JSON.stringify(applications)
-        );
+        localStorage.setItem("taybeen_affiliate_applications", JSON.stringify(applications));
       } catch (e) {
         console.error(e);
       }
@@ -118,7 +113,6 @@ export const PartnershipsPage: React.FC = () => {
         <Hero src="/OurProducts Header.png" alt="Become a Taybeen Affiliate Banner" />
 
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-12 sm:py-16 md:py-20 text-left font-poppins">
-
           <div className="mb-10 text-left space-y-4">
             <h1 className="font-serif font-bold text-[#5A3E2B] text-3xl sm:text-4xl md:text-5xl leading-tight">
               {title}
@@ -139,9 +133,7 @@ export const PartnershipsPage: React.FC = () => {
                     {term.stepNumber}
                   </div>
                   <div className="space-y-1">
-                    <h4 className="font-semibold text-[#5A3E2B] text-sm">
-                      {term.title}
-                    </h4>
+                    <h4 className="font-semibold text-[#5A3E2B] text-sm">{term.title}</h4>
                     <p className="text-brand-green/95 text-xs sm:text-sm leading-relaxed">
                       {term.description}
                     </p>
@@ -274,9 +266,7 @@ export const PartnershipsPage: React.FC = () => {
                     </span>
                   </label>
                   {errors.agreeToTerms && (
-                    <p className="text-red-500 text-xs font-semibold pl-8">
-                      {errors.agreeToTerms}
-                    </p>
+                    <p className="text-red-500 text-xs font-semibold pl-8">{errors.agreeToTerms}</p>
                   )}
                 </div>
 

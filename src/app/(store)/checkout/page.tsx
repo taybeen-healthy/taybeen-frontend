@@ -3,8 +3,7 @@ import CheckoutPage from "@/components/user/pages/checkout/CheckoutPage";
 
 export const metadata: Metadata = {
   title: "Checkout | Taybeen Premium Dates",
-  description:
-    "Complete your order of premium date varieties and gift hampers.",
+  description: "Complete your order of premium date varieties and gift hampers.",
   alternates: {
     canonical: "/checkout",
   },

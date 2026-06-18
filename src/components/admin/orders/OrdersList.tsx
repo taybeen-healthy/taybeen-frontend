@@ -10,7 +10,7 @@ import {
   CheckCircle2,
   Boxes,
   IndianRupee,
-  Printer
+  Printer,
 } from "lucide-react";
 import { ordersKpis, adminOrdersList } from "@/data/admin/ordersData";
 import { formatIndianCurrency, cn } from "@/lib/utils";
@@ -63,12 +63,15 @@ export const OrdersList: React.FC = () => {
     setOrders((prevOrders) =>
       prevOrders.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
     );
-    setSelectedOrder((prev) => (prev && prev.id === orderId ? { ...prev, status: newStatus } : prev));
+    setSelectedOrder((prev) =>
+      prev && prev.id === orderId ? { ...prev, status: newStatus } : prev
+    );
   };
 
   const filteredOrders = orders
     .filter((order) => {
-      const matchesSearch = order.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      const matchesSearch =
+        order.customerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         order.id.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesStatus = statusFilter === "All" || order.status === statusFilter;
@@ -86,7 +89,9 @@ export const OrdersList: React.FC = () => {
       if (paymentFilter === "cod") {
         matchesPayment = order.paymentMethod.toLowerCase().includes("cash");
       } else if (paymentFilter === "upi") {
-        matchesPayment = order.paymentMethod.toLowerCase().includes("upi") || order.paymentMethod.toLowerCase().includes("net");
+        matchesPayment =
+          order.paymentMethod.toLowerCase().includes("upi") ||
+          order.paymentMethod.toLowerCase().includes("net");
       } else if (paymentFilter === "card") {
         matchesPayment = order.paymentMethod.toLowerCase().includes("card");
       }
@@ -173,7 +178,15 @@ export const OrdersList: React.FC = () => {
             <Select
               value={statusFilter}
               onChange={(value) => setStatusFilter(value)}
-              options={["All", "Pending", "Processing", "In Transit", "Shipped", "Completed", "Cancelled"]}
+              options={[
+                "All",
+                "Pending",
+                "Processing",
+                "In Transit",
+                "Shipped",
+                "Completed",
+                "Cancelled",
+              ]}
               placeholder="All Statuses"
               variant="borderless"
               className="w-full"
@@ -194,30 +207,22 @@ export const OrdersList: React.FC = () => {
       <AdminTableShell headers={tableHeaders} tableClassName="min-w-[900px]">
         {filteredOrders.map((order) => (
           <tr key={order.id} className="hover:bg-gray-50/40 transition-colors">
-            <td className="py-4 px-6 font-bold text-[#3A2418]">
-              {order.id}
-            </td>
-            
+            <td className="py-4 px-6 font-bold text-[#3A2418]">{order.id}</td>
+
             <td className="py-4 px-6">
               <div className="flex flex-col">
-                <span className="font-bold text-[#3A2418] leading-tight">
-                  {order.customerName}
-                </span>
+                <span className="font-bold text-[#3A2418] leading-tight">{order.customerName}</span>
                 <span className="text-[10px] text-[#8D7F75] font-semibold mt-1">
                   {order.customerEmail}
                 </span>
               </div>
             </td>
 
-            <td className="py-4 px-6 font-semibold text-[#8D7F75]">
-              {order.date}
-            </td>
+            <td className="py-4 px-6 font-semibold text-[#8D7F75]">{order.date}</td>
 
             <td className="py-4 px-6">
               <div className="flex flex-col">
-                <span className="font-semibold text-[#3A2418]">
-                  {order.paymentMethod}
-                </span>
+                <span className="font-semibold text-[#3A2418]">{order.paymentMethod}</span>
                 <span className="text-[10px] text-brand-green font-bold uppercase tracking-wider mt-0.5">
                   Paid
                 </span>
@@ -238,7 +243,9 @@ export const OrdersList: React.FC = () => {
                   ref={activeActionMenuOrderId === order.id ? activeActionTriggerRef : null}
                   onClick={(e) => {
                     activeActionTriggerRef.current = e.currentTarget;
-                    setActiveActionMenuOrderId(activeActionMenuOrderId === order.id ? null : order.id);
+                    setActiveActionMenuOrderId(
+                      activeActionMenuOrderId === order.id ? null : order.id
+                    );
                   }}
                   className="text-[#8D7F75] hover:text-brand-brown p-1.5 hover:bg-gray-50 rounded transition-colors cursor-pointer"
                   aria-label="Actions Menu"

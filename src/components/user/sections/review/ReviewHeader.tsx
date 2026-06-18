@@ -30,7 +30,8 @@ export const ReviewHeader: React.FC = () => {
             {reviewPageData.desktopHeader.title}
           </h1>
           <p className="text-[#7D6B5E] font-poppins text-sm leading-relaxed max-w-md mx-auto">
-            We&apos;d love to hear about your experience.<br />
+            We&apos;d love to hear about your experience.
+            <br />
             Your feedback helps us serve you better!
           </p>
         </div>

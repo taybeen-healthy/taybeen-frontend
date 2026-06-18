@@ -37,9 +37,7 @@ const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({
     const countryCode = opt.value;
     const countryName = opt.label;
 
-    const flagUrl = countryCode
-      ? `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`
-      : "";
+    const flagUrl = countryCode ? `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png` : "";
 
     return {
       value: countryCode || "",
@@ -321,7 +319,8 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                   countrySelectComponent={PhoneCountrySelect}
                   className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                   numberInputProps={{
-                    className: "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
+                    className:
+                      "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                   }}
                 />
                 {profileErrors.phone && (
@@ -463,7 +462,8 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 countrySelectComponent={PhoneCountrySelect}
                 className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                 numberInputProps={{
-                  className: "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
+                  className:
+                    "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                 }}
               />
               {billingErrors.phone && (

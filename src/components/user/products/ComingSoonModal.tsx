@@ -15,10 +15,7 @@ interface ComingSoonModalProps {
   onClose: () => void;
 }
 
-export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
-  product,
-  onClose,
-}) => {
+export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClose }) => {
   const messageText = `Hi Taybeen, I'm interested in ordering ${product.name} (${product.weight}) for ₹${product.price}.`;
   const whatsappUrl = `https://wa.me/919958544930?text=${encodeURIComponent(messageText)}`;
 
@@ -58,8 +55,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
             const lastWord = parts[parts.length - 1];
             return (
               <>
-                {firstPart}{" "}
-                <span className="text-brand-primary">{lastWord}</span>
+                {firstPart} <span className="text-brand-primary">{lastWord}</span>
               </>
             );
           })()}
@@ -78,7 +74,13 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
               <>
                 <span className="line-through text-brand-brown/60">₹{product.originalPrice}</span>
                 <span className="text-brand-brown">₹{product.price}</span>
-                <span className="text-[#768C3A]">({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)</span>
+                <span className="text-[#768C3A]">
+                  (
+                  {Math.round(
+                    ((product.originalPrice - product.price) / product.originalPrice) * 100
+                  )}
+                  % OFF)
+                </span>
               </>
             ) : (
               <span>₹{product.price}</span>

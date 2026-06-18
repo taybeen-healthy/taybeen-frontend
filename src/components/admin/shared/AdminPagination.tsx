@@ -16,7 +16,12 @@ export const AdminPagination: React.FC<AdminPaginationProps> = ({
   className = "",
 }) => {
   return (
-    <div className={cn("p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75] select-none", className)}>
+    <div
+      className={cn(
+        "p-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-poppins font-medium text-[#8D7F75] select-none",
+        className
+      )}
+    >
       <div className="flex items-center gap-2">
         <Button
           variant="outline"
@@ -27,7 +32,7 @@ export const AdminPagination: React.FC<AdminPaginationProps> = ({
         >
           Previous
         </Button>
-        
+
         {Array.from({ length: totalPages }).map((_, idx) => {
           const page = idx + 1;
           const isActive = page === currentPage;
@@ -37,8 +42,8 @@ export const AdminPagination: React.FC<AdminPaginationProps> = ({
               onClick={() => onPageChange?.(page)}
               className={cn(
                 "font-bold rounded-lg w-9 h-9 flex items-center justify-center shadow-sm cursor-pointer transition-all active:scale-95",
-                isActive 
-                  ? "bg-brand-green text-white" 
+                isActive
+                  ? "bg-brand-green text-white"
                   : "bg-white border border-[#C4A482]/20 text-brand-brown hover:bg-[#F2EADA]/20"
               )}
             >

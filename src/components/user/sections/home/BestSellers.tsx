@@ -52,13 +52,9 @@ export const BestSellers: React.FC = () => {
 
       <AnimatePresence>
         {isModalOpen && selectedProduct && (
-          <ComingSoonModal
-            product={selectedProduct}
-            onClose={() => setIsModalOpen(false)}
-          />
+          <ComingSoonModal product={selectedProduct} onClose={() => setIsModalOpen(false)} />
         )}
       </AnimatePresence>
     </Section>
   );
 };
-

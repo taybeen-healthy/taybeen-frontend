@@ -20,9 +20,7 @@ export const ReviewsList: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleUpdateStatus = (reviewId: string, newStatus: AdminReview["status"]) => {
-    setReviews((prev) =>
-      prev.map((r) => (r.id === reviewId ? { ...r, status: newStatus } : r))
-    );
+    setReviews((prev) => prev.map((r) => (r.id === reviewId ? { ...r, status: newStatus } : r)));
   };
 
   const getKpiIcon = (iconName: string) => {
@@ -91,9 +89,7 @@ export const ReviewsList: React.FC = () => {
                   {review.customerInitial}
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#3A2418] leading-tight">
-                    {review.customerName}
-                  </h4>
+                  <h4 className="font-bold text-[#3A2418] leading-tight">{review.customerName}</h4>
                   <span className="text-[10px] text-[#8D7F75] font-semibold">
                     {review.customerEmail}
                   </span>
@@ -106,19 +102,13 @@ export const ReviewsList: React.FC = () => {
                 <span className="font-semibold text-[#3A2418] leading-tight">
                   {review.customerEmail}
                 </span>
-                <span className="text-xs text-[#8D7F75] mt-0.5">
-                  {review.customerPhone}
-                </span>
+                <span className="text-xs text-[#8D7F75] mt-0.5">{review.customerPhone}</span>
               </div>
             </td>
 
-            <td className="py-4 px-6 font-medium text-[#3A2418]">
-              {review.productName}
-            </td>
+            <td className="py-4 px-6 font-medium text-[#3A2418]">{review.productName}</td>
 
-            <td className="py-4 px-6 font-semibold text-[#8D7F75]">
-              {review.date}
-            </td>
+            <td className="py-4 px-6 font-semibold text-[#8D7F75]">{review.date}</td>
 
             <td className="py-4 px-6">
               <AdminStatusBadge status={review.status} />

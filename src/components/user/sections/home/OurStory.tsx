@@ -10,13 +10,12 @@ export const OurStory: React.FC = () => {
   const highlights = homeData.ourStory.highlights.map((h, i) => ({
     title: h.title,
     desc: h.desc,
-    icon: icons[i]
+    icon: icons[i],
   }));
 
   return (
     <Section bg="cream" overflowHidden={true}>
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 md:gap-12 lg:gap-16 xl:gap-20">
-
         <div className="w-full lg:flex-1 lg:max-w-[45%] relative flex justify-center lg:justify-start">
           <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-none aspect-[4/5] sm:aspect-[10/11] lg:h-[480px] xl:h-[520px] 2xl:h-[550px] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg relative">
             <Image
@@ -43,7 +42,10 @@ export const OurStory: React.FC = () => {
               </p>
             </div>
             <div className="flex justify-center lg:justify-start">
-              <Button variant="primary" className="rounded-full border border-brand-gold w-full sm:w-auto px-6 sm:px-8 cursor-pointer">
+              <Button
+                variant="primary"
+                className="rounded-full border border-brand-gold w-full sm:w-auto px-6 sm:px-8 cursor-pointer"
+              >
                 {homeData.ourStory.buttonText}
               </Button>
             </div>
@@ -52,17 +54,11 @@ export const OurStory: React.FC = () => {
           <div className="space-y-3 sm:space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-3 xl:gap-4">
               {highlights.map((h, i) => (
-                <HighlightCard
-                  key={i}
-                  title={h.title}
-                  description={h.desc}
-                  icon={h.icon}
-                />
+                <HighlightCard key={i} title={h.title} description={h.desc} icon={h.icon} />
               ))}
             </div>
           </div>
         </div>
-
       </div>
     </Section>
   );

@@ -1,318 +1,270 @@
-# Taybeen Frontend
+<!-- markdownlint-disable MD013 MD033 -->
 
-![Next.js](https://img.shields.io/badge/Next.js-14.2.3-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.4.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Lucide React](https://img.shields.io/badge/Lucide_React-0.378.0-FF6B6B?style=for-the-badge&logo=lucide&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-Package_Manager-F69220?style=for-the-badge&logo=pnpm&logoColor=white)
-![Responsive](https://img.shields.io/badge/Design-Responsive-22C55E?style=for-the-badge)
+# Taybeen - Premium Dates & Gifts Platform
 
-**Live Demo:** [https://taybeen.com](https://taybeen.com)
+E-commerce storefront and admin dashboard panel for high-quality organic dates, gift boxes, and festive hampers.
 
-A production-grade, fully responsive Next.js frontend application built with Next.js 14 App Router, React 18, TypeScript, and Tailwind CSS — featuring a scalable component architecture, enterprise-level development patterns, and optimized performance.
+[![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)](#tech-stack)
+[![Next.js](https://img.shields.io/badge/Next.js-16.x-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](#tech-stack)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](#tech-stack)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](#tech-stack)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](#quick-start)
+[![pnpm](https://img.shields.io/badge/pnpm-Package_Manager-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](#tech-stack)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Functional%20MVP-blue?style=for-the-badge)](#roadmap)
+
+## Overview
+
+Taybeen is a premium e-commerce platform built for the **Smart Storefront & Admin Dashboard** assignment. Customers browse, filter, and purchase premium dates and corporate gift boxes through an interactive shop and checkout pipeline. Administrators log in to a secure dashboard to manage products catalog, audit customer orders, moderate reviews, configure hero banners, and approve affiliate partners with custom coupon generation/deletion workflows.
+
+## Problem statement
+
+Standard template storefronts separate checkout and administrator management interfaces, making full-lifecycle validation complex. Taybeen models this entire workflow directly in a single repository: interactive cart context state management, checkout with regional shipping validations, role-based admin dashboard portals, responsive data grids, reviews audit controls, and real-time coupon code activation/expiration logic. The codebase is organized as a clean, standardized frontend application with highly reusable administrative layouts.
+
+## Live demo
+
+| Item                 | Link                                                  |
+| -------------------- | ----------------------------------------------------- |
+| Storefront (Hostinger)  | <https://taybeen.com>                    |
+| Admin Panel (Hostinger) | <https://taybeen.com/admin>              |
+| Source               | <https://github.com/taybeen-healthy/taybeen-frontend> |
+
+### Try it — seeded credentials
+
+Use any valid email structure and password to log in to the admin dashboard at <https://taybeen.com/admin/signin>:
+
+| Role  | Email                 | Password    | What you'll see                                              |
+| ----- | --------------------- | ----------- | ------------------------------------------------------------ |
+| admin | `admin@taybeen.local` | `admin123!` | View statistics, order sheets, and manage affiliate partners |
 
 ---
 
-## Tech Stack
+## Core features
 
-### Core Framework & Runtime
+### Storefront Customer
 
-| Technology | Version | Purpose |
-| ---------- | ------- | ------- |
-| Next.js | 14.2.3 | App Router, SSR/SSG, Image Optimization |
-| React | 18.3.1 | UI Library with Server Components |
-| TypeScript | 5.4.5 | Type Safety (strict mode) |
-| Node.js | 18+ | Runtime |
+- Browse organic collections (Ajwa, Sukkari, Mebroom dates) by categories.
+- Cart drawer with real-time price updates and persistent local storage caching.
+- Checkout page verifying address lines, postal codes, and payment selection.
+- Info pages details (Our Story, FAQs, shipping and refund policies).
+- Responsive mobile drawer layout and touch-friendly buttons.
 
-### Styling & UI
+### Admin Dashboard
 
-| Technology | Version | Purpose |
-| ---------- | ------- | ------- |
-| Tailwind CSS | 3.4.3 | Utility-first CSS |
-| Lucide React | 0.378.0 | Icon library |
-| clsx | 2.1.1 | Conditional class composition |
-| tailwind-merge | 2.3.0 | Intelligent Tailwind class merging |
+- **KPI Metrics Overview**: Visualizes total order statistics, pending count, completed totals, and revenue aggregates.
+- **Product Management**: Create, edit, and audit dates products catalog with custom dropzone image uploads.
+- **Orders Administration**: Search, filter, and track orders; update shipment statuses (Pending → Processing → In Transit → Shipped → Completed → Cancelled).
+- **Affiliate & Coupon Generate**: View requests details, reject/approve affiliates, delete existing coupon codes to render them "Expired" (with line-through styling), and generate new codes conditionally.
+- **Customization Settings**: Live configurations of homepage hero sections, brand descriptions, and image slots.
 
-### Package Manager
+---
 
-- **pnpm** (lockfile: `pnpm-lock.yaml`)
+## Tech stack
 
-## Project Structure
+| Layer    | Tech                 | Version                               | Purpose                                     |
+| -------- | -------------------- | ------------------------------------- | ------------------------------------------- |
+| Frontend | React                | 19.2.x                                | View rendering and state component model    |
+| Frontend | Next.js (App Router) | 16.2.x                                | Production routing and SSR layout engine    |
+| Frontend | TypeScript           | 5.4.x                                 | Strict code type safety                     |
+| Frontend | Tailwind CSS         | 3.4.x                                 | Responsive class styles utility             |
+| Frontend | Lucide React         | 0.378.0                               | Interface layout icons                      |
+| Tooling  | Prettier             | 3.2.x                                 | Formatting rules                            |
+| Tooling  | ESLint               | 8.57.x                                | Code syntax checker                         |
+| Tooling  | pnpm                 | 10.30.0 (pinned via `packageManager`) | Package manager – single workspace lockfile |
 
-```text
-taybeen-frontend/
-├── public/                          # Static assets
-│   ├── Playfair_Display/            # Local Playfair Display serif font
-│   └── ...                          # Image assets
-│
-├── src/
-│   ├── app/                         # Next.js App Router
-│   │   ├── layout.tsx               # Root layout with font configurations
-│   │   └── page.tsx                 # Home page
-│   │
-│   ├── components/                  # Reusable UI components
-│   │   ├── layout/                  # App-wide structural elements (Navbar, Footer)
-│   │   ├── sections/                # Single-page sections (Hero, BestSellers, etc.)
-│   │   └── ui/                      # Reusable UI primitives (Button)
-│   │
-│   ├── data/                        # Static data and configurations
-│   │   └── mockData.ts              # Mock application data
-│   │
-│   ├── lib/                         # Utilities & helpers
-│   │   └── utils.ts                 # Common utility functions
-│   │
-│   ├── styles/                      # Global CSS
-│   │   └── globals.css              # Tailwind entry point
-│   │
-│   └── types/                       # Global TypeScript types
-│       └── index.ts                 # Shared types
-```
-├── package.json
-├── tsconfig.json                    # TypeScript configuration
-├── next.config.mjs                  # Next.js configuration
-├── tailwind.config.ts               # Tailwind configuration
-├── postcss.config.mjs               # PostCSS configuration
-├── pnpm-lock.yaml                   # pnpm lockfile
-├── pnpm-workspace.yaml              # Workspace configuration
-├── next-env.d.ts                    # Next.js type definitions
-├── README.md                        # Project documentation
-└── .gitignore
+---
+
+## Architecture at a glance
+
+```mermaid
+flowchart TD
+  user((Customer / Admin))
+  user -->|Renders store & checkout| storefront[Storefront UI<br/>Next.js App Router]
+  user -->|Renders admin tools| admin[Admin Panel<br/>Standard shared widgets]
+  storefront -->|Stores items| localstorage[(Local Storage)]
+  admin -->|Retrieves list data| data[(Local Mock Databases)]
 ```
 
-## Getting Started
+For more in-depth diagrams on request pipelines, ERDs, and the sequence flows, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
+---
+
+## Quick start
 
 ### Prerequisites
 
-- Node.js 18 or higher
-- pnpm (recommended) or npm
-- A modern web browser (Chrome, Edge, Firefox, Safari)
-- Git
+- Node.js 20+
+- pnpm 10+ (`corepack enable && corepack prepare pnpm@latest --activate`)
 
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/taybeen-healthy/taybeen-frontend.git
-   cd taybeen-frontend
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Set up environment variables (if needed)**
-
-   Copy the example environment file:
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. **Start the development server**
-
-   ```bash
-   pnpm dev
-   ```
-
-5. **Open the app in your browser**
-
-   ```text
-   http://localhost:3000
-   ```
-
-### Production Build
+### Terminal Commands
 
 ```bash
-pnpm build
-pnpm start
+# Clone the repository
+git clone https://github.com/taybeen-healthy/taybeen-frontend.git
+cd taybeen-frontend
+
+# Install dependencies
+pnpm install
+
+# Run the project in development mode
+pnpm dev
 ```
 
-### Available Scripts
-
-| Script | Command | Purpose |
-| ------ | ------- | ------- |
-| `dev` | `pnpm dev` | Start development server with hot reload |
-| `build` | `pnpm build` | Create optimized production build |
-| `start` | `pnpm start` | Serve production build locally |
-| `lint` | `pnpm lint` | Run ESLint checks |
-| `typecheck` | `pnpm typecheck` | Run TypeScript type checking |
-
-## Conventions
-
-- **Absolute Imports:** Use the `@/` prefix to import files from the `src` directory (e.g., `import { cn } from "@/lib/utils"`).
-- **Styling:** We use Tailwind CSS for all styling. Use the `cn()` utility in `@/lib/utils` to conditionally merge Tailwind classes safely.
-- **Component Structure:** Organize components by feature, with co-located styles and logic where possible.
-- **TypeScript:** Enable strict mode for all TypeScript files. Ensure proper typing for React components and hooks.
-- **File Naming:** Use kebab-case for file names and PascalCase for component names.
+Open [http://localhost:3000](http://localhost:3000) for the storefront or [http://localhost:3000/admin](http://localhost:3000/admin) for the admin portal.
 
 ---
 
-## Architecture & Patterns
+## Environment variables
 
-### Component Model
+Configure your local environment inside `.env.local` based on [.env.example](.env.example):
 
-- **Server Components** by default — better performance and reduced client bundle
-- **Client Components** (`"use client"`) — only where needed for interactivity (hooks, event handlers, browser APIs)
-- Clear separation of concerns between presentation and business logic
-
-### Data Flow
-
-- Static data files in `/src/data/` for non-dynamic content
-- API routes for backend communication (if applicable)
-- React Context for global state management
-- Custom hooks for reusable logic
-
-### Performance Best Practices
-
-- **Image Optimization** — Use Next.js `<Image>` component for automatic optimization
-- **Code Splitting** — Leverage dynamic imports with `React.lazy()` for non-critical components
-- **Caching Strategy** — Utilize Next.js built-in caching mechanisms
-- **Bundle Analysis** — Monitor bundle size regularly
+| Variable              | Required | Default                 | Purpose                                |
+| --------------------- | -------- | ----------------------- | -------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | Yes      | `http://localhost:3000` | Storefront application root URL        |
+| `NEXT_PUBLIC_API_URL` | No       | `http://localhost:5000` | Future backend connection API endpoint |
 
 ---
 
-## UI & Design
+## Available scripts
 
-- Built with **Tailwind CSS** — utility-first styling approach
-- Responsive design using Tailwind breakpoints (`sm:`, `md:`, `lg:`, `xl:`)
-- Semantic HTML with proper accessibility attributes
-- Clean, maintainable component structure
-- Consistent design system through utility classes
+Execute these scripts from the repository root:
 
----
-
-## Security
-
-- **HTTPS enforced** — Use HTTPS in production
-- **Environment Variables** — Never commit sensitive data; use `.env.local` for secrets
-- **Content Security Policy** — Configure CSP headers if needed
-- **XSS Prevention** — React escapes content by default; use `dangerouslySetInnerHTML` carefully
-- **No Hardcoded Secrets** — Keep API keys and credentials in environment variables
+| Script         | Command             | Purpose                                          |
+| -------------- | ------------------- | ------------------------------------------------ |
+| `dev`          | `pnpm dev`          | Start dev server with fast refresh               |
+| `build`        | `pnpm build`        | Generate optimized production static files       |
+| `start`        | `pnpm start`        | Serve built assets locally                       |
+| `lint`         | `pnpm lint`         | Execute ESLint validation check                  |
+| `lint:fix`     | `pnpm lint:fix`     | Automatically resolve fixable linting issues     |
+| `format`       | `pnpm format`       | Format files using Prettier                      |
+| `format:check` | `pnpm format:check` | Validate formatting consistency                  |
+| `typecheck`    | `pnpm typecheck`    | Execute TypeScript compiler type verification    |
+| `check`        | `pnpm check`        | Run linting, format checks, typecheck, and tests |
 
 ---
 
-## Performance
+## Quality tooling
 
-### Optimization Techniques
+We lock code styles via automated pre-checks:
 
-- Next.js Image component with automatic format optimization
-- Code splitting and lazy loading for routes
-- Production builds with tree-shaking and minification
-- Leveraging browser caching with proper headers
-- Monitoring Core Web Vitals
-
-### Caching Strategy
-
-| Asset Type | Cache Duration | Strategy |
-| ---------- | -------------- | -------- |
-| Images | Long-term | Next.js automatic optimization |
-| JS/CSS chunks | Hashed | Automatic cache busting by Next.js |
-| Static files | As configured | Configurable in next.config.mjs |
+| Tool              | Purpose                                                                  |
+| ----------------- | ------------------------------------------------------------------------ |
+| ESLint            | Checks react-hooks, accessibility parameters, and TypeScript rules       |
+| Prettier          | Unifies brace rules, spacing, and styling in all markdown, css, and json |
+| Commitlint        | Enforces Conventional Commits rules on branch messages                   |
+| lint-staged       | Restricts formatting checks only to modified staged files                |
+| GitHub Actions CI | Build, format, lint, and type check execution on pull requests           |
 
 ---
 
-## Customization
+## Project structure
 
-### Update Global Styles
-
-Edit `src/styles/globals.css` to modify the global styling and Tailwind configuration.
-
-### Add New Pages
-
-1. Create a new directory under `src/app/`
-2. Add a `page.tsx` file
-3. Optionally add a `layout.tsx` for route-specific layouts
-
-### Add New Components
-
-1. Create a component file in `src/components/`
-2. Export as a named export
-3. Import using absolute imports (`@/`)
-
-### Modify Tailwind Configuration
-
-Edit `tailwind.config.ts` to customize:
-- Color palette
-- Fonts
-- Breakpoints
-- Spacing
-- Custom utilities
+```text
+taybeen-frontend/
+├─ .github/
+│  └─ workflows/ci.yml    GitHub Actions verification setup
+├─ docs/
+│  ├─ API.md              Storefront and admin routes index
+│  ├─ SETUP.md            Clerk & Stripe integration details
+│  └─ ADRs/               ADR architectural decisions
+├─ public/                Image assets & fonts
+├─ src/
+│  ├─ app/                App Router page views
+│  ├─ components/         UI Components library
+│  │  ├─ admin/shared     Reusable admin card widgets, badges, loaders
+│  │  ├─ layout/          Navbar, Footer structural zones
+│  │  └─ ui/              Storefront core primitives
+│  ├─ context/            CartContext state provider
+│  ├─ data/               Mock databases for orders, partners, and reviews
+│  ├─ lib/                Helper utilities
+│  ├─ styles/             Tailwind stylesheet entries
+│  ├─ types/              TypeScript type definitions
+│  └─ utils/              Form inputs validations
+├─ .editorconfig          Code spacing configurations
+├─ .gitattributes         Git file property controllers
+├─ .gitignore             File checkout ignore rules
+├─ .nvmrc                 Node runtime engine pinning
+├─ .prettierrc.json       Prettier formatting declarations
+├─ commitlint.config.cjs  Conventional commits specification
+└─ lint-staged.config.cjs Staged files checking rules
+```
 
 ---
 
-## Troubleshooting
+## API reference
 
-**Development server won't start**
+Page Routing reference maps:
 
-- Ensure Node.js version is 18+
-- Clear `.next` folder: `rm -rf .next`
-- Reinstall dependencies: `pnpm install`
-- Check if port 3000 is already in use
+| Path              | Protected | Purpose                                              |
+| ----------------- | --------- | ---------------------------------------------------- |
+| `/`               | No        | Homepage storefront, features, collection highlights |
+| `/products`       | No        | Product catalogue filter view                        |
+| `/checkout`       | No        | Customer shopping cart checkout address entry        |
+| `/admin/signin`   | No        | Admin authentication entry login form                |
+| `/admin`          | Yes       | Admin dashboard overview page showing KPI metrics    |
+| `/admin/orders`   | Yes       | Orders grid list and status modifiers                |
+| `/admin/partners` | Yes       | Affiliate partner validation and coupon generation   |
+| `/admin/reviews`  | Yes       | Moderation list panel for product customer reviews   |
 
-**TypeScript errors in development**
+Detailed route directories: [docs/API.md](docs/API.md).
 
-- Run `pnpm typecheck` to see full type errors
-- Ensure all dependencies have proper type definitions
-- Check `tsconfig.json` is properly configured
+---
 
-**Tailwind CSS not applying styles**
+## Deployment
 
-- Verify Tailwind configuration includes the correct file paths
-- Check that CSS file imports are in place
-- Rebuild the project: `pnpm dev`
-- Ensure class names are properly formatted
+The application is deployed on **Hostinger** with automatic deployment hooks wired to git branch check-ins.
 
-**Build fails**
+### Environment checklist
 
-- Check build logs for specific errors
-- Clear build cache: `rm -rf .next`
-- Verify all environment variables are set
-- Run `pnpm typecheck` to identify type issues
+1. Ensure `NEXT_PUBLIC_APP_URL` is set to the live domain URL.
+2. Verify all API references and Clerk/Stripe tokens are configured inside Hostinger Dashboard Environment settings.
+
+---
+
+## Scalability considerations
+
+- **Layout Extraction**: The admin dashboard views utilize highly optimized layout shells ([AdminTableShell](file:///c:/Users/Admin/Desktop/Taybeen/taybeen-frontend/src/components/admin/shared/AdminTableShell.tsx), [AdminCard](file:///c:/Users/Admin/Desktop/Taybeen/taybeen-frontend/src/components/admin/shared/AdminCard.tsx)), reducing duplicated CSS bundles.
+- **Image Optimization**: Fully supports Next.js image loaders for automatic resizing, lazy loading, and modern format conversions.
+- **TypeScript Security**: Strict interfaces lock schema objects, reducing frontend run exceptions.
 
 ---
 
 ## Roadmap
 
-- Enhance component library with additional UI components
-- Add comprehensive unit and integration tests
-- Implement advanced state management solutions if needed
-- Add internationalization (i18n) support
-- Implement advanced logging and monitoring
-- Optimize performance metrics further
-- Add PWA capabilities
-- Implement comprehensive error handling
+- **Mock database replacement**: Migrate `/src/data/` collections to real database tables via Prisma/Postgres backend APIs.
+- **Stripe Payment Gateway**: Connect checkout pipelines directly to payment gateway verification hooks.
+- **State stores transition**: Migrate local React Context states to a centralized Zustand store.
+- **Unit Testing Suite**: Add full automated unit tests using Vitest and React Testing Library.
+
+---
+
+## Help wanted
+
+- We welcome first-time setup reviews! Check if [docs/SETUP.md](docs/SETUP.md) provides enough information to install and compile without errors.
 
 ---
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m "feat: add your feature"`
-4. Push your branch: `git push origin feature/your-feature`
-5. Open a Pull Request
+Review [CONTRIBUTING.md](CONTRIBUTING.md) for Conventional Commits standard rules and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standard behavior guidelines.
 
 ---
 
-## Contact & Support
+## Security
 
-- **Repository:** [taybeen-healthy/taybeen-frontend](https://github.com/taybeen-healthy/taybeen-frontend)
-- **Issues:** File an issue in the repository tracker
-- **Website:** [https://taybeen.com](https://taybeen.com)
+Report vulnerabilities privately per [SECURITY.md](SECURITY.md). Admin UI elements must use portal-safe `z-index` triggers (`z-[100]` for modal dialogues and overlay backdrops) to enforce access barriers.
 
 ---
 
-## Acknowledgments
+## License
 
-- [Next.js](https://nextjs.org) by Vercel for the React framework
-- [Tailwind CSS](https://tailwindcss.com) for the utility-first styling system
-- [React](https://react.dev) for the UI library
-- [TypeScript](https://www.typescriptlang.org) for type safety
-- [Lucide Icons](https://lucide.dev) for the icon library
-- [pnpm](https://pnpm.io) for the package manager
-- The open-source React and Next.js communities
+Released under the [MIT License](LICENSE).
 
 ---
+
+## Acknowledgements / contact
+
+Built by **Taybeen Team** as an interactive dates and hampers storefront system.
+
+- GitHub: <https://github.com/taybeen-healthy/taybeen-frontend>
+- Website: <https://taybeen.com>

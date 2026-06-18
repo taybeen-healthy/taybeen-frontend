@@ -84,7 +84,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                     ₹{product.price}
                   </span>
                   <span className="text-[10px] sm:text-xs text-[#768C3A] font-poppins font-semibold">
-                    ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
+                    (
+                    {Math.round(
+                      ((product.originalPrice - product.price) / product.originalPrice) * 100
+                    )}
+                    % OFF)
                   </span>
                 </>
               ) : (
@@ -159,7 +163,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   ₹{product.price}
                 </span>
                 <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
-                  ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF)
+                  (
+                  {Math.round(
+                    ((product.originalPrice - product.price) / product.originalPrice) * 100
+                  )}
+                  % OFF)
                 </span>
               </>
             ) : (

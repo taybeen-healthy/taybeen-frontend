@@ -13,7 +13,12 @@ export const AdminEmptyState: React.FC<AdminEmptyStateProps> = ({
   className = "",
 }) => {
   return (
-    <div className={cn("py-8 text-center text-sm text-[#8D7F75] font-poppins font-medium flex flex-col items-center justify-center gap-2", className)}>
+    <div
+      className={cn(
+        "py-8 text-center text-sm text-[#8D7F75] font-poppins font-medium flex flex-col items-center justify-center gap-2",
+        className
+      )}
+    >
       {icon && <div className="text-gray-400 shrink-0">{icon}</div>}
       <p className="italic">{message}</p>
     </div>

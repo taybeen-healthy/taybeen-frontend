@@ -4,7 +4,7 @@ export const customersKpis: CustomersKpis = {
   totalCustomers: 3,
   totalCustomersSub: "Active users",
   totalOrders: 100,
-  totalRevenue: 8777.00,
+  totalRevenue: 8777.0,
   totalRevenueTrend: "10% from last month",
 };
 

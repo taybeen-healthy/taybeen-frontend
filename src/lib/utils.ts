@@ -19,7 +19,7 @@ export function formatIndianNumber(num: number | string): string {
 }
 
 export function formatIndianCurrency(amount: number, minimumFractionDigits = 0): string {
-  const formatted = minimumFractionDigits > 0 ? amount.toFixed(minimumFractionDigits) : amount.toString();
+  const formatted =
+    minimumFractionDigits > 0 ? amount.toFixed(minimumFractionDigits) : amount.toString();
   return formatIndianNumber(formatted);
 }
-

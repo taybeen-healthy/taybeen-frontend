@@ -10,7 +10,7 @@ import {
   WhyDatesSection,
   MissionSection,
   FounderNoteSection,
-  FAQSection
+  FAQSection,
 } from "@/components/user/sections/our-story";
 
 export default function OurStoryPage() {
@@ -24,7 +24,7 @@ export default function OurStoryPage() {
           <MissionSection data={ourStoryData.mission} />
           <FounderNoteSection data={ourStoryData.founder} />
           <FAQSection />
-          
+
           <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-16 pt-4 text-left font-poppins">
             <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-6 border-t border-[#C4A482]/20 pt-12">
               <div className="bg-transparent w-40 h-20 flex items-center justify-center shrink-0">

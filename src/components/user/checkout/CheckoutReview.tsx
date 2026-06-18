@@ -25,7 +25,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-
         <div className="bg-[#FDFAF3] border border-[#C4A482]/20 rounded-xl p-5 relative flex flex-col justify-between min-h-[140px]">
           <div className="space-y-2.5">
             <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest block">
@@ -35,11 +34,10 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
               {shippingForm.firstName} {shippingForm.lastName}
             </h3>
             <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
-              {shippingForm.streetAddress}, {shippingForm.city}, {shippingForm.stateProvince} {shippingForm.postalCode}, {shippingForm.country}
+              {shippingForm.streetAddress}, {shippingForm.city}, {shippingForm.stateProvince}{" "}
+              {shippingForm.postalCode}, {shippingForm.country}
             </p>
-            <p className="text-xs sm:text-sm text-[#7D6B5E] font-medium">
-              {shippingForm.phone}
-            </p>
+            <p className="text-xs sm:text-sm text-[#7D6B5E] font-medium">{shippingForm.phone}</p>
           </div>
 
           <button
@@ -63,7 +61,8 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
                   {shippingForm.firstName} {shippingForm.lastName}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
-                  {shippingForm.streetAddress}, {shippingForm.city}, {shippingForm.stateProvince} {shippingForm.postalCode}, {shippingForm.country}
+                  {shippingForm.streetAddress}, {shippingForm.city}, {shippingForm.stateProvince}{" "}
+                  {shippingForm.postalCode}, {shippingForm.country}
                 </p>
                 <p className="text-xs sm:text-sm text-[#7D6B5E] font-medium">
                   {shippingForm.phone}
@@ -75,11 +74,10 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
                   {billingForm.firstName} {billingForm.lastName}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
-                  {billingForm.streetAddress}, {billingForm.city}, {billingForm.stateProvince} {billingForm.postalCode}, {billingForm.country}
+                  {billingForm.streetAddress}, {billingForm.city}, {billingForm.stateProvince}{" "}
+                  {billingForm.postalCode}, {billingForm.country}
                 </p>
-                <p className="text-xs sm:text-sm text-[#7D6B5E] font-medium">
-                  {billingForm.phone}
-                </p>
+                <p className="text-xs sm:text-sm text-[#7D6B5E] font-medium">{billingForm.phone}</p>
               </>
             )}
           </div>
@@ -92,7 +90,6 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
             <Pencil size={15} />
           </button>
         </div>
-
       </div>
 
       <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">

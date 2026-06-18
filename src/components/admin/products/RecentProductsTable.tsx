@@ -5,11 +5,7 @@ import { Trash2 } from "lucide-react";
 import { recentProducts } from "@/data/admin/productsData";
 import { formatIndianCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
-import {
-  AdminCard,
-  AdminTableShell,
-  AdminStatusBadge,
-} from "../shared";
+import { AdminCard, AdminTableShell, AdminStatusBadge } from "../shared";
 
 export const RecentProductsTable: React.FC = () => {
   const tableHeaders = [
@@ -37,24 +33,20 @@ export const RecentProductsTable: React.FC = () => {
                   <div className="text-[10px] font-bold text-brand-brown/40">Dates</div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#3A2418] leading-tight">
-                    {product.name}
-                  </h4>
-                  <span className="text-[10px] text-[#8D7F75] font-semibold">
-                    ID: {product.id}
-                  </span>
+                  <h4 className="font-bold text-[#3A2418] leading-tight">{product.name}</h4>
+                  <span className="text-[10px] text-[#8D7F75] font-semibold">ID: {product.id}</span>
                 </div>
               </div>
             </td>
 
             <td className="py-4 px-4 font-medium">{product.category}</td>
-            
+
             <td className="py-4 px-4 font-semibold font-poppins text-[#3A2418]">
               ₹{formatIndianCurrency(product.price)}
             </td>
-            
+
             <td className="py-4 px-4 font-semibold">{product.stock}</td>
-            
+
             <td className="py-4 px-4">
               <AdminStatusBadge status={product.status} />
             </td>
@@ -64,7 +56,10 @@ export const RecentProductsTable: React.FC = () => {
                 <button className="text-brand-green hover:text-[#3A4E1B] text-xs font-bold cursor-pointer hover:underline">
                   Edit
                 </button>
-                <button className="text-red-500 hover:text-red-700 p-1 hover:bg-red-50 rounded transition-colors cursor-pointer" aria-label="Delete">
+                <button
+                  className="text-red-500 hover:text-red-700 p-1 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                  aria-label="Delete"
+                >
                   <Trash2 size={16} />
                 </button>
               </div>

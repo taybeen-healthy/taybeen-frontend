@@ -9,7 +9,11 @@ export const Hero: React.FC = () => {
   const { hero } = homeData;
 
   return (
-    <Section bg="none" overflowHidden={true} className="relative pt-24 sm:pt-24 md:pt-32 lg:pt-32 pb-8 sm:pb-8 md:pb-20 lg:pb-20">
+    <Section
+      bg="none"
+      overflowHidden={true}
+      className="relative pt-24 sm:pt-24 md:pt-32 lg:pt-32 pb-8 sm:pb-8 md:pb-20 lg:pb-20"
+    >
       <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12 lg:gap-12 xl:gap-0">
         <div className="flex-1 w-full lg:w-auto space-y-6 md:space-y-8 lg:space-y-6 xl:space-y-7 2xl:space-y-8 text-center lg:text-left lg:pr-4 xl:pr-8">
           <Tag variant="primary-light" className="px-4 py-2 text-sm md:text-base">

@@ -53,10 +53,7 @@ export const Select: React.FC<SelectProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -111,12 +108,13 @@ export const Select: React.FC<SelectProps> = ({
             disabled && "opacity-60 cursor-not-allowed bg-black/[0.03]",
             variant === "borderless"
               ? "bg-transparent border-none py-2 px-1 pr-6"
-              : "bg-white border rounded-lg py-3 px-4 pr-10 " + (
-                  error
+              : "bg-white border rounded-lg py-3 px-4 pr-10 " +
+                  (error
                     ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                    : "border-[#D1C7BD] focus:ring-brand-primary focus:border-brand-primary"
-                ),
-            isOpen && variant !== "borderless" && !error ? "border-brand-primary ring-1 ring-brand-primary/20" : ""
+                    : "border-[#D1C7BD] focus:ring-brand-primary focus:border-brand-primary"),
+            isOpen && variant !== "borderless" && !error
+              ? "border-brand-primary ring-1 ring-brand-primary/20"
+              : ""
           )}
         >
           {selectedOption ? (
@@ -126,10 +124,12 @@ export const Select: React.FC<SelectProps> = ({
           ) : (
             <span className="text-[#C2B5A8]">{placeholder}</span>
           )}
-          <span className={cn(
-            "absolute top-1/2 -translate-y-1/2 flex items-center pointer-events-none",
-            variant === "borderless" ? "right-1" : "right-3.5"
-          )}>
+          <span
+            className={cn(
+              "absolute top-1/2 -translate-y-1/2 flex items-center pointer-events-none",
+              variant === "borderless" ? "right-1" : "right-3.5"
+            )}
+          >
             <ChevronDown
               className={cn(
                 "w-4 h-4 text-[#8D7F75] transition-transform duration-200 ease-out shrink-0",
@@ -140,11 +140,13 @@ export const Select: React.FC<SelectProps> = ({
         </button>
 
         {isOpen && (
-          <div className={cn(
-            "absolute mt-1.5 bg-white border border-[#F2EADA] rounded-lg shadow-lg z-50 overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150 scrollbar-thin flex flex-col",
-            variant === "borderless" ? "-left-3 w-[240px]" : "left-0 right-0",
-            optionsClassName
-          )}>
+          <div
+            className={cn(
+              "absolute mt-1.5 bg-white border border-[#F2EADA] rounded-lg shadow-lg z-50 overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150 scrollbar-thin flex flex-col",
+              variant === "borderless" ? "-left-3 w-[240px]" : "left-0 right-0",
+              optionsClassName
+            )}
+          >
             {searchable && (
               <div className="p-2 border-b border-[#F2EADA] bg-white sticky top-0 z-10 flex-shrink-0">
                 <input

@@ -12,7 +12,6 @@ export const WhyDatesSection: React.FC<WhyDatesSectionProps> = ({ data }) => {
   return (
     <Section bg="cream" className="py-16 sm:py-20 md:py-24" id="why-dates">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 xl:gap-20 items-center">
-
         <div className="space-y-6 text-left">
           {data.pillText && (
             <div className="inline-flex items-center gap-1.5 bg-[#FFEABF] text-[#5A3E2B] font-poppins font-bold text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full">
@@ -48,7 +47,6 @@ export const WhyDatesSection: React.FC<WhyDatesSectionProps> = ({ data }) => {
             </div>
           )}
         </div>
-
       </div>
     </Section>
   );

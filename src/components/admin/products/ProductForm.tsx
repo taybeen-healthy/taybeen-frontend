@@ -42,9 +42,7 @@ export const ProductForm: React.FC = () => {
       <AdminCard title="Add new product">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-6">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-brand-brown block">
-              Product Images
-            </label>
+            <label className="text-sm font-semibold text-brand-brown block">Product Images</label>
             <AdminUploadBox
               height="h-[280px]"
               iconSize={32}
@@ -166,17 +164,10 @@ export const ProductForm: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleCancel}
-          >
+          <Button type="button" variant="outline" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button
-            type="submit"
-            variant="dark"
-          >
+          <Button type="submit" variant="dark">
             Add Product
           </Button>
         </div>

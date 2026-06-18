@@ -106,11 +106,7 @@ export const AdminSignInForm: React.FC = () => {
           disabled={isLoading}
           className="w-full bg-[#5A3E2B] hover:bg-[#483122] disabled:bg-[#5A3E2B]/70 text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer mt-6 flex items-center justify-center gap-2"
         >
-          {isLoading ? (
-            <AdminSpinner />
-          ) : (
-            labels.submitButtonText
-          )}
+          {isLoading ? <AdminSpinner /> : labels.submitButtonText}
         </button>
       </form>
     </div>

@@ -18,10 +18,7 @@ interface NotificationsDrawerProps {
   onClose: () => void;
 }
 
-export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({ isOpen, onClose }) => {
   const [notifications, setNotifications] = useState<NotificationItem[]>([
     {
       id: "1",
@@ -64,9 +61,7 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
   };
 
   const handleToggleRead = (id: string) => {
-    setNotifications(
-      notifications.map((n) => (n.id === id ? { ...n, isUnread: !n.isUnread } : n))
-    );
+    setNotifications(notifications.map((n) => (n.id === id ? { ...n, isUnread: !n.isUnread } : n)));
   };
 
   const getIcon = (type: NotificationItem["type"]) => {
@@ -176,7 +171,9 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
                       n.isUnread ? "bg-white" : "bg-white opacity-70"
                     }`}
                   >
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${getIconBg(n.type)}`}>
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${getIconBg(n.type)}`}
+                    >
                       {getIcon(n.type)}
                     </div>
 
@@ -189,9 +186,7 @@ export const NotificationsDrawer: React.FC<NotificationsDrawerProps> = ({
                       <p className="text-xs text-[#7D6B5E] leading-normal font-medium">
                         {n.message}
                       </p>
-                      <span className="text-[10px] text-gray-400 block pt-0.5">
-                        {n.time}
-                      </span>
+                      <span className="text-[10px] text-gray-400 block pt-0.5">{n.time}</span>
                     </div>
 
                     {n.isUnread && (

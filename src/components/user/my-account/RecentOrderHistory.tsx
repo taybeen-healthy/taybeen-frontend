@@ -37,20 +37,11 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
         <table className="w-full min-w-[600px] border-collapse text-left text-xs sm:text-sm">
           <thead>
             <tr className="bg-[#F6F1E9] text-brand-brown font-bold uppercase tracking-wider text-[10px] sm:text-xs">
-              <th className="py-3 px-4 rounded-l-lg border-b border-[#C4A482]/20">
-                ORDER ID
-              </th>
-              <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                DATE
-              </th>
-              <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                TOTAL
-              </th>
-              <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                STATUS
-              </th>
-              <th className="py-3 px-4 rounded-r-lg border-b border-[#C4A482]/20">
-              </th>
+              <th className="py-3 px-4 rounded-l-lg border-b border-[#C4A482]/20">ORDER ID</th>
+              <th className="py-3 px-4 border-b border-[#C4A482]/20">DATE</th>
+              <th className="py-3 px-4 border-b border-[#C4A482]/20">TOTAL</th>
+              <th className="py-3 px-4 border-b border-[#C4A482]/20">STATUS</th>
+              <th className="py-3 px-4 rounded-r-lg border-b border-[#C4A482]/20"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
@@ -59,14 +50,15 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
                 <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
                   {order.id}
                 </td>
-                <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">
-                  {order.date}
-                </td>
+                <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">{order.date}</td>
                 <td className="py-4 px-4 font-medium text-brand-brown align-middle">
                   ₹{order.total.toFixed(2)}
                 </td>
                 <td className="py-4 px-4 align-middle">
-                  <Tag variant="primary-light" className="text-[10px] sm:text-xs font-semibold py-1 px-3 inline-block shrink-0">
+                  <Tag
+                    variant="primary-light"
+                    className="text-[10px] sm:text-xs font-semibold py-1 px-3 inline-block shrink-0"
+                  >
                     {order.status}
                   </Tag>
                 </td>
@@ -93,4 +85,3 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
 };
 
 export default RecentOrderHistory;
-

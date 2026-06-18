@@ -8,10 +8,7 @@ interface OrderDetailViewProps {
   onBack: () => void;
 }
 
-export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
-  orderId,
-  onBack,
-}) => {
+export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBack }) => {
   const order: OrderDetail | undefined = orderDetailsData[orderId];
 
   if (!order) {
@@ -54,7 +51,10 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
             Date Placed: <span className="font-semibold text-[#3A2418]">{order.date}</span>
           </p>
           <p className="mt-0.5">
-            Total Items: <span className="font-semibold text-[#3A2418]">{order.items.reduce((acc, item) => acc + item.quantity, 0)}</span>
+            Total Items:{" "}
+            <span className="font-semibold text-[#3A2418]">
+              {order.items.reduce((acc, item) => acc + item.quantity, 0)}
+            </span>
           </p>
         </div>
       </div>
@@ -68,7 +68,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
             <div
               className="h-full bg-[#768C3A] transition-all duration-500"
               style={{
-                width: `${completedStepsCount > 1 ? ((completedStepsCount - 1) / (order.progressSteps.length - 1)) * 100 : 0}%`
+                width: `${completedStepsCount > 1 ? ((completedStepsCount - 1) / (order.progressSteps.length - 1)) * 100 : 0}%`,
               }}
             />
           </div>
@@ -77,7 +77,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
             <div
               className="w-full bg-[#768C3A] transition-all duration-500"
               style={{
-                height: `${completedStepsCount > 1 ? ((completedStepsCount - 1) / (order.progressSteps.length - 1)) * 100 : 0}%`
+                height: `${completedStepsCount > 1 ? ((completedStepsCount - 1) / (order.progressSteps.length - 1)) * 100 : 0}%`,
               }}
             />
           </div>
@@ -85,7 +85,10 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
           {order.progressSteps.map((step, idx) => {
             const isCompleted = step.completed;
             return (
-              <div key={idx} className="flex md:flex-col items-center gap-4 md:gap-2.5 flex-1 md:text-center">
+              <div
+                key={idx}
+                className="flex md:flex-col items-center gap-4 md:gap-2.5 flex-1 md:text-center"
+              >
                 <div
                   className={`relative w-11 h-11 rounded-full flex items-center justify-center font-poppins font-bold text-xs sm:text-sm z-10 shrink-0 transition-colors ${
                     isCompleted
@@ -137,10 +140,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
           </p>
           <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-[#7D6B5E]">
             <p>
-              Email: <span className="font-semibold text-[#3A2418]">{order.shippingAddress.email}</span>
+              Email:{" "}
+              <span className="font-semibold text-[#3A2418]">{order.shippingAddress.email}</span>
             </p>
             <p>
-              Phone: <span className="font-semibold text-[#3A2418]">{order.shippingAddress.phone}</span>
+              Phone:{" "}
+              <span className="font-semibold text-[#3A2418]">{order.shippingAddress.phone}</span>
             </p>
           </div>
         </div>
@@ -162,10 +167,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
           </p>
           <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-[#7D6B5E]">
             <p>
-              Email: <span className="font-semibold text-[#3A2418]">{order.billingAddress.email}</span>
+              Email:{" "}
+              <span className="font-semibold text-[#3A2418]">{order.billingAddress.email}</span>
             </p>
             <p>
-              Phone: <span className="font-semibold text-[#3A2418]">{order.billingAddress.phone}</span>
+              Phone:{" "}
+              <span className="font-semibold text-[#3A2418]">{order.billingAddress.phone}</span>
             </p>
           </div>
         </div>
@@ -173,9 +180,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
 
       <div className="flex flex-col lg:flex-row gap-6 items-start">
         <div className="flex-1 w-full space-y-4">
-          <h3 className="font-serif text-base font-bold text-brand-brown mb-1">
-            Order Items
-          </h3>
+          <h3 className="font-serif text-base font-bold text-brand-brown mb-1">Order Items</h3>
 
           <div className="hidden sm:block overflow-hidden border border-[#C4A482]/20 rounded-2xl bg-white">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
@@ -228,11 +233,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
                 className="flex gap-4 p-3 bg-white border border-[#C4A482]/20 rounded-xl"
               >
                 <div className="w-16 h-16 bg-gray-50 border border-[#C4A482]/20 rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="font-semibold text-brand-brown text-xs line-clamp-2 leading-snug">
@@ -277,7 +278,9 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({
               <div className="flex justify-between font-medium">
                 <span>Shipping</span>
                 <span className="font-semibold text-[#3A2418]">
-                  {order.shippingCost === undefined || order.shippingCost === 0 ? "Free" : `₹${order.shippingCost.toFixed(2)}`}
+                  {order.shippingCost === undefined || order.shippingCost === 0
+                    ? "Free"
+                    : `₹${order.shippingCost.toFixed(2)}`}
                 </span>
               </div>
               <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-baseline">

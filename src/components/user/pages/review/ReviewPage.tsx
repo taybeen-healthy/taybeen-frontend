@@ -5,7 +5,7 @@ import {
   ReviewForm,
   ReviewSuccessModal,
   ReviewHeader,
-  ReviewSidebar
+  ReviewSidebar,
 } from "@/components/user/sections/review";
 
 export default function ReviewPage() {
@@ -19,9 +19,7 @@ export default function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col lg:flex-row">
-      {isSuccess && (
-        <ReviewSuccessModal onReset={handleReset} />
-      )}
+      {isSuccess && <ReviewSuccessModal onReset={handleReset} />}
 
       <div className="flex-1 lg:w-[55%] flex flex-col justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-12 xl:px-20 bg-white">
         <div className="max-w-2xl mx-auto w-full">

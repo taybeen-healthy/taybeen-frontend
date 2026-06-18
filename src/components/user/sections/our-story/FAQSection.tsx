@@ -23,9 +23,7 @@ const FAQAccordionItem: React.FC<FAQAccordionItemProps> = ({ item, isOpen, onTog
         <span className="font-poppins font-semibold text-sm sm:text-base md:text-lg text-brand-brown group-hover:text-brand-brown-dark transition-colors duration-200">
           {item.question}
         </span>
-        <div 
-          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-[#F7A503]/10 text-brand-primary flex-shrink-0 transition-all duration-200 group-hover:bg-[#F7A503]/20"
-        >
+        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-[#F7A503]/10 text-brand-primary flex-shrink-0 transition-all duration-200 group-hover:bg-[#F7A503]/20">
           <motion.div
             animate={{ rotate: isOpen ? 45 : 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
@@ -73,7 +71,8 @@ export const FAQSection: React.FC = () => {
             Things people ask us.
           </h2>
           <p className="text-[#768C3A] font-poppins text-sm md:text-base leading-relaxed max-w-sm">
-            Honest answers to the questions we hear most — no corporate deflection, no vague reassurances.
+            Honest answers to the questions we hear most — no corporate deflection, no vague
+            reassurances.
           </p>
         </div>
 

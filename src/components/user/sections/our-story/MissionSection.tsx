@@ -31,8 +31,11 @@ export const MissionSection: React.FC<MissionSectionProps> = ({ data }) => {
             )}
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-serif font-bold text-white max-w-4xl mx-auto leading-[1.3]">
-              To help people rediscover dates — not only as a symbol of tradition and generosity, but as a{" "}
-              <span className="text-[#F7A503] italic font-serif">wholesome part of modern living.</span>
+              To help people rediscover dates — not only as a symbol of tradition and generosity,
+              but as a{" "}
+              <span className="text-[#F7A503] italic font-serif">
+                wholesome part of modern living.
+              </span>
             </h2>
           </div>
         </div>

@@ -16,7 +16,11 @@ export default function HomePage() {
       <Navbar />
 
       <main>
-        <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, rgba(247, 165, 3, 0.14) 100%)" }}>
+        <div
+          style={{
+            background: "linear-gradient(to bottom, #FFFFFF 0%, rgba(247, 165, 3, 0.14) 100%)",
+          }}
+        >
           <Hero />
           <FeaturesBar />
         </div>

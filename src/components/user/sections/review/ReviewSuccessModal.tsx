@@ -14,11 +14,10 @@ export const ReviewSuccessModal: React.FC<ReviewSuccessModalProps> = ({ onReset 
           <Check size={32} strokeWidth={2.5} />
         </div>
         <div className="space-y-2">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-brand-brown">
-            Thank You!
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-brand-brown">Thank You!</h2>
           <p className="text-[#7D6B5E] font-poppins text-sm leading-relaxed">
-            Your review has been successfully submitted. We deeply appreciate you sharing your experience with the Taybeen community.
+            Your review has been successfully submitted. We deeply appreciate you sharing your
+            experience with the Taybeen community.
           </p>
         </div>
         <div className="flex flex-col gap-3 pt-2">

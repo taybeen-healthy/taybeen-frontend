@@ -7,12 +7,12 @@ export const FeaturesBar: React.FC = () => {
     <Leaf className="text-brand-brown" key="leaf" />,
     <FlaskConical className="text-brand-brown" key="flask" />,
     <RotateCcw className="text-brand-brown" key="rotate" />,
-    <Headset className="text-brand-brown" key="headset" />
+    <Headset className="text-brand-brown" key="headset" />,
   ];
 
   const features = homeData.features.map((f, i) => ({
     icon: icons[i],
-    text: f.text
+    text: f.text,
   }));
 
   return (

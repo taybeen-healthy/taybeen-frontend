@@ -12,7 +12,7 @@ import {
   CheckoutForm,
   CheckoutReview,
   CheckoutOrderSummary,
-  CouponCard
+  CouponCard,
 } from "@/components/user/checkout";
 import {
   validateFirstName,
@@ -103,19 +103,16 @@ export const CheckoutPage: React.FC = () => {
   const [couponError, setCouponError] = useState<string | null>(null);
   const [couponSuccess, setCouponSuccess] = useState<string | null>(null);
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.priceAtSelection * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((acc, item) => acc + item.priceAtSelection * item.quantity, 0);
   const shippingThreshold = 999;
   const shippingCost = subtotal >= shippingThreshold ? 0 : 79;
-  
+
   const discount = appliedCoupon ? discountAmount : 0;
   const total = Math.max(0, subtotal + shippingCost - discount);
 
   const handleApplyCoupon = (code: string): boolean => {
     if (!code) return false;
-    
+
     if (code === "TAYBEEN10" || code === "WELCOME10") {
       const discountVal = Math.round(subtotal * 0.1);
       setAppliedCoupon(code);
@@ -219,11 +216,26 @@ export const CheckoutPage: React.FC = () => {
         setStep("review");
       }
     } else {
-      const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000).toString().padStart(4, '0')}`;
-      
+      const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000)
+        .toString()
+        .padStart(4, "0")}`;
+
       const date = new Date();
       const day = date.getDate();
-      const actualMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const actualMonths = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
       const month = actualMonths[date.getMonth()];
       const year = date.getFullYear();
 
@@ -233,8 +245,8 @@ export const CheckoutPage: React.FC = () => {
       else if (day === 3 || day === 23) suffix = "rd";
 
       let hours = date.getHours();
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'pm' : 'am';
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const ampm = hours >= 12 ? "pm" : "am";
       hours = hours % 12;
       hours = hours ? hours : 12;
 
@@ -245,15 +257,15 @@ export const CheckoutPage: React.FC = () => {
         id: orderId,
         placedOn: placedOn,
         itemsCount: itemsCount,
-        items: cartItems.map(item => ({
+        items: cartItems.map((item) => ({
           id: item.product.id,
           name: item.product.name,
           weight: item.selectedWeight,
           quantity: item.quantity,
-          price: item.priceAtSelection
+          price: item.priceAtSelection,
         })),
         total: total,
-        giftMessage: giftMessageOpen ? giftMessageText : undefined
+        giftMessage: giftMessageOpen ? giftMessageText : undefined,
       };
 
       localStorage.setItem("taybeen_last_order", JSON.stringify(orderObject));
@@ -297,7 +309,6 @@ export const CheckoutPage: React.FC = () => {
 
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-24 pt-8 sm:pt-12 w-full">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start w-full">
-            
             <div className="flex-1 w-full">
               <div className="lg:hidden w-full mb-6">
                 <CheckoutOrderSummary
@@ -367,7 +378,6 @@ export const CheckoutPage: React.FC = () => {
                 setCouponSuccess={setCouponSuccess}
               />
             </div>
-
           </div>
         </main>
       </div>

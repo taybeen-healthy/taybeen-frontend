@@ -7,10 +7,7 @@ interface AdminStatusBadgeProps {
   className?: string;
 }
 
-export const AdminStatusBadge: React.FC<AdminStatusBadgeProps> = ({
-  status,
-  className = "",
-}) => {
+export const AdminStatusBadge: React.FC<AdminStatusBadgeProps> = ({ status, className = "" }) => {
   const getBadgeVariant = (s: string) => {
     const norm = s.toLowerCase().trim();
     if (

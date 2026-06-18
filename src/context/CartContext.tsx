@@ -72,9 +72,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const removeFromCart = (productId: string, weight: string) => {
     setCartItems((prevItems) =>
-      prevItems.filter(
-        (item) => !(item.product.id === productId && item.selectedWeight === weight)
-      )
+      prevItems.filter((item) => !(item.product.id === productId && item.selectedWeight === weight))
     );
   };
 

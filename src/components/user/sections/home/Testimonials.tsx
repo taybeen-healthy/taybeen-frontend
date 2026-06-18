@@ -50,7 +50,7 @@ export const Testimonials: React.FC = () => {
     });
   }
 
-  const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
+  const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
     return (
       <div className="bg-white p-5 md:p-6 lg:p-7 xl:p-8 rounded-2xl border border-brand-brown/20 flex flex-col h-full text-left">
         {testimonial.image && (
@@ -68,25 +68,33 @@ export const Testimonials: React.FC = () => {
           <div className="flex items-center gap-1">
             <Quote size={28} fill="currentColor" className="text-brand-primary rotate-180" />
           </div>
-          <p className="text-brand-green font-poppins text-sm leading-[1.8]">
-            {testimonial.quote}
-          </p>
+          <p className="text-brand-green font-poppins text-sm leading-[1.8]">{testimonial.quote}</p>
         </div>
 
         <div className="pt-6 border-t border-brand-brown/10 space-y-4">
           <div className="inline-block px-4 py-1 rounded-2xl bg-[#FFEABF]">
-            <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">{testimonial.productName}</span>
+            <span className="text-brand-brown font-poppins font-semibold text-xs md:text-sm">
+              {testimonial.productName}
+            </span>
           </div>
           <div className="flex items-center gap-1">
-            <StarRating rating={testimonial.rating} size={14} className="md:scale-[1.14] origin-left" />
+            <StarRating
+              rating={testimonial.rating}
+              size={14}
+              className="md:scale-[1.14] origin-left"
+            />
           </div>
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#FFDA8C]/20 border-[1.6px] border-[#FFDA8C] flex items-center justify-center text-[#F7A503]">
               <User className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
             </div>
             <div>
-              <h4 className="text-brand-green font-poppins font-semibold text-sm md:text-base">{testimonial.author}</h4>
-              <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">{testimonial.role}, {testimonial.location}</p>
+              <h4 className="text-brand-green font-poppins font-semibold text-sm md:text-base">
+                {testimonial.author}
+              </h4>
+              <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">
+                {testimonial.role}, {testimonial.location}
+              </p>
             </div>
           </div>
         </div>
@@ -150,5 +158,3 @@ export const Testimonials: React.FC = () => {
     </Section>
   );
 };
-
-

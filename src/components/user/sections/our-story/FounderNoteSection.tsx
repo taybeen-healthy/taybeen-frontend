@@ -11,7 +11,6 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
   return (
     <Section bg="cream" className="py-16 sm:py-20 md:py-24" id="founders-note">
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 xl:gap-24 items-center">
-
         <div className="w-full relative pb-8 lg:pb-0">
           <div className="w-full max-w-[480px] mx-auto lg:max-w-none aspect-[10/11] sm:aspect-[4/5] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-md relative border border-brand-brown/10">
             <Image
@@ -39,7 +38,9 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
             {data.title}
           </h2>
 
-          <span className="text-[#F7A503] font-serif text-6xl md:text-7xl leading-none select-none block -mb-6">“</span>
+          <span className="text-[#F7A503] font-serif text-6xl md:text-7xl leading-none select-none block -mb-6">
+            “
+          </span>
 
           <div className="space-y-4 font-poppins text-sm sm:text-base text-brand-brown/85 leading-relaxed">
             <p>{data.quote}</p>
@@ -48,7 +49,6 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
             ))}
           </div>
         </div>
-
       </div>
     </Section>
   );

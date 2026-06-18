@@ -10,7 +10,6 @@ export const Footer: React.FC = () => {
         <div className="hidden lg:block border-t border-[#A69797] mb-16" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16 lg:mb-8">
-
           <div className="space-y-6 text-left">
             <div className="flex justify-start">
               <Link href="/">
@@ -24,7 +23,8 @@ export const Footer: React.FC = () => {
               </Link>
             </div>
             <p className="text-brand-brown-dark font-poppins text-sm leading-relaxed max-w-xs">
-              India&apos;s most trusted source for premium, authenticated date varieties — sourced directly from Saudi Arabia, Jordan, and Iran.
+              India&apos;s most trusted source for premium, authenticated date varieties — sourced
+              directly from Saudi Arabia, Jordan, and Iran.
             </p>
             <div className="flex items-center justify-start gap-4">
               {[
@@ -33,7 +33,13 @@ export const Footer: React.FC = () => {
                 { Icon: Instagram, url: "https://instagram.com/taybeen" },
                 { Icon: Youtube, url: "https://youtube.com/taybeen" },
               ].map(({ Icon, url }, i) => (
-                <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-brand-green-pale flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all">
+                <a
+                  key={i}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-brand-green-pale flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all"
+                >
                   <Icon size={18} />
                 </a>
               ))}
@@ -41,42 +47,104 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
-            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">OUR PRODUCTS</h4>
+            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">
+              OUR PRODUCTS
+            </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><Link href="/products" className="hover:text-brand-primary">Premium Dates</Link></li>
-              <li><Link href="/products" className="hover:text-brand-primary">Festive Hampers</Link></li>
-              <li><Link href="/products" className="hover:text-brand-primary">Corporate Gifting</Link></li>
-              <li><Link href="/products" className="hover:text-brand-primary">Wellness Boxes</Link></li>
-              <li><Link href="/products" className="hover:text-brand-primary">Custom Orders</Link></li>
+              <li>
+                <Link href="/products" className="hover:text-brand-primary">
+                  Premium Dates
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-brand-primary">
+                  Festive Hampers
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-brand-primary">
+                  Corporate Gifting
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-brand-primary">
+                  Wellness Boxes
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-brand-primary">
+                  Custom Orders
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
-            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">COMPANY</h4>
+            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">
+              COMPANY
+            </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><Link href="/" className="hover:text-brand-primary">Home</Link></li>
-              <li><Link href="/our-story" className="hover:text-brand-primary">Our Story</Link></li>
-              <li><Link href="/terms-and-conditions" className="hover:text-brand-primary">Terms & Conditions</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-brand-primary">Privacy Policy</Link></li>
-              <li><Link href="/partnerships" className="hover:text-brand-primary">Affiliate & Coupons</Link></li>
+              <li>
+                <Link href="/" className="hover:text-brand-primary">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-story" className="hover:text-brand-primary">
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms-and-conditions" className="hover:text-brand-primary">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy" className="hover:text-brand-primary">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/partnerships" className="hover:text-brand-primary">
+                  Affiliate & Coupons
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div className="space-y-6 lg:pt-10 xl:pt-0">
-            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">SUPPORT</h4>
+            <h4 className="text-brand-brown font-poppins font-semibold uppercase text-sm md:text-base">
+              SUPPORT
+            </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li><Link href="/" className="hover:text-brand-primary">FAQ</Link></li>
-              <li><Link href="/shipping-and-delivery" className="hover:text-brand-primary">Shipping & Returns</Link></li>
-              <li><Link href="/" className="hover:text-brand-primary">Track Order</Link></li>
-              <li><Link href="/contact" className="hover:text-brand-primary">Contact Us</Link></li>
+              <li>
+                <Link href="/" className="hover:text-brand-primary">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping-and-delivery" className="hover:text-brand-primary">
+                  Shipping & Returns
+                </Link>
+              </li>
+              <li>
+                <Link href="/" className="hover:text-brand-primary">
+                  Track Order
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-brand-primary">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
-
         </div>
 
         <div className="flex flex-col items-center justify-center text-center space-y-6 mb-8 lg:mb-16 max-w-2xl mx-auto">
           <p className="text-brand-brown font-serif font-bold text-xl md:text-[1.75rem] leading-snug lg:whitespace-nowrap">
-            Be the first to know about <span className="text-brand-primary">new collections</span> and <span className="text-brand-primary">exclusive offers!</span>
+            Be the first to know about <span className="text-brand-primary">new collections</span>{" "}
+            and <span className="text-brand-primary">exclusive offers!</span>
           </p>
           <div className="relative w-full max-w-xl">
             <input
@@ -91,14 +159,21 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 lg:pt-0 border-t lg:border-t-0 border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
-          <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">© 2026 Taybeen Premium Dates. All rights reserved.</p>
+          <p className="text-brand-green-light font-poppins text-[10px] md:text-xs">
+            © 2026 Taybeen Premium Dates. All rights reserved.
+          </p>
           <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-brand-green-light font-poppins text-[10px] md:text-xs">
-            <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
-            <Link href="/terms-and-conditions" className="hover:underline">Terms of Service</Link>
-            <Link href="/" className="hover:underline">Cookie Policy</Link>
+            <Link href="/privacy-policy" className="hover:underline">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-and-conditions" className="hover:underline">
+              Terms of Service
+            </Link>
+            <Link href="/" className="hover:underline">
+              Cookie Policy
+            </Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

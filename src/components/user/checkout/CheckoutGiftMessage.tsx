@@ -31,7 +31,9 @@ export const CheckoutGiftMessage: React.FC<CheckoutGiftMessageProps> = ({
             <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
               Gift Message (Optional)
             </label>
-            <span className={`text-[10px] font-semibold ${remaining < 20 ? "text-red-500" : "text-[#7D6B5E]"}`}>
+            <span
+              className={`text-[10px] font-semibold ${remaining < 20 ? "text-red-500" : "text-[#7D6B5E]"}`}
+            >
               {remaining} characters left
             </span>
           </div>

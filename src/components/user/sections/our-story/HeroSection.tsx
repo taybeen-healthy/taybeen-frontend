@@ -20,7 +20,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
         />
       )}
       <div className="absolute inset-0 bg-black/40 z-0" />
-      
+
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 w-full text-left space-y-6 sm:space-y-8">
         {data.pillText && (
           <div className="inline-flex items-center gap-1.5 bg-[#5A3E2B]/50 border border-[#F6EBDA]/30 backdrop-blur-sm text-[#FFDA8C] font-poppins text-[10px] sm:text-xs font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider">
@@ -28,19 +28,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
             <span>{data.pillText}</span>
           </div>
         )}
-        
+
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-serif font-bold text-white leading-[1.1] max-w-xl">
           A Gift <br />
           from the <br />
           <span className="text-[#F7A503] italic font-serif">Desert.</span>
         </h1>
-        
+
         {data.description && (
           <p className="max-w-md md:max-w-lg text-sm sm:text-base md:text-lg font-poppins text-white/95 leading-relaxed">
             {data.description}
           </p>
         )}
-        
+
         {data.tagline && (
           <div className="border-l-2 border-[#F7A503] pl-3">
             <p className="text-[#F7A503] font-serif italic text-sm sm:text-base md:text-lg">

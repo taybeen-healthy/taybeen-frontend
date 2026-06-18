@@ -12,12 +12,14 @@
 @layer base {
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 
   html {
     scrollbar-width: thin;
-    scrollbar-color: #4A5E28 #FDFAF3;
+    scrollbar-color: #4a5e28 #fdfaf3;
   }
 
   ::-webkit-scrollbar {
@@ -26,16 +28,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #FDFAF3;
+    background: #fdfaf3;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #4A5E28;
+    background: #4a5e28;
     border-radius: 9999px;
-    border: 2px solid #FDFAF3;
+    border: 2px solid #fdfaf3;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #768C3A;
+    background: #768c3a;
   }
 }

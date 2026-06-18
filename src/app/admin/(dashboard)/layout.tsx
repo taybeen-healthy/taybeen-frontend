@@ -7,9 +7,7 @@ interface AdminDashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AdminDashboardLayout({
-  children,
-}: AdminDashboardLayoutProps) {
+export default function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
@@ -17,9 +15,7 @@ export default function AdminDashboardLayout({
       <AdminNavbar onMenuToggle={() => setIsMobileOpen(!isMobileOpen)} />
       <div className="flex flex-1 flex-col lg:flex-row relative overflow-hidden">
         <AdminSidebar isMobileOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />
-        <div className="flex-1 w-full bg-[#FDFAF3] overflow-y-auto">
-          {children}
-        </div>
+        <div className="flex-1 w-full bg-[#FDFAF3] overflow-y-auto">{children}</div>
       </div>
     </div>
   );

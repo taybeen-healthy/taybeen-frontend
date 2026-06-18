@@ -97,9 +97,7 @@ export const CustomersList: React.FC = () => {
                     {customer.initial}
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#3A2418] leading-tight">
-                      {customer.name}
-                    </h4>
+                    <h4 className="font-bold text-[#3A2418] leading-tight">{customer.name}</h4>
                     <span className="text-[10px] text-[#8D7F75] font-semibold">
                       {customer.email}
                     </span>
@@ -112,25 +110,19 @@ export const CustomersList: React.FC = () => {
                   <span className="font-semibold text-[#3A2418] leading-tight">
                     {customer.email}
                   </span>
-                  <span className="text-xs text-[#8D7F75] mt-0.5">
-                    {customer.phone}
-                  </span>
+                  <span className="text-xs text-[#8D7F75] mt-0.5">{customer.phone}</span>
                 </div>
               </td>
 
               <td className="py-4 px-6 font-bold text-[#8D7F75]">
-                {customer.ordersCount < 10
-                  ? `0${customer.ordersCount}`
-                  : customer.ordersCount}
+                {customer.ordersCount < 10 ? `0${customer.ordersCount}` : customer.ordersCount}
               </td>
 
               <td className="py-4 px-6 font-bold font-poppins text-[#3A2418]">
                 ₹{formatIndianCurrency(customer.totalSpent)}
               </td>
 
-              <td className="py-4 px-6 font-semibold text-[#8D7F75]">
-                {customer.joinedDate}
-              </td>
+              <td className="py-4 px-6 font-semibold text-[#8D7F75]">{customer.joinedDate}</td>
 
               <td className="py-4 px-6">
                 <div className="flex items-center justify-center gap-4">

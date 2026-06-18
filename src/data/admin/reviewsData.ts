@@ -19,11 +19,9 @@ export const adminReviewsList: AdminReview[] = [
     status: "Approved",
     orderId: "ORD-26-00001",
     rating: 4,
-    comment: "The dates were fresh, soft, and beautifully packed. Delivery was quick, and the quality exceeded my expectations. Will definitely order again and recommend to family and friends",
-    images: [
-      "/Image (Pile of premium dates).png",
-      "/Image (Dates in wooden bowl).png",
-    ],
+    comment:
+      "The dates were fresh, soft, and beautifully packed. Delivery was quick, and the quality exceeded my expectations. Will definitely order again and recommend to family and friends",
+    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png"],
   },
   {
     id: "rev-2",
@@ -36,11 +34,9 @@ export const adminReviewsList: AdminReview[] = [
     status: "Pending",
     orderId: "ORD-26-00002",
     rating: 5,
-    comment: "Excellent quality Safawi dates! They are chewy and naturally sweet. Highly recommended brand.",
-    images: [
-      "/Image (Premium dates on a plate).png",
-      "/Image (Dates in wooden bowl).png",
-    ],
+    comment:
+      "Excellent quality Safawi dates! They are chewy and naturally sweet. Highly recommended brand.",
+    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png"],
   },
   {
     id: "rev-3",
@@ -53,10 +49,8 @@ export const adminReviewsList: AdminReview[] = [
     status: "Rejected",
     orderId: "ORD-26-00003",
     rating: 3,
-    comment: "The Mabroom dates are good, but some of them were a bit dry. Package was well sealed.",
-    images: [
-      "/Image (Dates in wooden bowl).png",
-      "/Image (Premium dates on a plate).png",
-    ],
+    comment:
+      "The Mabroom dates are good, but some of them were a bit dry. Package was well sealed.",
+    images: ["/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
   },
 ];

@@ -3,7 +3,8 @@ import { AdminAuthLayout, AdminSignInForm } from "@/components/admin/auth";
 
 export const metadata: Metadata = {
   title: "Admin Sign In | Taybeen Premium Dates",
-  description: "Log into the Taybeen Administrator Portal to manage the dates catalog, view orders, and manage settings.",
+  description:
+    "Log into the Taybeen Administrator Portal to manage the dates catalog, view orders, and manage settings.",
   alternates: {
     canonical: "/admin/signin",
   },

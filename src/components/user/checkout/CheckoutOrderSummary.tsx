@@ -42,12 +42,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
           return (
             <div key={`${item.product.id}-${index}`} className="flex gap-4 items-center">
               <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-white border border-[#C4A482]/15 flex-shrink-0">
-                <Image
-                  src={itemImage}
-                  alt={item.product.name}
-                  fill
-                  className="object-cover"
-                />
+                <Image src={itemImage} alt={item.product.name} fill className="object-cover" />
               </div>
               <div className="flex-1 flex flex-col min-w-0">
                 <h4 className="font-bold text-xs sm:text-sm text-[#3A2418] truncate">

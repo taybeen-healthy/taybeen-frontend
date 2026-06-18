@@ -56,9 +56,7 @@ export const Modal: React.FC<ModalProps> = ({
     ? `${flexRowDirection === "row-reverse" ? "lg:flex-row-reverse" : "lg:flex-row"}`
     : "flex-col";
 
-  const sizeClasses = isSplit
-    ? "max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl"
-    : "max-w-md";
+  const sizeClasses = isSplit ? "max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl" : "max-w-md";
 
   return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 select-none">

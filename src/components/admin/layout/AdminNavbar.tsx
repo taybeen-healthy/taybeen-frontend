@@ -25,7 +25,7 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onMenuToggle }) => {
           >
             <Menu size={22} strokeWidth={2.5} />
           </button>
-          
+
           <Link href="/admin">
             <Image
               src="/TaybeenLogo.png"
@@ -48,7 +48,7 @@ export const AdminNavbar: React.FC<AdminNavbarProps> = ({ onMenuToggle }) => {
             <Bell size={20} strokeWidth={2} />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-[#FDFAF3]" />
           </button>
-          
+
           <button
             type="button"
             className="text-[#5A3E2B] hover:text-[#5A3E2B]/80 hover:bg-black/[0.02] p-2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5A3E2B]/20"

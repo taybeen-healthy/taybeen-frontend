@@ -101,6 +101,3 @@ export interface OrderDetail {
     stepNumber: string;
   }>;
 }
-
-
-

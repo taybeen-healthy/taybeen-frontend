@@ -69,118 +69,119 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Taybeen Premium Dates",
-  "url": "https://taybeen.com",
-  "logo": "/TaybeenLogo.png",
-  "contactPoint": {
+  name: "Taybeen Premium Dates",
+  url: "https://taybeen.com",
+  logo: "/TaybeenLogo.png",
+  contactPoint: {
     "@type": "ContactPoint",
-    "telephone": "+91-9867805123",
-    "contactType": "customer service"
+    telephone: "+91-9867805123",
+    contactType: "customer service",
   },
-  "sameAs": [
-    "https://www.facebook.com/taybeen",
-    "https://www.instagram.com/taybeen"
-  ]
+  sameAs: ["https://www.facebook.com/taybeen", "https://www.instagram.com/taybeen"],
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Taybeen Premium Dates",
-  "url": "https://taybeen.com"
+  name: "Taybeen Premium Dates",
+  url: "https://taybeen.com",
 };
 
 const productListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Best Selling Date Varieties",
-  "numberOfItems": 4,
-  "itemListElement": [
+  name: "Best Selling Date Varieties",
+  numberOfItems: 4,
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "item": {
+      position: 1,
+      item: {
         "@type": "Product",
-        "name": "Mejdool Dates",
-        "image": "/Image (Premium dates on a plate).png",
-        "description": "The 'King of Dates' - large, soft, and intensely caramel - sweet fudge like texture. Exceptionally rich in natural sugar and potassium.",
-        "offers": {
+        name: "Mejdool Dates",
+        image: "/Image (Premium dates on a plate).png",
+        description:
+          "The 'King of Dates' - large, soft, and intensely caramel - sweet fudge like texture. Exceptionally rich in natural sugar and potassium.",
+        offers: {
           "@type": "Offer",
-          "price": "499",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock"
+          price: "499",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
         },
-        "aggregateRating": {
+        aggregateRating: {
           "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "1240"
-        }
-      }
+          ratingValue: "4.9",
+          reviewCount: "1240",
+        },
+      },
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "item": {
+      position: 2,
+      item: {
         "@type": "Product",
-        "name": "Ajwa Dates",
-        "image": "/Image (Dates in wooden bowl).png",
-        "description": "From the holy city of Madinah. Dark, soft and uniquely flavoured with a dry finish. Revered for centuries for their extraordinary health properties.",
-        "offers": {
+        name: "Ajwa Dates",
+        image: "/Image (Dates in wooden bowl).png",
+        description:
+          "From the holy city of Madinah. Dark, soft and uniquely flavoured with a dry finish. Revered for centuries for their extraordinary health properties.",
+        offers: {
           "@type": "Offer",
-          "price": "799",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock"
+          price: "799",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
         },
-        "aggregateRating": {
+        aggregateRating: {
           "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "840"
-        }
-      }
+          ratingValue: "5.0",
+          reviewCount: "840",
+        },
+      },
     },
     {
       "@type": "ListItem",
-      "position": 3,
-      "item": {
+      position: 3,
+      item: {
         "@type": "Product",
-        "name": "Safawi Dates",
-        "image": "/Image (Pile of premium dates).png",
-        "description": "Moist, tender, and moderately sweet with a deep chocolately undertone. A favourite for daily snacking and excellent source of iron and fibre.",
-        "offers": {
+        name: "Safawi Dates",
+        image: "/Image (Pile of premium dates).png",
+        description:
+          "Moist, tender, and moderately sweet with a deep chocolately undertone. A favourite for daily snacking and excellent source of iron and fibre.",
+        offers: {
           "@type": "Offer",
-          "price": "549",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock"
+          price: "549",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
         },
-        "aggregateRating": {
+        aggregateRating: {
           "@type": "AggregateRating",
-          "ratingValue": "4.5",
-          "reviewCount": "470"
-        }
-      }
+          ratingValue: "4.5",
+          reviewCount: "470",
+        },
+      },
     },
     {
       "@type": "ListItem",
-      "position": 4,
-      "item": {
+      position: 4,
+      item: {
         "@type": "Product",
-        "name": "Mabroom Dates",
-        "image": "/ComingSoon Dates.png",
-        "description": "Long, slender and semi-dry with a rich, concentrated sweetness. Less sugar making them ideal for health-conscious snackers.",
-        "offers": {
+        name: "Mabroom Dates",
+        image: "/ComingSoon Dates.png",
+        description:
+          "Long, slender and semi-dry with a rich, concentrated sweetness. Less sugar making them ideal for health-conscious snackers.",
+        offers: {
           "@type": "Offer",
-          "price": "499",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock"
+          price: "499",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
         },
-        "aggregateRating": {
+        aggregateRating: {
           "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "1240"
-        }
-      }
-    }
-  ]
+          ratingValue: "4.9",
+          reviewCount: "1240",
+        },
+      },
+    },
+  ],
 };
 
 export default function RootLayout({

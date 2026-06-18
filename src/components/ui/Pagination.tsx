@@ -24,7 +24,7 @@ const getPaginationRange = (currentPage: number, totalPages: number) => {
     return [currentPage, currentPage + 1, totalPages];
   }
 
-  return [currentPage, currentPage + 1, '...', totalPages];
+  return [currentPage, currentPage + 1, "...", totalPages];
 };
 
 export const Pagination: React.FC<PaginationProps> = ({

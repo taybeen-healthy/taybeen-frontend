@@ -18,7 +18,7 @@ export const ProductsFilters: React.FC<ProductsFiltersProps> = ({
   itemsCount,
   sortBy,
   onSortByChange,
-  sortOptions
+  sortOptions,
 }) => {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-[#5A3E2B]/10">

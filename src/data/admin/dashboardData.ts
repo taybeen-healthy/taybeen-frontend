@@ -1,4 +1,9 @@
-import { OverviewAlert, DashboardKpi, RevenueChartPoint, BestSellerItem } from "@/types/admin/dashboard";
+import {
+  OverviewAlert,
+  DashboardKpi,
+  RevenueChartPoint,
+  BestSellerItem,
+} from "@/types/admin/dashboard";
 
 export const overviewAlerts: OverviewAlert[] = [
   {

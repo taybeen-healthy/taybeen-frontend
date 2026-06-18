@@ -15,9 +15,7 @@ export const AdminAuthFooter: React.FC = () => {
         <ArrowLeft size={14} />
         {labels.backToStoreText}
       </Link>
-      <p className="text-[11px] sm:text-xs text-brand-brown/50">
-        {labels.copyrightText}
-      </p>
+      <p className="text-[11px] sm:text-xs text-brand-brown/50">{labels.copyrightText}</p>
     </footer>
   );
 };

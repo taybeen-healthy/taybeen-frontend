@@ -38,10 +38,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -52,7 +49,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   return (
-    <div className={cn("relative flex items-center gap-1.5 font-poppins text-xs text-[#8D7F75] select-none", className)} ref={containerRef}>
+    <div
+      className={cn(
+        "relative flex items-center gap-1.5 font-poppins text-xs text-[#8D7F75] select-none",
+        className
+      )}
+      ref={containerRef}
+    >
       {label && <span className="uppercase tracking-wider">{label}</span>}
       <button
         type="button"
@@ -64,7 +67,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
       >
         {icon && <span className="flex-shrink-0 flex items-center">{icon}</span>}
         <span>{selectedOption ? selectedOption.label : placeholder}</span>
-        <ChevronDown size={14} className={cn("transition-transform duration-200", isOpen ? "rotate-180" : "")} />
+        <ChevronDown
+          size={14}
+          className={cn("transition-transform duration-200", isOpen ? "rotate-180" : "")}
+        />
       </button>
 
       <AnimatePresence>

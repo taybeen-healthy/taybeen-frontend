@@ -6,11 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
-import {
-  AdminPageHeader,
-  AdminCard,
-  AdminUploadBox,
-} from "../shared";
+import { AdminPageHeader, AdminCard, AdminUploadBox } from "../shared";
 
 export const CustomizationSettings: React.FC = () => {
   const [settings, setSettings] = useState(initialCustomizationData);
@@ -73,10 +69,12 @@ export const CustomizationSettings: React.FC = () => {
               <Input
                 type="text"
                 value={settings.hero.mainHeading}
-                onChange={(e) => setSettings({
-                  ...settings,
-                  hero: { ...settings.hero, mainHeading: e.target.value }
-                })}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    hero: { ...settings.hero, mainHeading: e.target.value },
+                  })
+                }
               />
             </div>
 
@@ -88,10 +86,12 @@ export const CustomizationSettings: React.FC = () => {
                 <Input
                   type="text"
                   value={settings.hero.heading2}
-                  onChange={(e) => setSettings({
-                    ...settings,
-                    hero: { ...settings.hero, heading2: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero: { ...settings.hero, heading2: e.target.value },
+                    })
+                  }
                 />
               </div>
               <div className="space-y-1.5">
@@ -101,10 +101,12 @@ export const CustomizationSettings: React.FC = () => {
                 <Input
                   type="text"
                   value={settings.hero.heading3}
-                  onChange={(e) => setSettings({
-                    ...settings,
-                    hero: { ...settings.hero, heading3: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero: { ...settings.hero, heading3: e.target.value },
+                    })
+                  }
                 />
               </div>
             </div>
@@ -115,10 +117,12 @@ export const CustomizationSettings: React.FC = () => {
               </label>
               <Textarea
                 value={settings.hero.supportingText}
-                onChange={(e) => setSettings({
-                  ...settings,
-                  hero: { ...settings.hero, supportingText: e.target.value }
-                })}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    hero: { ...settings.hero, supportingText: e.target.value },
+                  })
+                }
                 rows={4}
               />
             </div>
@@ -126,13 +130,13 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="space-y-3 pt-4">
-          <label className="text-sm font-semibold text-brand-brown block">
-            Key Highlights
-          </label>
+          <label className="text-sm font-semibold text-brand-brown block">Key Highlights</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             {settings.hero.highlights.map((hl, idx) => (
               <div key={idx} className="space-y-1.5">
-                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">Highlight {idx + 1}</span>
+                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">
+                  Highlight {idx + 1}
+                </span>
                 <Input
                   type="text"
                   value={hl}
@@ -141,7 +145,7 @@ export const CustomizationSettings: React.FC = () => {
                     newHl[idx] = e.target.value;
                     setSettings({
                       ...settings,
-                      hero: { ...settings.hero, highlights: newHl }
+                      hero: { ...settings.hero, highlights: newHl },
                     });
                   }}
                 />
@@ -151,10 +155,7 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="pt-2">
-          <Button
-            onClick={() => handleSave("hero")}
-            variant="primary"
-          >
+          <Button onClick={() => handleSave("hero")} variant="primary">
             Save
           </Button>
         </div>
@@ -166,7 +167,11 @@ export const CustomizationSettings: React.FC = () => {
             <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
               Section Image
             </label>
-            <AdminUploadBox height="h-[220px]" iconSize={24} description="Upload Image (PNG, JPG)" />
+            <AdminUploadBox
+              height="h-[220px]"
+              iconSize={24}
+              description="Upload Image (PNG, JPG)"
+            />
           </div>
 
           <div className="lg:col-span-2 space-y-4">
@@ -178,10 +183,12 @@ export const CustomizationSettings: React.FC = () => {
                 <Input
                   type="text"
                   value={settings.story.sectionLabel}
-                  onChange={(e) => setSettings({
-                    ...settings,
-                    story: { ...settings.story, sectionLabel: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      story: { ...settings.story, sectionLabel: e.target.value },
+                    })
+                  }
                 />
               </div>
               <div className="space-y-1.5">
@@ -191,10 +198,12 @@ export const CustomizationSettings: React.FC = () => {
                 <Input
                   type="text"
                   value={settings.story.heading}
-                  onChange={(e) => setSettings({
-                    ...settings,
-                    story: { ...settings.story, heading: e.target.value }
-                  })}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      story: { ...settings.story, heading: e.target.value },
+                    })
+                  }
                 />
               </div>
             </div>
@@ -205,10 +214,12 @@ export const CustomizationSettings: React.FC = () => {
               </label>
               <Textarea
                 value={settings.story.description}
-                onChange={(e) => setSettings({
-                  ...settings,
-                  story: { ...settings.story, description: e.target.value }
-                })}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    story: { ...settings.story, description: e.target.value },
+                  })
+                }
                 rows={4}
               />
             </div>
@@ -216,14 +227,17 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="space-y-3 pt-4">
-          <label className="text-sm font-semibold text-brand-brown block">
-            Brand Values
-          </label>
+          <label className="text-sm font-semibold text-brand-brown block">Brand Values</label>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {settings.story.brandValues.map((val, idx) => (
-              <div key={idx} className="border border-gray-100 rounded-xl p-4 bg-[#FDFAF3]/50 space-y-3">
-                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">Card {idx + 1}</span>
-                
+              <div
+                key={idx}
+                className="border border-gray-100 rounded-xl p-4 bg-[#FDFAF3]/50 space-y-3"
+              >
+                <span className="text-[10px] text-[#8D7F75] font-bold block uppercase">
+                  Card {idx + 1}
+                </span>
+
                 <div className="space-y-1">
                   <Input
                     type="text"
@@ -233,7 +247,7 @@ export const CustomizationSettings: React.FC = () => {
                       newVals[idx].title = e.target.value;
                       setSettings({
                         ...settings,
-                        story: { ...settings.story, brandValues: newVals }
+                        story: { ...settings.story, brandValues: newVals },
                       });
                     }}
                     placeholder="Title"
@@ -249,7 +263,7 @@ export const CustomizationSettings: React.FC = () => {
                       newVals[idx].description = e.target.value;
                       setSettings({
                         ...settings,
-                        story: { ...settings.story, brandValues: newVals }
+                        story: { ...settings.story, brandValues: newVals },
                       });
                     }}
                     placeholder="Description"
@@ -263,10 +277,7 @@ export const CustomizationSettings: React.FC = () => {
         </div>
 
         <div className="pt-2">
-          <Button
-            onClick={() => handleSave("story")}
-            variant="primary"
-          >
+          <Button onClick={() => handleSave("story")} variant="primary">
             Save
           </Button>
         </div>
@@ -281,10 +292,12 @@ export const CustomizationSettings: React.FC = () => {
             <Input
               type="text"
               value={settings.offer.badgeText}
-              onChange={(e) => setSettings({
-                ...settings,
-                offer: { ...settings.offer, badgeText: e.target.value }
-              })}
+              onChange={(e) =>
+                setSettings({
+                  ...settings,
+                  offer: { ...settings.offer, badgeText: e.target.value },
+                })
+              }
               placeholder="Special Offer"
             />
           </div>
@@ -293,14 +306,16 @@ export const CustomizationSettings: React.FC = () => {
             <Select
               label="Offer Heading"
               value={settings.offer.heading}
-              onChange={(value) => setSettings({
-                ...settings,
-                offer: { ...settings.offer, heading: value }
-              })}
+              onChange={(value) =>
+                setSettings({
+                  ...settings,
+                  offer: { ...settings.offer, heading: value },
+                })
+              }
               options={[
                 "Unlock Up to 50% Off on Your First Order",
                 "Exclusive Festive Collection Discount",
-                "Corporate Gifting Special Pricing"
+                "Corporate Gifting Special Pricing",
               ]}
               placeholder="Select Heading"
             />
@@ -313,19 +328,18 @@ export const CustomizationSettings: React.FC = () => {
           </label>
           <Textarea
             value={settings.offer.description}
-            onChange={(e) => setSettings({
-              ...settings,
-              offer: { ...settings.offer, description: e.target.value }
-            })}
+            onChange={(e) =>
+              setSettings({
+                ...settings,
+                offer: { ...settings.offer, description: e.target.value },
+              })
+            }
             rows={4}
           />
         </div>
 
         <div className="pt-2">
-          <Button
-            onClick={() => handleSave("offer")}
-            variant="primary"
-          >
+          <Button onClick={() => handleSave("offer")} variant="primary">
             Save
           </Button>
         </div>
@@ -340,10 +354,12 @@ export const CustomizationSettings: React.FC = () => {
             <Input
               type="text"
               value={settings.delivery.maximumAmount}
-              onChange={(e) => setSettings({
-                ...settings,
-                delivery: { ...settings.delivery, maximumAmount: e.target.value }
-              })}
+              onChange={(e) =>
+                setSettings({
+                  ...settings,
+                  delivery: { ...settings.delivery, maximumAmount: e.target.value },
+                })
+              }
               placeholder="0.00"
             />
           </div>
@@ -355,25 +371,27 @@ export const CustomizationSettings: React.FC = () => {
             <Input
               type="text"
               value={settings.delivery.deliveryCharges}
-              onChange={(e) => setSettings({
-                ...settings,
-                delivery: { ...settings.delivery, deliveryCharges: e.target.value }
-              })}
+              onChange={(e) =>
+                setSettings({
+                  ...settings,
+                  delivery: { ...settings.delivery, deliveryCharges: e.target.value },
+                })
+              }
               placeholder="00"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
-              GST %
-            </label>
+            <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">GST %</label>
             <Input
               type="text"
               value={settings.delivery.gstPercent}
-              onChange={(e) => setSettings({
-                ...settings,
-                delivery: { ...settings.delivery, gstPercent: e.target.value }
-              })}
+              onChange={(e) =>
+                setSettings({
+                  ...settings,
+                  delivery: { ...settings.delivery, gstPercent: e.target.value },
+                })
+              }
               placeholder="00"
             />
           </div>
@@ -433,17 +451,11 @@ export const CustomizationSettings: React.FC = () => {
         )}
 
         <div className="pt-2 flex gap-3">
-          <Button
-            onClick={() => handleSave("delivery")}
-            variant="primary"
-          >
+          <Button onClick={() => handleSave("delivery")} variant="primary">
             Save Delivery Settings
           </Button>
           {newCategory.trim() && (
-            <Button
-              onClick={handleAddCategory}
-              variant="outline"
-            >
+            <Button onClick={handleAddCategory} variant="outline">
               Add Category
             </Button>
           )}

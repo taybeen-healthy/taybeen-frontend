@@ -9,7 +9,7 @@ export interface AdminPartner {
   salesAmount: number; // can be 0 or negative for none
   ordersCount: number;
   status: "Approved" | "Pending" | "Expired";
-  
+
   city?: string;
   occupation?: string;
   joinedDate?: string;

@@ -22,7 +22,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = "",
 }) => {
   return (
-    <div className={cn("flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6 md:gap-8", className)}>
+    <div
+      className={cn(
+        "flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6 md:gap-8",
+        className
+      )}
+    >
       <div className="space-y-4 text-left">
         <Tag variant={tagVariant} className={tagClassName}>
           {tag}
@@ -36,9 +41,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         <div className="w-full md:w-auto text-left md:text-right space-y-2 select-none">
           {actions}
           {subtitle && (
-            <p className="text-brand-green-light font-poppins text-xs md:text-sm">
-              {subtitle}
-            </p>
+            <p className="text-brand-green-light font-poppins text-xs md:text-sm">{subtitle}</p>
           )}
         </div>
       )}

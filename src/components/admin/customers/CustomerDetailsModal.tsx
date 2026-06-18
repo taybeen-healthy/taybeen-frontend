@@ -44,12 +44,8 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
             {customer.initial}
           </div>
           <div>
-            <h3 className="font-bold text-brand-brown text-xl leading-tight">
-              {customer.name}
-            </h3>
-            <p className="text-sm text-[#8D7F75] font-medium mt-1">
-              {customer.email}
-            </p>
+            <h3 className="font-bold text-brand-brown text-xl leading-tight">{customer.name}</h3>
+            <p className="text-sm text-[#8D7F75] font-medium mt-1">{customer.email}</p>
           </div>
         </div>
 
@@ -91,9 +87,7 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
         </div>
 
         <div className="space-y-3">
-          <h4 className="font-serif text-lg font-bold text-brand-brown">
-            Recent Orders
-          </h4>
+          <h4 className="font-serif text-lg font-bold text-brand-brown">Recent Orders</h4>
           {customer.recentOrders && customer.recentOrders.length > 0 ? (
             <div className="space-y-3">
               {customer.recentOrders.map((ord) => (
@@ -118,8 +112,8 @@ export const CustomerDetailsModal: React.FC<CustomerDetailsModalProps> = ({
                         ord.status === "Completed"
                           ? "text-[#768C3A]"
                           : ord.status === "Pending"
-                          ? "text-amber-500"
-                          : "text-blue-500"
+                            ? "text-amber-500"
+                            : "text-blue-500"
                       }`}
                     >
                       {ord.status}

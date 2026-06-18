@@ -9,9 +9,7 @@ export const Gifting: React.FC = () => {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#24351F] text-white">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="grid grid-cols-12 gap-6 md:gap-8 h-auto lg:h-[480px] xl:h-[540px] 2xl:h-[600px]">
-
           <div className="col-span-12 lg:col-span-7 flex flex-col lg:h-full justify-between gap-6 lg:gap-8 lg:min-h-0">
-
             <div className="space-y-3 md:space-y-4 text-center lg:text-left flex-shrink-0">
               <div className="inline-block px-4 py-1.5 rounded-full bg-brand-primary">
                 <span className="text-white font-poppins font-semibold text-xs md:text-sm uppercase tracking-wider">
@@ -19,7 +17,8 @@ export const Gifting: React.FC = () => {
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-serif font-bold text-white leading-tight">
-                The Art of <span className="text-[#F7A503] font-serif">Premium</span> <br className="hidden lg:block" />
+                The Art of <span className="text-[#F7A503] font-serif">Premium</span>{" "}
+                <br className="hidden lg:block" />
                 <span className="text-[#F7A503] font-serif">Gifting</span>
               </h2>
             </div>
@@ -46,11 +45,9 @@ export const Gifting: React.FC = () => {
                 </h3>
               </div>
             </div>
-
           </div>
 
           <div className="col-span-12 lg:col-span-5 flex flex-col gap-6 lg:h-full justify-between lg:min-h-0">
-
             <div className="bg-brand-primary rounded-2xl overflow-hidden relative group w-full h-[220px] sm:h-[260px] lg:h-full lg:flex-1 lg:min-h-0">
               <Image
                 src={gifting.subCards[0].image}
@@ -86,9 +83,7 @@ export const Gifting: React.FC = () => {
                 {gifting.subCards[1].title}
               </h3>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

@@ -32,9 +32,7 @@ export const PartnersList: React.FC = () => {
   };
 
   const handleUpdatePartner = (updatedPartner: AdminPartner) => {
-    setPartners((prev) =>
-      prev.map((p) => (p.id === updatedPartner.id ? updatedPartner : p))
-    );
+    setPartners((prev) => prev.map((p) => (p.id === updatedPartner.id ? updatedPartner : p)));
     if (selectedPartner?.id === updatedPartner.id) {
       setSelectedPartner(updatedPartner);
     }
@@ -57,7 +55,8 @@ export const PartnersList: React.FC = () => {
 
   const filteredPartners = partners.filter((partner) => {
     const term = searchQuery.toLowerCase();
-    const matchesSearch = partner.name.toLowerCase().includes(term) ||
+    const matchesSearch =
+      partner.name.toLowerCase().includes(term) ||
       partner.email.toLowerCase().includes(term) ||
       partner.couponCode.toLowerCase().includes(term);
     const matchesStatus = statusFilter === "All" || partner.status === statusFilter;
@@ -156,9 +155,7 @@ export const PartnersList: React.FC = () => {
                   {partner.initial}
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#3A2418] leading-tight">
-                    {partner.name}
-                  </h4>
+                  <h4 className="font-bold text-[#3A2418] leading-tight">{partner.name}</h4>
                   <span className="text-[10px] text-[#8D7F75] font-semibold">
                     {partner.requestedDate}
                   </span>
@@ -168,20 +165,14 @@ export const PartnersList: React.FC = () => {
 
             <td className="py-4 px-6">
               <div className="flex flex-col">
-                <span className="font-semibold text-[#3A2418] leading-tight">
-                  {partner.email}
-                </span>
-                <span className="text-xs text-[#8D7F75] mt-0.5">
-                  {partner.phone}
-                </span>
+                <span className="font-semibold text-[#3A2418] leading-tight">{partner.email}</span>
+                <span className="text-xs text-[#8D7F75] mt-0.5">{partner.phone}</span>
               </div>
             </td>
 
             <td className="py-4 px-6">
               {partner.couponCode === "Not generated" ? (
-                <span className="text-brand-green font-semibold">
-                  Not generated
-                </span>
+                <span className="text-brand-green font-semibold">Not generated</span>
               ) : partner.couponCode === "-" ? (
                 <span className="text-[#8D7F75]">-</span>
               ) : (

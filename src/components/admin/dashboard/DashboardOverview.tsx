@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Calendar, ArrowRight } from "lucide-react";
-import { overviewAlerts, dashboardKpis, revenueChartData, bestSellers } from "@/data/admin/dashboardData";
-import { cn, formatIndianCurrency } from "@/lib/utils";
 import {
-  AdminPageHeader,
-  AdminCard,
-  AdminDashboardStatCard,
-} from "../shared";
+  overviewAlerts,
+  dashboardKpis,
+  revenueChartData,
+  bestSellers,
+} from "@/data/admin/dashboardData";
+import { cn, formatIndianCurrency } from "@/lib/utils";
+import { AdminPageHeader, AdminCard, AdminDashboardStatCard } from "../shared";
 
 export const DashboardOverview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"Today" | "Weekly" | "Monthly" | "Yearly">("Monthly");
@@ -40,15 +41,17 @@ export const DashboardOverview: React.FC = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1">
             {overviewAlerts.map((alert) => (
-              <div 
-                key={alert.id} 
+              <div
+                key={alert.id}
                 className="border border-brand-green/20 bg-brand-green-pale/10 rounded-xl overflow-hidden flex flex-col justify-between text-center min-w-[110px]"
               >
                 <div className="p-4 flex-1 flex flex-col justify-center items-center">
-                  <span className={cn(
-                    "text-2xl font-bold font-poppins mb-1",
-                    alert.type === "red" ? "text-red-500" : "text-amber-500"
-                  )}>
+                  <span
+                    className={cn(
+                      "text-2xl font-bold font-poppins mb-1",
+                      alert.type === "red" ? "text-red-500" : "text-amber-500"
+                    )}
+                  >
                     {alert.count}
                   </span>
                   <span className="text-[9px] font-bold text-brand-brown/80 tracking-wider">
@@ -92,8 +95,8 @@ export const DashboardOverview: React.FC = () => {
                   onClick={() => setActiveTab(tab)}
                   className={cn(
                     "px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer",
-                    activeTab === tab 
-                      ? "bg-white text-brand-brown shadow-sm font-semibold" 
+                    activeTab === tab
+                      ? "bg-white text-brand-brown shadow-sm font-semibold"
                       : "text-[#8D7F75] hover:text-brand-brown"
                   )}
                 >
@@ -108,11 +111,14 @@ export const DashboardOverview: React.FC = () => {
               {revenueChartData.map((dataPoint) => {
                 const heightPercent = `${Math.min(95, (dataPoint.amount / 850000) * 100)}%`;
                 return (
-                  <div key={dataPoint.month} className="flex-1 flex flex-col items-center group relative h-full justify-end">
+                  <div
+                    key={dataPoint.month}
+                    className="flex-1 flex flex-col items-center group relative h-full justify-end"
+                  >
                     <div className="absolute bottom-full mb-2 bg-[#5A3E2B] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md font-semibold font-poppins z-20">
                       ₹{formatIndianCurrency(dataPoint.amount)}
                     </div>
-                    <div 
+                    <div
                       style={{ height: heightPercent }}
                       className="w-full sm:w-8 bg-[#768C3A] rounded-t-lg hover:bg-brand-green transition-all duration-300 cursor-pointer"
                     />
@@ -123,7 +129,10 @@ export const DashboardOverview: React.FC = () => {
 
             <div className="w-full flex justify-between gap-2 px-2 pt-3">
               {revenueChartData.map((dataPoint) => (
-                <span key={dataPoint.month} className="flex-1 text-[11px] text-[#8D7F75] font-medium text-center">
+                <span
+                  key={dataPoint.month}
+                  className="flex-1 text-[11px] text-[#8D7F75] font-medium text-center"
+                >
                   {dataPoint.month}
                 </span>
               ))}
@@ -138,7 +147,10 @@ export const DashboardOverview: React.FC = () => {
                 <h3 className="text-lg font-bold text-brand-brown">Best Sellers</h3>
                 <p className="text-xs text-[#8D7F75]">By revenue generated</p>
               </div>
-              <Link href="/admin/products" className="flex items-center gap-1 text-xs font-semibold text-brand-green hover:underline">
+              <Link
+                href="/admin/products"
+                className="flex items-center gap-1 text-xs font-semibold text-brand-green hover:underline"
+              >
                 <span>All</span>
                 <ArrowRight size={14} />
               </Link>
@@ -147,24 +159,20 @@ export const DashboardOverview: React.FC = () => {
             <div className="divide-y divide-gray-100">
               {bestSellers.map((item) => (
                 <div key={item.rank} className="py-4 flex items-center gap-4 text-left">
-                  <span className="text-sm font-bold text-[#8D7F75] w-4 shrink-0">
-                    {item.rank}
-                  </span>
+                  <span className="text-sm font-bold text-[#8D7F75] w-4 shrink-0">{item.rank}</span>
 
                   <div className="w-12 h-12 rounded-lg bg-[#FDFAF3] border border-gray-100 flex items-center justify-center overflow-hidden shrink-0">
                     <div className="text-xs font-bold text-brand-brown/40">Dates</div>
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-bold text-[#3A2418] truncate">
-                      {item.name}
-                    </h4>
+                    <h4 className="text-sm font-bold text-[#3A2418] truncate">{item.name}</h4>
                     <p className="text-xs text-[#8D7F75] font-medium mt-0.5">
                       {item.soldUnits} units
                     </p>
-                    
+
                     <div className="w-full h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-[#768C3A] rounded-full"
                         style={{ width: `${item.progressPercent}%` }}
                       />

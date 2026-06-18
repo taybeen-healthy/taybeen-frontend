@@ -15,8 +15,34 @@ interface CartDrawerProps {
 
 const formatOrderDate = (date: Date): string => {
   const day = date.getDate();
-  const monthNames = ["June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May"];
-  const actualMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const monthNames = [
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+  ];
+  const actualMonths = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const month = actualMonths[date.getMonth()];
   const year = date.getFullYear();
 
@@ -26,8 +52,8 @@ const formatOrderDate = (date: Date): string => {
   else if (day === 3 || day === 23) suffix = "rd";
 
   let hours = date.getHours();
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const ampm = hours >= 12 ? 'pm' : 'am';
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12;
 
@@ -36,18 +62,9 @@ const formatOrderDate = (date: Date): string => {
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const {
-    cartItems,
-    updateQuantity,
-    removeFromCart,
-    cartCount,
-    clearCart,
-  } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, cartCount, clearCart } = useCart();
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.priceAtSelection * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((acc, item) => acc + item.priceAtSelection * item.quantity, 0);
 
   const shippingThreshold = 999;
   const shippingCost = subtotal >= shippingThreshold ? 0 : 79;
@@ -187,7 +204,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                           <div className="flex items-center gap-3 border border-[#C4A482]/50 bg-white rounded-full py-1 px-3">
                             <button
                               onClick={() =>
-                                updateQuantity(item.product.id, item.selectedWeight, item.quantity - 1)
+                                updateQuantity(
+                                  item.product.id,
+                                  item.selectedWeight,
+                                  item.quantity - 1
+                                )
                               }
                               className="text-brand-brown hover:text-brand-primary active:scale-95 transition-transform"
                               aria-label="Decrease quantity"
@@ -199,7 +220,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                             </span>
                             <button
                               onClick={() =>
-                                updateQuantity(item.product.id, item.selectedWeight, item.quantity + 1)
+                                updateQuantity(
+                                  item.product.id,
+                                  item.selectedWeight,
+                                  item.quantity + 1
+                                )
                               }
                               className="text-brand-brown hover:text-brand-primary active:scale-95 transition-transform"
                               aria-label="Increase quantity"

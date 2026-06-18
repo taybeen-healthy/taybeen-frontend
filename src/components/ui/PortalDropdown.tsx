@@ -39,18 +39,17 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
         const rect = triggerRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const menuHeight = menuRef.current ? menuRef.current.getBoundingClientRect().height : 245;
-        
+
         const spaceBelow = viewportHeight - rect.bottom;
-        
+
         let top = rect.bottom + window.scrollY;
-        
+
         if (spaceBelow < menuHeight && rect.top > spaceBelow) {
           top = rect.top + window.scrollY - menuHeight - 4;
         }
 
-        const left = align === "right" 
-          ? rect.right - width + window.scrollX 
-          : rect.left + window.scrollX;
+        const left =
+          align === "right" ? rect.right - width + window.scrollX : rect.left + window.scrollX;
         setCoords({ top, left });
       }
     };
@@ -59,7 +58,7 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
       const handle = requestAnimationFrame(updateCoords);
       window.addEventListener("scroll", updateCoords, true);
       window.addEventListener("resize", updateCoords);
-      
+
       return () => {
         cancelAnimationFrame(handle);
         window.removeEventListener("scroll", updateCoords, true);
@@ -91,7 +90,7 @@ export const PortalDropdown: React.FC<PortalDropdownProps> = ({
   return createPortal(
     <div className="fixed inset-0 z-[90] pointer-events-none">
       <div className="absolute inset-0 pointer-events-auto" onClick={onClose} />
-      
+
       <motion.div
         ref={menuRef}
         initial={{ opacity: 0, y: 5 }}

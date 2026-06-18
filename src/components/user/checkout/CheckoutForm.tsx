@@ -14,18 +14,12 @@ interface PhoneCountrySelectProps {
   disabled?: boolean;
 }
 
-const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({
-  value,
-  onChange,
-  options,
-}) => {
+const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({ value, onChange, options }) => {
   const selectOptions = options.map((opt) => {
     const countryCode = opt.value;
     const countryName = opt.label;
 
-    const flagUrl = countryCode
-      ? `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`
-      : "";
+    const flagUrl = countryCode ? `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png` : "";
 
     return {
       value: countryCode || "",
@@ -154,7 +148,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               <Input
                 type="text"
                 value={shippingForm.firstName}
-                onChange={(e) => onShippingFormChange({ ...shippingForm, firstName: e.target.value })}
+                onChange={(e) =>
+                  onShippingFormChange({ ...shippingForm, firstName: e.target.value })
+                }
                 placeholder="Enter Your Name"
                 error={shippingErrors.firstName}
               />
@@ -166,7 +162,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               <Input
                 type="text"
                 value={shippingForm.lastName}
-                onChange={(e) => onShippingFormChange({ ...shippingForm, lastName: e.target.value })}
+                onChange={(e) =>
+                  onShippingFormChange({ ...shippingForm, lastName: e.target.value })
+                }
                 placeholder="Enter Your Name"
                 error={shippingErrors.lastName}
               />
@@ -180,7 +178,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             <Input
               type="text"
               value={shippingForm.streetAddress}
-              onChange={(e) => onShippingFormChange({ ...shippingForm, streetAddress: e.target.value })}
+              onChange={(e) =>
+                onShippingFormChange({ ...shippingForm, streetAddress: e.target.value })
+              }
               placeholder="Enter Street Address"
               error={shippingErrors.streetAddress}
             />
@@ -217,7 +217,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               <Input
                 type="text"
                 value={shippingForm.postalCode}
-                onChange={(e) => onShippingFormChange({ ...shippingForm, postalCode: e.target.value })}
+                onChange={(e) =>
+                  onShippingFormChange({ ...shippingForm, postalCode: e.target.value })
+                }
                 placeholder="12345"
                 error={shippingErrors.postalCode}
               />
@@ -249,13 +251,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 countrySelectComponent={PhoneCountrySelect}
                 className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                 numberInputProps={{
-                  className: "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
+                  className:
+                    "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                 }}
               />
               {shippingErrors.phone && (
-                <span className="text-red-500 text-[10px] mt-1 block">
-                  {shippingErrors.phone}
-                </span>
+                <span className="text-red-500 text-[10px] mt-1 block">{shippingErrors.phone}</span>
               )}
             </div>
           </div>
@@ -294,7 +295,6 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
             message={giftMessageText}
             onMessageChange={onGiftMessageTextChange}
           />
-
         </div>
       </div>
 
@@ -313,7 +313,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 <Input
                   type="text"
                   value={billingForm.firstName}
-                  onChange={(e) => onBillingFormChange({ ...billingForm, firstName: e.target.value })}
+                  onChange={(e) =>
+                    onBillingFormChange({ ...billingForm, firstName: e.target.value })
+                  }
                   placeholder="Enter Your Name"
                   error={billingErrors.firstName}
                 />
@@ -325,7 +327,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 <Input
                   type="text"
                   value={billingForm.lastName}
-                  onChange={(e) => onBillingFormChange({ ...billingForm, lastName: e.target.value })}
+                  onChange={(e) =>
+                    onBillingFormChange({ ...billingForm, lastName: e.target.value })
+                  }
                   placeholder="Enter Your Name"
                   error={billingErrors.lastName}
                 />
@@ -339,7 +343,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               <Input
                 type="text"
                 value={billingForm.streetAddress}
-                onChange={(e) => onBillingFormChange({ ...billingForm, streetAddress: e.target.value })}
+                onChange={(e) =>
+                  onBillingFormChange({ ...billingForm, streetAddress: e.target.value })
+                }
                 placeholder="Enter Street Address"
                 error={billingErrors.streetAddress}
               />
@@ -376,7 +382,9 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 <Input
                   type="text"
                   value={billingForm.postalCode}
-                  onChange={(e) => onBillingFormChange({ ...billingForm, postalCode: e.target.value })}
+                  onChange={(e) =>
+                    onBillingFormChange({ ...billingForm, postalCode: e.target.value })
+                  }
                   placeholder="12345"
                   error={billingErrors.postalCode}
                 />
@@ -408,13 +416,12 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                   countrySelectComponent={PhoneCountrySelect}
                   className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                   numberInputProps={{
-                    className: "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
+                    className:
+                      "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                   }}
                 />
                 {billingErrors.phone && (
-                  <span className="text-red-500 text-[10px] mt-1 block">
-                    {billingErrors.phone}
-                  </span>
+                  <span className="text-red-500 text-[10px] mt-1 block">{billingErrors.phone}</span>
                 )}
               </div>
             </div>

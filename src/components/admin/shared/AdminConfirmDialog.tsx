@@ -30,9 +30,7 @@ export const AdminConfirmDialog: React.FC<AdminConfirmDialogProps> = ({
     >
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-brand-brown font-serif">{title}</h3>
-        <p className="text-sm text-brand-brown/90 leading-relaxed font-medium">
-          {message}
-        </p>
+        <p className="text-sm text-brand-brown/90 leading-relaxed font-medium">{message}</p>
         <div className="flex justify-end gap-3 pt-2">
           <Button
             type="button"

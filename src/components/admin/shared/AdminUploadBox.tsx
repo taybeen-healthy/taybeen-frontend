@@ -31,7 +31,9 @@ export const AdminUploadBox: React.FC<AdminUploadBoxProps> = ({
       <Upload size={iconSize} className="text-brand-brown/40 mb-1" />
       <span className="text-xs font-bold text-brand-brown/70">{title}</span>
       {description && (
-        <span className={cn("text-[9px] text-[#8D7F75] mt-0.5", iconSize > 24 && "text-[11px] mt-1")}>
+        <span
+          className={cn("text-[9px] text-[#8D7F75] mt-0.5", iconSize > 24 && "text-[11px] mt-1")}
+        >
           {description}
         </span>
       )}

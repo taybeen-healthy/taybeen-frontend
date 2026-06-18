@@ -32,14 +32,14 @@ export const orderConfirmedData: OrderConfirmedDataConfig = {
     deliveryLabel: "DELIVERY",
     deliveryValue: "3-4 days",
     confirmationSentLabel: "CONFIRMATION SENT",
-    confirmationSentValue: "Check your inbox"
+    confirmationSentValue: "Check your inbox",
   },
   buttons: {
     continueShopping: "Continue Shopping",
-    backToHome: "Back to Home"
+    backToHome: "Back to Home",
   },
   support: {
     note: "Questions? Email us at Contactus@taybeen.in - We typically respond within a few hours.",
-    email: "Contactus@taybeen.in"
-  }
+    email: "Contactus@taybeen.in",
+  },
 };

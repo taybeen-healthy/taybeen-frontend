@@ -11,12 +11,9 @@ interface ForgotPasswordModalProps {
   onClose: () => void;
 }
 
-export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState<"email" | "reset" | "success">("email");
-  
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
 
@@ -98,7 +95,8 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
               Forgot Password?
             </h3>
             <p className="text-[#768C3A] text-xs sm:text-sm leading-relaxed max-w-xs mx-auto">
-              Enter your registered email address and we&apos;ll send you a link to reset your password.
+              Enter your registered email address and we&apos;ll send you a link to reset your
+              password.
             </p>
           </div>
 
@@ -205,11 +203,10 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">
-              Reset Complete
-            </h3>
+            <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">Reset Complete</h3>
             <p className="text-brand-green text-xs sm:text-sm max-w-xs leading-relaxed">
-              Your password has been successfully updated. You can now log in using your new credentials.
+              Your password has been successfully updated. You can now log in using your new
+              credentials.
             </p>
           </div>
 

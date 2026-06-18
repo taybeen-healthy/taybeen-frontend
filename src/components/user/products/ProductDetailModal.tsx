@@ -15,14 +15,13 @@ interface ProductDetailModalProps {
   onClose: () => void;
 }
 
-export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
-  product,
-  onClose,
-}) => {
+export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClose }) => {
   const { addToCart, setIsCartOpen } = useCart();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<"description" | "benefits">("description");
-  const [selectedWeight, setSelectedWeight] = useState(product.weightOptions?.[0] || product.weight);
+  const [selectedWeight, setSelectedWeight] = useState(
+    product.weightOptions?.[0] || product.weight
+  );
   const [quantity, setQuantity] = useState(1);
   const [shareStatus, setShareStatus] = useState("Share");
 
@@ -31,7 +30,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   const productBenefits = product.benefits || [
     "Rich in vitamins and minerals",
     "100% natural energy booster",
-    "High source of dietary fiber"
+    "High source of dietary fiber",
   ];
 
   const getPriceForWeight = (option: string, baseWeight: string, basePrice: number) => {
@@ -44,7 +43,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   const currentPrice = getPriceForWeight(selectedWeight, product.weight, product.price);
-  const currentOriginalPrice = product.originalPrice 
+  const currentOriginalPrice = product.originalPrice
     ? getPriceForWeight(selectedWeight, product.weight, product.originalPrice)
     : undefined;
 
@@ -76,10 +75,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   };
 
   return (
-    <Modal 
-      isOpen={true} 
-      onClose={onClose} 
-      flexRowDirection="row" 
+    <Modal
+      isOpen={true}
+      onClose={onClose}
+      flexRowDirection="row"
       className="max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl lg:h-auto overflow-y-auto"
     >
       <button
@@ -146,7 +145,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   ₹{formatIndianCurrency(currentOriginalPrice, 2)}
                 </span>
                 <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
-                  ({Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}% OFF)
+                  (
+                  {Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}
+                  % OFF)
                 </span>
               </>
             )}
@@ -248,7 +249,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           <div className="flex flex-col items-center gap-1.5">
             <Truck size={20} className="text-[#F7A503]" />
             <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
-              Free Shipping on<br />₹999+
+              Free Shipping on
+              <br />
+              ₹999+
             </span>
           </div>
           <div className="flex flex-col items-center gap-1.5">

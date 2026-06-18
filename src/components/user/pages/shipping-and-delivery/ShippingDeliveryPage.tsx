@@ -27,7 +27,10 @@ export const ShippingDeliveryPage: React.FC = () => {
                 {sections.processingTime.title}
               </h2>
               {sections.processingTime.paragraphs.map((p, idx) => (
-                <p key={idx} className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4 last:mb-0">
+                <p
+                  key={idx}
+                  className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4 last:mb-0"
+                >
                   {p}
                 </p>
               ))}
@@ -38,7 +41,10 @@ export const ShippingDeliveryPage: React.FC = () => {
                 {sections.shippingRates.title}
               </h2>
               {sections.shippingRates.paragraphs.map((p, idx) => (
-                <p key={idx} className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4 last:mb-0">
+                <p
+                  key={idx}
+                  className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4 last:mb-0"
+                >
                   {p}
                 </p>
               ))}
@@ -49,14 +55,22 @@ export const ShippingDeliveryPage: React.FC = () => {
                 {sections.returnsPolicy.title}
               </h2>
               <p className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4">
-                At Taybeen, we take great care to ensure that all products arrive in excellent condition at the shipping address provided during checkout. If you are not fully satisfied with the quality of your order upon delivery, please contact us at{" "}
-                <a href="mailto:contactus@taybeen.com" className="text-brand-primary hover:underline font-medium">
+                At Taybeen, we take great care to ensure that all products arrive in excellent
+                condition at the shipping address provided during checkout. If you are not fully
+                satisfied with the quality of your order upon delivery, please contact us at{" "}
+                <a
+                  href="mailto:contactus@taybeen.com"
+                  className="text-brand-primary hover:underline font-medium"
+                >
                   contactus@taybeen.com
                 </a>{" "}
-                within 48 hours of receiving your order, along with a detailed description and clear photographs of the issue.
+                within 48 hours of receiving your order, along with a detailed description and clear
+                photographs of the issue.
               </p>
               <p className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-6">
-                Due to the perishable nature of our products, claims submitted without adequate supporting documentation may not be eligible for replacement or exchange. Taybeen reserves the right to review and limit replacement requests at its discretion.
+                Due to the perishable nature of our products, claims submitted without adequate
+                supporting documentation may not be eligible for replacement or exchange. Taybeen
+                reserves the right to review and limit replacement requests at its discretion.
               </p>
 
               {sections.returnsPolicy.bullets && (
@@ -84,14 +98,21 @@ export const ShippingDeliveryPage: React.FC = () => {
                 {sections.replacementsRefunds.title}
               </h2>
               <p className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-4">
-                All replacement requests must be submitted within 48 hours of receiving your order by contacting our customer support team at{" "}
-                <a href="mailto:contactus@taybeen.com" className="text-brand-primary hover:underline font-medium">
+                All replacement requests must be submitted within 48 hours of receiving your order
+                by contacting our customer support team at{" "}
+                <a
+                  href="mailto:contactus@taybeen.com"
+                  className="text-brand-primary hover:underline font-medium"
+                >
                   contactus@taybeen.com
                 </a>
-                . Once the request has been reviewed and approved, the replacement item(s) will be dispatched within 2-5 business days.
+                . Once the request has been reviewed and approved, the replacement item(s) will be
+                dispatched within 2-5 business days.
               </p>
               <p className="text-brand-green/90 text-sm sm:text-base leading-[1.8] mb-6">
-                If a replacement is not possible, a refund may be issued to the original payment method. Refunds may take between 10-30 business days to reflect in your account, depending on your payment provider and financial institution.
+                If a replacement is not possible, a refund may be issued to the original payment
+                method. Refunds may take between 10-30 business days to reflect in your account,
+                depending on your payment provider and financial institution.
               </p>
 
               {sections.replacementsRefunds.bullets && (

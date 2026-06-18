@@ -75,9 +75,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
-              Orders placed
-            </p>
+            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Orders placed</p>
             <p className="text-xl sm:text-2xl font-bold text-[#3A2418] font-poppins">
               {data.ordersPlaced}
             </p>
@@ -92,9 +90,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
-              Coupon status
-            </p>
+            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Coupon status</p>
             <div className="pt-1">
               <span className="px-3.5 py-1 text-xs font-bold text-green-700 bg-green-50/90 rounded-full border border-green-200">
                 {data.couponStatus}
@@ -117,9 +113,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
               key={index}
               className="flex justify-between items-center py-3 sm:py-3.5 border-b border-[#C4A482]/10 last:border-b-0 last:pb-0"
             >
-              <span className="text-[#7D6B5E] text-xs sm:text-sm font-medium">
-                {row.label}
-              </span>
+              <span className="text-[#7D6B5E] text-xs sm:text-sm font-medium">{row.label}</span>
               <span className="text-[#3A2418] text-xs sm:text-sm font-semibold text-right">
                 {row.value}
               </span>
@@ -129,9 +123,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
       </div>
 
       <div className="space-y-4">
-        <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">
-          Your coupon
-        </h2>
+        <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">Your coupon</h2>
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex-1 w-full space-y-4">
             <div className="flex items-center gap-3">
@@ -142,10 +134,8 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                 {data.couponStatus}
               </span>
             </div>
-            
-            <p className="text-xs sm:text-sm text-[#7D6B5E]/85">
-              {data.couponDescription}
-            </p>
+
+            <p className="text-xs sm:text-sm text-[#7D6B5E]/85">{data.couponDescription}</p>
 
             <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
               <input
@@ -199,18 +189,10 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
           <table className="w-full min-w-[600px] border-collapse text-left text-xs sm:text-sm">
             <thead>
               <tr className="bg-[#F6F1E9] text-brand-brown font-bold uppercase tracking-wider text-[10px] sm:text-xs">
-                <th className="py-3 px-4 rounded-l-lg border-b border-[#C4A482]/20">
-                  ORDER ID
-                </th>
-                <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                  DATE
-                </th>
-                <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                  ITEM
-                </th>
-                <th className="py-3 px-4 border-b border-[#C4A482]/20">
-                  AMOUNT
-                </th>
+                <th className="py-3 px-4 rounded-l-lg border-b border-[#C4A482]/20">ORDER ID</th>
+                <th className="py-3 px-4 border-b border-[#C4A482]/20">DATE</th>
+                <th className="py-3 px-4 border-b border-[#C4A482]/20">ITEM</th>
+                <th className="py-3 px-4 border-b border-[#C4A482]/20">AMOUNT</th>
                 <th className="py-3 px-4 rounded-r-lg border-b border-[#C4A482]/20">
                   PAYMENT STATUS
                 </th>

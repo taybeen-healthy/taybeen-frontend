@@ -7,7 +7,7 @@ import {
   OrderConfirmedHeader,
   OrderSummaryCard,
   OrderActions,
-  OrderSupportNote
+  OrderSupportNote,
 } from "@/components/user/sections/order-confirmed";
 
 interface OrderInfo {
@@ -28,13 +28,13 @@ export const OrderConfirmedPage: React.FC = () => {
         setOrderInfo({
           id: parsed.id || "TYB-2024-0056",
           placedOn: parsed.placedOn || "11th June 2026 5:30 pm",
-          itemsCount: parsed.itemsCount || 1
+          itemsCount: parsed.itemsCount || 1,
         });
       } else {
         setOrderInfo({
           id: "TYB-2024-0056",
           placedOn: "11th June 2026 5:30 pm",
-          itemsCount: 1
+          itemsCount: 1,
         });
       }
     } catch (error) {
@@ -42,7 +42,7 @@ export const OrderConfirmedPage: React.FC = () => {
       setOrderInfo({
         id: "TYB-2024-0056",
         placedOn: "11th June 2026 5:30 pm",
-        itemsCount: 1
+        itemsCount: 1,
       });
     }
     setIsLoaded(true);

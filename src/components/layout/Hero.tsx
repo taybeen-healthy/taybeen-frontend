@@ -13,7 +13,9 @@ export const Hero: React.FC<HeroProps> = ({
   className = "h-[120px] md:h-[150px]",
 }) => {
   return (
-    <div className={`relative w-full mt-[74px] md:mt-[88px] lg:mt-[99px] overflow-hidden select-none pointer-events-none ${className}`}>
+    <div
+      className={`relative w-full mt-[74px] md:mt-[88px] lg:mt-[99px] overflow-hidden select-none pointer-events-none ${className}`}
+    >
       <Image
         src={src}
         alt={alt}

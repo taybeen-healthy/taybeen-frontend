@@ -8,7 +8,6 @@ export const SpecialOffer: React.FC = () => {
   return (
     <Section bg="cream">
       <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-12 lg:gap-16 xl:gap-20">
-
         <div className="flex-1 space-y-5 md:space-y-6 lg:space-y-7 text-center lg:text-left">
           <h4 className="text-brand-primary font-poppins font-bold text-lg sm:text-xl md:text-2xl">
             {specialOffer.tag}

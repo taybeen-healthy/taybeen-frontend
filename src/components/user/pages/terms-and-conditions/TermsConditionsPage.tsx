@@ -28,7 +28,10 @@ export const TermsConditionsPage: React.FC = () => {
                 return (
                   <p key={idx}>
                     {parts[0]}
-                    <a href="mailto:contactus@taybeen.com" className="text-brand-primary hover:underline font-medium">
+                    <a
+                      href="mailto:contactus@taybeen.com"
+                      className="text-brand-primary hover:underline font-medium"
+                    >
                       contactus@taybeen.com
                     </a>
                     {parts[1]}

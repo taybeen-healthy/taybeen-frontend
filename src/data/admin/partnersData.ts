@@ -39,7 +39,8 @@ export const adminPartnersList: AdminPartner[] = [
     phone: "+91 96650 78901",
     city: "Ahmedabad, Gujarat",
     occupation: "Food influencer & chef",
-    whyJoin: "I have a large following in the food space and I strongly believe Taybeen's dates would resonate with my audience who values authentic quality produce.",
+    whyJoin:
+      "I have a large following in the food space and I strongly believe Taybeen's dates would resonate with my audience who values authentic quality produce.",
     couponCode: "Not generated",
     salesAmount: -1, // representing "-"
     ordersCount: 0,

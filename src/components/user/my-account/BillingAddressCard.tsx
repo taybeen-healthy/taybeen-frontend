@@ -14,10 +14,7 @@ interface BillingAddressCardProps {
   onEdit: () => void;
 }
 
-export const BillingAddressCard: React.FC<BillingAddressCardProps> = ({
-  billing,
-  onEdit,
-}) => {
+export const BillingAddressCard: React.FC<BillingAddressCardProps> = ({ billing, onEdit }) => {
   const fullName = `${billing.firstName} ${billing.lastName}`.trim() || "User";
   const addressLine = `${billing.streetAddress}, ${billing.stateProvince} ${billing.postalCode}, ${billing.country}`;
 
@@ -30,13 +27,9 @@ export const BillingAddressCard: React.FC<BillingAddressCardProps> = ({
         <h3 className="font-serif text-base sm:text-lg lg:text-xl font-bold text-brand-brown leading-tight truncate">
           {fullName}
         </h3>
-        <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed max-w-sm">
-          {addressLine}
-        </p>
+        <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed max-w-sm">{addressLine}</p>
         {billing.email && (
-          <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">
-            {billing.email}
-          </p>
+          <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">{billing.email}</p>
         )}
       </div>
       <div className="mt-4 pt-1 flex-shrink-0">

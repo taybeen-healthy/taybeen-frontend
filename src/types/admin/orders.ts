@@ -34,4 +34,3 @@ export interface OrdersKpis {
   revenueText: string;
   revenueTrend: string;
 }
-

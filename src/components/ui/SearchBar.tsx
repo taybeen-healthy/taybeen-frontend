@@ -16,7 +16,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   className = "",
 }) => {
   return (
-    <div className={cn("relative flex items-center bg-[#FDFCF9] hover:bg-white border border-[#C4A482]/30 hover:border-brand-primary/60 focus-within:border-brand-primary focus-within:ring-2 focus-within:ring-brand-primary/10 rounded-xl py-2.5 pl-4 pr-10 transition-all duration-300 w-full max-w-[280px]", className)}>
+    <div
+      className={cn(
+        "relative flex items-center bg-[#FDFCF9] hover:bg-white border border-[#C4A482]/30 hover:border-brand-primary/60 focus-within:border-brand-primary focus-within:ring-2 focus-within:ring-brand-primary/10 rounded-xl py-2.5 pl-4 pr-10 transition-all duration-300 w-full max-w-[280px]",
+        className
+      )}
+    >
       <Search size={15} className="text-brand-green/70 flex-shrink-0" strokeWidth={2.5} />
       <input
         type="text"

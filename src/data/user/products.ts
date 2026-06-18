@@ -4,21 +4,22 @@ const DATE_BENEFITS = [
   "Rich in essential vitamins and minerals like Potassium, Magnesium, and Iron.",
   "100% natural energy booster, perfect as a pre-workout or healthy midday snack.",
   "High source of dietary fiber, promoting healthy digestion and heart health.",
-  "Naturally sweet with no added sugar, preservatives, or artificial additives."
+  "Naturally sweet with no added sugar, preservatives, or artificial additives.",
 ];
 
 const GIFT_BENEFITS = [
   "Handpicked premium date assortment, carefully selected for size and quality.",
   "Presented in an elegant, luxury custom packaging ideal for corporate or family gifting.",
   "Nutritious selection that makes a thoughtful, health-conscious present.",
-  "Comes with customizable personalized greeting card options."
+  "Comes with customizable personalized greeting card options.",
 ];
 
 export const products: Product[] = [
   {
     id: "mejdool-jumbo",
     name: "Mejdool Jordan Premium Jumbo Dates",
-    description: "The 'King of Dates' - jumbo-sized, soft, and caramel-sweet, sourced directly from Jordan.",
+    description:
+      "The 'King of Dates' - jumbo-sized, soft, and caramel-sweet, sourced directly from Jordan.",
     price: 1750,
     weight: "500g",
     rating: 4.9,
@@ -27,14 +28,19 @@ export const products: Product[] = [
     badge: "Best Seller",
     badgeColor: "#F7A503",
     category: "Plain Dates",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "ajwa-premium",
     name: "Ajwa Premium Dates",
-    description: "From the holy city of Madinah. Dark, soft and uniquely flavored dates revered for their health benefits.",
+    description:
+      "From the holy city of Madinah. Dark, soft and uniquely flavored dates revered for their health benefits.",
     price: 1750,
     weight: "500g",
     rating: 5.0,
@@ -43,14 +49,19 @@ export const products: Product[] = [
     badge: "New",
     badgeColor: "#4A5E28",
     category: "Plain Dates",
-    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Pile of premium dates).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "festive-hamper",
     name: "Festive Gift Hamper",
-    description: "A beautifully curated collection of our finest premium dates, perfect for corporate and family gifting.",
+    description:
+      "A beautifully curated collection of our finest premium dates, perfect for corporate and family gifting.",
     price: 2750,
     weight: "1kg",
     rating: 4.9,
@@ -59,14 +70,19 @@ export const products: Product[] = [
     badge: "Best Seller",
     badgeColor: "#F7A503",
     category: "Gift Hampers",
-    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["500 g", "1 kg", "2 kg"]
+    weightOptions: ["500 g", "1 kg", "2 kg"],
   },
   {
     id: "mebroom-premium",
     name: "Mebroom Premium Dates",
-    description: "Long, slender dates with a rich semi-dry texture and a natural candy-like sweetness.",
+    description:
+      "Long, slender dates with a rich semi-dry texture and a natural candy-like sweetness.",
     price: 1750,
     weight: "500g",
     rating: 4.7,
@@ -75,42 +91,57 @@ export const products: Product[] = [
     badge: "Sacred & Rare",
     badgeColor: "#5A3E2B",
     category: "Plain Dates",
-    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/Image (Premium dates on a plate).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "sukkari-premium",
     name: "Sukkari Premium Dates",
-    description: "Sweet, crispy dates with a golden color and rich caramel flavor. Exceptionally nutritious.",
+    description:
+      "Sweet, crispy dates with a golden color and rich caramel flavor. Exceptionally nutritious.",
     price: 1750,
     weight: "500g",
     rating: 4.8,
     reviewsCount: 310,
     image: "/Image (Dates in wooden bowl).png",
     category: "Plain Dates",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "mebroom-jumbo",
     name: "Mebroom Premium Jumbo Dates",
-    description: "Semi-dry dates with a chewy texture, golden-brown hue, and a delicious, sweet flavor.",
+    description:
+      "Semi-dry dates with a chewy texture, golden-brown hue, and a delicious, sweet flavor.",
     price: 1750,
     weight: "500g",
     rating: 4.9,
     reviewsCount: 195,
     image: "/Image (Pile of premium dates).png",
     category: "Plain Dates",
-    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Pile of premium dates).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "almond-stuffed",
     name: "Premium Almond Stuffed Dates",
-    description: "Premium dates stuffed with crunchy, roasted almonds for the perfect healthy snack.",
+    description:
+      "Premium dates stuffed with crunchy, roasted almonds for the perfect healthy snack.",
     price: 1950,
     weight: "400g",
     rating: 4.9,
@@ -119,14 +150,19 @@ export const products: Product[] = [
     badge: "New",
     badgeColor: "#4A5E28",
     category: "Stuffed Dates",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["200 g", "400 g", "800 g"]
+    weightOptions: ["200 g", "400 g", "800 g"],
   },
   {
     id: "walnut-stuffed",
     name: "Premium Walnut Stuffed Dates",
-    description: "Exquisite dates stuffed with premium walnut halves, balancing sweet and nutty flavors.",
+    description:
+      "Exquisite dates stuffed with premium walnut halves, balancing sweet and nutty flavors.",
     price: 1950,
     weight: "400g",
     rating: 5.0,
@@ -135,14 +171,19 @@ export const products: Product[] = [
     badge: "Best Seller",
     badgeColor: "#F7A503",
     category: "Stuffed Dates",
-    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/Image (Premium dates on a plate).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["200 g", "400 g", "800 g"]
+    weightOptions: ["200 g", "400 g", "800 g"],
   },
   {
     id: "corporate-gifting-hamper",
     name: "Corporate Premium Date Hamper",
-    description: "An elegant, bespoke packaging filled with stuffed and premium dates, curated for professional gifting.",
+    description:
+      "An elegant, bespoke packaging filled with stuffed and premium dates, curated for professional gifting.",
     price: 3450,
     weight: "1.5kg",
     rating: 5.0,
@@ -151,14 +192,19 @@ export const products: Product[] = [
     badge: "Best Seller",
     badgeColor: "#F7A503",
     category: "Corporate Gifting",
-    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["1 kg", "1.5 kg", "3 kg"]
+    weightOptions: ["1 kg", "1.5 kg", "3 kg"],
   },
   {
     id: "wellness-dates-box",
     name: "Wellness Premium Dates Box",
-    description: "A balanced selection of low-glycemic, organic dates designed to boost daily natural energy.",
+    description:
+      "A balanced selection of low-glycemic, organic dates designed to boost daily natural energy.",
     price: 2150,
     weight: "800g",
     rating: 4.8,
@@ -167,42 +213,57 @@ export const products: Product[] = [
     badge: "New",
     badgeColor: "#4A5E28",
     category: "Wellness Boxes",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["400 g", "800 g", "1.6 kg"]
+    weightOptions: ["400 g", "800 g", "1.6 kg"],
   },
   {
     id: "custom-orders-selection",
     name: "Custom Tailored Date Selection",
-    description: "Pick and choose your favorite varieties, stuffing options, and premium box styles for a truly custom treat.",
+    description:
+      "Pick and choose your favorite varieties, stuffing options, and premium box styles for a truly custom treat.",
     price: 4250,
     weight: "1kg",
     rating: 4.9,
     reviewsCount: 29,
     image: "/Image (Premium dates on a plate).png",
     category: "Custom Orders",
-    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/Image (Premium dates on a plate).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["500 g", "1 kg", "2 kg"]
+    weightOptions: ["500 g", "1 kg", "2 kg"],
   },
   {
     id: "mejdool-medium",
     name: "Mejdool Jordan Premium Medium Dates",
-    description: "Soft, sweet Mejdool dates of medium sizing, offering high nutritional value and a rich taste.",
+    description:
+      "Soft, sweet Mejdool dates of medium sizing, offering high nutritional value and a rich taste.",
     price: 1450,
     weight: "500g",
     rating: 4.7,
     reviewsCount: 184,
     image: "/Image (Dates in wooden bowl).png",
     category: "Plain Dates",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "ajwa-jumbo",
     name: "Ajwa Madinah Premium Jumbo Dates",
-    description: "Select large-sized Ajwa dates from the finest groves of Madinah, carrying rich cultural heritage.",
+    description:
+      "Select large-sized Ajwa dates from the finest groves of Madinah, carrying rich cultural heritage.",
     price: 1950,
     weight: "500g",
     rating: 4.9,
@@ -211,14 +272,19 @@ export const products: Product[] = [
     badge: "Sacred & Rare",
     badgeColor: "#5A3E2B",
     category: "Plain Dates",
-    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Pile of premium dates).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["250 g", "500 g", "1 kg"]
+    weightOptions: ["250 g", "500 g", "1 kg"],
   },
   {
     id: "stuffed-pistachio",
     name: "Premium Pistachio Stuffed Dates",
-    description: "Sweet dates hand-stuffed with high-quality Iranian pistachios for a nutty, decadent bite.",
+    description:
+      "Sweet dates hand-stuffed with high-quality Iranian pistachios for a nutty, decadent bite.",
     price: 2150,
     weight: "400g",
     rating: 4.8,
@@ -227,28 +293,38 @@ export const products: Product[] = [
     badge: "New",
     badgeColor: "#4A5E28",
     category: "Stuffed Dates",
-    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/Image (Premium dates on a plate).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["200 g", "400 g", "800 g"]
+    weightOptions: ["200 g", "400 g", "800 g"],
   },
   {
     id: "stuffed-hazelnut",
     name: "Premium Hazelnut Stuffed Dates",
-    description: "Delicious dates filled with premium roasted hazelnuts, providing a delightful crunch.",
+    description:
+      "Delicious dates filled with premium roasted hazelnuts, providing a delightful crunch.",
     price: 2150,
     weight: "400g",
     rating: 4.9,
     reviewsCount: 61,
     image: "/Image (Dates in wooden bowl).png",
     category: "Stuffed Dates",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: DATE_BENEFITS,
-    weightOptions: ["200 g", "400 g", "800 g"]
+    weightOptions: ["200 g", "400 g", "800 g"],
   },
   {
     id: "royal-gift-box",
     name: "Royal Velvet Gift Box Selection",
-    description: "Luxury velvet box filled with assortment of our finest dates. Perfect for premium gifting.",
+    description:
+      "Luxury velvet box filled with assortment of our finest dates. Perfect for premium gifting.",
     price: 3200,
     weight: "1.2kg",
     rating: 4.9,
@@ -257,28 +333,38 @@ export const products: Product[] = [
     badge: "Best Seller",
     badgeColor: "#F7A503",
     category: "Gift Hampers",
-    images: ["/7844d57c9be79ee5e7b88ccbc592df37 1.png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["600 g", "1.2 kg", "2.4 kg"]
+    weightOptions: ["600 g", "1.2 kg", "2.4 kg"],
   },
   {
     id: "executive-box",
     name: "Executive Date Box Assortment",
-    description: "A professional date collection designed for high-profile business meetings and events.",
+    description:
+      "A professional date collection designed for high-profile business meetings and events.",
     price: 2850,
     weight: "1kg",
     rating: 4.9,
     reviewsCount: 33,
     image: "/Image (Dates in wooden bowl).png",
     category: "Corporate Gifting",
-    images: ["/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["500 g", "1 kg", "2 kg"]
+    weightOptions: ["500 g", "1 kg", "2 kg"],
   },
   {
     id: "wellness-platter",
     name: "Organic Wellness Date Platter",
-    description: "A nutritious, multi-variety date platter selected specifically for sugar-conscious health goals.",
+    description:
+      "A nutritious, multi-variety date platter selected specifically for sugar-conscious health goals.",
     price: 2450,
     weight: "750g",
     rating: 4.7,
@@ -287,22 +373,31 @@ export const products: Product[] = [
     badge: "New",
     badgeColor: "#4A5E28",
     category: "Wellness Boxes",
-    images: ["/Image (Premium dates on a plate).png", "/Image (Dates in wooden bowl).png", "/Image (Pile of premium dates).png"],
+    images: [
+      "/Image (Premium dates on a plate).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Pile of premium dates).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["375 g", "750 g", "1.5 kg"]
+    weightOptions: ["375 g", "750 g", "1.5 kg"],
   },
   {
     id: "custom-party-platter",
     name: "Custom Party Date Platter",
-    description: "Design your own custom platter with multiple dates, nuts, and dry-fruit toppings for any gathering.",
+    description:
+      "Design your own custom platter with multiple dates, nuts, and dry-fruit toppings for any gathering.",
     price: 4850,
     weight: "1.8kg",
     rating: 5.0,
     reviewsCount: 19,
     image: "/Image (Pile of premium dates).png",
     category: "Custom Orders",
-    images: ["/Image (Pile of premium dates).png", "/Image (Dates in wooden bowl).png", "/Image (Premium dates on a plate).png"],
+    images: [
+      "/Image (Pile of premium dates).png",
+      "/Image (Dates in wooden bowl).png",
+      "/Image (Premium dates on a plate).png",
+    ],
     benefits: GIFT_BENEFITS,
-    weightOptions: ["900 g", "1.8 kg", "3.6 kg"]
-  }
+    weightOptions: ["900 g", "1.8 kg", "3.6 kg"],
+  },
 ];

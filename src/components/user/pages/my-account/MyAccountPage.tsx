@@ -97,11 +97,10 @@ export const MyAccountPage: React.FC = () => {
     <div className="min-h-screen bg-brand-bg selection:bg-brand-primary/30 flex flex-col justify-between">
       <div>
         <Navbar />
-        
+
         <Hero />
 
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-20 pt-8 sm:pt-10">
-          
           <div className="flex flex-col lg:hidden gap-6">
             <AccountSidebar activeTab={activeTab} onTabChange={handleTabChange} />
             {activeTab === "dashboard" && (
@@ -123,8 +122,8 @@ export const MyAccountPage: React.FC = () => {
                 onSaveBilling={handleSaveBilling}
               />
             )}
-            {activeTab === "orders" && (
-              selectedOrderId ? (
+            {activeTab === "orders" &&
+              (selectedOrderId ? (
                 <OrderDetailView
                   orderId={selectedOrderId}
                   onBack={() => setSelectedOrderId(null)}
@@ -136,21 +135,19 @@ export const MyAccountPage: React.FC = () => {
                   orders={orders}
                   onViewDetails={setSelectedOrderId}
                 />
-              )
-            )}
-            {activeTab === "affiliate" && (
-              <AffiliateDashboard data={affiliateDashboardData} />
-            )}
-            {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && activeTab !== "affiliate" && (
-              <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
-                <h3 className="font-serif text-lg font-bold text-brand-brown mb-2 capitalize">
-                  {activeTab.replace("-", " ")}
-                </h3>
-                <p className="text-sm text-[#7D6B5E]">
-                  This section is coming soon.
-                </p>
-              </div>
-            )}
+              ))}
+            {activeTab === "affiliate" && <AffiliateDashboard data={affiliateDashboardData} />}
+            {activeTab !== "dashboard" &&
+              activeTab !== "orders" &&
+              activeTab !== "settings" &&
+              activeTab !== "affiliate" && (
+                <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
+                  <h3 className="font-serif text-lg font-bold text-brand-brown mb-2 capitalize">
+                    {activeTab.replace("-", " ")}
+                  </h3>
+                  <p className="text-sm text-[#7D6B5E]">This section is coming soon.</p>
+                </div>
+              )}
           </div>
 
           <div className="hidden lg:flex gap-8 items-start">
@@ -206,19 +203,19 @@ export const MyAccountPage: React.FC = () => {
                 </div>
               )}
 
-              {activeTab !== "dashboard" && activeTab !== "orders" && activeTab !== "settings" && activeTab !== "affiliate" && (
-                <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
-                  <h3 className="font-serif text-lg md:text-xl font-bold text-brand-brown mb-2 capitalize">
-                    {activeTab.replace("-", " ")}
-                  </h3>
-                  <p className="text-sm text-[#7D6B5E]">
-                    This section is coming soon.
-                  </p>
-                </div>
-              )}
+              {activeTab !== "dashboard" &&
+                activeTab !== "orders" &&
+                activeTab !== "settings" &&
+                activeTab !== "affiliate" && (
+                  <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins">
+                    <h3 className="font-serif text-lg md:text-xl font-bold text-brand-brown mb-2 capitalize">
+                      {activeTab.replace("-", " ")}
+                    </h3>
+                    <p className="text-sm text-[#7D6B5E]">This section is coming soon.</p>
+                  </div>
+                )}
             </div>
           </div>
-
         </main>
       </div>
 
@@ -236,9 +233,7 @@ export const MyAccountPage: React.FC = () => {
           </div>
 
           <div className="space-y-1.5">
-            <h3 className="font-serif text-xl font-bold text-brand-brown">
-              Log Out
-            </h3>
+            <h3 className="font-serif text-xl font-bold text-brand-brown">Log Out</h3>
             <p className="text-sm text-[#7D6B5E]">
               Are you sure you want to log out of your account? Any unsaved changes will be lost.
             </p>
@@ -266,6 +261,5 @@ export const MyAccountPage: React.FC = () => {
     </div>
   );
 };
-
 
 export default MyAccountPage;

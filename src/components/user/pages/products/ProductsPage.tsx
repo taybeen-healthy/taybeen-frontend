@@ -16,7 +16,7 @@ import {
   ProductsHero,
   ProductsHeader,
   ProductsSidebar,
-  ProductsFilters
+  ProductsFilters,
 } from "@/components/user/sections/products";
 
 export default function ProductsPage() {
@@ -33,8 +33,7 @@ export default function ProductsPage() {
 
   const filteredProducts = (() => {
     let list = products.filter(
-      (product) =>
-        selectedCategory === "All Products" || product.category === selectedCategory
+      (product) => selectedCategory === "All Products" || product.category === selectedCategory
     );
 
     if (searchQuery.trim()) {
@@ -69,7 +68,8 @@ export default function ProductsPage() {
     setIsModalOpen(true);
   };
 
-  const currentCategoryDetails = CATEGORY_DETAILS[selectedCategory] || CATEGORY_DETAILS["All Products"];
+  const currentCategoryDetails =
+    CATEGORY_DETAILS[selectedCategory] || CATEGORY_DETAILS["All Products"];
 
   return (
     <div className="min-h-screen bg-brand-bg selection:bg-brand-primary/30 flex flex-col justify-between">
@@ -84,7 +84,6 @@ export default function ProductsPage() {
 
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-20">
           <div className="flex flex-col lg:flex-row xl:gap-12">
-
             <ProductsSidebar
               categories={CATEGORIES}
               selectedCategory={selectedCategory}
@@ -141,7 +140,6 @@ export default function ProductsPage() {
                 className="mt-12 md:mt-16"
               />
             </div>
-
           </div>
         </main>
       </div>
@@ -150,10 +148,7 @@ export default function ProductsPage() {
 
       <AnimatePresence>
         {isModalOpen && selectedProduct && (
-          <ProductDetailModal
-            product={selectedProduct}
-            onClose={() => setIsModalOpen(false)}
-          />
+          <ProductDetailModal product={selectedProduct} onClose={() => setIsModalOpen(false)} />
         )}
       </AnimatePresence>
     </div>
