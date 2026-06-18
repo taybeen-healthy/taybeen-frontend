@@ -2,62 +2,33 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Calendar, ArrowUpRight, ArrowDownRight, IndianRupee, Users, ShoppingCart, Box as BoxIcon, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight } from "lucide-react";
 import { overviewAlerts, dashboardKpis, revenueChartData, bestSellers } from "@/data/admin/dashboardData";
 import { cn, formatIndianCurrency } from "@/lib/utils";
+import {
+  AdminPageHeader,
+  AdminCard,
+  AdminDashboardStatCard,
+} from "../shared";
 
 export const DashboardOverview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"Today" | "Weekly" | "Monthly" | "Yearly">("Monthly");
 
-  const getKpiIcon = (type: string) => {
-    const baseClass = "w-5 h-5";
-    switch (type) {
-      case "income":
-        return <IndianRupee className={cn(baseClass, "text-amber-600")} />;
-      case "customers":
-        return <Users className={cn(baseClass, "text-blue-600")} />;
-      case "orders":
-        return <ShoppingCart className={cn(baseClass, "text-indigo-600")} />;
-      case "products":
-        return <BoxIcon className={cn(baseClass, "text-amber-800")} />;
-      default:
-        return <BoxIcon className={baseClass} />;
-    }
-  };
-
-  const getKpiIconBg = (type: string) => {
-    switch (type) {
-      case "income":
-        return "bg-amber-50";
-      case "customers":
-        return "bg-blue-50";
-      case "orders":
-        return "bg-indigo-50";
-      case "products":
-        return "bg-amber-100/50";
-      default:
-        return "bg-gray-50";
-    }
-  };
-
   return (
     <div className="space-y-8 text-left font-poppins">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-serif text-3xl font-bold text-brand-brown">
-            Dashboard
-          </h1>
-        </div>
-        <div className="flex items-center gap-2 bg-white border border-[#C4A482]/20 rounded-xl px-4 py-2.5 shadow-sm text-xs font-medium text-brand-brown cursor-pointer hover:border-brand-primary/40 transition-colors">
-          <Calendar size={16} className="text-brand-brown/60" />
-          <span>Thursday, 12 June 2026</span>
-        </div>
-      </div>
+      <AdminPageHeader
+        title="Dashboard"
+        subtitle=""
+        actions={
+          <div className="flex items-center gap-2 bg-white border border-[#C4A482]/20 rounded-xl px-4 py-2.5 shadow-sm text-xs font-medium text-brand-brown cursor-pointer hover:border-brand-primary/40 transition-colors">
+            <Calendar size={16} className="text-brand-brown/60" />
+            <span>Thursday, 12 June 2026</span>
+          </div>
+        }
+      />
 
-      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
-        <h2 className="text-lg font-bold text-brand-brown mb-6">Overview</h2>
+      <AdminCard title="Overview" className="space-y-0 p-6 sm:p-8">
         <div className="flex flex-col xl:flex-row items-stretch justify-between gap-8">
-          
           <div className="flex flex-col justify-center text-left max-w-sm">
             <h3 className="text-xl sm:text-2xl font-bold text-brand-brown mb-2">
               Welcome back, Admin!
@@ -90,68 +61,39 @@ export const DashboardOverview: React.FC = () => {
               </div>
             ))}
           </div>
-
         </div>
-      </div>
+      </AdminCard>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-        {dashboardKpis.map((kpi) => {
-          const isUp = kpi.trendDirection === "up";
-          return (
-            <div 
-              key={kpi.id} 
-              className="bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between gap-4 hover:border-brand-primary/30 transition-all duration-300"
-            >
-              <div className="flex items-center justify-between">
-                <div className={cn("p-2.5 rounded-xl", getKpiIconBg(kpi.iconType))}>
-                  {getKpiIcon(kpi.iconType)}
-                </div>
-                
-                <div className={cn(
-                  "flex items-center gap-0.5 px-2.5 py-1 rounded-full text-[10px] font-bold",
-                  isUp 
-                    ? "bg-[#4A5E28]/10 text-brand-green" 
-                    : "bg-red-500/10 text-red-500"
-                )}>
-                  {isUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                  <span>{kpi.trend}</span>
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <span className="text-2xl font-bold font-poppins text-[#3A2418]">
-                  {kpi.value}
-                </span>
-                <h4 className="text-xs font-semibold text-[#8D7F75] tracking-wider uppercase block">
-                  {kpi.title}
-                </h4>
-              </div>
-
-              <div className="border-t border-gray-100 pt-3 text-[11px] text-[#8D7F75]">
-                {kpi.subtext}
-              </div>
-            </div>
-          );
-        })}
+        {dashboardKpis.map((kpi) => (
+          <AdminDashboardStatCard
+            key={kpi.id}
+            title={kpi.title}
+            value={kpi.value}
+            subtext={kpi.subtext}
+            trend={kpi.trend}
+            trendDirection={kpi.trendDirection}
+            iconType={kpi.iconType}
+          />
+        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
         <div className="lg:col-span-2 bg-white border border-[#C4A482]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="text-lg font-bold text-brand-brown">Revenue</h3>
               <p className="text-xs text-[#8D7F75]">Income overview across periods</p>
             </div>
-            <div className="flex bg-[#F5F2EA] p-1 rounded-xl w-fit">
+            <div className="flex bg-[#F5F2EA] p-1 rounded-xl w-fit animate-none selection:bg-transparent">
               {(["Today", "Weekly", "Monthly", "Yearly"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={cn(
-                    "px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
+                    "px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer",
                     activeTab === tab 
-                      ? "bg-white text-brand-brown shadow-sm" 
+                      ? "bg-white text-brand-brown shadow-sm font-semibold" 
                       : "text-[#8D7F75] hover:text-brand-brown"
                   )}
                 >
@@ -237,7 +179,6 @@ export const DashboardOverview: React.FC = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { Upload } from "lucide-react";
 import { initialCustomizationData } from "@/data/admin/customizationData";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Select } from "@/components/ui/Select";
+import {
+  AdminPageHeader,
+  AdminCard,
+  AdminUploadBox,
+} from "../shared";
 
 export const CustomizationSettings: React.FC = () => {
   const [settings, setSettings] = useState(initialCustomizationData);
@@ -38,42 +42,26 @@ export const CustomizationSettings: React.FC = () => {
 
   return (
     <div className="space-y-8 text-left font-poppins pb-12">
-      <div>
-        <h1 className="font-serif text-3xl font-bold text-brand-brown">
-          Admin Customization
-        </h1>
-        <p className="text-xs text-[#8D7F75] mt-1">
-          Manage and view all site information
-        </p>
-      </div>
+      <AdminPageHeader
+        title="Admin Customization"
+        subtitle="Manage and view all site information"
+      />
 
-      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-        <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
-          Hero Section
-        </h3>
-
+      <AdminCard title="Hero Section">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                 Hero Images
               </label>
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center bg-gray-50/50 cursor-pointer hover:border-brand-primary/40 transition-colors h-[120px]">
-                <Upload size={20} className="text-brand-brown/40 mb-1" />
-                <span className="text-xs font-bold text-brand-brown/70">Upload</span>
-                <span className="text-[9px] text-[#8D7F75] mt-0.5">Upload Images (PNG, JPG)</span>
-              </div>
+              <AdminUploadBox description="Upload Images (PNG, JPG)" />
             </div>
 
             <div className="space-y-2">
               <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
                 Side Images
               </label>
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center bg-gray-50/50 cursor-pointer hover:border-brand-primary/40 transition-colors h-[120px]">
-                <Upload size={20} className="text-brand-brown/40 mb-1" />
-                <span className="text-xs font-bold text-brand-brown/70">Upload</span>
-                <span className="text-[9px] text-[#8D7F75] mt-0.5">Upload Images (PNG, JPG)</span>
-              </div>
+              <AdminUploadBox description="Upload Images (PNG, JPG)" />
             </div>
           </div>
 
@@ -170,23 +158,15 @@ export const CustomizationSettings: React.FC = () => {
             Save
           </Button>
         </div>
-      </div>
+      </AdminCard>
 
-      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-        <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
-          Our Story
-        </h3>
-
+      <AdminCard title="Our Story">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="space-y-2">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
               Section Image
             </label>
-            <div className="border-2 border-dashed border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center bg-gray-50/50 cursor-pointer hover:border-brand-primary/40 transition-colors h-[220px]">
-              <Upload size={24} className="text-brand-brown/40 mb-1" />
-              <span className="text-xs font-bold text-brand-brown/70">Upload</span>
-              <span className="text-[9px] text-[#8D7F75] mt-0.5">Upload Image (PNG, JPG)</span>
-            </div>
+            <AdminUploadBox height="h-[220px]" iconSize={24} description="Upload Image (PNG, JPG)" />
           </div>
 
           <div className="lg:col-span-2 space-y-4">
@@ -290,13 +270,9 @@ export const CustomizationSettings: React.FC = () => {
             Save
           </Button>
         </div>
-      </div>
+      </AdminCard>
 
-      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-        <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
-          Offer Banner
-        </h3>
-
+      <AdminCard title="Offer Banner">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-1.5">
             <label className="text-xs sm:text-sm font-semibold text-brand-brown block">
@@ -353,13 +329,9 @@ export const CustomizationSettings: React.FC = () => {
             Save
           </Button>
         </div>
-      </div>
+      </AdminCard>
 
-      <div className="border border-[#C4A482]/20 bg-white rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
-        <h3 className="text-lg font-bold text-brand-brown pb-2 border-b border-gray-100">
-          Manage Delivery
-        </h3>
-
+      <AdminCard title="Manage Delivery">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-1.5">
             <label className="text-xs sm:text-sm font-semibold text-[#5A3E2B] block">
@@ -476,8 +448,7 @@ export const CustomizationSettings: React.FC = () => {
             </Button>
           )}
         </div>
-      </div>
-
+      </AdminCard>
     </div>
   );
 };

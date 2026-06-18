@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { adminAuthData } from "@/data/admin/adminAuthData";
 import { validateEmail, validatePassword } from "@/utils/validation";
+import { AdminSpinner } from "../shared";
 
 export const AdminSignInForm: React.FC = () => {
   const router = useRouter();
@@ -106,7 +107,7 @@ export const AdminSignInForm: React.FC = () => {
           className="w-full bg-[#5A3E2B] hover:bg-[#483122] disabled:bg-[#5A3E2B]/70 text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer mt-6 flex items-center justify-center gap-2"
         >
           {isLoading ? (
-            <div className="w-4 h-4 border-2 border-[#FDFAF3] border-t-transparent rounded-full animate-spin" />
+            <AdminSpinner />
           ) : (
             labels.submitButtonText
           )}

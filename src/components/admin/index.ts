@@ -1,3 +1,4 @@
+export * from "./shared";
 export * from "./layout";
 export * from "./dashboard";
 export * from "./products";
@@ -7,3 +8,4 @@ export * from "./reviews";
 export * from "./partners";
 export * from "./customization";
 export * from "./auth";
+
