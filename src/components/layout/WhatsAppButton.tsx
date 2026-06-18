@@ -1,5 +1,5 @@
 import React from "react";
-import { WhatsAppIcon } from "@/components/ui/Icons";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const WhatsAppButton: React.FC = () => {
   const msg = "Hii can you share details for the products";
@@ -16,7 +16,7 @@ export const WhatsAppButton: React.FC = () => {
       <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 animate-ping group-hover:animate-none pointer-events-none" />
 
       <div className="w-14 h-14 flex items-center justify-center flex-shrink-0 relative z-10">
-        <WhatsAppIcon width={32} height={32} />
+        <FaWhatsapp size={32} />
       </div>
 
       <span className="relative z-10 pr-6 text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-300 ease-in-out opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 font-poppins">

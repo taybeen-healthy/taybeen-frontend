@@ -3,12 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import { X, ArrowRight } from "lucide-react";
-import { WhatsAppIcon } from "@/components/ui/Icons";
+import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/types";
 import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
 import { formatIndianNumber } from "@/lib/utils";
-import comingSoonImage from "../../../../public/ComingSoon Dates.png";
 
 interface ComingSoonModalProps {
   product: Product;
@@ -31,10 +30,12 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
 
       <div className="relative w-full lg:w-[50%] h-[200px] sm:h-[240px] lg:h-full flex-shrink-0 overflow-hidden border-b lg:border-b-0 lg:border-l border-[#F2EADA] p-4 lg:p-8 flex items-center justify-center bg-white">
         <Image
-          src={comingSoonImage}
+          src="/ComingSoon Dates.png"
           alt="Taybeen Premium Dates"
           className="max-w-full max-h-full object-contain select-none pointer-events-none"
           priority
+          width={400}
+          height={400}
         />
       </div>
 
@@ -104,13 +105,9 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto border border-brand-green text-brand-green hover:bg-brand-green hover:text-white font-poppins font-semibold text-xs sm:text-sm rounded-full py-3.5 px-10 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer group shadow-sm hover:shadow"
+            className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5a] border border-[#25D366] hover:border-[#20ba5a] text-white font-poppins font-semibold text-xs sm:text-sm rounded-full py-3.5 px-10 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer group shadow-sm hover:shadow"
           >
-            <WhatsAppIcon
-              width={22}
-              height={22}
-              className="group-hover:scale-105 transition-transform"
-            />
+            <FaWhatsapp size={22} className="group-hover:scale-105 transition-transform" />
             Chat on WhatsApp
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
