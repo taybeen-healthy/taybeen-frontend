@@ -149,8 +149,9 @@ export const Testimonials: React.FC = () => {
               setDirection(index > activeIndex ? 1 : -1);
               setActiveIndex(index);
             }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeIndex ? "bg-brand-brown-dark" : "bg-[#FFDA8C]"
-              }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === activeIndex ? "bg-brand-brown-dark" : "bg-[#FFDA8C]"
+            }`}
           />
         ))}
       </div>
