@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { testimonials } from "@/data/user/mockData";
-import { ChevronLeft, ChevronRight, Quote, User } from "lucide-react";
+import { ChevronLeft, ChevronRight, CircleUserRound, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -86,7 +86,7 @@ export const Testimonials: React.FC = () => {
           </div>
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#FFDA8C]/20 border-[1.6px] border-[#FFDA8C] flex items-center justify-center text-[#F7A503]">
-              <User className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
+              <CircleUserRound className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
             </div>
             <div>
               <h4 className="text-brand-green font-poppins font-semibold text-sm md:text-base">
@@ -149,9 +149,8 @@ export const Testimonials: React.FC = () => {
               setDirection(index > activeIndex ? 1 : -1);
               setActiveIndex(index);
             }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex ? "bg-brand-brown-dark" : "bg-[#FFDA8C]"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeIndex ? "bg-brand-brown-dark" : "bg-[#FFDA8C]"
+              }`}
           />
         ))}
       </div>

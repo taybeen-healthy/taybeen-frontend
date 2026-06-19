@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { User, ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
+import { CircleUserRound, ShoppingCart, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CartDrawer } from "@/components/user/cart/CartDrawer";
 import { useCart } from "@/context/CartContext";
@@ -74,7 +74,7 @@ export const Navbar: React.FC = () => {
               href="/my-account"
               className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors"
             >
-              <User size={24} className="md:w-8 md:h-8" strokeWidth={2} />
+              <CircleUserRound size={24} className="md:w-8 md:h-8" strokeWidth={2} />
             </Link>
             <div className="hidden lg:block relative">
               <button

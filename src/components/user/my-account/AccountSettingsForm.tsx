@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { User, Pencil, CheckCircle } from "lucide-react";
+import { CircleUserRound, Pencil, CheckCircle } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
@@ -245,7 +245,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <User size={52} strokeWidth={1} />
+                  <CircleUserRound size={52} strokeWidth={1} />
                 )}
               </div>
               <button
