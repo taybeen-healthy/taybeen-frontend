@@ -16,6 +16,9 @@ import {
   validateAcceptTerms,
 } from "@/utils/validation";
 
+import { apiClient } from "@/lib/apiClient";
+import { setCookie } from "@/utils/cookie";
+
 interface AuthFormProps {
   type: "signup" | "signin";
 }
@@ -37,6 +40,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -71,41 +76,47 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      if (isSignUp) {
-        const names = fullName.trim().split(/\s+/);
-        const firstName = names[0] || "";
-        const lastName = names.slice(1).join(" ") || "";
+      const payload = isSignUp
+        ? { fullName, email, phone: phone.replace(/\s+/g, ""), password }
+        : { email, password };
+      const endpoint = isSignUp
+        ? "/auth/customer/signup"
+        : "/auth/customer/signin";
+
+      setIsSubmitting(true);
+      setSubmitError(null);
+      try {
+        const res = await apiClient.post(endpoint, payload);
+        const { tokens, user } = res.data;
+
+        setCookie("taybeen_access_token", tokens.accessToken, 1);
+        setCookie("taybeen_refresh_token", tokens.refreshToken, 7);
+
+        const nameParts = (user.name || fullName || "").trim().split(/\s+/);
+        const firstName = nameParts[0] || "";
+        const lastName = nameParts.slice(1).join(" ") || "";
+
         localStorage.setItem(
           "taybeen_profile",
           JSON.stringify({
             firstName,
             lastName,
-            email,
-            phone: phone.replace(/\s+/g, ""), // ensure E.164
-            avatarUrl: undefined,
+            email: user.email || email,
+            phone: user.phone || phone || "",
+            avatarUrl: user.avatarUrl || undefined,
           })
         );
-        alert("Account created successfully!");
+
+        alert(isSignUp ? "Account created successfully!" : "Signed in successfully!");
         router.push("/my-account");
-      } else {
-        const storedProfile = localStorage.getItem("taybeen_profile");
-        if (!storedProfile) {
-          localStorage.setItem(
-            "taybeen_profile",
-            JSON.stringify({
-              firstName: "Maryam",
-              lastName: "Ali",
-              email,
-              phone: "+919876543210",
-              avatarUrl: undefined,
-            })
-          );
-        }
-        alert("Signed in successfully!");
-        router.push("/my-account");
+      } catch (err: any) {
+        console.error("Auth error:", err);
+        setSubmitError(err.response?.data?.message || "An authentication error occurred. Please try again.");
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -222,12 +233,18 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             </button>
           </div>
         )}
+        {submitError && (
+          <div className="text-red-500 font-poppins text-xs font-semibold text-center bg-red-50 border border-red-200 rounded-lg p-2.5 mt-2">
+            {submitError}
+          </div>
+        )}
 
         <button
           type="submit"
-          className="w-full bg-[#5A3E2B] hover:bg-[#483122] text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer mt-6"
+          disabled={isSubmitting}
+          className="w-full bg-[#5A3E2B] hover:bg-[#483122] disabled:bg-[#5A3E2B]/50 text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer mt-6 flex items-center justify-center gap-2"
         >
-          {isSignUp ? "Create Account" : "Sign In"}
+          {isSubmitting ? "Processing..." : (isSignUp ? "Create Account" : "Sign In")}
         </button>
       </form>
 
@@ -241,6 +258,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
 
       <button
         type="button"
+        onClick={() => {
+          const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
+          window.location.href = `${backendUrl}/auth/google`;
+        }}
         className="w-full bg-white border border-[#C4A482]/50 hover:bg-black/5 text-[#5A3E2B] py-3.5 px-6 rounded-full font-poppins font-semibold text-sm transition-all flex items-center justify-center gap-3 cursor-pointer shadow-sm"
       >
         <GoogleIcon className="w-5 h-5" />

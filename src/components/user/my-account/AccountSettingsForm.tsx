@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
+import { apiClient } from "@/lib/apiClient";
 import { getCountryOptions, getStateOptions } from "@/utils/geoUtils";
 import {
   validateFirstName,
@@ -131,11 +132,16 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     }));
   };
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const url = URL.createObjectURL(file);
-      setProfileForm((prev) => ({ ...prev, avatarUrl: url }));
+      setSelectedFile(file);
+      // Set temporary local URL for quick visual feedback
+      const localUrl = URL.createObjectURL(file);
+      setProfileForm((prev) => ({ ...prev, avatarUrl: localUrl }));
     }
   };
 
@@ -143,7 +149,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     fileInputRef.current?.click();
   };
 
-  const handleProfileSubmit = (e: React.FormEvent) => {
+  const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: Record<string, string> = {};
 
@@ -166,9 +172,43 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     }
 
     setProfileErrors({});
-    onSaveProfile(profileForm);
-    setProfileSuccess(true);
-    setTimeout(() => setProfileSuccess(false), 4000);
+    setIsUploadingAvatar(true);
+
+    try {
+      let finalAvatarUrl = profileForm.avatarUrl;
+
+      if (selectedFile) {
+        const formDataPayload = new FormData();
+        formDataPayload.append("file", selectedFile);
+
+        const response = await apiClient.post("/media/upload", formDataPayload, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        const url = response.data?.url || response.data?.data?.url;
+        if (url) {
+          finalAvatarUrl = url;
+          // Sync form state
+          setProfileForm((prev) => ({ ...prev, avatarUrl: url }));
+        }
+      }
+
+      await onSaveProfile({
+        ...profileForm,
+        avatarUrl: finalAvatarUrl,
+      });
+
+      setSelectedFile(null);
+      setProfileSuccess(true);
+      setTimeout(() => setProfileSuccess(false), 4000);
+    } catch (err) {
+      console.error("Failed to save profile or upload avatar:", err);
+      alert("An error occurred while saving profile changes. Please try again.");
+    } finally {
+      setIsUploadingAvatar(false);
+    }
   };
 
   const handleBillingSubmit = (e: React.FormEvent) => {
@@ -335,9 +375,10 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                   type="submit"
                   variant="primary"
                   size="md"
-                  className="w-full md:w-auto uppercase font-bold text-xs sm:text-sm tracking-wider shadow-md hover:shadow-lg hover:bg-opacity-95 active:scale-[0.98]"
+                  disabled={isUploadingAvatar}
+                  className="w-full md:w-auto uppercase font-bold text-xs sm:text-sm tracking-wider shadow-md hover:shadow-lg hover:bg-opacity-95 active:scale-[0.98] disabled:opacity-50"
                 >
-                  SAVE CHANGES
+                  {isUploadingAvatar ? "SAVING..." : "SAVE CHANGES"}
                 </Button>
               </div>
             </div>

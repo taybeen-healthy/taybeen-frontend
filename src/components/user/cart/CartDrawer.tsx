@@ -8,6 +8,8 @@ import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { formatIndianCurrency } from "@/lib/utils";
 
+import { useCustomization } from "@/context/CustomizationContext";
+
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -63,11 +65,12 @@ const formatOrderDate = (date: Date): string => {
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
   const { cartItems, updateQuantity, removeFromCart, cartCount, clearCart } = useCart();
+  const { delivery } = useCustomization();
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.priceAtSelection * item.quantity, 0);
 
-  const shippingThreshold = 999;
-  const shippingCost = subtotal >= shippingThreshold ? 0 : 79;
+  const shippingThreshold = delivery.maximumAmount;
+  const shippingCost = subtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
   const total = subtotal + shippingCost;
   const remainingForFreeShipping = Math.max(shippingThreshold - subtotal, 0);
   const freeShippingProgress = Math.min((subtotal / shippingThreshold) * 100, 100);

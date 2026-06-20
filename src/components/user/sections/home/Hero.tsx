@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { Tag } from "@/components/ui/Tag";
-import { homeData } from "@/data/user/homeData";
+import { useCustomization } from "@/context/CustomizationContext";
 
 export const Hero: React.FC = () => {
-  const { hero } = homeData;
+  const { hero } = useCustomization();
 
   return (
     <Section

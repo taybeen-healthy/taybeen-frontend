@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Star, Upload, X, ArrowRight } from "lucide-react";
+import { Star, Upload, X, ArrowRight, Loader2 } from "lucide-react";
 import { Select } from "@/components/ui/Select";
-
-const productsList = ["Mejdool Dates", "Ajwa Dates", "Safawi Dates", "Mabroom Dates"];
+import { apiClient } from "@/lib/apiClient";
 
 interface ReviewFormProps {
   onSubmitSuccess: () => void;
@@ -22,8 +21,61 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  
+  const [orders, setOrders] = useState<any[]>([]);
+  const [purchasedProducts, setPurchasedProducts] = useState<{ id: string; name: string; orderId: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState("");
+  const [selectedOrderId, setSelectedOrderId] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Prefill profile
+    try {
+      const storedProfile = localStorage.getItem("taybeen_profile");
+      if (storedProfile) {
+        const p = JSON.parse(storedProfile);
+        setFullName(`${p.firstName || ""} ${p.lastName || ""}`.trim());
+        setEmail(p.email || "");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    // Fetch orders
+    apiClient.get("/orders")
+      .then((res) => {
+        const ordersData = Array.isArray(res.data?.data)
+          ? res.data.data
+          : Array.isArray(res.data)
+            ? res.data
+            : [];
+        setOrders(ordersData);
+
+        const productsMap: Record<string, { id: string; name: string; orderId: string }> = {};
+        ordersData.forEach((order: any) => {
+          if (order.items) {
+            order.items.forEach((item: any) => {
+              const prodId = item.productId;
+              productsMap[prodId] = {
+                id: prodId,
+                name: item.name || item.productName || "Product",
+                orderId: order.id || order._id,
+              };
+            });
+          }
+        });
+        setPurchasedProducts(Object.values(productsMap));
+      })
+      .catch((err) => {
+        console.error("Error fetching customer orders for reviews:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleRatingClick = (val: number) => {
     setRating(val);
@@ -81,21 +133,71 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
       return;
     }
 
+    if (!selectedProductId || !selectedOrderId) {
+      setSubmitError("Could not associate the review with a valid purchase. Please select a purchased product.");
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      await apiClient.post("/reviews", {
+        productId: selectedProductId,
+        orderId: selectedOrderId,
+        customerName: fullName,
+        customerEmail: email,
+        customerPhone: "",
+        rating,
+        comment: experience,
+        images: [], // Pass empty array since user-facing image uploading is admin-only
+      });
       onSubmitSuccess();
-    }, 1500);
+    } catch (err: any) {
+      console.error("Review submit error:", err);
+      setSubmitError(err.response?.data?.message || "Failed to submit review. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[300px] flex flex-col items-center justify-center bg-white border border-[#C4A482]/25 rounded-2xl p-8">
+        <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
+        <p className="font-poppins text-[#5A3E2B]/80 font-medium">Checking your purchased products...</p>
+      </div>
+    );
+  }
+
+  if (purchasedProducts.length === 0) {
+    return (
+      <div className="min-h-[300px] flex flex-col items-center justify-center bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center space-y-4 font-poppins">
+        <div className="w-16 h-16 rounded-full bg-[#FFECEC] text-red-500 flex items-center justify-center border border-red-100">
+          <X size={28} />
+        </div>
+        <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">No Purchased Products</h3>
+        <p className="text-brand-green max-w-md mx-auto text-sm leading-relaxed">
+          You can only review products that you have successfully purchased from Taybeen. Once you place an order, you will be able to leave a review here.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
+      {submitError && (
+        <div className="text-red-500 font-poppins text-sm font-semibold bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+          {submitError}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div>
           <label
@@ -156,6 +258,11 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         value={productPurchased}
         onChange={(val) => {
           setProductPurchased(val);
+          const match = purchasedProducts.find((p) => p.name === val);
+          if (match) {
+            setSelectedProductId(match.id);
+            setSelectedOrderId(match.orderId);
+          }
           if (errors.productPurchased) {
             setErrors((prev) => {
               const copy = { ...prev };
@@ -164,7 +271,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
             });
           }
         }}
-        options={productsList}
+        options={purchasedProducts.map((p) => p.name)}
         placeholder="Select a product"
         error={errors.productPurchased}
       />

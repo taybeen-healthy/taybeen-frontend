@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { LogOut, Loader2, Users } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
 import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData";
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
 import { Hero } from "@/components/layout/Hero";
+import { apiClient } from "@/lib/apiClient";
 import {
   AccountSidebar,
   AccountDashboard,
@@ -24,60 +25,149 @@ export const MyAccountPage: React.FC = () => {
   const router = useRouter();
 
   const [profile, setProfile] = useState<AccountProfileForm>({
-    firstName: "Maryam",
-    lastName: "Ali",
-    email: "maryam.ali@gmail.com",
-    phone: "+919876543210",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
     avatarUrl: undefined,
   });
 
   const [billing, setBilling] = useState<BillingAddressForm>({
-    firstName: "Maryam",
-    lastName: "Ali",
-    streetAddress: "Flat 402, Green Valley Apartments, Baner, Pune",
-    country: "India",
-    stateProvince: "Maharashtra",
-    postalCode: "411045",
-    email: "1234@gmil.com",
-    phone: "+919876543210",
+    firstName: "",
+    lastName: "",
+    streetAddress: "",
+    country: "",
+    stateProvince: "",
+    postalCode: "",
+    email: "",
+    phone: "",
   });
 
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [affiliateData, setAffiliateData] = useState<any>(null);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [loadingAffiliate, setLoadingAffiliate] = useState(true);
 
   useEffect(() => {
-    try {
-      const storedProfile = localStorage.getItem("taybeen_profile");
-      if (storedProfile) {
-        setProfile(JSON.parse(storedProfile));
-      }
-      const storedBilling = localStorage.getItem("taybeen_billing");
-      if (storedBilling) {
-        setBilling(JSON.parse(storedBilling));
-      }
-    } catch (e) {
-      console.error("Failed to load profile/billing from localStorage", e);
-    }
+    // Fetch customer profile & billing info
+    apiClient.get("/customers/me")
+      .then((res) => {
+        if (res.data) {
+          const cust = res.data;
+          const nameParts = (cust.name || "").trim().split(/\s+/);
+          const firstName = nameParts[0] || "";
+          const lastName = nameParts.slice(1).join(" ") || "";
+          
+          setProfile({
+            firstName,
+            lastName,
+            email: cust.email || "",
+            phone: cust.phone || "",
+            avatarUrl: cust.avatarUrl || undefined,
+          });
+
+          if (cust.billingAddress) {
+            setBilling({
+              firstName: cust.billingAddress.firstName || "",
+              lastName: cust.billingAddress.lastName || "",
+              streetAddress: cust.billingAddress.street || cust.billingAddress.streetAddress || "",
+              city: cust.billingAddress.city || "",
+              country: cust.billingAddress.country || "",
+              stateProvince: cust.billingAddress.state || cust.billingAddress.stateProvince || "",
+              postalCode: cust.billingAddress.postalCode || "",
+              email: cust.billingAddress.email || "",
+              phone: cust.billingAddress.phone || "",
+            });
+          } else {
+            const storedBilling = localStorage.getItem("taybeen_billing");
+            if (storedBilling) {
+              setBilling(JSON.parse(storedBilling));
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching customer profile:", err);
+        // Fallback to local storage
+        try {
+          const storedProfile = localStorage.getItem("taybeen_profile");
+          if (storedProfile) {
+            setProfile(JSON.parse(storedProfile));
+          }
+          const storedBilling = localStorage.getItem("taybeen_billing");
+          if (storedBilling) {
+            setBilling(JSON.parse(storedBilling));
+          }
+        } catch (e) {
+          console.error("Failed to load profile/billing from localStorage", e);
+        }
+      });
+
+    // Fetch customer orders
+    apiClient.get("/orders")
+      .then((res) => {
+        const ordersList = Array.isArray(res.data?.data)
+          ? res.data.data
+          : Array.isArray(res.data)
+            ? res.data
+            : [];
+        setOrders(ordersList);
+      })
+      .catch((err) => console.error("Error fetching orders:", err))
+      .finally(() => setLoadingOrders(false));
+
+    // Fetch affiliate dashboard
+    apiClient.get("/affiliates/my-dashboard")
+      .then((res) => {
+        if (res.data) {
+          setAffiliateData(res.data);
+        } else {
+          setAffiliateData(null);
+        }
+      })
+      .catch((err) => {
+        console.warn("Affiliate dashboard not found or error fetching:", err?.message || err);
+        setAffiliateData(null);
+      })
+      .finally(() => setLoadingAffiliate(false));
   }, []);
 
-  const handleSaveProfile = (newProfile: AccountProfileForm) => {
+  const handleSaveProfile = async (newProfile: AccountProfileForm) => {
     setProfile(newProfile);
     try {
       localStorage.setItem("taybeen_profile", JSON.stringify(newProfile));
+      await apiClient.put("/customers/profile", {
+        name: `${newProfile.firstName} ${newProfile.lastName}`.trim(),
+        phone: newProfile.phone,
+        avatarUrl: newProfile.avatarUrl,
+      });
     } catch (e) {
-      console.error(e);
+      console.error("Error saving profile to API:", e);
     }
   };
 
-  const handleSaveBilling = (newBilling: BillingAddressForm) => {
+  const handleSaveBilling = async (newBilling: BillingAddressForm) => {
     setBilling(newBilling);
     try {
       localStorage.setItem("taybeen_billing", JSON.stringify(newBilling));
+      await apiClient.put("/customers/billing", {
+        billingAddress: {
+          firstName: newBilling.firstName,
+          lastName: newBilling.lastName,
+          streetAddress: newBilling.streetAddress,
+          city: newBilling.city || "Pune",
+          stateProvince: newBilling.stateProvince,
+          country: newBilling.country,
+          postalCode: newBilling.postalCode,
+          phone: newBilling.phone,
+          email: newBilling.email || profile.email,
+        },
+      });
     } catch (e) {
-      console.error(e);
+      console.error("Error saving billing to API:", e);
     }
   };
-
-  const [orders] = useState(orderHistory);
 
   const handleTabChange = (tab: string) => {
     if (tab === "logout") {
@@ -136,7 +226,35 @@ export const MyAccountPage: React.FC = () => {
                   onViewDetails={setSelectedOrderId}
                 />
               ))}
-            {activeTab === "affiliate" && <AffiliateDashboard data={affiliateDashboardData} />}
+            {activeTab === "affiliate" && (
+              loadingAffiliate ? (
+                <div className="flex justify-center items-center py-12">
+                  <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
+                </div>
+              ) : affiliateData ? (
+                <AffiliateDashboard data={affiliateData} />
+              ) : (
+                <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg text-[#F7A503]">
+                    <Users size={32} className="stroke-[1.75]" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
+                      Become a Taybeen Affiliate Partner
+                    </h3>
+                    <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
+                      Earn rewards by sharing Taybeen Premium Dates with your audience. Access your custom coupon code, track orders in real-time, and get exclusive commissions.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => router.push("/partnerships")}
+                    className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              )
+            )}
             {activeTab !== "dashboard" &&
               activeTab !== "orders" &&
               activeTab !== "settings" &&
@@ -199,7 +317,33 @@ export const MyAccountPage: React.FC = () => {
 
               {activeTab === "affiliate" && (
                 <div className="w-full">
-                  <AffiliateDashboard data={affiliateDashboardData} />
+                  {loadingAffiliate ? (
+                    <div className="flex justify-center items-center py-12">
+                      <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
+                    </div>
+                  ) : affiliateData ? (
+                    <AffiliateDashboard data={affiliateData} />
+                  ) : (
+                    <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg text-[#F7A503]">
+                        <Users size={32} className="stroke-[1.75]" />
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
+                          Become a Taybeen Affiliate Partner
+                        </h3>
+                        <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
+                          Earn rewards by sharing Taybeen Premium Dates with your audience. Access your custom coupon code, track orders in real-time, and get exclusive commissions.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => router.push("/partnerships")}
+                        className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
+                      >
+                        Apply Now
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 

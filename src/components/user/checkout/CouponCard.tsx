@@ -4,7 +4,7 @@ import { Tag, X } from "lucide-react";
 
 interface CouponCardProps {
   appliedCoupon: string | null;
-  onApplyCoupon: (code: string) => boolean;
+  onApplyCoupon: (code: string) => Promise<boolean>;
   onRemoveCoupon: () => void;
   couponError: string | null;
   couponSuccess: string | null;
@@ -23,12 +23,12 @@ export const CouponCard: React.FC<CouponCardProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     const code = inputValue.trim().toUpperCase();
-    const success = onApplyCoupon(code);
+    const success = await onApplyCoupon(code);
     if (success) {
       setInputValue("");
     }

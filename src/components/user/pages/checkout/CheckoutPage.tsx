@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "@/context/CartContext";
 import { CheckoutAddressForm, CheckoutStep } from "@/types/checkout";
 import { Hero } from "@/components/layout/Hero";
+import { apiClient } from "@/lib/apiClient";
+import { loadRazorpayScript } from "@/utils/loadScript";
 import {
   CheckoutForm,
   CheckoutReview,
@@ -25,11 +27,17 @@ import {
   validatePhone,
 } from "@/utils/validation";
 
+import { useCustomization } from "@/context/CustomizationContext";
+
 export const CheckoutPage: React.FC = () => {
   const router = useRouter();
   const { cartItems, clearCart } = useCart();
+  const { delivery } = useCustomization();
 
   const [step, setStep] = useState<CheckoutStep>("form");
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [createdOrder, setCreatedOrder] = useState<any | null>(null);
   const [isBillingSame, setIsBillingSame] = useState(true);
   const [giftMessageOpen, setGiftMessageOpen] = useState(false);
   const [giftMessageText, setGiftMessageText] = useState("");
@@ -104,39 +112,36 @@ export const CheckoutPage: React.FC = () => {
   const [couponSuccess, setCouponSuccess] = useState<string | null>(null);
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.priceAtSelection * item.quantity, 0);
-  const shippingThreshold = 999;
-  const shippingCost = subtotal >= shippingThreshold ? 0 : 79;
+  const shippingThreshold = delivery.maximumAmount;
+  const shippingCost = subtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
 
   const discount = appliedCoupon ? discountAmount : 0;
   const total = Math.max(0, subtotal + shippingCost - discount);
 
-  const handleApplyCoupon = (code: string): boolean => {
+  const handleApplyCoupon = async (code: string): Promise<boolean> => {
     if (!code) return false;
+    setCouponError(null);
+    setCouponSuccess(null);
 
-    if (code === "TAYBEEN10" || code === "WELCOME10") {
-      const discountVal = Math.round(subtotal * 0.1);
-      setAppliedCoupon(code);
-      setDiscountAmount(discountVal);
-      setCouponSuccess(`Coupon "${code}" applied! You saved 10% (₹${discountVal})`);
-      setCouponError(null);
-      return true;
-    } else if (code === "WELCOME100" || code === "WELCOME") {
-      const discountVal = 100;
-      setAppliedCoupon(code);
-      setDiscountAmount(discountVal);
-      setCouponSuccess(`Coupon "${code}" applied! You saved ₹100`);
-      setCouponError(null);
-      return true;
-    } else if (code === "FIRST50") {
-      const discountVal = Math.round(subtotal * 0.5);
-      setAppliedCoupon(code);
-      setDiscountAmount(discountVal);
-      setCouponSuccess(`Coupon "${code}" applied! You saved 50% (₹${discountVal})`);
-      setCouponError(null);
-      return true;
-    } else {
-      setCouponError("Invalid coupon code. Please try again.");
-      setCouponSuccess(null);
+    try {
+      const res = await apiClient.post("/coupons/validate", {
+        code,
+        orderSubtotal: subtotal,
+      });
+
+      const validationData = res.data?.data || res.data;
+
+      if (validationData?.valid) {
+        setAppliedCoupon(code);
+        setDiscountAmount(validationData.discountAmount);
+        setCouponSuccess(validationData.message || `Coupon "${code}" applied!`);
+        return true;
+      } else {
+        setCouponError(validationData?.message || "Invalid coupon code");
+        return false;
+      }
+    } catch (err: any) {
+      setCouponError(err.response?.data?.message || "Failed to validate coupon code");
       return false;
     }
   };
@@ -208,7 +213,67 @@ export const CheckoutPage: React.FC = () => {
     return Object.keys(sErrors).length === 0 && Object.keys(bErrors).length === 0;
   };
 
-  const handleProceedAction = (e?: React.FormEvent) => {
+  const initiateRazorpayPayment = async (orderId: string, razorpayOrder: any) => {
+    const scriptLoaded = await loadRazorpayScript();
+    if (!scriptLoaded) {
+      setPaymentError("Failed to load Razorpay SDK. Please check your connection.");
+      setIsProcessingPayment(false);
+      return;
+    }
+
+    const storedProfileStr = localStorage.getItem("taybeen_profile");
+    let profileData: any = null;
+    if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
+
+    const options = {
+      key: razorpayOrder.keyId,
+      amount: Math.round(razorpayOrder.amount * 100),
+      currency: razorpayOrder.currency,
+      name: "Taybeen Premium Dates",
+      description: `Order #${razorpayOrder.hexId}`,
+      order_id: razorpayOrder.razorpayOrderId,
+      handler: async (response: any) => {
+        setIsProcessingPayment(true);
+        try {
+          const verifyRes = await apiClient.post("/payments/verify", {
+            orderId: orderId,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
+          });
+
+          if (verifyRes.data) {
+            localStorage.setItem("taybeen_last_order", JSON.stringify(verifyRes.data));
+            clearCart();
+            router.push("/order-confirmed");
+          }
+        } catch (err: any) {
+          setPaymentError(err.response?.data?.message || "Payment verification failed.");
+        } finally {
+          setIsProcessingPayment(false);
+        }
+      },
+      prefill: {
+        name: `${shippingForm.firstName} ${shippingForm.lastName}`,
+        email: profileData?.email || shippingForm.phone + "@taybeen.local",
+        contact: shippingForm.phone,
+      },
+      theme: {
+        color: "#4A5E28",
+      },
+      modal: {
+        ondismiss: () => {
+          setIsProcessingPayment(false);
+          setPaymentError("Payment process cancelled by user. You can click 'PROCEED TO MAKE PAYMENT' to try again.");
+        }
+      }
+    };
+
+    const rzp = new (window as any).Razorpay(options);
+    rzp.open();
+  };
+
+  const handleProceedAction = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
     if (step === "form") {
@@ -216,61 +281,68 @@ export const CheckoutPage: React.FC = () => {
         setStep("review");
       }
     } else {
-      const orderId = `TYB-2024-${Math.floor(1000 + Math.random() * 9000)
-        .toString()
-        .padStart(4, "0")}`;
+      setIsProcessingPayment(true);
+      setPaymentError(null);
 
-      const date = new Date();
-      const day = date.getDate();
-      const actualMonths = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      const month = actualMonths[date.getMonth()];
-      const year = date.getFullYear();
+      const storedProfileStr = localStorage.getItem("taybeen_profile");
+      let profileData: any = null;
+      if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
 
-      let suffix = "th";
-      if (day === 1 || day === 21 || day === 31) suffix = "st";
-      else if (day === 2 || day === 22) suffix = "nd";
-      else if (day === 3 || day === 23) suffix = "rd";
+      try {
+        let order = createdOrder;
 
-      let hours = date.getHours();
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-      const ampm = hours >= 12 ? "pm" : "am";
-      hours = hours % 12;
-      hours = hours ? hours : 12;
+        if (!order) {
+          const orderPayload = {
+            items: cartItems.map((item) => ({
+              productId: item.product.id,
+              quantity: item.quantity,
+              weight: item.selectedWeight,
+            })),
+            couponCode: appliedCoupon || undefined,
+            paymentMethod: "UPI",
+            shippingAddress: {
+              firstName: shippingForm.firstName,
+              lastName: shippingForm.lastName,
+              streetAddress: shippingForm.streetAddress,
+              city: shippingForm.city,
+              stateProvince: shippingForm.stateProvince,
+              postalCode: shippingForm.postalCode,
+              country: shippingForm.country,
+              phone: shippingForm.phone,
+              email: profileData?.email || "customer@taybeen.local",
+            },
+            billingAddress: isBillingSame
+              ? undefined
+              : {
+                  firstName: billingForm.firstName,
+                  lastName: billingForm.lastName,
+                  streetAddress: billingForm.streetAddress,
+                  city: billingForm.city,
+                  stateProvince: billingForm.stateProvince,
+                  postalCode: billingForm.postalCode,
+                  country: billingForm.country,
+                  phone: billingForm.phone,
+                  email: profileData?.email || "customer@taybeen.local",
+                },
+            giftMessage: giftMessageOpen ? giftMessageText : undefined,
+          };
 
-      const placedOn = `${day}${suffix} ${month} ${year} ${hours}:${minutes} ${ampm}`;
-      const itemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+          const orderResponse = await apiClient.post("/orders", orderPayload);
+          order = orderResponse.data?.data || orderResponse.data;
+          setCreatedOrder(order);
+        }
 
-      const orderObject = {
-        id: orderId,
-        placedOn: placedOn,
-        itemsCount: itemsCount,
-        items: cartItems.map((item) => ({
-          id: item.product.id,
-          name: item.product.name,
-          weight: item.selectedWeight,
-          quantity: item.quantity,
-          price: item.priceAtSelection,
-        })),
-        total: total,
-        giftMessage: giftMessageOpen ? giftMessageText : undefined,
-      };
+        const paymentOrderResponse = await apiClient.post("/payments/orders", {
+          orderId: order.id,
+        });
+        const paymentOrder = paymentOrderResponse.data?.data || paymentOrderResponse.data;
 
-      localStorage.setItem("taybeen_last_order", JSON.stringify(orderObject));
-      clearCart();
-      router.push("/order-confirmed");
+        await initiateRazorpayPayment(order.id, paymentOrder);
+
+      } catch (err: any) {
+        setPaymentError(err.response?.data?.message || "Failed to initiate payment. Please try again.");
+        setIsProcessingPayment(false);
+      }
     }
   };
 
@@ -310,6 +382,20 @@ export const CheckoutPage: React.FC = () => {
         <main className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-12 pb-24 pt-8 sm:pt-12 w-full">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start w-full">
             <div className="flex-1 w-full">
+              {paymentError && (
+                <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-poppins font-medium flex items-center justify-between">
+                  <span>{paymentError}</span>
+                  <button onClick={() => setPaymentError(null)} className="text-red-500 hover:text-red-700 font-bold ml-2">✕</button>
+                </div>
+              )}
+
+              {isProcessingPayment && (
+                <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm font-poppins font-medium flex items-center gap-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-green-600 border-t-transparent"></div>
+                  <span>Processing, please wait...</span>
+                </div>
+              )}
+
               <div className="lg:hidden w-full mb-6">
                 <CheckoutOrderSummary
                   cartItems={cartItems}

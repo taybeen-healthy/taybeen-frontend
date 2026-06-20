@@ -15,6 +15,21 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
   orders = [],
   onViewDetails,
 }) => {
+  if (!orders || orders.length === 0) {
+    if (activeTab === "dashboard") {
+      return null;
+    }
+    return (
+      <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 shadow-sm text-center font-poppins">
+        <h2 className="font-serif text-base sm:text-lg lg:text-xl font-bold text-brand-brown mb-2 text-left">
+          Order History
+        </h2>
+        <div className="border-b border-[#C4A482]/10 mb-6" />
+        <p className="text-sm text-[#8D7F75] font-medium py-4">You have not placed any orders yet.</p>
+      </div>
+    );
+  }
+
   const displayedOrders = activeTab === "dashboard" ? orders.slice(0, 4) : orders;
 
   return (

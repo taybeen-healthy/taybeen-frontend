@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { partnershipsData } from "@/data/user/partnershipsData";
 import { AffiliateApplicationForm } from "@/types";
+import { apiClient } from "@/lib/apiClient";
 import {
   validateFirstName,
   validateLastName,
@@ -34,6 +35,7 @@ export const PartnershipsPage: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -81,28 +83,28 @@ export const PartnershipsPage: React.FC = () => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+    try {
+      await apiClient.post("/affiliates/apply", {
+        name: `${form.firstName} ${form.lastName}`.trim(),
+        email: form.email,
+        phone: form.phone,
+        city: form.city,
+        occupation: form.occupation,
+        whyJoin: form.reason,
+      });
       setIsSubmitted(true);
-      try {
-        const applications = JSON.parse(
-          localStorage.getItem("taybeen_affiliate_applications") || "[]"
-        );
-        applications.push({
-          ...form,
-          id: `APP-${Date.now()}`,
-          date: new Date().toLocaleDateString(),
-        });
-        localStorage.setItem("taybeen_affiliate_applications", JSON.stringify(applications));
-      } catch (e) {
-        console.error(e);
-      }
-    }, 1200);
+    } catch (err: any) {
+      console.error("Affiliate apply error:", err);
+      setSubmitError(err.response?.data?.message || "Failed to submit application. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -148,6 +150,12 @@ export const PartnershipsPage: React.FC = () => {
               <h2 className="font-serif font-bold text-[#5A3E2B] text-2xl sm:text-3xl border-b border-[#C4A482]/25 pb-4">
                 {formHeading}
               </h2>
+
+              {submitError && (
+                <div className="text-red-500 font-poppins text-sm font-semibold bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                  {submitError}
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

@@ -150,6 +150,7 @@ export const Footer: React.FC = () => {
             <input
               type="email"
               placeholder="your@gmail.com"
+              suppressHydrationWarning={true}
               className="w-full bg-[#F7A503]/10 border border-black/35 rounded-full py-3.5 px-6 pr-32 sm:pr-36 font-poppins text-brand-brown focus:outline-none focus:ring-1 focus:ring-brand-primary text-sm"
             />
             <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-green-light text-white px-5 md:px-6 py-2 rounded-full font-poppins text-xs md:text-sm hover:bg-opacity-90 transition-all font-semibold">

@@ -1,4 +1,5 @@
 import { CartProvider } from "@/context/CartContext";
+import { CustomizationProvider } from "@/context/CustomizationContext";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 
 export default function StoreLayout({
@@ -7,9 +8,11 @@ export default function StoreLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <CartProvider>
-      {children}
-      <WhatsAppButton />
-    </CartProvider>
+    <CustomizationProvider>
+      <CartProvider>
+        {children}
+        <WhatsAppButton />
+      </CartProvider>
+    </CustomizationProvider>
   );
 }

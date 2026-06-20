@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Share2, Truck, Award, Sprout, Plus, Minus } from "lucide-react";
+import { X, Share2, Truck, Award, Sprout, Plus, Minus, Loader2 } from "lucide-react";
 import { Product } from "@/types";
 import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
 import { Select } from "@/components/ui/Select";
 import { useCart } from "@/context/CartContext";
 import { formatIndianCurrency } from "@/lib/utils";
+import { apiClient } from "@/lib/apiClient";
 
 interface ProductDetailModalProps {
   product: Product;
@@ -17,6 +18,8 @@ interface ProductDetailModalProps {
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClose }) => {
   const { addToCart, setIsCartOpen } = useCart();
+  const [detailedProduct, setDetailedProduct] = useState<Product>(product);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<"description" | "benefits">("description");
   const [selectedWeight, setSelectedWeight] = useState(
@@ -25,9 +28,37 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   const [quantity, setQuantity] = useState(1);
   const [shareStatus, setShareStatus] = useState("Share");
 
-  const productImages = product.images || [product.image];
-  const weightOptions = product.weightOptions || [product.weight];
-  const productBenefits = product.benefits || [
+  useEffect(() => {
+    let active = true;
+    const fetchDetails = async () => {
+      try {
+        setIsLoading(true);
+        const response = await apiClient.get(`/products/${product.id}`);
+        if (active && response.data) {
+          setDetailedProduct(response.data);
+          if (response.data.weightOptions && response.data.weightOptions.length > 0) {
+            setSelectedWeight(response.data.weightOptions[0]);
+          } else if (response.data.weight) {
+            setSelectedWeight(response.data.weight);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      } finally {
+        if (active) {
+          setIsLoading(false);
+        }
+      }
+    };
+    fetchDetails();
+    return () => {
+      active = false;
+    };
+  }, [product.id]);
+
+  const productImages = detailedProduct.images || [detailedProduct.image];
+  const weightOptions = detailedProduct.weightOptions || [detailedProduct.weight];
+  const productBenefits = detailedProduct.benefits || [
     "Rich in vitamins and minerals",
     "100% natural energy booster",
     "High source of dietary fiber",
@@ -42,18 +73,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
     return Math.round(basePrice * ratio);
   };
 
-  const currentPrice = getPriceForWeight(selectedWeight, product.weight, product.price);
-  const currentOriginalPrice = product.originalPrice
-    ? getPriceForWeight(selectedWeight, product.weight, product.originalPrice)
+  const currentPrice = getPriceForWeight(selectedWeight, detailedProduct.weight, detailedProduct.price);
+  const currentOriginalPrice = detailedProduct.originalPrice
+    ? getPriceForWeight(selectedWeight, detailedProduct.weight, detailedProduct.originalPrice)
     : undefined;
 
   const handleShare = async () => {
     const shareUrl = window.location.href;
-    const shareText = `Check out Taybeen's premium ${product.name}!`;
+    const shareText = `Check out Taybeen's premium ${detailedProduct.name}!`;
 
     if (navigator.share) {
       try {
-        await navigator.share({ title: product.name, text: shareText, url: shareUrl });
+        await navigator.share({ title: detailedProduct.name, text: shareText, url: shareUrl });
       } catch {
         copyToClipboard(shareUrl);
       }
@@ -69,7 +100,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   };
 
   const handleAddToCart = () => {
-    addToCart(product, selectedWeight, quantity);
+    addToCart(detailedProduct, selectedWeight, quantity);
     onClose();
     setIsCartOpen(true);
   };
@@ -89,185 +120,194 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
         <X size={16} className="sm:w-[18px] sm:h-[18px]" />
       </button>
 
-      <div className="w-full lg:w-[45%] flex flex-col p-4 sm:p-5 md:p-6 lg:p-8 bg-[#FDFAF3] border-b lg:border-b-0 lg:border-r border-[#F2EADA] h-auto flex-shrink-0">
-        <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden bg-[#F5F0E8] mb-4 flex-shrink-0">
-          <Image
-            src={productImages[selectedImageIndex] || product.image}
-            alt={product.name}
-            fill
-            className="object-cover select-none pointer-events-none"
-            priority
-          />
+      {isLoading ? (
+        <div className="w-full flex flex-col items-center justify-center py-32 px-4 bg-[#FDFAF3] min-h-[400px]">
+          <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
+          <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading product details...</p>
         </div>
-
-        <div className="flex gap-3 justify-start">
-          {productImages.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedImageIndex(i)}
-              className={`relative w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-lg overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
-                selectedImageIndex === i
-                  ? "border-[#C4A482] shadow-sm"
-                  : "border-transparent hover:border-[#C4A482]/40 bg-[#F5F0E8]"
-              }`}
-            >
+      ) : (
+        <>
+          <div className="w-full lg:w-[45%] flex flex-col p-4 sm:p-5 md:p-6 lg:p-8 bg-[#FDFAF3] border-b lg:border-b-0 lg:border-r border-[#F2EADA] h-auto flex-shrink-0">
+            <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden bg-[#F5F0E8] mb-4 flex-shrink-0">
               <Image
-                src={img}
-                alt={`${product.name} view ${i + 1}`}
+                src={productImages[selectedImageIndex] || detailedProduct.image}
+                alt={detailedProduct.name}
                 fill
-                className="object-cover"
+                className="object-cover select-none pointer-events-none"
+                priority
               />
-            </button>
-          ))}
-        </div>
-      </div>
+            </div>
 
-      <div className="flex-1 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col h-auto select-text text-left bg-[#FDFAF3] overflow-visible">
-        <h2 className="text-xl sm:text-2xl lg:text-[1.85rem] font-serif font-bold text-brand-brown leading-tight mb-3">
-          {product.name}
-        </h2>
-
-        <div className="flex items-center gap-3 mb-4">
-          <StarRating rating={product.rating} size={16} />
-          <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
-            {product.rating} ({product.reviewsCount} reviews)
-          </span>
-        </div>
-
-        <div className="mb-5">
-          <div className="flex items-baseline gap-3 flex-wrap">
-            <span className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
-              ₹{formatIndianCurrency(currentPrice, 2)}
-            </span>
-            {currentOriginalPrice && (
-              <>
-                <span className="text-base sm:text-lg text-brand-brown/60 line-through font-poppins font-medium">
-                  ₹{formatIndianCurrency(currentOriginalPrice, 2)}
-                </span>
-                <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
-                  (
-                  {Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}
-                  % OFF)
-                </span>
-              </>
-            )}
-          </div>
-          <div className="text-xs sm:text-sm text-brand-green-light font-poppins mt-0.5">
-            Inclusive of all taxes
-          </div>
-        </div>
-
-        <div className="flex gap-6 mb-5 border-b border-[#5A3E2B]/15">
-          <button
-            onClick={() => setActiveTab("description")}
-            className={`pb-2.5 text-sm font-poppins transition-all cursor-pointer ${
-              activeTab === "description"
-                ? "font-bold text-brand-brown border-b-2 border-brand-brown"
-                : "font-medium text-[#8D7F75] hover:text-[#5A3E2B]"
-            }`}
-          >
-            Description
-          </button>
-          <button
-            onClick={() => setActiveTab("benefits")}
-            className={`pb-2.5 text-sm font-poppins transition-all cursor-pointer ${
-              activeTab === "benefits"
-                ? "font-bold text-brand-brown border-b-2 border-brand-brown"
-                : "font-medium text-[#8D7F75] hover:text-[#5A3E2B]"
-            }`}
-          >
-            Benefits
-          </button>
-        </div>
-
-        <div className="text-xs sm:text-sm text-[#7D6B5E] font-poppins leading-relaxed mb-6 overflow-visible">
-          {activeTab === "description" ? (
-            <p>{product.description}</p>
-          ) : (
-            <ul className="list-disc pl-5 space-y-1.5">
-              {productBenefits.map((benefit, i) => (
-                <li key={i}>{benefit}</li>
+            <div className="flex gap-3 justify-start">
+              {productImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedImageIndex(i)}
+                  className={`relative w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-lg overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
+                    selectedImageIndex === i
+                      ? "border-[#C4A482] shadow-sm"
+                      : "border-transparent hover:border-[#C4A482]/40 bg-[#F5F0E8]"
+                  }`}
+                >
+                  <Image
+                    src={img}
+                    alt={`${detailedProduct.name} view ${i + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
               ))}
-            </ul>
-          )}
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6">
-          <div className="w-full sm:w-44">
-            <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
-              Weight
-            </span>
-            <Select
-              value={selectedWeight}
-              onChange={setSelectedWeight}
-              options={weightOptions}
-              className="w-full text-xs"
-            />
-          </div>
-
-          <div>
-            <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
-              Quantity
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
-              >
-                <Minus size={15} strokeWidth={2.5} />
-              </button>
-              <span className="w-10 text-center font-bold text-brand-brown font-poppins text-base select-none">
-                {quantity}
-              </span>
-              <button
-                onClick={() => setQuantity((q) => q + 1)}
-                className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
-              >
-                <Plus size={15} strokeWidth={2.5} />
-              </button>
             </div>
           </div>
-        </div>
 
-        <div className="flex gap-3 mb-6">
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
-          >
-            Add to cart
-          </button>
-          <button
-            onClick={handleShare}
-            className="flex items-center justify-center gap-2 border border-[#5A3E2B]/30 hover:border-[#5A3E2B] hover:bg-[#5A3E2B]/5 text-brand-brown py-3.5 px-6 rounded-lg font-poppins font-semibold text-sm cursor-pointer transition-all select-none active:scale-[0.98] focus:outline-none"
-          >
-            <Share2 size={15} />
-            <span>{shareStatus}</span>
-          </button>
-        </div>
+          <div className="flex-1 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col h-auto select-text text-left bg-[#FDFAF3] overflow-visible">
+            <h2 className="text-xl sm:text-2xl lg:text-[1.85rem] font-serif font-bold text-brand-brown leading-tight mb-3">
+              {detailedProduct.name}
+            </h2>
 
-        <div className="grid grid-cols-3 gap-3 border-t border-[#5A3E2B]/10 pt-5 mt-4">
-          <div className="flex flex-col items-center gap-1.5">
-            <Truck size={20} className="text-[#F7A503]" />
-            <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
-              Free Shipping on
-              <br />
-              ₹999+
-            </span>
+            <div className="flex items-center gap-3 mb-4">
+              <StarRating rating={detailedProduct.rating} size={16} />
+              <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
+                {detailedProduct.rating} ({detailedProduct.reviewsCount} reviews)
+              </span>
+            </div>
+
+            <div className="mb-5">
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <span className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
+                  ₹{formatIndianCurrency(currentPrice, 2)}
+                </span>
+                {currentOriginalPrice && (
+                  <>
+                    <span className="text-base sm:text-lg text-brand-brown/60 line-through font-poppins font-medium">
+                      ₹{formatIndianCurrency(currentOriginalPrice, 2)}
+                    </span>
+                    <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
+                      (
+                      {Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}
+                      % OFF)
+                    </span>
+                  </>
+                )}
+              </div>
+              <div className="text-xs sm:text-sm text-brand-green-light font-poppins mt-0.5">
+                Inclusive of all taxes
+              </div>
+            </div>
+
+            <div className="flex gap-6 mb-5 border-b border-[#5A3E2B]/15">
+              <button
+                onClick={() => setActiveTab("description")}
+                className={`pb-2.5 text-sm font-poppins transition-all cursor-pointer ${
+                  activeTab === "description"
+                    ? "font-bold text-brand-brown border-b-2 border-brand-brown"
+                    : "font-medium text-[#8D7F75] hover:text-[#5A3E2B]"
+                }`}
+              >
+                Description
+              </button>
+              <button
+                onClick={() => setActiveTab("benefits")}
+                className={`pb-2.5 text-sm font-poppins transition-all cursor-pointer ${
+                  activeTab === "benefits"
+                    ? "font-bold text-brand-brown border-b-2 border-brand-brown"
+                    : "font-medium text-[#8D7F75] hover:text-[#5A3E2B]"
+                }`}
+              >
+                Benefits
+              </button>
+            </div>
+
+            <div className="text-xs sm:text-sm text-[#7D6B5E] font-poppins leading-relaxed mb-6 overflow-visible">
+              {activeTab === "description" ? (
+                <p>{detailedProduct.description}</p>
+              ) : (
+                <ul className="list-disc pl-5 space-y-1.5">
+                  {productBenefits.map((benefit, i) => (
+                    <li key={i}>{benefit}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6">
+              <div className="w-full sm:w-44">
+                <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
+                  Weight
+                </span>
+                <Select
+                  value={selectedWeight}
+                  onChange={setSelectedWeight}
+                  options={weightOptions}
+                  className="w-full text-xs"
+                />
+              </div>
+
+              <div>
+                <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
+                  Quantity
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
+                  >
+                    <Minus size={15} strokeWidth={2.5} />
+                  </button>
+                  <span className="w-10 text-center font-bold text-brand-brown font-poppins text-base select-none">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity((q) => q + 1)}
+                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
+                  >
+                    <Plus size={15} strokeWidth={2.5} />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mb-6">
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
+              >
+                Add to cart
+              </button>
+              <button
+                onClick={handleShare}
+                className="flex items-center justify-center gap-2 border border-[#5A3E2B]/30 hover:border-[#5A3E2B] hover:bg-[#5A3E2B]/5 text-brand-brown py-3.5 px-6 rounded-lg font-poppins font-semibold text-sm cursor-pointer transition-all select-none active:scale-[0.98] focus:outline-none"
+              >
+                <Share2 size={15} />
+                <span>{shareStatus}</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 border-t border-[#5A3E2B]/10 pt-5 mt-4">
+              <div className="flex flex-col items-center gap-1.5">
+                <Truck size={20} className="text-[#F7A503]" />
+                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                  Free Shipping on
+                  <br />
+                  ₹999+
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <Award size={20} className="text-[#F7A503]" />
+                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                  Premium Quality
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <Sprout size={20} className="text-[#F7A503]" />
+                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                  Rich in Fiber
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col items-center gap-1.5">
-            <Award size={20} className="text-[#F7A503]" />
-            <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
-              Premium Quality
-            </span>
-          </div>
-          <div className="flex flex-col items-center gap-1.5">
-            <Sprout size={20} className="text-[#F7A503]" />
-            <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
-              Rich in Fiber
-            </span>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </Modal>
   );
 };
