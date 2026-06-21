@@ -251,16 +251,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
+                    disabled={detailedProduct.stock !== undefined && detailedProduct.stock <= 0}
+                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Minus size={15} strokeWidth={2.5} />
                   </button>
                   <span className="w-10 text-center font-bold text-brand-brown font-poppins text-base select-none">
-                    {quantity}
+                    {detailedProduct.stock !== undefined && detailedProduct.stock <= 0 ? 0 : quantity}
                   </span>
                   <button
                     onClick={() => setQuantity((q) => q + 1)}
-                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none"
+                    disabled={detailedProduct.stock !== undefined && (detailedProduct.stock <= 0 || quantity >= detailedProduct.stock)}
+                    className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Plus size={15} strokeWidth={2.5} />
                   </button>
@@ -269,12 +271,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             </div>
 
             <div className="flex gap-3 mb-6">
-              <button
-                onClick={handleAddToCart}
-                className="flex-1 bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
-              >
-                Add to cart
-              </button>
+              {detailedProduct.stock !== undefined && detailedProduct.stock <= 0 ? (
+                <button
+                  disabled
+                  className="flex-1 bg-gray-200 text-gray-400 py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide cursor-not-allowed text-center select-none focus:outline-none border border-gray-300"
+                >
+                  Out of Stock
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
+                >
+                  Add to cart
+                </button>
+              )}
               <button
                 onClick={handleShare}
                 className="flex items-center justify-center gap-2 border border-[#5A3E2B]/30 hover:border-[#5A3E2B] hover:bg-[#5A3E2B]/5 text-brand-brown py-3.5 px-6 rounded-lg font-poppins font-semibold text-sm cursor-pointer transition-all select-none active:scale-[0.98] focus:outline-none"
