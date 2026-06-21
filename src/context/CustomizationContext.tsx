@@ -34,8 +34,9 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
     const fetchCustomization = async () => {
       try {
         const response = await apiClient.get("/customization");
-        if (active && response.data) {
-          const { hero: backendHero, story: backendStory, offer: backendOffer, delivery: backendDelivery } = response.data;
+        const customizationData = response.data?.data || response.data;
+        if (active && customizationData) {
+          const { hero: backendHero, story: backendStory, offer: backendOffer, delivery: backendDelivery } = customizationData;
 
           // Merge backend properties, keeping local fields as fallbacks
           if (backendHero) {

@@ -90,7 +90,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       setSubmitError(null);
       try {
         const res = await apiClient.post(endpoint, payload);
-        const { tokens, user } = res.data;
+        const { tokens, user } = res.data?.data || res.data;
 
         setCookie("taybeen_access_token", tokens.accessToken, 1);
         setCookie("taybeen_refresh_token", tokens.refreshToken, 7);

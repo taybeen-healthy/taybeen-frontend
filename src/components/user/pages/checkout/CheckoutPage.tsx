@@ -242,8 +242,21 @@ export const CheckoutPage: React.FC = () => {
             razorpaySignature: response.razorpay_signature,
           });
 
-          if (verifyRes.data) {
-            localStorage.setItem("taybeen_last_order", JSON.stringify(verifyRes.data));
+          const orderData = verifyRes.data?.data || verifyRes.data;
+          if (orderData) {
+            const lastOrderInfo = {
+              id: orderData.hexId || createdOrder?.hexId || orderData.orderId || createdOrder?.id,
+              placedOn: createdOrder?.placedOn || new Date().toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+              }),
+              itemsCount: createdOrder?.itemsCount || cartItems.reduce((acc, item) => acc + item.quantity, 0),
+            };
+            localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
             clearCart();
             router.push("/order-confirmed");
           }

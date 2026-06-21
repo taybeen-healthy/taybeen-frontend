@@ -47,11 +47,13 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
     // Fetch orders
     apiClient.get("/orders")
       .then((res) => {
-        const ordersData = Array.isArray(res.data?.data)
-          ? res.data.data
-          : Array.isArray(res.data)
-            ? res.data
-            : [];
+        const ordersData = Array.isArray(res.data?.data?.data)
+          ? res.data.data.data
+          : Array.isArray(res.data?.data)
+            ? res.data.data
+            : Array.isArray(res.data)
+              ? res.data
+              : [];
         setOrders(ordersData);
 
         const productsMap: Record<string, { id: string; name: string; orderId: string }> = {};

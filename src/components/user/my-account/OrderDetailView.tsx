@@ -1,28 +1,133 @@
-import React from "react";
-import { ArrowLeft, Check, CreditCard } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
 import { OrderDetail } from "@/types/myAccount";
-import { orderDetailsData } from "@/data/user/myAccountData";
+import { apiClient } from "@/lib/apiClient";
 
 interface OrderDetailViewProps {
   orderId: string;
   onBack: () => void;
 }
 
-export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBack }) => {
-  const order: OrderDetail | undefined = orderDetailsData[orderId];
+const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
+  const getProgressSteps = (status: string) => {
+    const steps = [
+      { label: "Ordered", stepNumber: "1", completed: true },
+      { label: "Processing", stepNumber: "2", completed: false },
+      { label: "Shipped", stepNumber: "3", completed: false },
+      { label: "Delivered", stepNumber: "4", completed: false },
+    ];
+    
+    if (
+      status === "Processing" ||
+      status === "In Transit" ||
+      status === "Shipped" ||
+      status === "Completed"
+    ) {
+      steps[1].completed = true;
+    }
+    if (status === "In Transit" || status === "Shipped" || status === "Completed") {
+      steps[2].completed = true;
+    }
+    if (status === "Completed") {
+      steps[3].completed = true;
+    }
+    return steps;
+  };
 
-  if (!order) {
+  const formatAddress = (addr: any) => {
+    if (!addr) return { name: "", addressLine: "", email: "", phone: "" };
+    const street = addr.streetAddress || addr.street || "";
+    const city = addr.city || "";
+    const state = addr.stateProvince || addr.state || "";
+    const postal = addr.postalCode || "";
+    const country = addr.country || "";
+    const addressLine = [street, city, state, postal, country].filter(Boolean).join(", ");
+
+    return {
+      name: `${addr.firstName || ""} ${addr.lastName || ""}`.trim(),
+      addressLine,
+      email: addr.email || "",
+      phone: addr.phone || "",
+    };
+  };
+
+  return {
+    id: apiOrder.hexId || apiOrder.id,
+    date: apiOrder.placedOn || apiOrder.date || "Just now",
+    total: apiOrder.total,
+    status: apiOrder.status,
+    paymentMethod: apiOrder.paymentMethod,
+    subtotal: apiOrder.subtotal,
+    gst: apiOrder.gst || apiOrder.tax,
+    shippingCost: apiOrder.shippingCost || apiOrder.shipping,
+    billingAddress: formatAddress(apiOrder.billingAddress),
+    shippingAddress: formatAddress(apiOrder.shippingAddress),
+    items: (apiOrder.items || []).map((item: any) => ({
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      weight: item.weight || "",
+      image: item.image,
+    })),
+    progressSteps: getProgressSteps(apiOrder.status),
+  };
+};
+
+export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBack }) => {
+  const [order, setOrder] = useState<OrderDetail | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const fetchOrderDetails = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const res = await apiClient.get(`/orders/${orderId}`);
+        const apiOrder = res.data?.data || res.data;
+        if (active && apiOrder) {
+          setOrder(mapApiToOrderDetail(apiOrder));
+        }
+      } catch (err: any) {
+        console.error("Failed to load order details:", err);
+        if (active) {
+          setError(err.response?.data?.message || "Failed to load order details.");
+        }
+      } finally {
+        if (active) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchOrderDetails();
+    return () => {
+      active = false;
+    };
+  }, [orderId]);
+
+  if (isLoading) {
     return (
-      <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 text-center font-poppins select-none">
+      <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-20 flex flex-col items-center justify-center shadow-sm select-none">
+        <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B] mb-3" />
+        <p className="font-poppins text-[#5A3E2B]/80 text-sm font-medium">Loading order details...</p>
+      </div>
+    );
+  }
+
+  if (error || !order) {
+    return (
+      <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center font-poppins select-none">
         <h3 className="font-serif text-lg sm:text-xl font-bold text-brand-brown mb-2">
           Order Not Found
         </h3>
         <p className="text-sm text-[#7D6B5E] mb-6">
-          The order with ID <span className="font-semibold">{orderId}</span> could not be retrieved.
+          {error || `The order with ID "${orderId}" could not be retrieved.`}
         </p>
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 text-[#768C3A] hover:underline font-semibold text-sm focus:outline-none cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-[#768C3A] hover:underline font-semibold text-sm focus:outline-none cursor-pointer bg-transparent border-0"
         >
           <ArrowLeft size={16} /> Back to Order History
         </button>
@@ -38,7 +143,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         <div>
           <button
             onClick={onBack}
-            className="flex items-center gap-1 text-[#768C3A] hover:underline text-xs sm:text-sm font-semibold mb-2 transition-all focus:outline-none cursor-pointer"
+            className="flex items-center gap-1 text-[#768C3A] hover:underline text-xs sm:text-sm font-semibold mb-2 transition-all focus:outline-none cursor-pointer bg-transparent border-0"
           >
             <ArrowLeft size={16} /> Back to List
           </button>
@@ -130,11 +235,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           <h4 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-1.5">
             {order.shippingAddress.name}
           </h4>
-          {order.shippingAddress.company && (
-            <p className="text-xs sm:text-sm text-[#7D6B5E] mb-1 font-medium">
-              {order.shippingAddress.company}
-            </p>
-          )}
           <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed mb-4">
             {order.shippingAddress.addressLine}
           </p>
@@ -157,11 +257,6 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           <h4 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-1.5">
             {order.billingAddress.name}
           </h4>
-          {order.billingAddress.company && (
-            <p className="text-xs sm:text-sm text-[#7D6B5E] mb-1 font-medium">
-              {order.billingAddress.company}
-            </p>
-          )}
           <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed mb-4">
             {order.billingAddress.addressLine}
           </p>
@@ -212,13 +307,13 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                       {item.weight}
                     </td>
                     <td className="py-4 px-4 align-middle font-medium text-[#7D6B5E]">
-                      ₹{item.price.toFixed(2)}
+                      ₹{(item.price || 0).toFixed(2)}
                     </td>
                     <td className="py-4 px-4 align-middle font-semibold text-[#3A2418]">
                       {item.quantity}
                     </td>
                     <td className="py-4 px-4 align-middle font-bold text-brand-brown text-right">
-                      ₹{(item.price * item.quantity).toFixed(2)}
+                      ₹{((item.price || 0) * (item.quantity || 0)).toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -244,10 +339,10 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                   </p>
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-[11px] text-[#7D6B5E] font-medium">
-                      ₹{item.price.toFixed(2)} × {item.quantity}
+                      ₹{(item.price || 0).toFixed(2)} × {item.quantity}
                     </p>
                     <p className="text-xs font-bold text-brand-brown">
-                      ₹{(item.price * item.quantity).toFixed(2)}
+                      ₹{((item.price || 0) * (item.quantity || 0)).toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -267,12 +362,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
             <div className="space-y-3 text-xs sm:text-sm text-[#7D6B5E]">
               <div className="flex justify-between font-medium">
                 <span>Subtotal</span>
-                <span className="font-semibold text-[#3A2418]">₹{order.subtotal.toFixed(2)}</span>
+                <span className="font-semibold text-[#3A2418]">₹{(order.subtotal || 0).toFixed(2)}</span>
               </div>
               {order.gst !== undefined && (
                 <div className="flex justify-between font-medium">
-                  <span>GST (18%)</span>
-                  <span className="font-semibold text-[#3A2418]">₹{order.gst.toFixed(2)}</span>
+                  <span>GST</span>
+                  <span className="font-semibold text-[#3A2418]">₹{(order.gst || 0).toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between font-medium">
@@ -280,7 +375,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                 <span className="font-semibold text-[#3A2418]">
                   {order.shippingCost === undefined || order.shippingCost === 0
                     ? "Free"
-                    : `₹${order.shippingCost.toFixed(2)}`}
+                    : `₹${(order.shippingCost || 0).toFixed(2)}`}
                 </span>
               </div>
               <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-baseline">
@@ -288,7 +383,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                   Total
                 </span>
                 <span className="font-poppins text-base sm:text-lg font-bold text-brand-brown">
-                  ₹{order.total.toFixed(2)}
+                  ₹{(order.total || 0).toFixed(2)}
                 </span>
               </div>
             </div>

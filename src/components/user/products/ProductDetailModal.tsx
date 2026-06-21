@@ -34,12 +34,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
       try {
         setIsLoading(true);
         const response = await apiClient.get(`/products/${product.id}`);
-        if (active && response.data) {
-          setDetailedProduct(response.data);
-          if (response.data.weightOptions && response.data.weightOptions.length > 0) {
-            setSelectedWeight(response.data.weightOptions[0]);
-          } else if (response.data.weight) {
-            setSelectedWeight(response.data.weight);
+        if (active && response.data && response.data.data) {
+          const productData = response.data.data;
+          setDetailedProduct(productData);
+          if (productData.weightOptions && productData.weightOptions.length > 0) {
+            setSelectedWeight(productData.weightOptions[0]);
+          } else if (productData.weight) {
+            setSelectedWeight(productData.weight);
           }
         }
       } catch (error) {

@@ -53,8 +53,8 @@ export const MyAccountPage: React.FC = () => {
     // Fetch customer profile & billing info
     apiClient.get("/customers/me")
       .then((res) => {
-        if (res.data) {
-          const cust = res.data;
+        const cust = res.data?.data || res.data;
+        if (cust) {
           const nameParts = (cust.name || "").trim().split(/\s+/);
           const firstName = nameParts[0] || "";
           const lastName = nameParts.slice(1).join(" ") || "";
@@ -105,14 +105,28 @@ export const MyAccountPage: React.FC = () => {
       });
 
     // Fetch customer orders
+    console.log("Fetching customer orders...");
     apiClient.get("/orders")
       .then((res) => {
-        const ordersList = Array.isArray(res.data?.data)
-          ? res.data.data
-          : Array.isArray(res.data)
-            ? res.data
-            : [];
-        setOrders(ordersList);
+        console.log("Get orders response payload:", res.data);
+        const ordersList = Array.isArray(res.data?.data?.data)
+          ? res.data.data.data
+          : Array.isArray(res.data?.data)
+            ? res.data.data
+            : Array.isArray(res.data)
+              ? res.data
+              : [];
+        
+        console.log("Resolved ordersList array:", ordersList);
+        const mappedOrders = ordersList.map((ord: any) => ({
+          id: ord.id || ord._id?.toString(),
+          hexId: ord.hexId || ord.id,
+          date: ord.placedOn || ord.date || "Just now",
+          total: typeof ord.total === "number" ? ord.total : (Number(ord.total) || 0),
+          status: ord.status,
+        }));
+        console.log("Mapped orders for UI state:", mappedOrders);
+        setOrders(mappedOrders);
       })
       .catch((err) => console.error("Error fetching orders:", err))
       .finally(() => setLoadingOrders(false));
@@ -120,8 +134,9 @@ export const MyAccountPage: React.FC = () => {
     // Fetch affiliate dashboard
     apiClient.get("/affiliates/my-dashboard")
       .then((res) => {
-        if (res.data) {
-          setAffiliateData(res.data);
+        const dashboardData = res.data?.data || res.data;
+        if (dashboardData && (res.data?.data !== null)) {
+          setAffiliateData(dashboardData);
         } else {
           setAffiliateData(null);
         }

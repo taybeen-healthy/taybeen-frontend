@@ -60,14 +60,14 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
-            {displayedOrders.map((order) => (
+            {displayedOrders.map((order: any) => (
               <tr key={order.id} className="hover:bg-black/[0.01] transition-colors">
                 <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
-                  {order.id}
+                  {order.hexId || order.id}
                 </td>
                 <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">{order.date}</td>
                 <td className="py-4 px-4 font-medium text-brand-brown align-middle">
-                  ₹{order.total.toFixed(2)}
+                  ₹{typeof order.total === "number" ? order.total.toFixed(2) : parseFloat(order.total || 0).toFixed(2)}
                 </td>
                 <td className="py-4 px-4 align-middle">
                   <Tag
