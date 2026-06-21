@@ -65,6 +65,9 @@ export interface AffiliateDashboardInfo {
   referralLink: string;
   details: AffiliateDetails;
   orders: AffiliateOrder[];
+  expiredCouponCode?: string;
+  expiredCouponDiscount?: number;
+  expiredCouponExpiryDate?: string;
 }
 
 export interface OrderDetailItem {
@@ -85,10 +88,12 @@ export interface OrderAddressBlock {
 
 export interface OrderDetail {
   id: string;
+  dbId?: string;
   date: string;
   total: number;
   status: string;
   paymentMethod: string;
+  paymentStatus?: string;
   subtotal: number;
   gst?: number;
   shippingCost?: number;

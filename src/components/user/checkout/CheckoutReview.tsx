@@ -9,6 +9,8 @@ interface CheckoutReviewProps {
   isBillingSame: boolean;
   onEdit: () => void;
   onPaymentSubmit: () => void;
+  paymentMethod: string;
+  onPaymentMethodChange: (method: string) => void;
 }
 
 export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
@@ -17,6 +19,8 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
   isBillingSame,
   onEdit,
   onPaymentSubmit,
+  paymentMethod,
+  onPaymentMethodChange,
 }) => {
   return (
     <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-7 md:p-8 shadow-sm text-left font-poppins">
@@ -92,7 +96,44 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
         </div>
       </div>
 
-      <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
+      <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-brand-brown mt-8 mb-4 tracking-wide">
+        Payment Method
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {[
+          { id: "Razorpay", label: "Razorpay (Online Payment)", desc: "Pay securely with Net Banking, Wallets, etc." },
+          { id: "UPI", label: "UPI", desc: "Pay using Google Pay, PhonePe, Paytm, or any UPI app" },
+          { id: "Credit Card", label: "Credit Card / Debit Card", desc: "Visa, Mastercard, RuPay, Maestro cards" },
+          { id: "Cash on Delivery", label: "Cash on Delivery (COD)", desc: "Pay with cash upon delivery" }
+        ].map((method) => {
+          const isSelected = paymentMethod === method.id;
+          return (
+            <label
+              key={method.id}
+              className={`border rounded-xl p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${
+                isSelected
+                  ? "bg-[#F6F1E9]/50 border-brand-green ring-1 ring-brand-green/20"
+                  : "bg-white border-[#C4A482]/25 hover:bg-black/[0.01]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value={method.id}
+                  checked={isSelected}
+                  onChange={() => onPaymentMethodChange(method.id)}
+                  className="accent-[#5A3E2B] w-4 h-4 cursor-pointer"
+                />
+                <span className="font-bold text-sm text-brand-brown">{method.label}</span>
+              </div>
+              <span className="text-[11px] text-[#7D6B5E] pl-7 mt-1">{method.desc}</span>
+            </label>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed border-t border-[#C4A482]/15 pt-4">
         By placing an order you agree to our{" "}
         <a href="#" className="underline hover:text-brand-brown">
           Terms & Conditions
@@ -109,7 +150,7 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
           variant="primary"
           className="uppercase font-bold text-xs sm:text-sm tracking-wider px-10 py-3.5 shadow-md hover:shadow-lg active:scale-98"
         >
-          PROCEED TO MAKE PAYMENT
+          {paymentMethod === "Cash on Delivery" ? "PLACE COD ORDER" : "PROCEED TO MAKE PAYMENT"}
         </Button>
       </div>
     </div>

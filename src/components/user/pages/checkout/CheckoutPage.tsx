@@ -41,6 +41,7 @@ export const CheckoutPage: React.FC = () => {
   const [isBillingSame, setIsBillingSame] = useState(true);
   const [giftMessageOpen, setGiftMessageOpen] = useState(false);
   const [giftMessageText, setGiftMessageText] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<string>("Razorpay");
 
   const [shippingForm, setShippingForm] = useState<CheckoutAddressForm>({
     firstName: "",
@@ -116,7 +117,10 @@ export const CheckoutPage: React.FC = () => {
   const shippingCost = subtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
 
   const discount = appliedCoupon ? discountAmount : 0;
-  const total = Math.max(0, subtotal + shippingCost - discount);
+  const discountedSubtotal = Math.max(0, subtotal - discount);
+  const gstPercent = delivery.gstPercent || 5;
+  const gstCost = Math.round(((discountedSubtotal * gstPercent) / 100) * 100) / 100;
+  const total = Math.max(0, discountedSubtotal + shippingCost + gstCost);
 
   const handleApplyCoupon = async (code: string): Promise<boolean> => {
     if (!code) return false;
@@ -255,6 +259,7 @@ export const CheckoutPage: React.FC = () => {
                 hour12: true
               }),
               itemsCount: createdOrder?.itemsCount || cartItems.reduce((acc, item) => acc + item.quantity, 0),
+              paymentStatus: orderData.paymentStatus || "Captured",
             };
             localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
             clearCart();
@@ -312,7 +317,7 @@ export const CheckoutPage: React.FC = () => {
               weight: item.selectedWeight,
             })),
             couponCode: appliedCoupon || undefined,
-            paymentMethod: "UPI",
+            paymentMethod: paymentMethod,
             shippingAddress: {
               firstName: shippingForm.firstName,
               lastName: shippingForm.lastName,
@@ -343,6 +348,26 @@ export const CheckoutPage: React.FC = () => {
           const orderResponse = await apiClient.post("/orders", orderPayload);
           order = orderResponse.data?.data || orderResponse.data;
           setCreatedOrder(order);
+        }
+
+        if (paymentMethod === "Cash on Delivery") {
+          const lastOrderInfo = {
+            id: order.hexId || order.id,
+            placedOn: new Date().toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true
+            }),
+            itemsCount: cartItems.reduce((acc, item) => acc + item.quantity, 0),
+            paymentStatus: "Pending",
+          };
+          localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
+          clearCart();
+          router.push("/order-confirmed");
+          return;
         }
 
         const paymentOrderResponse = await apiClient.post("/payments/orders", {
@@ -418,6 +443,9 @@ export const CheckoutPage: React.FC = () => {
                   discount={discount}
                   step={step}
                   onProceed={handleProceedAction}
+                  paymentMethod={paymentMethod}
+                  gstCost={gstCost}
+                  gstPercent={gstPercent}
                 />
                 <CouponCard
                   appliedCoupon={appliedCoupon}
@@ -453,6 +481,8 @@ export const CheckoutPage: React.FC = () => {
                   isBillingSame={isBillingSame}
                   onEdit={() => setStep("form")}
                   onPaymentSubmit={handleProceedAction}
+                  paymentMethod={paymentMethod}
+                  onPaymentMethodChange={setPaymentMethod}
                 />
               )}
             </div>
@@ -466,6 +496,9 @@ export const CheckoutPage: React.FC = () => {
                 discount={discount}
                 step={step}
                 onProceed={handleProceedAction}
+                paymentMethod={paymentMethod}
+                gstCost={gstCost}
+                gstPercent={gstPercent}
               />
               <CouponCard
                 appliedCoupon={appliedCoupon}

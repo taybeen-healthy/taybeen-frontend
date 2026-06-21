@@ -173,6 +173,38 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
             </div>
           </div>
         </div>
+
+        {data.expiredCouponCode && (
+          <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm mt-4">
+            <h3 className="text-xs sm:text-sm font-bold text-brand-brown/70 uppercase tracking-wider mb-3">
+              Last Expired Coupon History
+            </h3>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <p className="text-sm font-bold text-[#8D7F75] line-through uppercase tracking-wider">
+                  {data.expiredCouponCode}
+                </p>
+                <p className="text-xs text-[#7D6B5E]">
+                  Discount Value: <span className="font-semibold text-brand-brown">{data.expiredCouponDiscount}% / ₹</span>
+                </p>
+              </div>
+              {data.expiredCouponExpiryDate && (
+                <div className="text-left sm:text-right">
+                  <span className="px-2 py-0.5 text-[10px] font-bold text-red-700 bg-red-50 rounded-full border border-red-200">
+                    Expired
+                  </span>
+                  <p className="text-[11px] text-[#7D6B5E] mt-1.5">
+                    Expired on: {new Date(data.expiredCouponExpiryDate).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="space-y-4">

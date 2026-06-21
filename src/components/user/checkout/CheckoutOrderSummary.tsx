@@ -13,6 +13,9 @@ interface CheckoutOrderSummaryProps {
   step: CheckoutStep;
   onProceed: () => void;
   discount?: number;
+  paymentMethod?: string;
+  gstCost?: number;
+  gstPercent?: number;
 }
 
 export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
@@ -23,6 +26,9 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
   step,
   onProceed,
   discount = 0,
+  paymentMethod = "Razorpay",
+  gstCost = 0,
+  gstPercent = 5,
 }) => {
   return (
     <div className="w-full bg-[#FDFAF3] border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm text-left font-poppins">
@@ -72,6 +78,12 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
             <span>- ₹{formatIndianCurrency(discount)}</span>
           </div>
         )}
+        {gstCost > 0 && (
+          <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
+            <span>GST ({gstPercent}%)</span>
+            <span className="font-semibold text-[#3A2418]">₹{formatIndianCurrency(gstCost)}</span>
+          </div>
+        )}
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
           <span>Shipping & Handling</span>
           <span className="font-semibold text-[#3A2418]">
@@ -95,7 +107,11 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
               variant="primary"
               className="w-full uppercase font-bold text-xs sm:text-sm tracking-wider py-3.5 shadow-md active:scale-[0.98] select-none"
             >
-              PROCEED TO MAKE PAYMENT
+              {step === "form"
+                ? "PROCEED TO REVIEW"
+                : paymentMethod === "Cash on Delivery"
+                  ? "PLACE COD ORDER"
+                  : "PROCEED TO MAKE PAYMENT"}
             </Button>
             <div className="mt-4 text-[10px] text-[#7D6B5E] text-center leading-relaxed">
               By placing an order you agree to our{" "}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
 import { OrderDetail } from "@/types/myAccount";
 import { apiClient } from "@/lib/apiClient";
+import { loadRazorpayScript } from "@/utils/loadScript";
 
 interface OrderDetailViewProps {
   orderId: string;
@@ -53,10 +54,12 @@ const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
 
   return {
     id: apiOrder.hexId || apiOrder.id,
+    dbId: apiOrder.id,
     date: apiOrder.placedOn || apiOrder.date || "Just now",
     total: apiOrder.total,
     status: apiOrder.status,
     paymentMethod: apiOrder.paymentMethod,
+    paymentStatus: apiOrder.paymentStatus,
     subtotal: apiOrder.subtotal,
     gst: apiOrder.gst || apiOrder.tax,
     shippingCost: apiOrder.shippingCost || apiOrder.shipping,
@@ -77,6 +80,82 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
   const [order, setOrder] = useState<OrderDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [isRetrying, setIsRetrying] = useState(false);
+  const [retryError, setRetryError] = useState<string | null>(null);
+
+  const handleRetryPayment = async () => {
+    if (!order) return;
+    setIsRetrying(true);
+    setRetryError(null);
+    try {
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        setRetryError("Failed to load Razorpay SDK. Please check your connection.");
+        setIsRetrying(false);
+        return;
+      }
+
+      const res = await apiClient.post("/payments/orders", {
+        orderId: order.dbId || orderId,
+      });
+      const paymentOrder = res.data?.data || res.data;
+
+      const storedProfileStr = localStorage.getItem("taybeen_profile");
+      let profileData: any = null;
+      if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
+
+      const options = {
+        key: paymentOrder.keyId,
+        amount: Math.round(paymentOrder.amount * 100),
+        currency: paymentOrder.currency,
+        name: "Taybeen Premium Dates",
+        description: `Retry Payment for Order #${paymentOrder.hexId}`,
+        order_id: paymentOrder.razorpayOrderId,
+        handler: async (response: any) => {
+          setIsRetrying(true);
+          try {
+            const verifyRes = await apiClient.post("/payments/verify", {
+              orderId: order.dbId || orderId,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+            const updatedOrder = verifyRes.data?.data || verifyRes.data;
+            if (updatedOrder) {
+              alert("Payment successful!");
+              setOrder(mapApiToOrderDetail(updatedOrder));
+            }
+          } catch (err: any) {
+            setRetryError(err.response?.data?.message || "Payment verification failed.");
+          } finally {
+            setIsRetrying(false);
+          }
+        },
+        prefill: {
+          name: order.shippingAddress.name,
+          email: profileData?.email || order.shippingAddress.phone + "@taybeen.local",
+          contact: order.shippingAddress.phone,
+        },
+        theme: {
+          color: "#4A5E28",
+        },
+        modal: {
+          ondismiss: () => {
+            setIsRetrying(false);
+            setRetryError("Payment window was closed.");
+          }
+        }
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+    } catch (err: any) {
+      console.error("Retry payment error:", err);
+      setRetryError(err.response?.data?.message || "Failed to initiate retry payment.");
+      setIsRetrying(false);
+    }
+  };
 
   useEffect(() => {
     let active = true;
@@ -388,15 +467,51 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               </div>
             </div>
 
-            <div className="bg-[#F6F1E9] rounded-xl p-3.5 mt-5 space-y-2 text-xs sm:text-sm">
-              <div className="flex items-center gap-2 text-brand-brown font-semibold">
-                <CreditCard size={15} />
-                <span>Payment Method</span>
+            <div className="bg-[#F6F1E9] rounded-xl p-3.5 mt-5 space-y-3 text-xs sm:text-sm">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-brand-brown font-semibold">
+                  <CreditCard size={15} />
+                  <span>Payment Method</span>
+                </div>
+                <p className="text-[#7D6B5E] pl-6 font-medium leading-relaxed">
+                  {order.paymentMethod}
+                </p>
               </div>
-              <p className="text-[#7D6B5E] pl-6 font-medium leading-relaxed">
-                {order.paymentMethod}
-              </p>
+              {order.paymentStatus && (
+                <div className="space-y-1 border-t border-[#C4A482]/20 pt-2">
+                  <span className="text-brand-brown font-semibold pl-6 block text-[10px] uppercase tracking-wider">Payment Status</span>
+                  <div className="pl-6 flex items-center gap-2 mt-1">
+                    <span className={`inline-block w-2.5 h-2.5 rounded-full ${
+                      order.paymentStatus === "Captured" ? "bg-green-500" :
+                      order.paymentStatus === "Failed" ? "bg-red-500" : "bg-yellow-500 animate-pulse"
+                    }`} />
+                    <span className="font-bold text-brand-brown">{order.paymentStatus}</span>
+                  </div>
+                </div>
+              )}
             </div>
+
+            {order.paymentStatus !== "Captured" && order.paymentMethod !== "Cash on Delivery" && (
+              <div className="mt-5 space-y-2">
+                {retryError && (
+                  <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">{retryError}</p>
+                )}
+                <button
+                  onClick={handleRetryPayment}
+                  disabled={isRetrying}
+                  className="w-full bg-[#5A3E2B] hover:bg-[#462F20] disabled:bg-[#5A3E2B]/50 text-white rounded-xl py-3 text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer font-poppins flex items-center justify-center gap-2"
+                >
+                  {isRetrying ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <span>Retry Payment</span>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

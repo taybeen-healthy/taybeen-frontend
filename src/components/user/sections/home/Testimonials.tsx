@@ -2,18 +2,20 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { testimonials } from "@/data/user/mockData";
+import { testimonials as mockTestimonials } from "@/data/user/mockData";
 import { ChevronLeft, ChevronRight, CircleUserRound, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StarRating } from "@/components/ui/StarRating";
 import { homeData } from "@/data/user/homeData";
+import { apiClient } from "@/lib/apiClient";
 
 export const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [direction, setDirection] = useState(1);
+  const [testimonialsList, setTestimonialsList] = useState<any[]>(mockTestimonials);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,26 +33,51 @@ export const Testimonials: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    apiClient.get("/reviews")
+      .then((res) => {
+        const arr = res.data?.data?.data || res.data?.data || [];
+        if (arr.length > 0) {
+          const mapped = arr.map((item: any) => ({
+            id: item.id || item._id,
+            quote: item.comment,
+            author: item.customerName,
+            role: "Verified Buyer",
+            location: "India",
+            rating: item.rating,
+            productName: item.productName || "Premium Dates",
+            image: item.images?.[0] || undefined,
+          }));
+          setTestimonialsList(mapped);
+        }
+      })
+      .catch((e) => {
+        console.warn("Failed to fetch dynamic reviews, falling back to mock data:", e);
+      });
+  }, []);
+
   const nextTestimonial = () => {
     setDirection(1);
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    setActiveIndex((prev) => (prev + 1) % testimonialsList.length);
   };
 
   const prevTestimonial = () => {
     setDirection(-1);
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length);
   };
 
   const visibleTestimonials = [];
-  for (let i = 0; i < itemsPerPage; i++) {
-    const targetIndex = (activeIndex + i) % testimonials.length;
-    visibleTestimonials.push({
-      item: testimonials[targetIndex],
-      index: i,
-    });
+  if (testimonialsList.length > 0) {
+    for (let i = 0; i < Math.min(itemsPerPage, testimonialsList.length); i++) {
+      const targetIndex = (activeIndex + i) % testimonialsList.length;
+      visibleTestimonials.push({
+        item: testimonialsList[targetIndex],
+        index: i,
+      });
+    }
   }
 
-  const TestimonialCard = ({ testimonial }: { testimonial: (typeof testimonials)[0] }) => {
+  const TestimonialCard = ({ testimonial }: { testimonial: any }) => {
     return (
       <div className="bg-white p-5 md:p-6 lg:p-7 xl:p-8 rounded-2xl border border-brand-brown/20 flex flex-col h-full text-left">
         {testimonial.image && (
@@ -142,7 +169,7 @@ export const Testimonials: React.FC = () => {
       </div>
 
       <div className="flex justify-center items-center gap-2 mt-8">
-        {testimonials.map((_, index) => (
+        {testimonialsList.map((_, index) => (
           <button
             key={index}
             onClick={() => {
@@ -158,3 +185,5 @@ export const Testimonials: React.FC = () => {
     </Section>
   );
 };
+
+export default Testimonials;

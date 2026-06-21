@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff, X, CheckCircle } from "lucide-react";
+import { X, CheckCircle } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
-import { validateEmail, validatePassword, validateConfirmPassword } from "@/utils/validation";
+import { validateEmail } from "@/utils/validation";
+import { apiClient } from "@/lib/apiClient";
 
 interface ForgotPasswordModalProps {
   isOpen: boolean;
@@ -12,21 +13,14 @@ interface ForgotPasswordModalProps {
 }
 
 export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState<"email" | "reset" | "success">("email");
+  const [step, setStep] = useState<"email" | "success">("email");
 
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
-
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState<string | null>(null);
-  const [confirmError, setConfirmError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendLink = (e: React.FormEvent) => {
+  const handleSendLink = async (e: React.FormEvent) => {
     e.preventDefault();
     const err = validateEmail(email);
     if (err) {
@@ -34,42 +28,25 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen
       return;
     }
     setEmailError(null);
+    setSubmitError(null);
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setStep("reset");
-    }, 1200);
-  };
-
-  const handleResetPassword = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const passwordErr = validatePassword(newPassword, true);
-    const confirmErr = validateConfirmPassword(newPassword, confirmPassword);
-
-    setPasswordError(passwordErr);
-    setConfirmError(confirmErr);
-
-    if (passwordErr || confirmErr) return;
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await apiClient.post("/auth/customer/forgot-password", { email });
       setStep("success");
-    }, 1200);
+    } catch (err: any) {
+      console.error("Forgot password error:", err);
+      setSubmitError(err.response?.data?.message || "Failed to send reset link. Please verify your email.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const resetStateAndClose = () => {
     setStep("email");
     setEmail("");
-    setNewPassword("");
-    setConfirmPassword("");
     setEmailError(null);
-    setPasswordError(null);
-    setConfirmError(null);
-    setShowPassword(false);
-    setShowConfirm(false);
+    setSubmitError(null);
     onClose();
   };
 
@@ -108,89 +85,25 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen
               onChange={(e) => {
                 setEmail(e.target.value);
                 if (emailError) setEmailError(null);
+                if (submitError) setSubmitError(null);
               }}
               error={emailError || undefined}
             />
           </div>
 
+          {submitError && (
+            <div className="text-red-500 font-poppins text-xs font-semibold text-center bg-red-50 border border-red-200 rounded-lg p-2.5 mt-2">
+              {submitError}
+            </div>
+          )}
+
           <div className="pt-2">
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#5A3E2B] hover:bg-[#483122] text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer"
+              className="w-full bg-[#5A3E2B] hover:bg-[#483122] disabled:bg-[#5A3E2B]/50 text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer"
             >
               {isLoading ? "Sending..." : "SEND RESET LINK"}
-            </button>
-          </div>
-        </form>
-      )}
-
-      {step === "reset" && (
-        <form onSubmit={handleResetPassword} className="space-y-5 pt-4 text-left">
-          <div className="space-y-2.5 text-center">
-            <h3 className="font-serif text-[#5A3E2B] text-2xl sm:text-3xl font-bold">
-              Create New Password
-            </h3>
-            <p className="text-[#768C3A] text-xs sm:text-sm leading-relaxed max-w-xs mx-auto">
-              Please enter and confirm your new password.
-            </p>
-          </div>
-
-          <div className="space-y-4 pt-2">
-            <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => {
-                setNewPassword(e.target.value);
-                if (passwordError) setPasswordError(null);
-              }}
-              error={passwordError || undefined}
-              rightElement={
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="text-brand-brown/40 hover:text-brand-brown transition-colors cursor-pointer"
-                  aria-label="Toggle password visibility"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              }
-            />
-
-            <Input
-              type={showConfirm ? "text" : "password"}
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-                if (confirmError) setConfirmError(null);
-              }}
-              error={confirmError || undefined}
-              rightElement={
-                <button
-                  type="button"
-                  onClick={() => setShowConfirm(!showConfirm)}
-                  className="text-brand-brown/40 hover:text-brand-brown transition-colors cursor-pointer"
-                  aria-label="Toggle password visibility"
-                >
-                  {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              }
-            />
-
-            <p className="text-left text-[#768C3A] text-[10px] sm:text-xs leading-normal pl-1">
-              Password must be at least 6 characters
-            </p>
-          </div>
-
-          <div className="pt-2">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-[#5A3E2B] hover:bg-[#483122] text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer"
-            >
-              {isLoading ? "Resetting..." : "RESET PASSWORD"}
             </button>
           </div>
         </form>
@@ -203,10 +116,9 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">Reset Complete</h3>
+            <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">Email Sent</h3>
             <p className="text-brand-green text-xs sm:text-sm max-w-xs leading-relaxed">
-              Your password has been successfully updated. You can now log in using your new
-              credentials.
+              We have sent a password reset link to your email address. Please check your inbox and spam folder.
             </p>
           </div>
 

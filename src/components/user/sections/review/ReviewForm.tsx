@@ -150,6 +150,21 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
     setSubmitError(null);
 
     try {
+      const uploadedUrls: string[] = [];
+      for (const file of images) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const uploadRes = await apiClient.post("/reviews/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const url = uploadRes.data?.data?.url || uploadRes.data?.url;
+        if (url) {
+          uploadedUrls.push(url);
+        }
+      }
+
       await apiClient.post("/reviews", {
         productId: selectedProductId,
         orderId: selectedOrderId,
@@ -158,7 +173,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
         customerPhone: "",
         rating,
         comment: experience,
-        images: [], // Pass empty array since user-facing image uploading is admin-only
+        images: uploadedUrls,
       });
       onSubmitSuccess();
     } catch (err: any) {

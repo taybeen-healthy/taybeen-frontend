@@ -14,6 +14,7 @@ interface OrderInfo {
   id: string;
   placedOn: string;
   itemsCount: number;
+  paymentStatus?: string;
 }
 
 export const OrderConfirmedPage: React.FC = () => {
@@ -29,12 +30,14 @@ export const OrderConfirmedPage: React.FC = () => {
           id: parsed.id || "TYB-2024-0056",
           placedOn: parsed.placedOn || "11th June 2026 5:30 pm",
           itemsCount: parsed.itemsCount || 1,
+          paymentStatus: parsed.paymentStatus || "Captured",
         });
       } else {
         setOrderInfo({
           id: "TYB-2024-0056",
           placedOn: "11th June 2026 5:30 pm",
           itemsCount: 1,
+          paymentStatus: "Captured",
         });
       }
     } catch (error) {
@@ -43,6 +46,7 @@ export const OrderConfirmedPage: React.FC = () => {
         id: "TYB-2024-0056",
         placedOn: "11th June 2026 5:30 pm",
         itemsCount: 1,
+        paymentStatus: "Captured",
       });
     }
     setIsLoaded(true);
@@ -69,6 +73,7 @@ export const OrderConfirmedPage: React.FC = () => {
               orderId={orderInfo.id}
               placedOn={orderInfo.placedOn}
               itemsCount={orderInfo.itemsCount}
+              paymentStatus={orderInfo.paymentStatus || "Captured"}
             />
 
             <OrderActions />

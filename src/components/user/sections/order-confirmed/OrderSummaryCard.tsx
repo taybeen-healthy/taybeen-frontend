@@ -6,12 +6,14 @@ interface OrderSummaryCardProps {
   orderId: string;
   placedOn: string;
   itemsCount: number;
+  paymentStatus?: string;
 }
 
 export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
   orderId,
   placedOn,
   itemsCount,
+  paymentStatus = "Captured",
 }) => {
   const { labels } = orderConfirmedData;
 
@@ -19,7 +21,7 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
 
   return (
     <div className="max-w-[800px] w-full mx-auto bg-white rounded-2xl border border-[#C4A482]/35 shadow-premium overflow-hidden text-left">
-      <div className="bg-gradient-to-r from-[#5A4200] to-[#2C3A1A] px-6 sm:px-8 py-5 flex justify-between items-center select-none">
+      <div className="bg-gradient-to-r from-[#5A4200] to-[#2C3A1A] px-6 sm:px-8 py-5 flex justify-between items-center select-none gap-4">
         <div>
           <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase">
             {labels.orderIdLabel}
@@ -27,6 +29,20 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           <p className="text-xs sm:text-base font-poppins font-bold text-[#FFDA8C] mt-1">
             {orderId}
           </p>
+        </div>
+        <div className="text-center">
+          <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase block">
+            Payment Status
+          </span>
+          <span className={`text-[10px] sm:text-xs font-poppins font-bold mt-1 px-3 py-0.5 rounded-full inline-block ${
+            paymentStatus === "Captured" || paymentStatus === "Paid"
+              ? "text-[#A2E043] bg-green-500/10 border border-green-500/20"
+              : paymentStatus === "Failed"
+                ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                : "text-yellow-400 bg-yellow-500/10 border border-yellow-500/20"
+          }`}>
+            {paymentStatus}
+          </span>
         </div>
         <div className="text-right">
           <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase">

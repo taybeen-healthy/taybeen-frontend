@@ -10,6 +10,7 @@ import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData"
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
 import { Hero } from "@/components/layout/Hero";
 import { apiClient } from "@/lib/apiClient";
+import { removeCookie } from "@/utils/cookie";
 import {
   AccountSidebar,
   AccountDashboard,
@@ -406,9 +407,19 @@ export const MyAccountPage: React.FC = () => {
               Cancel
             </button>
             <button
-              onClick={() => {
+              onClick={async () => {
                 setIsLogoutModalOpen(false);
-                router.push("/");
+                try {
+                  await apiClient.post("/auth/logout");
+                } catch (e) {
+                  console.error("Logout API error:", e);
+                } finally {
+                  removeCookie("taybeen_access_token");
+                  removeCookie("taybeen_refresh_token");
+                  localStorage.removeItem("taybeen_profile");
+                  localStorage.removeItem("taybeen_billing");
+                  router.push("/");
+                }
               }}
               className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold shadow-md active:scale-98 transition-all cursor-pointer focus:outline-none"
             >
