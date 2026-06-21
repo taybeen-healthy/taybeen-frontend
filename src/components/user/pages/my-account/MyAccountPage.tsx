@@ -37,6 +37,7 @@ export const MyAccountPage: React.FC = () => {
     firstName: "",
     lastName: "",
     streetAddress: "",
+    city: "",
     country: "",
     stateProvince: "",
     postalCode: "",

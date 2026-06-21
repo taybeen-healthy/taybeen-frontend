@@ -29,6 +29,7 @@ export interface BillingAddressForm {
   firstName: string;
   lastName: string;
   streetAddress: string;
+  city: string;
   country: string;
   stateProvince: string;
   postalCode: string;

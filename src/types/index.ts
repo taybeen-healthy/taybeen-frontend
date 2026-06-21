@@ -14,6 +14,7 @@ export interface Product {
   images?: string[];
   benefits?: string[];
   weightOptions?: string[];
+  stock?: number;
 }
 
 export interface Testimonial {

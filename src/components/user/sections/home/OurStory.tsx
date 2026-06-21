@@ -54,7 +54,7 @@ export const OurStory: React.FC = () => {
 
           <div className="space-y-3 sm:space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-3 xl:gap-4">
-              {highlights.map((h, i) => (
+              {highlights.map((h: any, i: number) => (
                 <HighlightCard key={i} title={h.title} description={h.desc} icon={h.icon} />
               ))}
             </div>
