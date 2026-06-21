@@ -46,7 +46,7 @@ export const Testimonials: React.FC = () => {
             location: "India",
             rating: item.rating,
             productName: item.productName || "Premium Dates",
-            image: item.images?.[0] || undefined,
+            image: item.selectedImage || item.images?.[0] || undefined,
           }));
           setTestimonialsList(mapped);
         }
