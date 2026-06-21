@@ -21,7 +21,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  
+
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -43,19 +43,20 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
     }
 
     // Fetch active categories
-    apiClient.get("/categories")
+    apiClient
+      .get("/categories")
       .then((res) => {
         const categoriesData = Array.isArray(res.data?.data)
           ? res.data.data
           : Array.isArray(res.data)
             ? res.data
             : [];
-        
+
         const mappedCategories = categoriesData.map((cat: any) => ({
           id: cat.id || cat._id,
           name: cat.name,
         }));
-        
+
         setCategories(mappedCategories);
       })
       .catch((err) => {

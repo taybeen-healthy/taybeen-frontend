@@ -82,9 +82,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       const payload = isSignUp
         ? { fullName, email, phone: phone.replace(/\s+/g, ""), password }
         : { email, password };
-      const endpoint = isSignUp
-        ? "/auth/customer/signup"
-        : "/auth/customer/signin";
+      const endpoint = isSignUp ? "/auth/customer/signup" : "/auth/customer/signin";
 
       setIsSubmitting(true);
       setSubmitError(null);
@@ -114,7 +112,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         router.push("/my-account");
       } catch (err: any) {
         console.error("Auth error:", err);
-        setSubmitError(err.response?.data?.message || "An authentication error occurred. Please try again.");
+        setSubmitError(
+          err.response?.data?.message || "An authentication error occurred. Please try again."
+        );
       } finally {
         setIsSubmitting(false);
       }
@@ -244,7 +244,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
           disabled={isSubmitting}
           className="w-full bg-[#5A3E2B] hover:bg-[#483122] disabled:bg-[#5A3E2B]/50 text-[#FDFAF3] py-4 rounded-full font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer mt-6 flex items-center justify-center gap-2"
         >
-          {isSubmitting ? "Processing..." : (isSignUp ? "Create Account" : "Sign In")}
+          {isSubmitting ? "Processing..." : isSignUp ? "Create Account" : "Sign In"}
         </button>
       </form>
 

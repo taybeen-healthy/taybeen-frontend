@@ -36,7 +36,9 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen
       setStep("success");
     } catch (err: any) {
       console.error("Forgot password error:", err);
-      setSubmitError(err.response?.data?.message || "Failed to send reset link. Please verify your email.");
+      setSubmitError(
+        err.response?.data?.message || "Failed to send reset link. Please verify your email."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +120,8 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen
           <div className="space-y-2">
             <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">Email Sent</h3>
             <p className="text-brand-green text-xs sm:text-sm max-w-xs leading-relaxed">
-              We have sent a password reset link to your email address. Please check your inbox and spam folder.
+              We have sent a password reset link to your email address. Please check your inbox and
+              spam folder.
             </p>
           </div>
 

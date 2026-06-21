@@ -36,7 +36,12 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
         const response = await apiClient.get("/customization");
         const customizationData = response.data?.data || response.data;
         if (active && customizationData) {
-          const { hero: backendHero, story: backendStory, offer: backendOffer, delivery: backendDelivery } = customizationData;
+          const {
+            hero: backendHero,
+            story: backendStory,
+            offer: backendOffer,
+            delivery: backendDelivery,
+          } = customizationData;
 
           // Merge backend properties, keeping local fields as fallbacks
           if (backendHero) {
@@ -56,8 +61,11 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
               subtitle: backendStory.heading || homeData.ourStory.subtitle,
               description: backendStory.description || homeData.ourStory.description,
               imageUrl: backendStory.sectionImage || homeData.ourStory.imageUrl,
-              highlights: backendStory.brandValues 
-                ? backendStory.brandValues.map((v: any) => ({ title: v.title, desc: v.description || v.desc }))
+              highlights: backendStory.brandValues
+                ? backendStory.brandValues.map((v: any) => ({
+                    title: v.title,
+                    desc: v.description || v.desc,
+                  }))
                 : homeData.ourStory.highlights,
             });
           }

@@ -29,7 +29,8 @@ export default function ProductsPage() {
 
   const [productsList, setProductsList] = useState<Product[]>([]);
   const [categoriesList, setCategoriesList] = useState<string[]>(["All Products"]);
-  const [categoryDetailsMap, setCategoryDetailsMap] = useState<Record<string, { title: string; description: string }>>(CATEGORY_DETAILS);
+  const [categoryDetailsMap, setCategoryDetailsMap] =
+    useState<Record<string, { title: string; description: string }>>(CATEGORY_DETAILS);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function ProductsPage() {
         setIsLoading(true);
         const [prodRes, catRes] = await Promise.all([
           apiClient.get("/products"),
-          apiClient.get("/categories")
+          apiClient.get("/categories"),
         ]);
 
         const prodData = prodRes.data?.data?.data || prodRes.data?.data || prodRes.data || [];
@@ -73,7 +74,10 @@ export default function ProductsPage() {
         catData.forEach((c: any) => {
           detailsMap[c.name] = {
             title: c.name,
-            description: c.description || CATEGORY_DETAILS[c.name]?.description || "Premium selection of dates.",
+            description:
+              c.description ||
+              CATEGORY_DETAILS[c.name]?.description ||
+              "Premium selection of dates.",
           };
         });
         setCategoryDetailsMap(detailsMap);
@@ -169,11 +173,13 @@ export default function ProductsPage() {
                 onSortByChange={setSortBy}
                 sortOptions={SORT_BY_OPTIONS}
               />
-              
+
               {isLoading ? (
                 <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-[#C4A482]/25">
                   <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-                  <p className="font-poppins text-brand-brown text-sm font-semibold">Loading premium dates...</p>
+                  <p className="font-poppins text-brand-brown text-sm font-semibold">
+                    Loading premium dates...
+                  </p>
                 </div>
               ) : displayedProducts.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">

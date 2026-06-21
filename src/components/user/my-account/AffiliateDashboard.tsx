@@ -185,7 +185,10 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                   {data.expiredCouponCode}
                 </p>
                 <p className="text-xs text-[#7D6B5E]">
-                  Discount Value: <span className="font-semibold text-brand-brown">{data.expiredCouponDiscount}% / ₹</span>
+                  Discount Value:{" "}
+                  <span className="font-semibold text-brand-brown">
+                    {data.expiredCouponDiscount}% / ₹
+                  </span>
                 </p>
               </div>
               {data.expiredCouponExpiryDate && (
@@ -194,7 +197,8 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                     Expired
                   </span>
                   <p className="text-[11px] text-[#7D6B5E] mt-1.5">
-                    Expired on: {new Date(data.expiredCouponExpiryDate).toLocaleDateString("en-IN", {
+                    Expired on:{" "}
+                    {new Date(data.expiredCouponExpiryDate).toLocaleDateString("en-IN", {
                       day: "numeric",
                       month: "short",
                       year: "numeric",

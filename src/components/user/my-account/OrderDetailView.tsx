@@ -17,7 +17,7 @@ const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
       { label: "Shipped", stepNumber: "3", completed: false },
       { label: "Delivered", stepNumber: "4", completed: false },
     ];
-    
+
     if (
       status === "Processing" ||
       status === "In Transit" ||
@@ -144,8 +144,8 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           ondismiss: () => {
             setIsRetrying(false);
             setRetryError("Payment window was closed.");
-          }
-        }
+          },
+        },
       };
 
       const rzp = new (window as any).Razorpay(options);
@@ -190,7 +190,9 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
     return (
       <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-20 flex flex-col items-center justify-center shadow-sm select-none">
         <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B] mb-3" />
-        <p className="font-poppins text-[#5A3E2B]/80 text-sm font-medium">Loading order details...</p>
+        <p className="font-poppins text-[#5A3E2B]/80 text-sm font-medium">
+          Loading order details...
+        </p>
       </div>
     );
   }
@@ -441,12 +443,16 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
             <div className="space-y-3 text-xs sm:text-sm text-[#7D6B5E]">
               <div className="flex justify-between font-medium">
                 <span>Subtotal</span>
-                <span className="font-semibold text-[#3A2418]">₹{(order.subtotal || 0).toFixed(2)}</span>
+                <span className="font-semibold text-[#3A2418]">
+                  ₹{(order.subtotal || 0).toFixed(2)}
+                </span>
               </div>
               {order.gst !== undefined && (
                 <div className="flex justify-between font-medium">
                   <span>GST</span>
-                  <span className="font-semibold text-[#3A2418]">₹{(order.gst || 0).toFixed(2)}</span>
+                  <span className="font-semibold text-[#3A2418]">
+                    ₹{(order.gst || 0).toFixed(2)}
+                  </span>
                 </div>
               )}
               <div className="flex justify-between font-medium">
@@ -479,12 +485,19 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               </div>
               {order.paymentStatus && (
                 <div className="space-y-1 border-t border-[#C4A482]/20 pt-2">
-                  <span className="text-brand-brown font-semibold pl-6 block text-[10px] uppercase tracking-wider">Payment Status</span>
+                  <span className="text-brand-brown font-semibold pl-6 block text-[10px] uppercase tracking-wider">
+                    Payment Status
+                  </span>
                   <div className="pl-6 flex items-center gap-2 mt-1">
-                    <span className={`inline-block w-2.5 h-2.5 rounded-full ${
-                      order.paymentStatus === "Captured" ? "bg-green-500" :
-                      order.paymentStatus === "Failed" ? "bg-red-500" : "bg-yellow-500 animate-pulse"
-                    }`} />
+                    <span
+                      className={`inline-block w-2.5 h-2.5 rounded-full ${
+                        order.paymentStatus === "Captured"
+                          ? "bg-green-500"
+                          : order.paymentStatus === "Failed"
+                            ? "bg-red-500"
+                            : "bg-yellow-500 animate-pulse"
+                      }`}
+                    />
                     <span className="font-bold text-brand-brown">{order.paymentStatus}</span>
                   </div>
                 </div>
@@ -494,7 +507,9 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
             {order.paymentStatus !== "Captured" && order.paymentMethod !== "Cash on Delivery" && (
               <div className="mt-5 space-y-2">
                 {retryError && (
-                  <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">{retryError}</p>
+                  <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">
+                    {retryError}
+                  </p>
                 )}
                 <button
                   onClick={handleRetryPayment}

@@ -101,17 +101,26 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         {[
-          { id: "Razorpay", label: "Pay Online", desc: "Pay securely via UPI, Cards, Net Banking, or Wallets using Razorpay" },
-          { id: "Cash on Delivery", label: "Cash on Delivery (COD)", desc: "Pay with cash upon delivery" }
+          {
+            id: "Razorpay",
+            label: "Pay Online",
+            desc: "Pay securely via UPI, Cards, Net Banking, or Wallets using Razorpay",
+          },
+          {
+            id: "Cash on Delivery",
+            label: "Cash on Delivery (COD)",
+            desc: "Pay with cash upon delivery",
+          },
         ].map((method) => {
           const isSelected = paymentMethod === method.id;
           return (
             <label
               key={method.id}
-              className={`border rounded-xl p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${isSelected
+              className={`border rounded-xl p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${
+                isSelected
                   ? "bg-[#F6F1E9]/50 border-brand-green ring-1 ring-brand-green/20"
                   : "bg-white border-[#C4A482]/25 hover:bg-black/[0.01]"
-                }`}
+              }`}
             >
               <div className="flex items-center gap-3">
                 <input

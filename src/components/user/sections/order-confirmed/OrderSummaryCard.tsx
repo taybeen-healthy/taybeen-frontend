@@ -34,13 +34,15 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase block">
             Payment Status
           </span>
-          <span className={`text-[10px] sm:text-xs font-poppins font-bold mt-1 px-3 py-0.5 rounded-full inline-block ${
-            paymentStatus === "Captured" || paymentStatus === "Paid"
-              ? "text-[#A2E043] bg-green-500/10 border border-green-500/20"
-              : paymentStatus === "Failed"
-                ? "text-red-400 bg-red-500/10 border border-red-500/20"
-                : "text-yellow-400 bg-yellow-500/10 border border-yellow-500/20"
-          }`}>
+          <span
+            className={`text-[10px] sm:text-xs font-poppins font-bold mt-1 px-3 py-0.5 rounded-full inline-block ${
+              paymentStatus === "Captured" || paymentStatus === "Paid"
+                ? "text-[#A2E043] bg-green-500/10 border border-green-500/20"
+                : paymentStatus === "Failed"
+                  ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                  : "text-yellow-400 bg-yellow-500/10 border border-yellow-500/20"
+            }`}
+          >
             {paymentStatus}
           </span>
         </div>

@@ -40,7 +40,8 @@ apiClient.interceptors.response.use(
           refreshToken,
         });
 
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } = refreshResponse.data.data?.tokens || refreshResponse.data.tokens;
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+          refreshResponse.data.data?.tokens || refreshResponse.data.tokens;
 
         setCookie("taybeen_access_token", newAccessToken, 1);
         setCookie("taybeen_refresh_token", newRefreshToken, 7);

@@ -158,10 +158,16 @@ export const CheckoutPage: React.FC = () => {
             let shippingAddr: CheckoutAddressForm = {
               firstName: firstName || exampleAddr.firstName,
               lastName: lastName || exampleAddr.lastName,
-              streetAddress: cust.shippingAddress?.street || cust.shippingAddress?.streetAddress || exampleAddr.streetAddress,
+              streetAddress:
+                cust.shippingAddress?.street ||
+                cust.shippingAddress?.streetAddress ||
+                exampleAddr.streetAddress,
               city: cust.shippingAddress?.city || exampleAddr.city,
               country: cust.shippingAddress?.country || exampleAddr.country,
-              stateProvince: cust.shippingAddress?.state || cust.shippingAddress?.stateProvince || exampleAddr.stateProvince,
+              stateProvince:
+                cust.shippingAddress?.state ||
+                cust.shippingAddress?.stateProvince ||
+                exampleAddr.stateProvince,
               postalCode: cust.shippingAddress?.postalCode || exampleAddr.postalCode,
               phone: cust.shippingAddress?.phone || cust.phone || exampleAddr.phone,
             };
@@ -169,10 +175,16 @@ export const CheckoutPage: React.FC = () => {
             let billingAddr: CheckoutAddressForm = {
               firstName: firstName || exampleAddr.firstName,
               lastName: lastName || exampleAddr.lastName,
-              streetAddress: cust.billingAddress?.street || cust.billingAddress?.streetAddress || exampleAddr.streetAddress,
+              streetAddress:
+                cust.billingAddress?.street ||
+                cust.billingAddress?.streetAddress ||
+                exampleAddr.streetAddress,
               city: cust.billingAddress?.city || exampleAddr.city,
               country: cust.billingAddress?.country || exampleAddr.country,
-              stateProvince: cust.billingAddress?.state || cust.billingAddress?.stateProvince || exampleAddr.stateProvince,
+              stateProvince:
+                cust.billingAddress?.state ||
+                cust.billingAddress?.stateProvince ||
+                exampleAddr.stateProvince,
               postalCode: cust.billingAddress?.postalCode || exampleAddr.postalCode,
               phone: cust.billingAddress?.phone || cust.phone || exampleAddr.phone,
             };
@@ -202,7 +214,10 @@ export const CheckoutPage: React.FC = () => {
             return;
           }
         } catch (apiErr) {
-          console.warn("Failed to fetch customer profile from API, falling back to localStorage:", apiErr);
+          console.warn(
+            "Failed to fetch customer profile from API, falling back to localStorage:",
+            apiErr
+          );
         }
 
         // Fallback to local storage if API fails or isn't logged in
@@ -285,7 +300,13 @@ export const CheckoutPage: React.FC = () => {
       fetch(`https://api.postalpincode.in/pincode/${pin}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice[0]) {
+          if (
+            data &&
+            data[0] &&
+            data[0].Status === "Success" &&
+            data[0].PostOffice &&
+            data[0].PostOffice[0]
+          ) {
             const postOffice = data[0].PostOffice[0];
             const state = postOffice.State;
             const city = postOffice.District || postOffice.Block || "";
@@ -308,7 +329,13 @@ export const CheckoutPage: React.FC = () => {
       fetch(`https://api.postalpincode.in/pincode/${pin}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice[0]) {
+          if (
+            data &&
+            data[0] &&
+            data[0].Status === "Success" &&
+            data[0].PostOffice &&
+            data[0].PostOffice[0]
+          ) {
             const postOffice = data[0].PostOffice[0];
             const state = postOffice.State;
             const city = postOffice.District || postOffice.Block || "";
@@ -468,15 +495,18 @@ export const CheckoutPage: React.FC = () => {
           if (orderData) {
             const lastOrderInfo = {
               id: orderData.hexId || createdOrder?.hexId || orderData.orderId || createdOrder?.id,
-              placedOn: createdOrder?.placedOn || new Date().toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true
-              }),
-              itemsCount: createdOrder?.itemsCount || cartItems.reduce((acc, item) => acc + item.quantity, 0),
+              placedOn:
+                createdOrder?.placedOn ||
+                new Date().toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true,
+                }),
+              itemsCount:
+                createdOrder?.itemsCount || cartItems.reduce((acc, item) => acc + item.quantity, 0),
               paymentStatus: orderData.paymentStatus || "Captured",
             };
             localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
@@ -503,9 +533,11 @@ export const CheckoutPage: React.FC = () => {
       modal: {
         ondismiss: () => {
           setIsProcessingPayment(false);
-          setPaymentError("Payment process cancelled by user. You can click 'PROCEED TO MAKE PAYMENT' to try again.");
-        }
-      }
+          setPaymentError(
+            "Payment process cancelled by user. You can click 'PROCEED TO MAKE PAYMENT' to try again."
+          );
+        },
+      },
     };
 
     const rzp = new (window as any).Razorpay(options);
@@ -553,7 +585,7 @@ export const CheckoutPage: React.FC = () => {
             postalCode: addressToSave.postalCode,
             phone: addressToSave.phone,
             email: profileData.email || addressToSave.phone + "@taybeen.local",
-          }
+          },
         });
         setSaveSuccessMsg("Address saved to profile successfully!");
       } else {
@@ -635,7 +667,7 @@ export const CheckoutPage: React.FC = () => {
               year: "numeric",
               hour: "2-digit",
               minute: "2-digit",
-              hour12: true
+              hour12: true,
             }),
             itemsCount: cartItems.reduce((acc, item) => acc + item.quantity, 0),
             paymentStatus: "Pending",
@@ -655,9 +687,10 @@ export const CheckoutPage: React.FC = () => {
         const paymentOrder = paymentOrderResponse.data?.data || paymentOrderResponse.data;
 
         await initiateRazorpayPayment(order.id, paymentOrder);
-
       } catch (err: any) {
-        setPaymentError(err.response?.data?.message || "Failed to initiate payment. Please try again.");
+        setPaymentError(
+          err.response?.data?.message || "Failed to initiate payment. Please try again."
+        );
         setIsProcessingPayment(false);
       }
     }
@@ -702,7 +735,12 @@ export const CheckoutPage: React.FC = () => {
               {paymentError && (
                 <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-poppins font-medium flex items-center justify-between">
                   <span>{paymentError}</span>
-                  <button onClick={() => setPaymentError(null)} className="text-red-500 hover:text-red-700 font-bold ml-2">✕</button>
+                  <button
+                    onClick={() => setPaymentError(null)}
+                    className="text-red-500 hover:text-red-700 font-bold ml-2"
+                  >
+                    ✕
+                  </button>
                 </div>
               )}
 

@@ -103,32 +103,32 @@ const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
   if (value.includes("+91")) {
     const pastedData = e.clipboardData.getData("text");
     const pastedDigits = pastedData.replace(/\D/g, "");
-    
+
     const selectionStart = target.selectionStart ?? 0;
     const selectionEnd = target.selectionEnd ?? 0;
     const selectedText = value.substring(selectionStart, selectionEnd);
     const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
-    
+
     const currentDigits = value.replace(/\D/g, "");
     const currentDigitsCount = currentDigits.length - 2; // exclude 91
-    
+
     const netDigitsCount = currentDigitsCount - selectedDigitsCount;
     const remainingDigits = 10 - netDigitsCount;
-    
+
     if (remainingDigits <= 0) {
       e.preventDefault();
     } else if (pastedDigits.length > remainingDigits) {
       e.preventDefault();
       const truncatedPastedDigits = pastedDigits.slice(0, remainingDigits);
-      const newValue = value.slice(0, selectionStart) + truncatedPastedDigits + value.slice(selectionEnd);
-      
+      const newValue =
+        value.slice(0, selectionStart) + truncatedPastedDigits + value.slice(selectionEnd);
+
       target.value = newValue;
       const event = new Event("input", { bubbles: true });
       target.dispatchEvent(event);
     }
   }
 };
-
 
 interface CheckoutFormProps {
   shippingForm: CheckoutAddressForm;
@@ -336,7 +336,10 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 countrySelectComponent={PhoneCountrySelect}
                 className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                 numberInputProps={{
-                  maxLength: (shippingForm.phone || "").startsWith("+91") || !(shippingForm.phone) ? 16 : undefined,
+                  maxLength:
+                    (shippingForm.phone || "").startsWith("+91") || !shippingForm.phone
+                      ? 16
+                      : undefined,
                   onKeyDown: handlePhoneKeyDown,
                   onPaste: handlePhonePaste,
                   className:
@@ -534,7 +537,10 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                   countrySelectComponent={PhoneCountrySelect}
                   className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                   numberInputProps={{
-                    maxLength: (billingForm.phone || "").startsWith("+91") || !(billingForm.phone) ? 16 : undefined,
+                    maxLength:
+                      (billingForm.phone || "").startsWith("+91") || !billingForm.phone
+                        ? 16
+                        : undefined,
                     onKeyDown: handlePhoneKeyDown,
                     onPaste: handlePhonePaste,
                     className:

@@ -15,11 +15,14 @@ interface BillingAddressCardProps {
 }
 
 export const BillingAddressCard: React.FC<BillingAddressCardProps> = ({ billing, onEdit }) => {
-  const isEmpty = !billing.streetAddress && !billing.country && !billing.firstName && !billing.lastName;
+  const isEmpty =
+    !billing.streetAddress && !billing.country && !billing.firstName && !billing.lastName;
 
-  const fullName = isEmpty ? "Example User" : (`${billing.firstName} ${billing.lastName}`.trim() || "User");
-  const addressLine = isEmpty 
-    ? "123, Example Street, City, State, Country" 
+  const fullName = isEmpty
+    ? "Example User"
+    : `${billing.firstName} ${billing.lastName}`.trim() || "User";
+  const addressLine = isEmpty
+    ? "123, Example Street, City, State, Country"
     : `${billing.streetAddress}, ${billing.stateProvince} ${billing.postalCode}, ${billing.country}`;
   const email = isEmpty ? "example@gmail.com" : billing.email;
   const phone = isEmpty ? "+91 98765 43210" : billing.phone;
@@ -41,12 +44,8 @@ export const BillingAddressCard: React.FC<BillingAddressCardProps> = ({ billing,
           {fullName}
         </h3>
         <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed max-w-sm">{addressLine}</p>
-        {email && (
-          <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">{email}</p>
-        )}
-        {phone && (
-          <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">{phone}</p>
-        )}
+        {email && <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">{email}</p>}
+        {phone && <p className="text-xs sm:text-sm text-[#7D6B5E] truncate">{phone}</p>}
       </div>
       <div className="mt-4 pt-1 flex-shrink-0">
         <button

@@ -85,7 +85,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
     return Math.round(basePrice * ratio);
   };
 
-  const currentPrice = getPriceForWeight(selectedWeight, detailedProduct.weight, detailedProduct.price);
+  const currentPrice = getPriceForWeight(
+    selectedWeight,
+    detailedProduct.weight,
+    detailedProduct.price
+  );
   const currentOriginalPrice = detailedProduct.originalPrice
     ? getPriceForWeight(selectedWeight, detailedProduct.weight, detailedProduct.originalPrice)
     : undefined;
@@ -196,7 +200,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                     </span>
                     <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
                       (
-                      {Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)}
+                      {Math.round(
+                        ((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100
+                      )}
                       % OFF)
                     </span>
                   </>
@@ -268,11 +274,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                     <Minus size={15} strokeWidth={2.5} />
                   </button>
                   <span className="w-10 text-center font-bold text-brand-brown font-poppins text-base select-none">
-                    {detailedProduct.stock !== undefined && detailedProduct.stock <= 0 ? 0 : quantity}
+                    {detailedProduct.stock !== undefined && detailedProduct.stock <= 0
+                      ? 0
+                      : quantity}
                   </span>
                   <button
                     onClick={() => setQuantity((q) => q + 1)}
-                    disabled={detailedProduct.stock !== undefined && (detailedProduct.stock <= 0 || quantity >= detailedProduct.stock)}
+                    disabled={
+                      detailedProduct.stock !== undefined &&
+                      (detailedProduct.stock <= 0 || quantity >= detailedProduct.stock)
+                    }
                     className="w-10 h-10 flex items-center justify-center bg-[#E8E0D0] hover:bg-[#DDD5C5] text-brand-brown rounded-lg font-bold cursor-pointer transition-colors select-none active:scale-95 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Plus size={15} strokeWidth={2.5} />

@@ -101,7 +101,9 @@ export const PartnershipsPage: React.FC = () => {
       setIsSubmitted(true);
     } catch (err: any) {
       console.error("Affiliate apply error:", err);
-      setSubmitError(err.response?.data?.message || "Failed to submit application. Please try again later.");
+      setSubmitError(
+        err.response?.data?.message || "Failed to submit application. Please try again later."
+      );
     } finally {
       setIsSubmitting(false);
     }

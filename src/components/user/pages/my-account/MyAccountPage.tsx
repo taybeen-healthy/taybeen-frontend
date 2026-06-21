@@ -53,14 +53,15 @@ export const MyAccountPage: React.FC = () => {
 
   useEffect(() => {
     // Fetch customer profile & billing info
-    apiClient.get("/customers/me")
+    apiClient
+      .get("/customers/me")
       .then((res) => {
         const cust = res.data?.data || res.data;
         if (cust) {
           const nameParts = (cust.name || "").trim().split(/\s+/);
           const firstName = nameParts[0] || "";
           const lastName = nameParts.slice(1).join(" ") || "";
-          
+
           setProfile({
             firstName,
             lastName,
@@ -108,7 +109,8 @@ export const MyAccountPage: React.FC = () => {
 
     // Fetch customer orders
     console.log("Fetching customer orders...");
-    apiClient.get("/orders")
+    apiClient
+      .get("/orders")
       .then((res) => {
         console.log("Get orders response payload:", res.data);
         const ordersList = Array.isArray(res.data?.data?.data)
@@ -118,13 +120,13 @@ export const MyAccountPage: React.FC = () => {
             : Array.isArray(res.data)
               ? res.data
               : [];
-        
+
         console.log("Resolved ordersList array:", ordersList);
         const mappedOrders = ordersList.map((ord: any) => ({
           id: ord.id || ord._id?.toString(),
           hexId: ord.hexId || ord.id,
           date: ord.placedOn || ord.date || "Just now",
-          total: typeof ord.total === "number" ? ord.total : (Number(ord.total) || 0),
+          total: typeof ord.total === "number" ? ord.total : Number(ord.total) || 0,
           status: ord.status,
         }));
         console.log("Mapped orders for UI state:", mappedOrders);
@@ -134,10 +136,11 @@ export const MyAccountPage: React.FC = () => {
       .finally(() => setLoadingOrders(false));
 
     // Fetch affiliate dashboard
-    apiClient.get("/affiliates/my-dashboard")
+    apiClient
+      .get("/affiliates/my-dashboard")
       .then((res) => {
         const dashboardData = res.data?.data || res.data;
-        if (dashboardData && (res.data?.data !== null)) {
+        if (dashboardData && res.data?.data !== null) {
           setAffiliateData(dashboardData);
         } else {
           setAffiliateData(null);
@@ -249,8 +252,8 @@ export const MyAccountPage: React.FC = () => {
                   onViewDetails={setSelectedOrderId}
                 />
               ))}
-            {activeTab === "affiliate" && (
-              loadingAffiliate ? (
+            {activeTab === "affiliate" &&
+              (loadingAffiliate ? (
                 <div className="flex justify-center items-center py-12">
                   <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
                 </div>
@@ -266,7 +269,8 @@ export const MyAccountPage: React.FC = () => {
                       Become a Taybeen Affiliate Partner
                     </h3>
                     <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-                      Earn rewards by sharing Taybeen Premium Dates with your audience. Access your custom coupon code, track orders in real-time, and get exclusive commissions.
+                      Earn rewards by sharing Taybeen Premium Dates with your audience. Access your
+                      custom coupon code, track orders in real-time, and get exclusive commissions.
                     </p>
                   </div>
                   <button
@@ -276,8 +280,7 @@ export const MyAccountPage: React.FC = () => {
                     Apply Now
                   </button>
                 </div>
-              )
-            )}
+              ))}
             {activeTab !== "dashboard" &&
               activeTab !== "orders" &&
               activeTab !== "settings" &&
@@ -356,7 +359,9 @@ export const MyAccountPage: React.FC = () => {
                           Become a Taybeen Affiliate Partner
                         </h3>
                         <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-                          Earn rewards by sharing Taybeen Premium Dates with your audience. Access your custom coupon code, track orders in real-time, and get exclusive commissions.
+                          Earn rewards by sharing Taybeen Premium Dates with your audience. Access
+                          your custom coupon code, track orders in real-time, and get exclusive
+                          commissions.
                         </p>
                       </div>
                       <button

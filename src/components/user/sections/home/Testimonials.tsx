@@ -34,7 +34,8 @@ export const Testimonials: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    apiClient.get("/reviews")
+    apiClient
+      .get("/reviews")
       .then((res) => {
         const arr = res.data?.data?.data || res.data?.data || [];
         if (arr.length > 0) {

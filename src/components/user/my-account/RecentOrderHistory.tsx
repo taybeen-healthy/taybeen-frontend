@@ -25,7 +25,9 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
           Order History
         </h2>
         <div className="border-b border-[#C4A482]/10 mb-6" />
-        <p className="text-sm text-[#8D7F75] font-medium py-4">You have not placed any orders yet.</p>
+        <p className="text-sm text-[#8D7F75] font-medium py-4">
+          You have not placed any orders yet.
+        </p>
       </div>
     );
   }
@@ -67,7 +69,10 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
                 </td>
                 <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">{order.date}</td>
                 <td className="py-4 px-4 font-medium text-brand-brown align-middle">
-                  ₹{typeof order.total === "number" ? order.total.toFixed(2) : parseFloat(order.total || 0).toFixed(2)}
+                  ₹
+                  {typeof order.total === "number"
+                    ? order.total.toFixed(2)
+                    : parseFloat(order.total || 0).toFixed(2)}
                 </td>
                 <td className="py-4 px-4 align-middle">
                   <Tag

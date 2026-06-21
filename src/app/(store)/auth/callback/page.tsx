@@ -51,12 +51,14 @@ function AuthCallbackHandler() {
 
 export default function AuthCallbackPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFAF3]">
-        <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-        <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading...</p>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFAF3]">
+          <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
+          <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading...</p>
+        </div>
+      }
+    >
       <AuthCallbackHandler />
     </Suspense>
   );

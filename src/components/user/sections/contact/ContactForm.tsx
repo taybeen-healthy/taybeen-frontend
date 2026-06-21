@@ -36,7 +36,9 @@ export const ContactForm: React.FC = () => {
       setMessage("");
     } catch (err: any) {
       console.error("Contact form error:", err);
-      setSubmitError(err.response?.data?.message || "Failed to send message. Please try again later.");
+      setSubmitError(
+        err.response?.data?.message || "Failed to send message. Please try again later."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -50,7 +52,8 @@ export const ContactForm: React.FC = () => {
         </div>
         <h2 className="text-2xl font-serif font-bold text-[#5A3E2B] mb-3">Message Sent!</h2>
         <p className="text-[#768C3A] text-sm leading-relaxed mb-6 max-w-sm">
-          Thank you for reaching out to Taybeen. We have received your message and will get back to you shortly.
+          Thank you for reaching out to Taybeen. We have received your message and will get back to
+          you shortly.
         </p>
         <button
           onClick={() => setIsSuccess(false)}
