@@ -81,6 +81,74 @@ const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({
   );
 };
 
+const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const allowedKeys = [
+    "Backspace",
+    "Delete",
+    "ArrowLeft",
+    "ArrowRight",
+    "Tab",
+    "Enter",
+    "Escape",
+    "Home",
+    "End",
+  ];
+  if (allowedKeys.includes(e.key) || e.ctrlKey || e.metaKey || e.altKey) {
+    return;
+  }
+
+  if (/^[0-9]$/.test(e.key)) {
+    const target = e.currentTarget;
+    const value = target.value || "";
+    if (value.includes("+91")) {
+      const digits = value.replace(/\D/g, "");
+      const selectionStart = target.selectionStart ?? 0;
+      const selectionEnd = target.selectionEnd ?? 0;
+      const selectedText = value.substring(selectionStart, selectionEnd);
+      const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+      const currentDigitsCount = digits.length - 2; // exclude 91
+      const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+
+      if (netDigitsCount >= 10) {
+        e.preventDefault();
+      }
+    }
+  }
+};
+
+const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+  const target = e.currentTarget;
+  const value = target.value || "";
+  if (value.includes("+91")) {
+    const pastedData = e.clipboardData.getData("text");
+    const pastedDigits = pastedData.replace(/\D/g, "");
+    
+    const selectionStart = target.selectionStart ?? 0;
+    const selectionEnd = target.selectionEnd ?? 0;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+    const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+    
+    const currentDigits = value.replace(/\D/g, "");
+    const currentDigitsCount = currentDigits.length - 2; // exclude 91
+    
+    const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+    const remainingDigits = 10 - netDigitsCount;
+    
+    if (remainingDigits <= 0) {
+      e.preventDefault();
+    } else if (pastedDigits.length > remainingDigits) {
+      e.preventDefault();
+      const truncatedPastedDigits = pastedDigits.slice(0, remainingDigits);
+      const newValue = value.slice(0, selectionStart) + truncatedPastedDigits + value.slice(selectionEnd);
+      
+      target.value = newValue;
+      const event = new Event("input", { bubbles: true });
+      target.dispatchEvent(event);
+    }
+  }
+};
+
+
 interface AccountSettingsFormProps {
   profile: AccountProfileForm;
   billing: BillingAddressForm;
@@ -239,7 +307,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     }
 
     if (billingForm.phone) {
-      const phoneErr = validatePhone(billingForm.phone);
+      const phoneErr = validatePhone(billingForm.phone, billingForm.country);
       if (phoneErr) errors.phone = phoneErr;
     }
 
@@ -355,10 +423,22 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                   international
                   defaultCountry="IN"
                   value={profileForm.phone}
-                  onChange={(val) => setProfileForm({ ...profileForm, phone: val || "" })}
+                  onChange={(val) => {
+                    let phoneVal = val || "";
+                    if (phoneVal.startsWith("+91")) {
+                      const digits = phoneVal.slice(3).replace(/\D/g, "");
+                      if (digits.length > 10) {
+                        phoneVal = "+91" + digits.slice(0, 10);
+                      }
+                    }
+                    setProfileForm({ ...profileForm, phone: phoneVal });
+                  }}
                   countrySelectComponent={PhoneCountrySelect}
                   className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                   numberInputProps={{
+                    maxLength: (profileForm.phone || "").startsWith("+91") || !(profileForm.phone) ? 16 : undefined,
+                    onKeyDown: handlePhoneKeyDown,
+                    onPaste: handlePhonePaste,
                     className:
                       "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                   }}
@@ -499,10 +579,22 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 international
                 defaultCountry="IN"
                 value={billingForm.phone}
-                onChange={(val) => setBillingForm({ ...billingForm, phone: val || "" })}
+                onChange={(val) => {
+                  let phoneVal = val || "";
+                  if (phoneVal.startsWith("+91")) {
+                    const digits = phoneVal.slice(3).replace(/\D/g, "");
+                    if (digits.length > 10) {
+                      phoneVal = "+91" + digits.slice(0, 10);
+                    }
+                  }
+                  setBillingForm({ ...billingForm, phone: phoneVal });
+                }}
                 countrySelectComponent={PhoneCountrySelect}
                 className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                 numberInputProps={{
+                  maxLength: (billingForm.phone || "").startsWith("+91") || !(billingForm.phone) ? 16 : undefined,
+                  onKeyDown: handlePhoneKeyDown,
+                  onPaste: handlePhonePaste,
                   className:
                     "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                 }}

@@ -62,6 +62,74 @@ const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({ value, onChange
   );
 };
 
+const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const allowedKeys = [
+    "Backspace",
+    "Delete",
+    "ArrowLeft",
+    "ArrowRight",
+    "Tab",
+    "Enter",
+    "Escape",
+    "Home",
+    "End",
+  ];
+  if (allowedKeys.includes(e.key) || e.ctrlKey || e.metaKey || e.altKey) {
+    return;
+  }
+
+  if (/^[0-9]$/.test(e.key)) {
+    const target = e.currentTarget;
+    const value = target.value || "";
+    if (value.includes("+91")) {
+      const digits = value.replace(/\D/g, "");
+      const selectionStart = target.selectionStart ?? 0;
+      const selectionEnd = target.selectionEnd ?? 0;
+      const selectedText = value.substring(selectionStart, selectionEnd);
+      const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+      const currentDigitsCount = digits.length - 2; // exclude 91
+      const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+
+      if (netDigitsCount >= 10) {
+        e.preventDefault();
+      }
+    }
+  }
+};
+
+const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+  const target = e.currentTarget;
+  const value = target.value || "";
+  if (value.includes("+91")) {
+    const pastedData = e.clipboardData.getData("text");
+    const pastedDigits = pastedData.replace(/\D/g, "");
+    
+    const selectionStart = target.selectionStart ?? 0;
+    const selectionEnd = target.selectionEnd ?? 0;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+    const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+    
+    const currentDigits = value.replace(/\D/g, "");
+    const currentDigitsCount = currentDigits.length - 2; // exclude 91
+    
+    const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+    const remainingDigits = 10 - netDigitsCount;
+    
+    if (remainingDigits <= 0) {
+      e.preventDefault();
+    } else if (pastedDigits.length > remainingDigits) {
+      e.preventDefault();
+      const truncatedPastedDigits = pastedDigits.slice(0, remainingDigits);
+      const newValue = value.slice(0, selectionStart) + truncatedPastedDigits + value.slice(selectionEnd);
+      
+      target.value = newValue;
+      const event = new Event("input", { bubbles: true });
+      target.dispatchEvent(event);
+    }
+  }
+};
+
+
 interface CheckoutFormProps {
   shippingForm: CheckoutAddressForm;
   onShippingFormChange: (form: CheckoutAddressForm) => void;
@@ -76,6 +144,10 @@ interface CheckoutFormProps {
   giftMessageText: string;
   onGiftMessageTextChange: (text: string) => void;
   onSubmit: (e: React.FormEvent) => void;
+  onSaveAddress: () => void;
+  isSavingAddress: boolean;
+  saveSuccessMsg: string | null;
+  saveErrorMsg: string | null;
 }
 
 export const CheckoutForm: React.FC<CheckoutFormProps> = ({
@@ -92,6 +164,10 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   giftMessageText,
   onGiftMessageTextChange,
   onSubmit,
+  onSaveAddress,
+  isSavingAddress,
+  saveSuccessMsg,
+  saveErrorMsg,
 }) => {
   const countryOptions = getCountryOptions().map((c) => ({
     value: c.name,
@@ -247,10 +323,22 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 international
                 defaultCountry="IN"
                 value={shippingForm.phone}
-                onChange={(val) => onShippingFormChange({ ...shippingForm, phone: val || "" })}
+                onChange={(val) => {
+                  let phoneVal = val || "";
+                  if (phoneVal.startsWith("+91")) {
+                    const digits = phoneVal.slice(3).replace(/\D/g, "");
+                    if (digits.length > 10) {
+                      phoneVal = "+91" + digits.slice(0, 10);
+                    }
+                  }
+                  onShippingFormChange({ ...shippingForm, phone: phoneVal });
+                }}
                 countrySelectComponent={PhoneCountrySelect}
                 className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                 numberInputProps={{
+                  maxLength: (shippingForm.phone || "").startsWith("+91") || !(shippingForm.phone) ? 16 : undefined,
+                  onKeyDown: handlePhoneKeyDown,
+                  onPaste: handlePhonePaste,
                   className:
                     "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                 }}
@@ -287,6 +375,27 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 <span>No</span>
               </label>
             </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-5 border-t border-[#C4A482]/15">
+            <button
+              type="button"
+              disabled={isSavingAddress}
+              onClick={onSaveAddress}
+              className="bg-[#5A3E2B]/10 hover:bg-[#5A3E2B]/15 text-[#5A3E2B] font-poppins font-bold text-xs tracking-wider uppercase py-2.5 px-5 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {isSavingAddress ? "Saving Address..." : "Save Address"}
+            </button>
+            {saveSuccessMsg && (
+              <span className="text-xs font-semibold text-green-600 font-poppins animate-fadeIn">
+                ✓ {saveSuccessMsg}
+              </span>
+            )}
+            {saveErrorMsg && (
+              <span className="text-xs font-semibold text-red-500 font-poppins animate-fadeIn">
+                ⚠ {saveErrorMsg}
+              </span>
+            )}
           </div>
 
           <CheckoutGiftMessage
@@ -412,10 +521,22 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                   international
                   defaultCountry="IN"
                   value={billingForm.phone}
-                  onChange={(val) => onBillingFormChange({ ...billingForm, phone: val || "" })}
+                  onChange={(val) => {
+                    let phoneVal = val || "";
+                    if (phoneVal.startsWith("+91")) {
+                      const digits = phoneVal.slice(3).replace(/\D/g, "");
+                      if (digits.length > 10) {
+                        phoneVal = "+91" + digits.slice(0, 10);
+                      }
+                    }
+                    onBillingFormChange({ ...billingForm, phone: phoneVal });
+                  }}
                   countrySelectComponent={PhoneCountrySelect}
                   className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                   numberInputProps={{
+                    maxLength: (billingForm.phone || "").startsWith("+91") || !(billingForm.phone) ? 16 : undefined,
+                    onKeyDown: handlePhoneKeyDown,
+                    onPaste: handlePhonePaste,
                     className:
                       "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
                   }}

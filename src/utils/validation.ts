@@ -1,3 +1,6 @@
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { getCountryIso } from "./geoUtils";
+
 export const validateFullName = (name: string): string | null => {
   if (!name.trim()) {
     return "Full name is required";
@@ -15,12 +18,32 @@ export const validateEmail = (email: string): string | null => {
   return null;
 };
 
-export const validatePhone = (phone: string): string | null => {
-  if (!phone.trim()) {
+export const validatePhone = (phone: string, countryName?: string): string | null => {
+  if (!phone || !phone.trim() || phone.trim() === "+") {
     return "Phone number is required";
   }
-  if (!/^\+?[0-9\s-]{10,15}$/.test(phone.trim())) {
-    return "Please enter a valid phone number";
+
+  const trimmed = phone.trim();
+
+  if (countryName === "India" || countryName?.toLowerCase() === "india") {
+    let rawNumber = trimmed.replace(/\D/g, "");
+    if (rawNumber.startsWith("91")) {
+      rawNumber = rawNumber.slice(2);
+    }
+    if (rawNumber.length !== 10) {
+      return "Indian phone number must be exactly 10 digits";
+    }
+  }
+
+  if (countryName) {
+    const countryIso = getCountryIso(countryName) as any;
+    if (!isValidPhoneNumber(trimmed, countryIso)) {
+      return `Please enter a valid phone number for ${countryName}`;
+    }
+  } else {
+    if (!isValidPhoneNumber(trimmed)) {
+      return "Please enter a valid phone number";
+    }
   }
   return null;
 };
@@ -73,6 +96,9 @@ export const validateStreetAddress = (address: string): string | null => {
 export const validatePostalCode = (code: string): string | null => {
   if (!code.trim()) {
     return "Postal code is required";
+  }
+  if (!/^[0-9]{6}$/.test(code.trim())) {
+    return "Postal code must be exactly 6 digits";
   }
   return null;
 };

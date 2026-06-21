@@ -59,6 +59,8 @@ export default function ProductsPage() {
           ingredients: p.ingredients || [],
           details: p.details || "",
           stock: p.stock ?? 10,
+          weight: p.weight || p.weightOptions?.[0] || "500g",
+          weightOptions: p.weightOptions || ["500g", "1kg"],
           weights: p.weights || ["500g", "1kg"],
           pricePerWeight: p.pricePerWeight || {},
         }));

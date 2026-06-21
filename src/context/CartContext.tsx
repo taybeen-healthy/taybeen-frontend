@@ -43,12 +43,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cartItems, isInitialized]);
 
-  const getPriceForWeight = (option: string, baseWeight: string, basePrice: number) => {
-    const parsedOptionVal = parseFloat(option);
-    const parsedBaseVal = parseFloat(baseWeight);
-    if (isNaN(parsedOptionVal) || isNaN(parsedBaseVal) || parsedBaseVal === 0) return basePrice;
+  const getWeightInGrams = (weightStr: string): number => {
+    if (!weightStr) return 0;
+    const clean = weightStr.toLowerCase().replace(/\s+/g, "");
+    const value = parseFloat(clean);
+    if (isNaN(value)) return 0;
+    if (clean.includes("kg")) {
+      return value * 1000;
+    }
+    return value;
+  };
 
-    const ratio = parsedOptionVal / parsedBaseVal;
+  const getPriceForWeight = (option: string, baseWeight: string, basePrice: number) => {
+    const optionWeight = getWeightInGrams(option);
+    const baseWeightInGrams = getWeightInGrams(baseWeight);
+    if (optionWeight === 0 || baseWeightInGrams === 0) return basePrice;
+
+    const ratio = optionWeight / baseWeightInGrams;
     return Math.round(basePrice * ratio);
   };
 

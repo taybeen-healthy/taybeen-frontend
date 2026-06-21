@@ -115,11 +115,11 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
             </Button>
             <div className="mt-4 text-[10px] text-[#7D6B5E] text-center leading-relaxed">
               By placing an order you agree to our{" "}
-              <a href="#" className="underline hover:text-brand-brown">
+              <a href="/terms-and-contitions" className="underline hover:text-brand-brown">
                 Terms & Conditions
               </a>{" "}
               and{" "}
-              <a href="#" className="underline hover:text-brand-brown">
+              <a href="/privacy-policy" className="underline hover:text-brand-brown">
                 Privacy Policy
               </a>
             </div>

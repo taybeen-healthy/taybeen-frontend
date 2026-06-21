@@ -42,12 +42,14 @@ export const Select: React.FC<SelectProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const normalizedOptions: SelectOption[] = options.map((opt) => {
-    if (typeof opt === "string") {
-      return { label: opt, value: opt, searchString: opt };
-    }
-    return opt;
-  });
+  const normalizedOptions: SelectOption[] = options
+    .filter((opt): opt is string | SelectOption => opt !== undefined && opt !== null)
+    .map((opt) => {
+      if (typeof opt === "string") {
+        return { label: opt, value: opt, searchString: opt };
+      }
+      return opt;
+    });
 
   const selectedOption = normalizedOptions.find((opt) => opt.value === value);
 

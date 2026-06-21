@@ -42,6 +42,9 @@ export const CheckoutPage: React.FC = () => {
   const [giftMessageOpen, setGiftMessageOpen] = useState(false);
   const [giftMessageText, setGiftMessageText] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<string>("Razorpay");
+  const [isSavingAddress, setIsSavingAddress] = useState(false);
+  const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
+  const [saveErrorMsg, setSaveErrorMsg] = useState<string | null>(null);
 
   const [shippingForm, setShippingForm] = useState<CheckoutAddressForm>({
     firstName: "",
@@ -69,43 +72,257 @@ export const CheckoutPage: React.FC = () => {
   const [billingErrors, setBillingErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    try {
-      const storedProfileStr = localStorage.getItem("taybeen_profile");
-      const storedBillingStr = localStorage.getItem("taybeen_billing");
+    const loadInitialAddresses = async () => {
+      try {
+        const draftShipping = localStorage.getItem("taybeen_checkout_draft_shipping");
+        const draftBilling = localStorage.getItem("taybeen_checkout_draft_billing");
+        const draftIsBillingSame = localStorage.getItem("taybeen_checkout_draft_is_billing_same");
 
-      let profileData: any = null;
-      let billingData: any = null;
+        let initialShipping: CheckoutAddressForm | null = null;
+        let initialBilling: CheckoutAddressForm | null = null;
+        let initialIsBillingSame = true;
 
-      if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
-      if (storedBillingStr) billingData = JSON.parse(storedBillingStr);
+        if (draftShipping) {
+          const parsed = JSON.parse(draftShipping);
+          if (parsed.streetAddress?.trim()) {
+            initialShipping = parsed;
+          }
+        }
+        if (draftBilling) {
+          const parsed = JSON.parse(draftBilling);
+          if (parsed.streetAddress?.trim()) {
+            initialBilling = parsed;
+          }
+          if (draftIsBillingSame !== null) {
+            initialIsBillingSame = draftIsBillingSame === "true";
+          }
+        }
 
-      const defaultShipping = {
-        firstName: billingData?.firstName || profileData?.firstName || "",
-        lastName: billingData?.lastName || profileData?.lastName || "",
-        streetAddress: billingData?.streetAddress || "",
-        city: "",
-        country: billingData?.country || "India",
-        stateProvince: billingData?.stateProvince || "",
-        postalCode: billingData?.postalCode || "",
-        phone: billingData?.phone || profileData?.phone || "",
-      };
+        // Helper to check address validity
+        const checkAddressValid = (addr: CheckoutAddressForm) => {
+          return (
+            !validateFirstName(addr.firstName) &&
+            !validateLastName(addr.lastName) &&
+            !validateStreetAddress(addr.streetAddress) &&
+            !validateCity(addr.city) &&
+            !validateCountry(addr.country) &&
+            !validateStateProvince(addr.stateProvince) &&
+            !validatePostalCode(addr.postalCode) &&
+            !validatePhone(addr.phone, addr.country)
+          );
+        };
 
-      setShippingForm(defaultShipping);
+        if (initialShipping && initialBilling) {
+          setShippingForm(initialShipping);
+          setBillingForm(initialBilling);
+          setIsBillingSame(initialIsBillingSame);
 
-      setBillingForm({
-        firstName: billingData?.firstName || "",
-        lastName: billingData?.lastName || "",
-        streetAddress: billingData?.streetAddress || "",
-        city: "",
-        country: billingData?.country || "India",
-        stateProvince: billingData?.stateProvince || "",
-        postalCode: billingData?.postalCode || "",
-        phone: billingData?.phone || "",
-      });
-    } catch (e) {
-      console.error("Failed to load prefill details from localStorage", e);
-    }
+          const isShippingValid = checkAddressValid(initialShipping);
+          const isBillingValid = initialIsBillingSame || checkAddressValid(initialBilling);
+
+          if (isShippingValid && isBillingValid) {
+            setStep("review");
+          }
+          return;
+        }
+
+        // If no drafts, try to load from backend API first
+        const exampleAddr: CheckoutAddressForm = {
+          firstName: "Example",
+          lastName: "User",
+          streetAddress: "123, Example Street",
+          city: "City",
+          stateProvince: "State",
+          postalCode: "123456",
+          country: "India",
+          phone: "+919876543210",
+        };
+
+        try {
+          const res = await apiClient.get("/customers/me");
+          const cust = res.data?.data || res.data;
+          if (cust) {
+            const nameParts = (cust.name || "").trim().split(/\s+/);
+            const firstName = nameParts[0] || "";
+            const lastName = nameParts.slice(1).join(" ") || "";
+
+            const profileData = {
+              firstName,
+              lastName,
+              email: cust.email || "",
+              phone: cust.phone || "",
+              avatarUrl: cust.avatarUrl || undefined,
+            };
+            localStorage.setItem("taybeen_profile", JSON.stringify(profileData));
+
+            let shippingAddr: CheckoutAddressForm = {
+              firstName: firstName || exampleAddr.firstName,
+              lastName: lastName || exampleAddr.lastName,
+              streetAddress: cust.shippingAddress?.street || cust.shippingAddress?.streetAddress || exampleAddr.streetAddress,
+              city: cust.shippingAddress?.city || exampleAddr.city,
+              country: cust.shippingAddress?.country || exampleAddr.country,
+              stateProvince: cust.shippingAddress?.state || cust.shippingAddress?.stateProvince || exampleAddr.stateProvince,
+              postalCode: cust.shippingAddress?.postalCode || exampleAddr.postalCode,
+              phone: cust.shippingAddress?.phone || cust.phone || exampleAddr.phone,
+            };
+
+            let billingAddr: CheckoutAddressForm = {
+              firstName: firstName || exampleAddr.firstName,
+              lastName: lastName || exampleAddr.lastName,
+              streetAddress: cust.billingAddress?.street || cust.billingAddress?.streetAddress || exampleAddr.streetAddress,
+              city: cust.billingAddress?.city || exampleAddr.city,
+              country: cust.billingAddress?.country || exampleAddr.country,
+              stateProvince: cust.billingAddress?.state || cust.billingAddress?.stateProvince || exampleAddr.stateProvince,
+              postalCode: cust.billingAddress?.postalCode || exampleAddr.postalCode,
+              phone: cust.billingAddress?.phone || cust.phone || exampleAddr.phone,
+            };
+
+            // Align shipping and billing if only one was returned in DB
+            if (cust.billingAddress && !cust.shippingAddress) {
+              shippingAddr = { ...billingAddr };
+            } else if (cust.shippingAddress && !cust.billingAddress) {
+              billingAddr = { ...shippingAddr };
+            }
+
+            // Sync with local storage if from DB
+            if (cust.billingAddress) {
+              localStorage.setItem("taybeen_billing", JSON.stringify(billingAddr));
+            }
+
+            setShippingForm(shippingAddr);
+            setBillingForm(billingAddr);
+            setIsBillingSame(true);
+
+            const isShippingValid = checkAddressValid(shippingAddr);
+            const isBillingValid = checkAddressValid(billingAddr);
+
+            if (isShippingValid && isBillingValid) {
+              setStep("review");
+            }
+            return;
+          }
+        } catch (apiErr) {
+          console.warn("Failed to fetch customer profile from API, falling back to localStorage:", apiErr);
+        }
+
+        // Fallback to local storage if API fails or isn't logged in
+        const storedProfileStr = localStorage.getItem("taybeen_profile");
+        const storedBillingStr = localStorage.getItem("taybeen_billing");
+
+        let profileData: any = null;
+        let billingData: any = null;
+
+        if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
+        if (storedBillingStr) billingData = JSON.parse(storedBillingStr);
+
+        const loadedShipping: CheckoutAddressForm = {
+          firstName: billingData?.firstName || profileData?.firstName || exampleAddr.firstName,
+          lastName: billingData?.lastName || profileData?.lastName || exampleAddr.lastName,
+          streetAddress: billingData?.streetAddress || exampleAddr.streetAddress,
+          city: billingData?.city || exampleAddr.city,
+          country: billingData?.country || exampleAddr.country,
+          stateProvince: billingData?.stateProvince || exampleAddr.stateProvince,
+          postalCode: billingData?.postalCode || exampleAddr.postalCode,
+          phone: billingData?.phone || profileData?.phone || exampleAddr.phone,
+        };
+
+        const loadedBilling: CheckoutAddressForm = {
+          firstName: billingData?.firstName || exampleAddr.firstName,
+          lastName: billingData?.lastName || exampleAddr.lastName,
+          streetAddress: billingData?.streetAddress || exampleAddr.streetAddress,
+          city: billingData?.city || exampleAddr.city,
+          country: billingData?.country || exampleAddr.country,
+          stateProvince: billingData?.stateProvince || exampleAddr.stateProvince,
+          postalCode: billingData?.postalCode || exampleAddr.postalCode,
+          phone: billingData?.phone || exampleAddr.phone,
+        };
+
+        setShippingForm(loadedShipping);
+        setBillingForm(loadedBilling);
+        setIsBillingSame(true);
+
+        const isShippingValid = checkAddressValid(loadedShipping);
+        const isBillingValid = checkAddressValid(loadedBilling);
+
+        if (isShippingValid && isBillingValid) {
+          setStep("review");
+        }
+      } catch (e) {
+        console.error("Failed to load prefill details:", e);
+      }
+    };
+
+    loadInitialAddresses();
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("taybeen_checkout_draft_shipping", JSON.stringify(shippingForm));
+    } catch (e) {
+      console.error("Failed to save shipping form draft", e);
+    }
+  }, [shippingForm]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("taybeen_checkout_draft_billing", JSON.stringify(billingForm));
+    } catch (e) {
+      console.error("Failed to save billing form draft", e);
+    }
+  }, [billingForm]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("taybeen_checkout_draft_is_billing_same", String(isBillingSame));
+    } catch (e) {
+      console.error("Failed to save isBillingSame draft", e);
+    }
+  }, [isBillingSame]);
+
+  useEffect(() => {
+    const pin = shippingForm.postalCode.trim();
+    if (/^[0-9]{6}$/.test(pin) && shippingForm.country === "India") {
+      fetch(`https://api.postalpincode.in/pincode/${pin}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice[0]) {
+            const postOffice = data[0].PostOffice[0];
+            const state = postOffice.State;
+            const city = postOffice.District || postOffice.Block || "";
+            setShippingForm((prev) => ({
+              ...prev,
+              stateProvince: state,
+              city: city,
+            }));
+            setShippingErrors((prev) => ({ ...prev, postalCode: "" }));
+          }
+        })
+        .catch((err) => console.error("Error fetching pincode data:", err));
+    }
+  }, [shippingForm.postalCode, shippingForm.country]);
+
+  useEffect(() => {
+    if (isBillingSame) return;
+    const pin = billingForm.postalCode.trim();
+    if (/^[0-9]{6}$/.test(pin) && billingForm.country === "India") {
+      fetch(`https://api.postalpincode.in/pincode/${pin}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice[0]) {
+            const postOffice = data[0].PostOffice[0];
+            const state = postOffice.State;
+            const city = postOffice.District || postOffice.Block || "";
+            setBillingForm((prev) => ({
+              ...prev,
+              stateProvince: state,
+              city: city,
+            }));
+            setBillingErrors((prev) => ({ ...prev, postalCode: "" }));
+          }
+        })
+        .catch((err) => console.error("Error fetching pincode data:", err));
+    }
+  }, [billingForm.postalCode, billingForm.country, isBillingSame]);
 
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
   const [discountAmount, setDiscountAmount] = useState<number>(0);
@@ -113,11 +330,12 @@ export const CheckoutPage: React.FC = () => {
   const [couponSuccess, setCouponSuccess] = useState<string | null>(null);
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.priceAtSelection * item.quantity, 0);
-  const shippingThreshold = delivery.maximumAmount;
-  const shippingCost = subtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
-
   const discount = appliedCoupon ? discountAmount : 0;
   const discountedSubtotal = Math.max(0, subtotal - discount);
+
+  const shippingThreshold = delivery.maximumAmount;
+  const shippingCost = discountedSubtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
+
   const gstPercent = delivery.gstPercent || 5;
   const gstCost = Math.round(((discountedSubtotal * gstPercent) / 100) * 100) / 100;
   const total = Math.max(0, discountedSubtotal + shippingCost + gstCost);
@@ -182,7 +400,7 @@ export const CheckoutPage: React.FC = () => {
     const sPostalErr = validatePostalCode(shippingForm.postalCode);
     if (sPostalErr) sErrors.postalCode = sPostalErr;
 
-    const sPhoneErr = validatePhone(shippingForm.phone);
+    const sPhoneErr = validatePhone(shippingForm.phone, shippingForm.country);
     if (sPhoneErr) sErrors.phone = sPhoneErr;
 
     if (!isBillingSame) {
@@ -207,7 +425,7 @@ export const CheckoutPage: React.FC = () => {
       const bPostalErr = validatePostalCode(billingForm.postalCode);
       if (bPostalErr) bErrors.postalCode = bPostalErr;
 
-      const bPhoneErr = validatePhone(billingForm.phone);
+      const bPhoneErr = validatePhone(billingForm.phone, billingForm.country);
       if (bPhoneErr) bErrors.phone = bPhoneErr;
     }
 
@@ -262,6 +480,9 @@ export const CheckoutPage: React.FC = () => {
               paymentStatus: orderData.paymentStatus || "Captured",
             };
             localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
+            localStorage.removeItem("taybeen_checkout_draft_shipping");
+            localStorage.removeItem("taybeen_checkout_draft_billing");
+            localStorage.removeItem("taybeen_checkout_draft_is_billing_same");
             clearCart();
             router.push("/order-confirmed");
           }
@@ -289,6 +510,61 @@ export const CheckoutPage: React.FC = () => {
 
     const rzp = new (window as any).Razorpay(options);
     rzp.open();
+  };
+
+  const handleSaveAddress = async () => {
+    setSaveSuccessMsg(null);
+    setSaveErrorMsg(null);
+
+    if (!validateForm()) {
+      setSaveErrorMsg("Please fix validation errors first.");
+      return;
+    }
+
+    setIsSavingAddress(true);
+    const addressToSave = shippingForm;
+    const billingToSave = isBillingSame ? shippingForm : billingForm;
+
+    try {
+      localStorage.setItem("taybeen_billing", JSON.stringify(addressToSave));
+
+      const storedProfileStr = localStorage.getItem("taybeen_profile");
+      if (storedProfileStr) {
+        const profileData = JSON.parse(storedProfileStr);
+        await apiClient.put("/customers/billing", {
+          billingAddress: {
+            firstName: billingToSave.firstName,
+            lastName: billingToSave.lastName,
+            streetAddress: billingToSave.streetAddress,
+            city: billingToSave.city || "Pune",
+            stateProvince: billingToSave.stateProvince,
+            country: billingToSave.country,
+            postalCode: billingToSave.postalCode,
+            phone: billingToSave.phone,
+            email: billingToSave.phone + "@taybeen.local",
+          },
+          shippingAddress: {
+            firstName: addressToSave.firstName,
+            lastName: addressToSave.lastName,
+            streetAddress: addressToSave.streetAddress,
+            city: addressToSave.city || "Pune",
+            stateProvince: addressToSave.stateProvince,
+            country: addressToSave.country,
+            postalCode: addressToSave.postalCode,
+            phone: addressToSave.phone,
+            email: profileData.email || addressToSave.phone + "@taybeen.local",
+          }
+        });
+        setSaveSuccessMsg("Address saved to profile successfully!");
+      } else {
+        setSaveSuccessMsg("Address saved locally! Log in to sync to your profile.");
+      }
+    } catch (err: any) {
+      console.error("Failed to save address:", err);
+      setSaveErrorMsg(err.response?.data?.message || "Failed to save address. Please try again.");
+    } finally {
+      setIsSavingAddress(false);
+    }
   };
 
   const handleProceedAction = async (e?: React.FormEvent) => {
@@ -365,6 +641,9 @@ export const CheckoutPage: React.FC = () => {
             paymentStatus: "Pending",
           };
           localStorage.setItem("taybeen_last_order", JSON.stringify(lastOrderInfo));
+          localStorage.removeItem("taybeen_checkout_draft_shipping");
+          localStorage.removeItem("taybeen_checkout_draft_billing");
+          localStorage.removeItem("taybeen_checkout_draft_is_billing_same");
           clearCart();
           router.push("/order-confirmed");
           return;
@@ -473,6 +752,10 @@ export const CheckoutPage: React.FC = () => {
                   giftMessageText={giftMessageText}
                   onGiftMessageTextChange={setGiftMessageText}
                   onSubmit={handleProceedAction}
+                  onSaveAddress={handleSaveAddress}
+                  isSavingAddress={isSavingAddress}
+                  saveSuccessMsg={saveSuccessMsg}
+                  saveErrorMsg={saveErrorMsg}
                 />
               ) : (
                 <CheckoutReview

@@ -22,12 +22,10 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   
-  const [orders, setOrders] = useState<any[]>([]);
-  const [purchasedProducts, setPurchasedProducts] = useState<{ id: string; name: string; orderId: string }[]>([]);
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [selectedProductId, setSelectedProductId] = useState("");
-  const [selectedOrderId, setSelectedOrderId] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,35 +42,24 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       console.error(e);
     }
 
-    // Fetch orders
-    apiClient.get("/orders")
+    // Fetch active categories
+    apiClient.get("/categories")
       .then((res) => {
-        const ordersData = Array.isArray(res.data?.data?.data)
-          ? res.data.data.data
-          : Array.isArray(res.data?.data)
-            ? res.data.data
-            : Array.isArray(res.data)
-              ? res.data
-              : [];
-        setOrders(ordersData);
-
-        const productsMap: Record<string, { id: string; name: string; orderId: string }> = {};
-        ordersData.forEach((order: any) => {
-          if (order.items) {
-            order.items.forEach((item: any) => {
-              const prodId = item.productId;
-              productsMap[prodId] = {
-                id: prodId,
-                name: item.name || item.productName || "Product",
-                orderId: order.id || order._id,
-              };
-            });
-          }
-        });
-        setPurchasedProducts(Object.values(productsMap));
+        const categoriesData = Array.isArray(res.data?.data)
+          ? res.data.data
+          : Array.isArray(res.data)
+            ? res.data
+            : [];
+        
+        const mappedCategories = categoriesData.map((cat: any) => ({
+          id: cat.id || cat._id,
+          name: cat.name,
+        }));
+        
+        setCategories(mappedCategories);
       })
       .catch((err) => {
-        console.error("Error fetching customer orders for reviews:", err);
+        console.error("Error fetching categories for reviews:", err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -127,7 +114,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!productPurchased) newErrors.productPurchased = "Please select a product";
+    if (!productPurchased) newErrors.productPurchased = "Please select a category";
     if (rating === 0) newErrors.rating = "Please provide a rating";
     if (!experience.trim()) newErrors.experience = "Review experience text is required";
 
@@ -141,8 +128,8 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       return;
     }
 
-    if (!selectedProductId || !selectedOrderId) {
-      setSubmitError("Could not associate the review with a valid purchase. Please select a purchased product.");
+    if (!selectedCategoryId) {
+      setSubmitError("Please select a category to review.");
       return;
     }
 
@@ -166,8 +153,8 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       }
 
       await apiClient.post("/reviews", {
-        productId: selectedProductId,
-        orderId: selectedOrderId,
+        productId: selectedCategoryId,
+        orderId: "general-review",
         customerName: fullName,
         customerEmail: email,
         customerPhone: "",
@@ -188,21 +175,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
     return (
       <div className="min-h-[300px] flex flex-col items-center justify-center bg-white border border-[#C4A482]/25 rounded-2xl p-8">
         <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-        <p className="font-poppins text-[#5A3E2B]/80 font-medium">Checking your purchased products...</p>
-      </div>
-    );
-  }
-
-  if (purchasedProducts.length === 0) {
-    return (
-      <div className="min-h-[300px] flex flex-col items-center justify-center bg-white border border-[#C4A482]/25 rounded-2xl p-8 text-center space-y-4 font-poppins">
-        <div className="w-16 h-16 rounded-full bg-[#FFECEC] text-red-500 flex items-center justify-center border border-red-100">
-          <X size={28} />
-        </div>
-        <h3 className="font-serif text-[#5A3E2B] text-2xl font-bold">No Purchased Products</h3>
-        <p className="text-brand-green max-w-md mx-auto text-sm leading-relaxed">
-          You can only review products that you have successfully purchased from Taybeen. Once you place an order, you will be able to leave a review here.
-        </p>
+        <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading review form...</p>
       </div>
     );
   }
@@ -270,15 +243,14 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       </div>
 
       <Select
-        label="Product Purchased"
+        label="Category"
         required
         value={productPurchased}
         onChange={(val) => {
           setProductPurchased(val);
-          const match = purchasedProducts.find((p) => p.name === val);
+          const match = categories.find((c) => c.name === val);
           if (match) {
-            setSelectedProductId(match.id);
-            setSelectedOrderId(match.orderId);
+            setSelectedCategoryId(match.id);
           }
           if (errors.productPurchased) {
             setErrors((prev) => {
@@ -288,8 +260,8 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
             });
           }
         }}
-        options={purchasedProducts.map((p) => p.name)}
-        placeholder="Select a product"
+        options={categories.map((c) => c.name)}
+        placeholder="Select a category"
         error={errors.productPurchased}
       />
 

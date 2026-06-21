@@ -154,6 +154,9 @@ export const MyAccountPage: React.FC = () => {
     setProfile(newProfile);
     try {
       localStorage.setItem("taybeen_profile", JSON.stringify(newProfile));
+      localStorage.removeItem("taybeen_checkout_draft_shipping");
+      localStorage.removeItem("taybeen_checkout_draft_billing");
+      localStorage.removeItem("taybeen_checkout_draft_is_billing_same");
       await apiClient.put("/customers/profile", {
         name: `${newProfile.firstName} ${newProfile.lastName}`.trim(),
         phone: newProfile.phone,
@@ -168,6 +171,9 @@ export const MyAccountPage: React.FC = () => {
     setBilling(newBilling);
     try {
       localStorage.setItem("taybeen_billing", JSON.stringify(newBilling));
+      localStorage.removeItem("taybeen_checkout_draft_shipping");
+      localStorage.removeItem("taybeen_checkout_draft_billing");
+      localStorage.removeItem("taybeen_checkout_draft_is_billing_same");
       await apiClient.put("/customers/billing", {
         billingAddress: {
           firstName: newBilling.firstName,

@@ -101,20 +101,17 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         {[
-          { id: "Razorpay", label: "Razorpay (Online Payment)", desc: "Pay securely with Net Banking, Wallets, etc." },
-          { id: "UPI", label: "UPI", desc: "Pay using Google Pay, PhonePe, Paytm, or any UPI app" },
-          { id: "Credit Card", label: "Credit Card / Debit Card", desc: "Visa, Mastercard, RuPay, Maestro cards" },
+          { id: "Razorpay", label: "Pay Online", desc: "Pay securely via UPI, Cards, Net Banking, or Wallets using Razorpay" },
           { id: "Cash on Delivery", label: "Cash on Delivery (COD)", desc: "Pay with cash upon delivery" }
         ].map((method) => {
           const isSelected = paymentMethod === method.id;
           return (
             <label
               key={method.id}
-              className={`border rounded-xl p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${
-                isSelected
+              className={`border rounded-xl p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${isSelected
                   ? "bg-[#F6F1E9]/50 border-brand-green ring-1 ring-brand-green/20"
                   : "bg-white border-[#C4A482]/25 hover:bg-black/[0.01]"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-3">
                 <input
@@ -135,11 +132,11 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
 
       <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed border-t border-[#C4A482]/15 pt-4">
         By placing an order you agree to our{" "}
-        <a href="#" className="underline hover:text-brand-brown">
+        <a href="/terms-and-contitions" className="underline hover:text-brand-brown">
           Terms & Conditions
         </a>{" "}
         and{" "}
-        <a href="#" className="underline hover:text-brand-brown">
+        <a href="/privacy-policy" className="underline hover:text-brand-brown">
           Privacy Policy
         </a>
       </div>
