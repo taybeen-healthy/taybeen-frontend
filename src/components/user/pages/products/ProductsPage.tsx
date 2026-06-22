@@ -50,7 +50,7 @@ export default function ProductsPage() {
           name: p.name,
           category: p.category?.name || p.category || "Others",
           price: p.price,
-          originalPrice: p.price + (p.discount || 0),
+          originalPrice: p.originalPrice || undefined,
           image: p.images?.[0] || "/images/placeholder.jpg",
           images: p.images || [],
           rating: p.rating || 5,

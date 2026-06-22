@@ -75,7 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {product.name}
             </h3>
             <div className="flex items-center gap-1.5 flex-wrap">
-              {product.originalPrice ? (
+              {product.originalPrice && product.originalPrice > product.price ? (
                 <>
                   <span className="text-[10px] sm:text-xs text-[#5A3E2B]/60 line-through font-poppins font-medium">
                     ₹{product.originalPrice}
@@ -154,7 +154,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </p>
           )}
           <div className="pt-1 flex items-center gap-2 flex-wrap">
-            {product.originalPrice ? (
+            {product.originalPrice && product.originalPrice > product.price ? (
               <>
                 <span className="text-sm sm:text-base text-brand-brown/60 line-through font-poppins font-medium">
                   ₹{product.originalPrice}
@@ -179,19 +179,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="mt-4 pt-3 border-t border-[#F5EDE0] flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <StarRating
-              rating={product.rating || 4.9}
-              size={12}
-              className="[&_svg]:!w-3 [&_svg]:md:!w-3.5 [&_svg]:!h-3 [&_svg]:md:!h-3.5"
-            />
-            <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
-              {product.rating || 4.9}{" "}
-              <span className="text-[#8D7F75] font-normal">
-                ({formatIndianNumber(product.reviewsCount || 120)})
+          {((product.reviewsCount || 0) > 0) ? (
+            <div className="flex items-center gap-1.5">
+              <StarRating
+                rating={product.rating || 4.9}
+                size={12}
+                className="[&_svg]:!w-3 [&_svg]:md:!w-3.5 [&_svg]:!h-3 [&_svg]:md:!h-3.5"
+              />
+              <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
+                {product.rating || 4.9}{" "}
+                <span className="text-[#8D7F75] font-normal">
+                  ({formatIndianNumber(product.reviewsCount || 120)})
+                </span>
               </span>
-            </span>
-          </div>
+            </div>
+          ) : (
+            <div />
+          )}
 
           <button
             onClick={(e) => {

@@ -22,10 +22,10 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
+  const [products, setProducts] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedProductId, setSelectedProductId] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -42,25 +42,21 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       console.error(e);
     }
 
-    // Fetch active categories
+    // Fetch active products
     apiClient
-      .get("/categories")
+      .get("/products?limit=100")
       .then((res) => {
-        const categoriesData = Array.isArray(res.data?.data)
-          ? res.data.data
-          : Array.isArray(res.data)
-            ? res.data
-            : [];
+        const productsData = res.data?.data?.data || res.data?.data || res.data || [];
 
-        const mappedCategories = categoriesData.map((cat: any) => ({
-          id: cat.id || cat._id,
-          name: cat.name,
+        const mappedProducts = productsData.map((prod: any) => ({
+          id: prod.id || prod._id,
+          name: prod.name,
         }));
 
-        setCategories(mappedCategories);
+        setProducts(mappedProducts);
       })
       .catch((err) => {
-        console.error("Error fetching categories for reviews:", err);
+        console.error("Error fetching products for reviews:", err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -115,7 +111,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!productPurchased) newErrors.productPurchased = "Please select a category";
+    if (!productPurchased) newErrors.productPurchased = "Please select a product";
     if (rating === 0) newErrors.rating = "Please provide a rating";
     if (!experience.trim()) newErrors.experience = "Review experience text is required";
 
@@ -129,8 +125,8 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       return;
     }
 
-    if (!selectedCategoryId) {
-      setSubmitError("Please select a category to review.");
+    if (!selectedProductId) {
+      setSubmitError("Please select a product to review.");
       return;
     }
 
@@ -154,7 +150,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       }
 
       await apiClient.post("/reviews", {
-        productId: selectedCategoryId,
+        productId: selectedProductId,
         orderId: "general-review",
         customerName: fullName,
         customerEmail: email,
@@ -244,14 +240,14 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       </div>
 
       <Select
-        label="Category"
+        label="Product"
         required
         value={productPurchased}
         onChange={(val) => {
           setProductPurchased(val);
-          const match = categories.find((c) => c.name === val);
+          const match = products.find((p) => p.name === val);
           if (match) {
-            setSelectedCategoryId(match.id);
+            setSelectedProductId(match.id);
           }
           if (errors.productPurchased) {
             setErrors((prev) => {
@@ -261,8 +257,8 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
             });
           }
         }}
-        options={categories.map((c) => c.name)}
-        placeholder="Select a category"
+        options={products.map((p) => p.name)}
+        placeholder="Select a product"
         error={errors.productPurchased}
       />
 

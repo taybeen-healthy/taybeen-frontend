@@ -71,7 +71,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
             <span>Pack Size: {product.weight}</span>
             <span>·</span>
             <span>Price:</span>
-            {product.originalPrice ? (
+            {product.originalPrice && product.originalPrice > product.price ? (
               <>
                 <span className="line-through text-brand-brown/60">₹{product.originalPrice}</span>
                 <span className="text-brand-brown">₹{product.price}</span>
@@ -88,12 +88,14 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
             )}
           </p>
 
-          <div className="flex items-center gap-1.5 text-brand-primary">
-            <StarRating rating={product.rating} size={14} />
-            <span className="text-xs font-poppins text-[#8D7F75] font-normal ml-1">
-              ({formatIndianNumber(product.reviewsCount)} reviews)
-            </span>
-          </div>
+          {((product.reviewsCount || 0) > 0) && (
+            <div className="flex items-center gap-1.5 text-brand-primary">
+              <StarRating rating={product.rating} size={14} />
+              <span className="text-xs font-poppins text-[#8D7F75] font-normal ml-1">
+                ({formatIndianNumber(product.reviewsCount)} reviews)
+              </span>
+            </div>
+          )}
         </div>
 
         <p className="text-brand-brown font-poppins text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase mb-3 md:mb-4 text-center select-none">

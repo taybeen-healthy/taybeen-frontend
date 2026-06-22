@@ -8,6 +8,7 @@ import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
 import { Select } from "@/components/ui/Select";
 import { useCart } from "@/context/CartContext";
+import { useCustomization } from "@/context/CustomizationContext";
 import { formatIndianCurrency } from "@/lib/utils";
 import { apiClient } from "@/lib/apiClient";
 
@@ -18,6 +19,7 @@ interface ProductDetailModalProps {
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClose }) => {
   const { addToCart, setIsCartOpen } = useCart();
+  const { delivery } = useCustomization();
   const [detailedProduct, setDetailedProduct] = useState<Product>(product);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -58,7 +60,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   }, [product.id]);
 
   const productImages = detailedProduct.images || [detailedProduct.image];
-  const weightOptions = detailedProduct.weightOptions || [detailedProduct.weight];
+
+  const isKgUnit =
+    (detailedProduct.weight || "").toLowerCase().trim() === "kg" ||
+    (product.weight || "").toLowerCase().trim() === "kg";
+
+  const weightOptions = isKgUnit
+    ? [
+        { label: "500 gram", value: "500g" },
+        { label: "Kilogram", value: "kg" },
+      ]
+    : (detailedProduct.weightOptions && detailedProduct.weightOptions.length > 0)
+    ? detailedProduct.weightOptions
+    : [detailedProduct.weight || product.weight || "500g"];
+
+  const showWeightSelector = !["pcs", "pieces", "piece", "box", "boxes"].includes(
+    (detailedProduct.weight || product.weight || "").toLowerCase().trim()
+  );
+
   const productBenefits = detailedProduct.benefits || [
     "Rich in vitamins and minerals",
     "100% natural energy booster",
@@ -68,9 +87,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   const getWeightInGrams = (weightStr: string): number => {
     if (!weightStr) return 0;
     const clean = weightStr.toLowerCase().replace(/\s+/g, "");
+    if (clean === "kg" || clean === "kilogram") return 1000;
+    if (clean === "g" || clean === "gram" || clean === "grams") return 1;
+
     const value = parseFloat(clean);
     if (isNaN(value)) return 0;
-    if (clean.includes("kg")) {
+    if (clean.includes("kg") || clean.includes("kilogram")) {
       return value * 1000;
     }
     return value;
@@ -181,19 +203,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               {detailedProduct.name}
             </h2>
 
-            <div className="flex items-center gap-3 mb-4">
-              <StarRating rating={detailedProduct.rating} size={16} />
-              <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
-                {detailedProduct.rating} ({detailedProduct.reviewsCount} reviews)
-              </span>
-            </div>
+            {((detailedProduct.reviewsCount || 0) > 0) && (
+              <div className="flex items-center gap-3 mb-4">
+                <StarRating rating={detailedProduct.rating} size={16} />
+                <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
+                  {detailedProduct.rating} ({detailedProduct.reviewsCount} reviews)
+                </span>
+              </div>
+            )}
 
             <div className="mb-5">
               <div className="flex items-baseline gap-3 flex-wrap">
                 <span className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
                   ₹{formatIndianCurrency(currentPrice, 2)}
                 </span>
-                {currentOriginalPrice && (
+                {currentOriginalPrice && currentOriginalPrice > currentPrice && (
                   <>
                     <span className="text-base sm:text-lg text-brand-brown/60 line-through font-poppins font-medium">
                       ₹{formatIndianCurrency(currentOriginalPrice, 2)}
@@ -249,17 +273,19 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             </div>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-6">
-              <div className="w-full sm:w-44">
-                <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
-                  Weight
-                </span>
-                <Select
-                  value={selectedWeight}
-                  onChange={setSelectedWeight}
-                  options={weightOptions}
-                  className="w-full text-xs"
-                />
-              </div>
+              {showWeightSelector && (
+                <div className="w-full sm:w-44">
+                  <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
+                    Weight
+                  </span>
+                  <Select
+                    value={selectedWeight}
+                    onChange={setSelectedWeight}
+                    options={weightOptions}
+                    className="w-full text-xs"
+                  />
+                </div>
+              )}
 
               <div>
                 <span className="text-[10px] sm:text-xs font-bold text-brand-brown tracking-widest uppercase mb-2 block font-poppins">
@@ -323,7 +349,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
                   Free Shipping on
                   <br />
-                  ₹999+
+                  ₹{delivery.maximumAmount}+
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5">

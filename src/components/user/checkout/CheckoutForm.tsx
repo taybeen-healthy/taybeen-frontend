@@ -296,7 +296,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 onChange={(e) =>
                   onShippingFormChange({ ...shippingForm, postalCode: e.target.value })
                 }
-                placeholder="12345"
+                placeholder="123456"
                 error={shippingErrors.postalCode}
               />
             </div>
@@ -497,7 +497,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
                   onChange={(e) =>
                     onBillingFormChange({ ...billingForm, postalCode: e.target.value })
                   }
-                  placeholder="12345"
+                  placeholder="123456"
                   error={billingErrors.postalCode}
                 />
               </div>

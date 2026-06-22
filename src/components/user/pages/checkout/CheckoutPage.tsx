@@ -127,17 +127,6 @@ export const CheckoutPage: React.FC = () => {
         }
 
         // If no drafts, try to load from backend API first
-        const exampleAddr: CheckoutAddressForm = {
-          firstName: "Example",
-          lastName: "User",
-          streetAddress: "123, Example Street",
-          city: "City",
-          stateProvince: "State",
-          postalCode: "123456",
-          country: "India",
-          phone: "+919876543210",
-        };
-
         try {
           const res = await apiClient.get("/customers/me");
           const cust = res.data?.data || res.data;
@@ -156,37 +145,37 @@ export const CheckoutPage: React.FC = () => {
             localStorage.setItem("taybeen_profile", JSON.stringify(profileData));
 
             let shippingAddr: CheckoutAddressForm = {
-              firstName: firstName || exampleAddr.firstName,
-              lastName: lastName || exampleAddr.lastName,
+              firstName: firstName || "",
+              lastName: lastName || "",
               streetAddress:
                 cust.shippingAddress?.street ||
                 cust.shippingAddress?.streetAddress ||
-                exampleAddr.streetAddress,
-              city: cust.shippingAddress?.city || exampleAddr.city,
-              country: cust.shippingAddress?.country || exampleAddr.country,
+                "",
+              city: cust.shippingAddress?.city || "",
+              country: cust.shippingAddress?.country || "India",
               stateProvince:
                 cust.shippingAddress?.state ||
                 cust.shippingAddress?.stateProvince ||
-                exampleAddr.stateProvince,
-              postalCode: cust.shippingAddress?.postalCode || exampleAddr.postalCode,
-              phone: cust.shippingAddress?.phone || cust.phone || exampleAddr.phone,
+                "",
+              postalCode: cust.shippingAddress?.postalCode || "",
+              phone: cust.shippingAddress?.phone || cust.phone || "",
             };
 
             let billingAddr: CheckoutAddressForm = {
-              firstName: firstName || exampleAddr.firstName,
-              lastName: lastName || exampleAddr.lastName,
+              firstName: firstName || "",
+              lastName: lastName || "",
               streetAddress:
                 cust.billingAddress?.street ||
                 cust.billingAddress?.streetAddress ||
-                exampleAddr.streetAddress,
-              city: cust.billingAddress?.city || exampleAddr.city,
-              country: cust.billingAddress?.country || exampleAddr.country,
+                "",
+              city: cust.billingAddress?.city || "",
+              country: cust.billingAddress?.country || "India",
               stateProvince:
                 cust.billingAddress?.state ||
                 cust.billingAddress?.stateProvince ||
-                exampleAddr.stateProvince,
-              postalCode: cust.billingAddress?.postalCode || exampleAddr.postalCode,
-              phone: cust.billingAddress?.phone || cust.phone || exampleAddr.phone,
+                "",
+              postalCode: cust.billingAddress?.postalCode || "",
+              phone: cust.billingAddress?.phone || cust.phone || "",
             };
 
             // Align shipping and billing if only one was returned in DB
@@ -231,25 +220,25 @@ export const CheckoutPage: React.FC = () => {
         if (storedBillingStr) billingData = JSON.parse(storedBillingStr);
 
         const loadedShipping: CheckoutAddressForm = {
-          firstName: billingData?.firstName || profileData?.firstName || exampleAddr.firstName,
-          lastName: billingData?.lastName || profileData?.lastName || exampleAddr.lastName,
-          streetAddress: billingData?.streetAddress || exampleAddr.streetAddress,
-          city: billingData?.city || exampleAddr.city,
-          country: billingData?.country || exampleAddr.country,
-          stateProvince: billingData?.stateProvince || exampleAddr.stateProvince,
-          postalCode: billingData?.postalCode || exampleAddr.postalCode,
-          phone: billingData?.phone || profileData?.phone || exampleAddr.phone,
+          firstName: billingData?.firstName || profileData?.firstName || "",
+          lastName: billingData?.lastName || profileData?.lastName || "",
+          streetAddress: billingData?.streetAddress || "",
+          city: billingData?.city || "",
+          country: billingData?.country || "India",
+          stateProvince: billingData?.stateProvince || "",
+          postalCode: billingData?.postalCode || "",
+          phone: billingData?.phone || profileData?.phone || "",
         };
 
         const loadedBilling: CheckoutAddressForm = {
-          firstName: billingData?.firstName || exampleAddr.firstName,
-          lastName: billingData?.lastName || exampleAddr.lastName,
-          streetAddress: billingData?.streetAddress || exampleAddr.streetAddress,
-          city: billingData?.city || exampleAddr.city,
-          country: billingData?.country || exampleAddr.country,
-          stateProvince: billingData?.stateProvince || exampleAddr.stateProvince,
-          postalCode: billingData?.postalCode || exampleAddr.postalCode,
-          phone: billingData?.phone || exampleAddr.phone,
+          firstName: billingData?.firstName || "",
+          lastName: billingData?.lastName || "",
+          streetAddress: billingData?.streetAddress || "",
+          city: billingData?.city || "",
+          country: billingData?.country || "India",
+          stateProvince: billingData?.stateProvince || "",
+          postalCode: billingData?.postalCode || "",
+          phone: billingData?.phone || "",
         };
 
         setShippingForm(loadedShipping);
@@ -549,7 +538,7 @@ export const CheckoutPage: React.FC = () => {
     setSaveErrorMsg(null);
 
     if (!validateForm()) {
-      setSaveErrorMsg("Please fix validation errors first.");
+      setSaveErrorMsg("Please fill all required fields.");
       return;
     }
 

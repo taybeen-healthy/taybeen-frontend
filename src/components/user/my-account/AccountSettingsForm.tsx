@@ -19,6 +19,7 @@ import {
   validateCountry,
   validateStateProvince,
   validatePostalCode,
+  validateCity,
 } from "@/utils/validation";
 
 interface PhoneCountrySelectProps {
@@ -292,6 +293,9 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     const streetAddressErr = validateStreetAddress(billingForm.streetAddress);
     if (streetAddressErr) errors.streetAddress = streetAddressErr;
 
+    const cityErr = validateCity(billingForm.city);
+    if (cityErr) errors.city = cityErr;
+
     const countryErr = validateCountry(billingForm.country);
     if (countryErr) errors.country = countryErr;
 
@@ -521,6 +525,19 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
               onChange={(e) => setBillingForm({ ...billingForm, streetAddress: e.target.value })}
               placeholder="Enter Street Address"
               error={billingErrors.streetAddress}
+            />
+          </div>
+
+          <div className="space-y-1.5 text-left">
+            <label className="text-xs sm:text-sm font-semibold text-brand-brown/85 block">
+              City<span className="text-red-500">*</span>
+            </label>
+            <Input
+              type="text"
+              value={billingForm.city}
+              onChange={(e) => setBillingForm({ ...billingForm, city: e.target.value })}
+              placeholder="Enter City"
+              error={billingErrors.city}
             />
           </div>
 
