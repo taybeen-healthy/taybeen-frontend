@@ -257,8 +257,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         {order.status === "Cancelled" && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200/50 rounded-xl flex items-center justify-between text-left">
             <div>
-              <p className="text-sm font-bold text-red-800 font-poppins">Your order has been cancelled</p>
-              <p className="text-xs text-red-600/80 mt-0.5 font-poppins">This order will not be processed further.</p>
+              <p className="text-sm font-bold text-red-800 font-poppins">
+                Your order has been cancelled
+              </p>
+              <p className="text-xs text-red-600/80 mt-0.5 font-poppins">
+                This order will not be processed further.
+              </p>
             </div>
             <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold font-poppins uppercase">
               Cancelled
@@ -520,29 +524,31 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               )}
             </div>
 
-            {order.status !== "Cancelled" && order.paymentStatus !== "Captured" && order.paymentMethod !== "Cash on Delivery" && (
-              <div className="mt-5 space-y-2">
-                {retryError && (
-                  <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">
-                    {retryError}
-                  </p>
-                )}
-                <button
-                  onClick={handleRetryPayment}
-                  disabled={isRetrying}
-                  className="w-full bg-[#5A3E2B] hover:bg-[#462F20] disabled:bg-[#5A3E2B]/50 text-white rounded-xl py-3 text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer font-poppins flex items-center justify-center gap-2"
-                >
-                  {isRetrying ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Processing...</span>
-                    </>
-                  ) : (
-                    <span>Retry Payment</span>
+            {order.status !== "Cancelled" &&
+              order.paymentStatus !== "Captured" &&
+              order.paymentMethod !== "Cash on Delivery" && (
+                <div className="mt-5 space-y-2">
+                  {retryError && (
+                    <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">
+                      {retryError}
+                    </p>
                   )}
-                </button>
-              </div>
-            )}
+                  <button
+                    onClick={handleRetryPayment}
+                    disabled={isRetrying}
+                    className="w-full bg-[#5A3E2B] hover:bg-[#462F20] disabled:bg-[#5A3E2B]/50 text-white rounded-xl py-3 text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer font-poppins flex items-center justify-center gap-2"
+                  >
+                    {isRetrying ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Processing...</span>
+                      </>
+                    ) : (
+                      <span>Retry Payment</span>
+                    )}
+                  </button>
+                </div>
+              )}
           </div>
         </div>
       </div>

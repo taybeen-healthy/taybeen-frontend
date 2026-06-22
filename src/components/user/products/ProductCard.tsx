@@ -179,7 +179,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className="mt-4 pt-3 border-t border-[#F5EDE0] flex items-center justify-between">
-          {((product.reviewsCount || 0) > 0) ? (
+          {(product.reviewsCount || 0) > 0 ? (
             <div className="flex items-center gap-1.5">
               <StarRating
                 rating={product.rating || 4.9}

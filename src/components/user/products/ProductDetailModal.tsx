@@ -70,9 +70,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
         { label: "500 gram", value: "500g" },
         { label: "Kilogram", value: "kg" },
       ]
-    : (detailedProduct.weightOptions && detailedProduct.weightOptions.length > 0)
-    ? detailedProduct.weightOptions
-    : [detailedProduct.weight || product.weight || "500g"];
+    : detailedProduct.weightOptions && detailedProduct.weightOptions.length > 0
+      ? detailedProduct.weightOptions
+      : [detailedProduct.weight || product.weight || "500g"];
 
   const showWeightSelector = !["pcs", "pieces", "piece", "box", "boxes"].includes(
     (detailedProduct.weight || product.weight || "").toLowerCase().trim()
@@ -203,7 +203,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               {detailedProduct.name}
             </h2>
 
-            {((detailedProduct.reviewsCount || 0) > 0) && (
+            {(detailedProduct.reviewsCount || 0) > 0 && (
               <div className="flex items-center gap-3 mb-4">
                 <StarRating rating={detailedProduct.rating} size={16} />
                 <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
@@ -348,8 +348,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 <Truck size={20} className="text-[#F7A503]" />
                 <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
                   Free Shipping on
-                  <br />
-                  ₹{delivery.maximumAmount}+
+                  <br />₹{delivery.maximumAmount}+
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5">

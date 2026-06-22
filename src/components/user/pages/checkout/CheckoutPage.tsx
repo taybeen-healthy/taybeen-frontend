@@ -148,15 +148,11 @@ export const CheckoutPage: React.FC = () => {
               firstName: firstName || "",
               lastName: lastName || "",
               streetAddress:
-                cust.shippingAddress?.street ||
-                cust.shippingAddress?.streetAddress ||
-                "",
+                cust.shippingAddress?.street || cust.shippingAddress?.streetAddress || "",
               city: cust.shippingAddress?.city || "",
               country: cust.shippingAddress?.country || "India",
               stateProvince:
-                cust.shippingAddress?.state ||
-                cust.shippingAddress?.stateProvince ||
-                "",
+                cust.shippingAddress?.state || cust.shippingAddress?.stateProvince || "",
               postalCode: cust.shippingAddress?.postalCode || "",
               phone: cust.shippingAddress?.phone || cust.phone || "",
             };
@@ -165,15 +161,10 @@ export const CheckoutPage: React.FC = () => {
               firstName: firstName || "",
               lastName: lastName || "",
               streetAddress:
-                cust.billingAddress?.street ||
-                cust.billingAddress?.streetAddress ||
-                "",
+                cust.billingAddress?.street || cust.billingAddress?.streetAddress || "",
               city: cust.billingAddress?.city || "",
               country: cust.billingAddress?.country || "India",
-              stateProvince:
-                cust.billingAddress?.state ||
-                cust.billingAddress?.stateProvince ||
-                "",
+              stateProvince: cust.billingAddress?.state || cust.billingAddress?.stateProvince || "",
               postalCode: cust.billingAddress?.postalCode || "",
               phone: cust.billingAddress?.phone || cust.phone || "",
             };

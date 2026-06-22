@@ -43,7 +43,7 @@ export const BestSellers: React.FC = () => {
             badge: p.badge || undefined,
             badgeColor: p.badgeColor || undefined,
           }));
-          
+
           // Show the top 4 products
           setProductsList(mappedProducts.slice(0, 4));
         }

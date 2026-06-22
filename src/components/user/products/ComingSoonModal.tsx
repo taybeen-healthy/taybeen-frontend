@@ -88,7 +88,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
             )}
           </p>
 
-          {((product.reviewsCount || 0) > 0) && (
+          {(product.reviewsCount || 0) > 0 && (
             <div className="flex items-center gap-1.5 text-brand-primary">
               <StarRating rating={product.rating} size={14} />
               <span className="text-xs font-poppins text-[#8D7F75] font-normal ml-1">
