@@ -1,6 +1,7 @@
-import React from "react";
-import { Package, Truck, Mail, Download } from "lucide-react";
+import React, { useState } from "react";
+import { Package, Truck, Mail, Download, Loader2 } from "lucide-react";
 import { orderConfirmedData } from "@/data/user/orderConfirmedData";
+import { apiClient } from "@/lib/apiClient";
 
 interface OrderSummaryCardProps {
   orderId: string;
@@ -16,6 +17,32 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
   paymentStatus = "Captured",
 }) => {
   const { labels } = orderConfirmedData;
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+
+  const handleDownloadInvoice = async () => {
+    setIsDownloading(true);
+    setDownloadError(null);
+    try {
+      const response = await apiClient.get(`/invoices/download/${orderId}`, {
+        responseType: "blob",
+      });
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `invoice-${orderId}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err: any) {
+      console.error("Failed to download invoice PDF:", err);
+      setDownloadError("Failed to download invoice. Please try again.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const itemsText = itemsCount === 1 ? "1 item" : `${itemsCount} items`;
 
@@ -143,15 +170,31 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
       </div>
 
       <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-        <span className="text-sm font-poppins font-medium text-brand-brown">
-          Need a copy of your invoice?
-        </span>
+        <div className="flex flex-col">
+          <span className="text-sm font-poppins font-medium text-brand-brown">
+            Need a copy of your invoice?
+          </span>
+          {downloadError && (
+            <span className="text-xs text-red-500 font-poppins mt-0.5">{downloadError}</span>
+          )}
+        </div>
         <button
           type="button"
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all text-xs font-bold font-poppins cursor-pointer select-none shadow-sm hover:shadow active:scale-[0.98]"
+          onClick={handleDownloadInvoice}
+          disabled={isDownloading}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all text-xs font-bold font-poppins cursor-pointer select-none shadow-sm hover:shadow active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Download size={14} />
-          Download Invoice
+          {isDownloading ? (
+            <>
+              <Loader2 size={14} className="animate-spin" />
+              Downloading...
+            </>
+          ) : (
+            <>
+              <Download size={14} />
+              Download Invoice
+            </>
+          )}
         </button>
       </div>
     </div>

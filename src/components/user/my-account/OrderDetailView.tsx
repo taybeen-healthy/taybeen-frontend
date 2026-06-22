@@ -18,6 +18,11 @@ const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
       { label: "Delivered", stepNumber: "4", completed: false },
     ];
 
+    if (status === "Cancelled") {
+      steps[0].completed = false;
+      return steps;
+    }
+
     if (
       status === "Processing" ||
       status === "In Transit" ||
@@ -249,6 +254,17 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         <h3 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-6">
           Order Status
         </h3>
+        {order.status === "Cancelled" && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200/50 rounded-xl flex items-center justify-between text-left">
+            <div>
+              <p className="text-sm font-bold text-red-800 font-poppins">Your order has been cancelled</p>
+              <p className="text-xs text-red-600/80 mt-0.5 font-poppins">This order will not be processed further.</p>
+            </div>
+            <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold font-poppins uppercase">
+              Cancelled
+            </span>
+          </div>
+        )}
         <div className="relative flex flex-col md:flex-row justify-between gap-6 md:gap-4 md:items-center">
           <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-0.5 bg-[#C4A482]/15 hidden md:block z-0">
             <div
@@ -504,7 +520,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               )}
             </div>
 
-            {order.paymentStatus !== "Captured" && order.paymentMethod !== "Cash on Delivery" && (
+            {order.status !== "Cancelled" && order.paymentStatus !== "Captured" && order.paymentMethod !== "Cash on Delivery" && (
               <div className="mt-5 space-y-2">
                 {retryError && (
                   <p className="text-red-500 text-xs font-semibold text-center bg-red-50 border border-red-100 p-2 rounded-lg">
