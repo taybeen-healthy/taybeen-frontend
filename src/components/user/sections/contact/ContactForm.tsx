@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import { apiClient } from "@/lib/apiClient";
 import { Loader2, CheckCircle } from "lucide-react";
+import { validatePhone } from "@/lib/utils/validation";
 
 export const ContactForm: React.FC = () => {
   const [name, setName] = useState("");
@@ -20,11 +22,20 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     setSubmitError(null);
 
+    // Validate phone number
+    const phoneError = validatePhone(phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
+      setIsSubmitting(false);
+      return;
+    }
+
     const payload = {
       name,
       email,
+      phone,
       subject: `Contact Inquiry from ${name}`,
-      message: `Message: ${message}\n\nPhone Number: ${phone}`,
+      message,
     };
 
     try {
@@ -56,6 +67,7 @@ export const ContactForm: React.FC = () => {
           you shortly.
         </p>
         <button
+          type="button"
           onClick={() => setIsSuccess(false)}
           className="px-6 py-2.5 bg-[#5A3E2B] hover:bg-[#432E20] text-[#FDFAF3] rounded-lg font-poppins font-bold text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer"
         >
@@ -99,13 +111,11 @@ export const ContactForm: React.FC = () => {
         <label className="block font-poppins font-medium text-xs sm:text-sm text-[#3A2418]">
           Phone Number*
         </label>
-        <Input
-          type="tel"
-          required
-          placeholder="Enter Your Phone Number"
+        <PhoneInput
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="border-[#C4A482]/40 rounded-lg focus:border-[#F7A503]"
+          onChange={setPhone}
+          placeholder="Enter Your Phone Number"
+          required
         />
       </div>
 

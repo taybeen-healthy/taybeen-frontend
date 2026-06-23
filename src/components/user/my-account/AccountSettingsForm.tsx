@@ -9,7 +9,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
 import { apiClient } from "@/lib/apiClient";
-import { getCountryOptions, getStateOptions } from "@/utils/geoUtils";
+import { getCountryOptions, getStateOptions } from "@/lib/utils/geo";
 import {
   validateFirstName,
   validateLastName,
@@ -20,7 +20,7 @@ import {
   validateStateProvince,
   validatePostalCode,
   validateCity,
-} from "@/utils/validation";
+} from "@/lib/utils/validation";
 
 interface PhoneCountrySelectProps {
   value?: string;

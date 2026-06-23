@@ -2,7 +2,7 @@
 
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { setCookie } from "@/utils/cookie";
+import { setCookie } from "@/lib/utils/cookie";
 import { apiClient } from "@/lib/apiClient";
 import { Loader2 } from "lucide-react";
 

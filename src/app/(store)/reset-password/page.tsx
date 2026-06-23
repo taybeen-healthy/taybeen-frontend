@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AuthBackground } from "@/components/user/auth";
 import { Input } from "@/components/ui/Input";
 import { apiClient } from "@/lib/apiClient";
-import { validatePassword, validateConfirmPassword } from "@/utils/validation";
+import { validatePassword, validateConfirmPassword } from "@/lib/utils/validation";
 
 function ResetPasswordForm() {
   const router = useRouter();

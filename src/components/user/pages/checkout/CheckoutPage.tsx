@@ -9,7 +9,7 @@ import { useCart } from "@/context/CartContext";
 import { CheckoutAddressForm, CheckoutStep } from "@/types/checkout";
 import { Hero } from "@/components/layout/Hero";
 import { apiClient } from "@/lib/apiClient";
-import { loadRazorpayScript } from "@/utils/loadScript";
+import { loadRazorpayScript } from "@/lib/utils/loadScript";
 import {
   CheckoutForm,
   CheckoutReview,
@@ -25,7 +25,7 @@ import {
   validateStateProvince,
   validatePostalCode,
   validatePhone,
-} from "@/utils/validation";
+} from "@/lib/utils/validation";
 
 import { useCustomization } from "@/context/CustomizationContext";
 

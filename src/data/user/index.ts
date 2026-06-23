@@ -1,0 +1,14 @@
+export * from "./authPageData";
+export * from "./categories";
+export * from "./contactData";
+export * from "./faqs";
+export * from "./homeData";
+export * from "./legalData";
+export { testimonials } from "./mockData";
+export * from "./myAccountData";
+export * from "./orderConfirmedData";
+export * from "./ourStoryData";
+export * from "./partnershipsData";
+export * from "./products";
+export * from "./productsPageData";
+export * from "./reviewPageData";

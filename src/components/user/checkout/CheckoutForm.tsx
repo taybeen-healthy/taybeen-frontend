@@ -4,7 +4,7 @@ import { Select } from "@/components/ui/Select";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { CheckoutAddressForm } from "@/types/checkout";
-import { getCountryOptions, getStateOptions } from "@/utils/geoUtils";
+import { getCountryOptions, getStateOptions } from "@/lib/utils/geo";
 import { CheckoutGiftMessage } from "./CheckoutGiftMessage";
 
 interface PhoneCountrySelectProps {

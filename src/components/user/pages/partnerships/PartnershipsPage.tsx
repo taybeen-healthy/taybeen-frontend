@@ -17,7 +17,7 @@ import {
   validateEmail,
   validatePhone,
   validateAcceptTerms,
-} from "@/utils/validation";
+} from "@/lib/utils/validation";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Select } from "@/components/ui/Select";

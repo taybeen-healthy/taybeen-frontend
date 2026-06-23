@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { X, CheckCircle } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
-import { validateEmail } from "@/utils/validation";
+import { validateEmail } from "@/lib/utils/validation";
 import { apiClient } from "@/lib/apiClient";
 
 interface ForgotPasswordModalProps {

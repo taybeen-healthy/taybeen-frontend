@@ -1,5 +1,5 @@
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { getCountryIso } from "./geoUtils";
+import { getCountryIso } from "./geo";
 
 export const validateFullName = (name: string): string | null => {
   if (!name.trim()) {

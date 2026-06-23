@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
 import { OrderDetail } from "@/types/myAccount";
 import { apiClient } from "@/lib/apiClient";
-import { loadRazorpayScript } from "@/utils/loadScript";
+import { loadRazorpayScript } from "@/lib/utils/loadScript";
 
 interface OrderDetailViewProps {
   orderId: string;

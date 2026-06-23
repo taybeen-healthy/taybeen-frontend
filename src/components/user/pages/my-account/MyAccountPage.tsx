@@ -10,7 +10,7 @@ import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData"
 import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
 import { Hero } from "@/components/layout/Hero";
 import { apiClient } from "@/lib/apiClient";
-import { removeCookie } from "@/utils/cookie";
+import { removeCookie } from "@/lib/utils/cookie";
 import {
   AccountSidebar,
   AccountDashboard,

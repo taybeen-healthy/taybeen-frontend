@@ -14,10 +14,10 @@ import {
   validatePassword,
   validateConfirmPassword,
   validateAcceptTerms,
-} from "@/utils/validation";
+} from "@/lib/utils/validation";
 
 import { apiClient } from "@/lib/apiClient";
-import { setCookie } from "@/utils/cookie";
+import { setCookie } from "@/lib/utils/cookie";
 
 interface AuthFormProps {
   type: "signup" | "signin";
