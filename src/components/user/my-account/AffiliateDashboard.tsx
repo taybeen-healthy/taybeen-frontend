@@ -55,7 +55,18 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+      {data.couponStatus === "Active" && (
+        <div className="bg-[#4A5E28]/10 border border-[#4A5E28]/20 rounded-xl p-4 flex items-center gap-3 text-[#4A5E28] animate-in fade-in slide-in-from-top-2 duration-300">
+          <CheckCircle size={20} className="text-[#4A5E28] shrink-0" />
+          <span className="text-xs sm:text-sm font-medium">
+            Your affiliate application has been accepted! You are now an active partner.
+          </span>
+        </div>
+      )}
+
+      <div className={`grid grid-cols-1 ${
+        data.couponCode === "Not generated" || data.couponCode === "-" ? "md:grid-cols-2" : "md:grid-cols-3"
+      } gap-5 sm:gap-6`}>
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
             <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
@@ -80,7 +91,9 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
               {data.ordersPlaced}
             </p>
             <p className="text-[10px] sm:text-xs text-[#7D6B5E]/70 font-medium">
-              Using {data.couponCode}
+              {data.couponCode === "Not generated" || data.couponCode === "-"
+                ? "Across all active campaigns"
+                : `Using ${data.couponCode}`}
             </p>
           </div>
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-50/50 flex items-center justify-center text-brand-green flex-shrink-0">
@@ -88,19 +101,21 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
           </div>
         </div>
 
-        <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
-          <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Coupon status</p>
-            <div className="pt-1">
-              <span className="px-3.5 py-1 text-xs font-bold text-green-700 bg-green-50/90 rounded-full border border-green-200">
-                {data.couponStatus}
-              </span>
+        {data.couponCode !== "Not generated" && data.couponCode !== "-" && (
+          <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
+            <div className="space-y-2">
+              <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Coupon status</p>
+              <div className="pt-1">
+                <span className="px-3.5 py-1 text-xs font-bold text-green-700 bg-green-50/90 rounded-full border border-green-200">
+                  {data.couponStatus}
+                </span>
+              </div>
+            </div>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-50/50 flex items-center justify-center text-[#F7A503] flex-shrink-0">
+              <Clock size={22} className="stroke-[1.75]" />
             </div>
           </div>
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-50/50 flex items-center justify-center text-[#F7A503] flex-shrink-0">
-            <Clock size={22} className="stroke-[1.75]" />
-          </div>
-        </div>
+        )}
       </div>
 
       <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm">
@@ -124,55 +139,73 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
       <div className="space-y-4">
         <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">Your coupon</h2>
-        <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="flex-1 w-full space-y-4">
-            <div className="flex items-center gap-3">
-              <span className="text-lg sm:text-xl font-bold text-[#3A2418] tracking-wide uppercase">
-                {data.couponCode}
-              </span>
-              <span className="px-2 py-0.5 text-[10px] font-bold text-green-700 bg-green-50 rounded-full border border-green-200">
-                {data.couponStatus}
-              </span>
+        {data.couponCode === "Not generated" || data.couponCode === "-" ? (
+          <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 text-center shadow-sm flex flex-col items-center justify-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-500">
+              <Clock size={24} className="stroke-[1.5]" />
             </div>
+            <p className="text-sm font-medium text-[#7D6B5E]">
+              Please wait till the admin generates a coupon for you.
+            </p>
+          </div>
+        ) : (
+          <>
+            {data.expiredCouponCode && data.couponStatus === "Active" && (
+              <div className="text-xs font-semibold text-brand-green bg-[#4A5E28]/10 border border-[#4A5E28]/25 rounded-xl px-4 py-3">
+                Your previous coupon code ({data.expiredCouponCode}) has expired. Here is your new coupon:
+              </div>
+            )}
+            <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="flex-1 w-full space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-lg sm:text-xl font-bold text-[#3A2418] tracking-wide uppercase">
+                    {data.couponCode}
+                  </span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold text-green-700 bg-green-50 rounded-full border border-green-200">
+                    {data.couponStatus}
+                  </span>
+                </div>
 
-            <p className="text-xs sm:text-sm text-[#7D6B5E]/85">{data.couponDescription}</p>
+                <p className="text-xs sm:text-sm text-[#7D6B5E]/85">{data.couponDescription}</p>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
-              <input
-                type="text"
-                readOnly
-                value={data.referralLink}
-                className="bg-[#FDFAF3] border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-xs text-[#3A2418] font-poppins focus:outline-none flex-1 truncate select-all"
-              />
-              <div className="flex gap-2">
-                <Button
-                  onClick={handleCopyLink}
-                  variant="outline"
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
-                >
-                  <Copy size={14} />
-                  <span>{copied ? "Copied!" : "Copy"}</span>
-                </Button>
-                <Button
-                  onClick={handleShareLink}
-                  variant="outline"
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
-                >
-                  <Share2 size={14} />
-                  <span>Share</span>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
+                  <input
+                    type="text"
+                    readOnly
+                    value={data.referralLink}
+                    className="bg-[#FDFAF3] border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-xs text-[#3A2418] font-poppins focus:outline-none flex-1 truncate select-all"
+                  />
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={handleCopyLink}
+                      variant="outline"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
+                    >
+                      <Copy size={14} />
+                      <span>{copied ? "Copied!" : "Copy"}</span>
+                    </Button>
+                    <Button
+                      onClick={handleShareLink}
+                      variant="outline"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
+                    >
+                      <Share2 size={14} />
+                      <span>Share</span>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden sm:flex items-center justify-center flex-shrink-0 mr-4">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg relative overflow-hidden group select-none">
+                  <span className="font-serif font-bold text-4xl text-[#F7A503] drop-shadow-md">T</span>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 rounded-full shadow-[inset_0_0_15px_rgba(247,165,3,0.2)]" />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="hidden sm:flex items-center justify-center flex-shrink-0 mr-4">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg relative overflow-hidden group select-none">
-              <span className="font-serif font-bold text-4xl text-[#F7A503] drop-shadow-md">T</span>
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
-              <div className="absolute inset-0 rounded-full shadow-[inset_0_0_15px_rgba(247,165,3,0.2)]" />
-            </div>
-          </div>
-        </div>
+          </>
+        )}
 
         {data.expiredCouponCode && (
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm mt-4">
@@ -217,7 +250,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
             Orders placed using your code
           </h2>
           <span className="text-xs sm:text-sm text-brand-green font-medium font-poppins">
-            47 total orders
+            {data.ordersPlaced} total orders
           </span>
         </div>
 
@@ -235,27 +268,35 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
               </tr>
             </thead>
             <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
-              {data.orders.map((order, index) => (
-                <tr key={index} className="hover:bg-black/[0.01] transition-colors">
-                  <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
-                    {order.orderId}
-                  </td>
-                  <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">
-                    {order.date}
-                  </td>
-                  <td className="py-4 px-4 font-medium text-[#3A2418] align-middle">
-                    {order.item}
-                  </td>
-                  <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
-                    ₹{formatIndianCurrency(order.amount)}
-                  </td>
-                  <td className="py-4 px-4 align-middle">
-                    <span className="px-4 py-1 text-xs font-bold text-[#0066CC] bg-[#7FBFFC]/25 rounded-full inline-block">
-                      {order.paymentStatus}
-                    </span>
+              {data.orders.length > 0 ? (
+                data.orders.map((order, index) => (
+                  <tr key={index} className="hover:bg-black/[0.01] transition-colors">
+                    <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
+                      {order.orderId}
+                    </td>
+                    <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">
+                      {order.date}
+                    </td>
+                    <td className="py-4 px-4 font-medium text-[#3A2418] align-middle">
+                      {order.item}
+                    </td>
+                    <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
+                      ₹{formatIndianCurrency(order.amount)}
+                    </td>
+                    <td className="py-4 px-4 align-middle">
+                      <span className="px-4 py-1 text-xs font-bold text-[#0066CC] bg-[#7FBFFC]/25 rounded-full inline-block">
+                        {order.paymentStatus}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="py-8 px-4 text-center text-sm text-[#7D6B5E]/70 font-medium">
+                    No orders have been placed using your coupon code yet.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

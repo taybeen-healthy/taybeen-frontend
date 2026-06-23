@@ -203,6 +203,16 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const initialLetter = (profileForm.firstName || profileForm.lastName || "U")
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+  React.useEffect(() => {
+    setImageError(false);
+  }, [profileForm.avatarUrl]);
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -211,6 +221,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
       // Set temporary local URL for quick visual feedback
       const localUrl = URL.createObjectURL(file);
       setProfileForm((prev) => ({ ...prev, avatarUrl: localUrl }));
+      setImageError(false);
     }
   };
 
@@ -350,14 +361,17 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
                 onClick={triggerFileSelect}
                 className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-brand-brown/15 bg-[#FDFBF7] flex items-center justify-center text-brand-brown/60 relative cursor-pointer overflow-hidden group-hover:border-[#C4A482]/50 transition-all shadow-sm"
               >
-                {profileForm.avatarUrl ? (
+                {profileForm.avatarUrl && !imageError ? (
                   <img
                     src={profileForm.avatarUrl}
                     alt="Profile Avatar"
                     className="w-full h-full object-cover"
+                    onError={() => setImageError(true)}
                   />
                 ) : (
-                  <CircleUserRound size={52} strokeWidth={1} />
+                  <div className="w-full h-full bg-gradient-to-br from-[#5A3E2B] to-[#3A2418] flex items-center justify-center text-[#F7A503] font-serif font-bold text-4xl lg:text-5xl">
+                    {initialLetter}
+                  </div>
                 )}
               </div>
               <button

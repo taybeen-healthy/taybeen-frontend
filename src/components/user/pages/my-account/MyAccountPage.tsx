@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LogOut, Loader2, Users } from "lucide-react";
+import { LogOut, Loader2, Users, Clock, AlertCircle } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
@@ -50,6 +50,148 @@ export const MyAccountPage: React.FC = () => {
   const [affiliateData, setAffiliateData] = useState<any>(null);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [loadingAffiliate, setLoadingAffiliate] = useState(true);
+
+  const renderAffiliateTab = () => {
+    if (loadingAffiliate) {
+      return (
+        <div className="flex justify-center items-center py-12">
+          <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
+        </div>
+      );
+    }
+
+    if (!affiliateData) {
+      return (
+        <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg text-[#F7A503]">
+            <Users size={32} className="stroke-[1.75]" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
+              Become a Taybeen Affiliate Partner
+            </h3>
+            <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
+              Earn rewards by sharing Taybeen Premium Dates with your audience. Access your
+              custom coupon code, track orders in real-time, and get exclusive commissions.
+            </p>
+          </div>
+          <button
+            onClick={() => router.push("/partnerships")}
+            className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
+          >
+            Apply Now
+          </button>
+        </div>
+      );
+    }
+
+    if (affiliateData.status === "Pending") {
+      return (
+        <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-amber-50 border-2 border-amber-200 flex items-center justify-center shadow-md text-amber-600">
+            <Clock size={32} className="stroke-[1.75]" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
+              Application Pending Review
+            </h3>
+            <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
+              Thank you for applying! Your affiliate application is currently being reviewed by our team.
+              We will notify you via email at <strong className="text-brand-brown">{affiliateData.email}</strong> once your account has been approved.
+            </p>
+          </div>
+          <button
+            onClick={() => router.push("/")}
+            className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
+          >
+            Back to Home
+          </button>
+        </div>
+      );
+    }
+
+    if (
+      affiliateData.status === "Rejected" ||
+      affiliateData.status?.toLowerCase() === "rejected" ||
+      (affiliateData.status === "Expired" &&
+        (!affiliateData.couponCode ||
+          affiliateData.couponCode === "Not generated" ||
+          affiliateData.couponCode === "-"))
+    ) {
+      return (
+        <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-red-50 border-2 border-red-200 flex items-center justify-center shadow-md text-red-600">
+            <AlertCircle size={32} className="stroke-[1.75]" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
+              Application Rejected
+            </h3>
+            <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
+              Your form has been rejected. If you have any questions, please reach out to our support team.
+            </p>
+          </div>
+          <button
+            onClick={() => router.push("/")}
+            className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
+          >
+            Back to Home
+          </button>
+        </div>
+      );
+    }
+
+    // Status is Approved or Expired, render dashboard with mapped data
+    const mappedData = {
+      totalSales: affiliateData.salesAmount ?? 0,
+      salesSince: affiliateData.joinedDate
+        ? new Date(affiliateData.joinedDate).toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })
+        : "N/A",
+      ordersPlaced: affiliateData.ordersCount ?? 0,
+      couponCode: affiliateData.couponCode || "Not generated",
+      couponStatus: affiliateData.status === "Approved" ? "Active" : "Inactive",
+      couponDescription: affiliateData.discountOffered || "10% off for anyone who uses your code",
+      referralLink: affiliateData.refLink || "",
+      details: {
+        fullName: affiliateData.name,
+        email: affiliateData.email,
+        phone: affiliateData.phone,
+        city: affiliateData.city || "",
+        occupation: affiliateData.occupation || "",
+        approvedOn: affiliateData.joinedDate
+          ? new Date(affiliateData.joinedDate).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })
+          : "N/A",
+      },
+      orders: Array.isArray(affiliateData.orders)
+        ? affiliateData.orders.map((ord: any) => ({
+            orderId: ord.hexId || ord.id,
+            date: new Date(ord.createdAt).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }),
+            item:
+              ord.items?.map((i: any) => `${i.name} x${i.quantity}`).join(", ") ||
+              "Dates Package",
+            amount: ord.total ?? 0,
+            paymentStatus: ord.paymentStatus || "Pending",
+          }))
+        : [],
+      expiredCouponCode: affiliateData.expiredCouponCode,
+      expiredCouponDiscount: affiliateData.expiredCouponDiscount,
+      expiredCouponExpiryDate: affiliateData.expiredCouponExpiryDate,
+    };
+
+    return <AffiliateDashboard data={mappedData as any} />;
+  };
 
   useEffect(() => {
     // Fetch customer profile & billing info
@@ -252,35 +394,7 @@ export const MyAccountPage: React.FC = () => {
                   onViewDetails={setSelectedOrderId}
                 />
               ))}
-            {activeTab === "affiliate" &&
-              (loadingAffiliate ? (
-                <div className="flex justify-center items-center py-12">
-                  <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
-                </div>
-              ) : affiliateData ? (
-                <AffiliateDashboard data={affiliateData} />
-              ) : (
-                <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg text-[#F7A503]">
-                    <Users size={32} className="stroke-[1.75]" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
-                      Become a Taybeen Affiliate Partner
-                    </h3>
-                    <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-                      Earn rewards by sharing Taybeen Premium Dates with your audience. Access your
-                      custom coupon code, track orders in real-time, and get exclusive commissions.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => router.push("/partnerships")}
-                    className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
-                  >
-                    Apply Now
-                  </button>
-                </div>
-              ))}
+            {activeTab === "affiliate" && renderAffiliateTab()}
             {activeTab !== "dashboard" &&
               activeTab !== "orders" &&
               activeTab !== "settings" &&
@@ -343,35 +457,7 @@ export const MyAccountPage: React.FC = () => {
 
               {activeTab === "affiliate" && (
                 <div className="w-full">
-                  {loadingAffiliate ? (
-                    <div className="flex justify-center items-center py-12">
-                      <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
-                    </div>
-                  ) : affiliateData ? (
-                    <AffiliateDashboard data={affiliateData} />
-                  ) : (
-                    <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-8 sm:p-10 text-center font-poppins shadow-sm max-w-2xl mx-auto flex flex-col items-center gap-6">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg text-[#F7A503]">
-                        <Users size={32} className="stroke-[1.75]" />
-                      </div>
-                      <div className="space-y-2">
-                        <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-brown text-center">
-                          Become a Taybeen Affiliate Partner
-                        </h3>
-                        <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-                          Earn rewards by sharing Taybeen Premium Dates with your audience. Access
-                          your custom coupon code, track orders in real-time, and get exclusive
-                          commissions.
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => router.push("/partnerships")}
-                        className="px-6 py-3 bg-[#5A3E2B] hover:bg-[#462F20] text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-98 transition-all cursor-pointer border border-[#C4A482]/25 font-poppins"
-                      >
-                        Apply Now
-                      </button>
-                    </div>
-                  )}
+                  {renderAffiliateTab()}
                 </div>
               )}
 

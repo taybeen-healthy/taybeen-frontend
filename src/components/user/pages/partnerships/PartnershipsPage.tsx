@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/layout/Hero";
@@ -17,8 +18,140 @@ import {
   validatePhone,
   validateAcceptTerms,
 } from "@/utils/validation";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { Select } from "@/components/ui/Select";
+
+interface PhoneCountrySelectProps {
+  value?: string;
+  onChange: (value?: string) => void;
+  options: { value?: string; label: string }[];
+  disabled?: boolean;
+}
+
+const PhoneCountrySelect: React.FC<PhoneCountrySelectProps> = ({
+  value,
+  onChange,
+  options,
+  disabled,
+}) => {
+  const selectOptions = options.map((opt) => {
+    const countryCode = opt.value;
+    const countryName = opt.label;
+
+    const flagUrl = countryCode ? `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png` : "";
+
+    return {
+      value: countryCode || "",
+      label: (
+        <span className="flex items-center gap-2 text-xs sm:text-sm">
+          {flagUrl && (
+            <img
+              src={flagUrl}
+              alt={countryName}
+              className="w-5 h-3.5 object-cover rounded-sm flex-shrink-0"
+              loading="lazy"
+            />
+          )}
+          <span>{countryName}</span>
+        </span>
+      ),
+      shortLabel: flagUrl ? (
+        <img
+          src={flagUrl}
+          alt={countryName}
+          className="w-5 h-3.5 object-cover rounded-sm flex-shrink-0"
+          loading="lazy"
+        />
+      ) : (
+        <span>🌎</span>
+      ),
+      searchString: countryName,
+    };
+  });
+
+  return (
+    <Select
+      value={value || ""}
+      onChange={(val) => onChange(val || undefined)}
+      options={selectOptions}
+      variant="borderless"
+      className="w-[65px] flex-shrink-0"
+      searchable
+    />
+  );
+};
+
+const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const allowedKeys = [
+    "Backspace",
+    "Delete",
+    "ArrowLeft",
+    "ArrowRight",
+    "Tab",
+    "Enter",
+    "Escape",
+    "Home",
+    "End",
+  ];
+  if (allowedKeys.includes(e.key) || e.ctrlKey || e.metaKey || e.altKey) {
+    return;
+  }
+
+  if (/^[0-9]$/.test(e.key)) {
+    const target = e.currentTarget;
+    const value = target.value || "";
+    if (value.includes("+91")) {
+      const digits = value.replace(/\D/g, "");
+      const selectionStart = target.selectionStart ?? 0;
+      const selectionEnd = target.selectionEnd ?? 0;
+      const selectedText = value.substring(selectionStart, selectionEnd);
+      const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+      const currentDigitsCount = digits.length - 2; // exclude 91
+      const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+
+      if (netDigitsCount >= 10) {
+        e.preventDefault();
+      }
+    }
+  }
+};
+
+const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+  const target = e.currentTarget;
+  const value = target.value || "";
+  if (value.includes("+91")) {
+    const pastedData = e.clipboardData.getData("text");
+    const pastedDigits = pastedData.replace(/\D/g, "");
+
+    const selectionStart = target.selectionStart ?? 0;
+    const selectionEnd = target.selectionEnd ?? 0;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+    const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
+
+    const currentDigits = value.replace(/\D/g, "");
+    const currentDigitsCount = currentDigits.length - 2; // exclude 91
+
+    const netDigitsCount = currentDigitsCount - selectedDigitsCount;
+    const remainingDigits = 10 - netDigitsCount;
+
+    if (remainingDigits <= 0) {
+      e.preventDefault();
+    } else if (pastedDigits.length > remainingDigits) {
+      e.preventDefault();
+      const truncatedPastedDigits = pastedDigits.slice(0, remainingDigits);
+      const newValue =
+        value.slice(0, selectionStart) + truncatedPastedDigits + value.slice(selectionEnd);
+
+      target.value = newValue;
+      const event = new Event("input", { bubbles: true });
+      target.dispatchEvent(event);
+    }
+  }
+};
 
 export const PartnershipsPage: React.FC = () => {
+  const router = useRouter();
   const { title, subtitle, termsHeading, terms, formHeading } = partnershipsData;
 
   const [form, setForm] = useState<AffiliateApplicationForm>({
@@ -56,6 +189,24 @@ export const PartnershipsPage: React.FC = () => {
       setErrors((prev) => {
         const next = { ...prev };
         delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const handlePhoneChange = (val?: string) => {
+    let phoneVal = val || "";
+    if (phoneVal.startsWith("+91")) {
+      const digits = phoneVal.slice(3).replace(/\D/g, "");
+      if (digits.length > 10) {
+        phoneVal = "+91" + digits.slice(0, 10);
+      }
+    }
+    setForm((prev) => ({ ...prev, phone: phoneVal }));
+    if (errors.phone) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next.phone;
         return next;
       });
     }
@@ -117,35 +268,39 @@ export const PartnershipsPage: React.FC = () => {
         <Hero src="/OurProducts Header.png" alt="Become a Taybeen Affiliate Banner" />
 
         <main className="max-w-4xl mx-auto px-6 md:px-8 py-12 sm:py-16 md:py-20 text-left font-poppins">
-          <div className="mb-10 text-left space-y-4">
-            <h1 className="font-serif font-bold text-[#5A3E2B] text-3xl sm:text-4xl md:text-5xl leading-tight">
-              {title}
-            </h1>
-            <p className="text-brand-green/80 text-sm sm:text-base leading-relaxed max-w-2xl">
-              {subtitle}
-            </p>
-          </div>
+          {!isSubmitted && (
+            <>
+              <div className="mb-10 text-left space-y-4">
+                <h1 className="font-serif font-bold text-[#5A3E2B] text-3xl sm:text-4xl md:text-5xl leading-tight">
+                  {title}
+                </h1>
+                <p className="text-brand-green/80 text-sm sm:text-base leading-relaxed max-w-2xl">
+                  {subtitle}
+                </p>
+              </div>
 
-          <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 shadow-sm mb-12">
-            <h2 className="font-serif font-bold text-[#5A3E2B] text-xl sm:text-2xl mb-6 pb-3 border-b border-[#C4A482]/15">
-              {termsHeading}
-            </h2>
-            <div className="space-y-6">
-              {terms.map((term) => (
-                <div key={term.id} className="flex gap-4 items-start text-left">
-                  <div className="w-8 h-8 rounded-full bg-[#FFDA8C]/30 text-[#5A3E2B] flex items-center justify-center font-semibold text-sm sm:text-base flex-shrink-0 mt-0.5 select-none">
-                    {term.stepNumber}
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="font-semibold text-[#5A3E2B] text-sm">{term.title}</h4>
-                    <p className="text-brand-green/95 text-xs sm:text-sm leading-relaxed">
-                      {term.description}
-                    </p>
-                  </div>
+              <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 shadow-sm mb-12">
+                <h2 className="font-serif font-bold text-[#5A3E2B] text-xl sm:text-2xl mb-6 pb-3 border-b border-[#C4A482]/15">
+                  {termsHeading}
+                </h2>
+                <div className="space-y-6">
+                  {terms.map((term) => (
+                    <div key={term.id} className="flex gap-4 items-start text-left">
+                      <div className="w-8 h-8 rounded-full bg-[#FFDA8C]/30 text-[#5A3E2B] flex items-center justify-center font-semibold text-sm sm:text-base flex-shrink-0 mt-0.5 select-none">
+                        {term.stepNumber}
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="font-semibold text-[#5A3E2B] text-sm">{term.title}</h4>
+                        <p className="text-brand-green/95 text-xs sm:text-sm leading-relaxed">
+                          {term.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </>
+          )}
 
           {!isSubmitted ? (
             <div className="space-y-8">
@@ -203,18 +358,33 @@ export const PartnershipsPage: React.FC = () => {
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <label className="text-[#5A3E2B] text-sm sm:text-base font-bold block">
                       Phone Number
                     </label>
-                    <Input
-                      type="text"
-                      name="phone"
-                      placeholder="+91 XXXXXXXXXX"
+                    <PhoneInput
+                      international
+                      defaultCountry="IN"
                       value={form.phone}
-                      onChange={handleInputChange}
-                      error={errors.phone}
+                      onChange={handlePhoneChange}
+                      countrySelectComponent={PhoneCountrySelect}
+                      className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
+                      numberInputProps={{
+                        maxLength:
+                          (form.phone || "").startsWith("+91") || !form.phone
+                            ? 16
+                            : undefined,
+                        onKeyDown: handlePhoneKeyDown,
+                        onPaste: handlePhonePaste,
+                        className:
+                          "w-full bg-transparent border-none py-3 px-1 text-sm font-poppins text-[#3A2418] placeholder-brand-brown/40 focus:outline-none focus:ring-0 focus:border-none",
+                      }}
                     />
+                    {errors.phone && (
+                      <span className="text-red-500 font-poppins text-[10px] mt-1 block">
+                        {errors.phone}
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -269,7 +439,14 @@ export const PartnershipsPage: React.FC = () => {
                     />
                     <span className="text-brand-green font-medium text-xs sm:text-sm leading-relaxed select-none">
                       I have read and agree to the{" "}
-                      <span className="text-[#F7A503] font-semibold hover:underline">
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        className="text-[#F7A503] font-semibold hover:underline cursor-pointer"
+                      >
                         Taybeen Affiliate Terms & Conditions
                       </span>{" "}
                       listed above and confirm that all information provided is accurate.
@@ -314,6 +491,15 @@ export const PartnershipsPage: React.FC = () => {
                 details and will review them. Our team will get back to you via email within 2-3
                 business days.
               </p>
+              <div className="pt-4 flex justify-center">
+                <Button
+                  onClick={() => router.push("/my-account")}
+                  variant="primary"
+                  className="uppercase font-bold text-xs sm:text-sm tracking-wider py-3 px-8 shadow-md active:scale-95 duration-200"
+                >
+                  Go to Dashboard
+                </Button>
+              </div>
             </div>
           )}
         </main>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { products } from "@/data/user/mockData";
 import { ArrowRight } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/user/products/ProductCard";
@@ -14,7 +13,7 @@ import { apiClient } from "@/lib/apiClient";
 
 export const BestSellers: React.FC = () => {
   const { delivery } = useCustomization();
-  const [productsList, setProductsList] = useState<Product[]>(products);
+  const [productsList, setProductsList] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
