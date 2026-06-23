@@ -8,15 +8,23 @@ import { apiClient } from "@/lib/apiClient";
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<{ type: "success" | "error" | "loading" | null; message: string }>({ type: null, message: "" });
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | "loading" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
     setStatus({ type: "loading", message: "" });
     try {
-      const response = await apiClient.post("/customers/newsletter/subscribe", { email: email.trim() });
-      setStatus({ type: "success", message: response.data?.message || "Successfully subscribed to our newsletter!" });
+      const response = await apiClient.post("/customers/newsletter/subscribe", {
+        email: email.trim(),
+      });
+      setStatus({
+        type: "success",
+        message: response.data?.message || "Successfully subscribed to our newsletter!",
+      });
       setEmail("");
     } catch (err: any) {
       setStatus({
@@ -187,9 +195,13 @@ export const Footer: React.FC = () => {
             </button>
           </form>
           {status.message && (
-            <p className={
-              status.type === "success" ? "text-brand-green text-sm font-poppins font-medium mt-2" : "text-red-500 text-sm font-poppins font-medium mt-2"
-            }>
+            <p
+              className={
+                status.type === "success"
+                  ? "text-brand-green text-sm font-poppins font-medium mt-2"
+                  : "text-red-500 text-sm font-poppins font-medium mt-2"
+              }
+            >
               {status.message}
             </p>
           )}

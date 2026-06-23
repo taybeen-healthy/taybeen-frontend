@@ -371,9 +371,7 @@ export const PartnershipsPage: React.FC = () => {
                       className="w-full flex items-center bg-white border border-[#C4A482]/40 focus-within:border-[#F7A503] focus-within:ring-1 focus-within:ring-[#F7A503]/20 rounded-lg px-3 transition-all"
                       numberInputProps={{
                         maxLength:
-                          (form.phone || "").startsWith("+91") || !form.phone
-                            ? 16
-                            : undefined,
+                          (form.phone || "").startsWith("+91") || !form.phone ? 16 : undefined,
                         onKeyDown: handlePhoneKeyDown,
                         onPaste: handlePhonePaste,
                         className:

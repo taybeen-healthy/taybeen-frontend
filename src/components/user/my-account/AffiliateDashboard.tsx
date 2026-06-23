@@ -64,9 +64,13 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         </div>
       )}
 
-      <div className={`grid grid-cols-1 ${
-        data.couponCode === "Not generated" || data.couponCode === "-" ? "md:grid-cols-2" : "md:grid-cols-3"
-      } gap-5 sm:gap-6`}>
+      <div
+        className={`grid grid-cols-1 ${
+          data.couponCode === "Not generated" || data.couponCode === "-"
+            ? "md:grid-cols-2"
+            : "md:grid-cols-3"
+        } gap-5 sm:gap-6`}
+      >
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
             <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
@@ -152,7 +156,8 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
           <>
             {data.expiredCouponCode && data.couponStatus === "Active" && (
               <div className="text-xs font-semibold text-brand-green bg-[#4A5E28]/10 border border-[#4A5E28]/25 rounded-xl px-4 py-3">
-                Your previous coupon code ({data.expiredCouponCode}) has expired. Here is your new coupon:
+                Your previous coupon code ({data.expiredCouponCode}) has expired. Here is your new
+                coupon:
               </div>
             )}
             <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
@@ -198,7 +203,9 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
               <div className="hidden sm:flex items-center justify-center flex-shrink-0 mr-4">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#3A2418] to-[#1E110A] border-2 border-[#F7A503]/50 flex items-center justify-center shadow-lg relative overflow-hidden group select-none">
-                  <span className="font-serif font-bold text-4xl text-[#F7A503] drop-shadow-md">T</span>
+                  <span className="font-serif font-bold text-4xl text-[#F7A503] drop-shadow-md">
+                    T
+                  </span>
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
                   <div className="absolute inset-0 rounded-full shadow-[inset_0_0_15px_rgba(247,165,3,0.2)]" />
                 </div>
@@ -292,7 +299,10 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="py-8 px-4 text-center text-sm text-[#7D6B5E]/70 font-medium">
+                  <td
+                    colSpan={5}
+                    className="py-8 px-4 text-center text-sm text-[#7D6B5E]/70 font-medium"
+                  >
                     No orders have been placed using your coupon code yet.
                   </td>
                 </tr>

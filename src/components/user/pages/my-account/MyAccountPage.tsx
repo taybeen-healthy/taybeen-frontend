@@ -71,8 +71,8 @@ export const MyAccountPage: React.FC = () => {
               Become a Taybeen Affiliate Partner
             </h3>
             <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-              Earn rewards by sharing Taybeen Premium Dates with your audience. Access your
-              custom coupon code, track orders in real-time, and get exclusive commissions.
+              Earn rewards by sharing Taybeen Premium Dates with your audience. Access your custom
+              coupon code, track orders in real-time, and get exclusive commissions.
             </p>
           </div>
           <button
@@ -96,8 +96,10 @@ export const MyAccountPage: React.FC = () => {
               Application Pending Review
             </h3>
             <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-              Thank you for applying! Your affiliate application is currently being reviewed by our team.
-              We will notify you via email at <strong className="text-brand-brown">{affiliateData.email}</strong> once your account has been approved.
+              Thank you for applying! Your affiliate application is currently being reviewed by our
+              team. We will notify you via email at{" "}
+              <strong className="text-brand-brown">{affiliateData.email}</strong> once your account
+              has been approved.
             </p>
           </div>
           <button
@@ -128,7 +130,8 @@ export const MyAccountPage: React.FC = () => {
               Application Rejected
             </h3>
             <p className="text-sm text-[#7D6B5E] max-w-md mx-auto leading-relaxed text-center">
-              Your form has been rejected. If you have any questions, please reach out to our support team.
+              Your form has been rejected. If you have any questions, please reach out to our
+              support team.
             </p>
           </div>
           <button
@@ -179,8 +182,7 @@ export const MyAccountPage: React.FC = () => {
               year: "numeric",
             }),
             item:
-              ord.items?.map((i: any) => `${i.name} x${i.quantity}`).join(", ") ||
-              "Dates Package",
+              ord.items?.map((i: any) => `${i.name} x${i.quantity}`).join(", ") || "Dates Package",
             amount: ord.total ?? 0,
             paymentStatus: ord.paymentStatus || "Pending",
           }))
@@ -455,11 +457,7 @@ export const MyAccountPage: React.FC = () => {
                 </div>
               )}
 
-              {activeTab === "affiliate" && (
-                <div className="w-full">
-                  {renderAffiliateTab()}
-                </div>
-              )}
+              {activeTab === "affiliate" && <div className="w-full">{renderAffiliateTab()}</div>}
 
               {activeTab !== "dashboard" &&
                 activeTab !== "orders" &&
