@@ -1,9 +1,31 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { apiClient } from "@/lib/apiClient";
 
 export const Footer: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<{ type: "success" | "error" | "loading" | null; message: string }>({ type: null, message: "" });
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus({ type: "loading", message: "" });
+    try {
+      const response = await apiClient.post("/customers/newsletter/subscribe", { email: email.trim() });
+      setStatus({ type: "success", message: response.data?.message || "Successfully subscribed to our newsletter!" });
+      setEmail("");
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        message: err.response?.data?.message || "Failed to subscribe. Please try again.",
+      });
+    }
+  };
+
   return (
     <footer className="bg-brand-bg border-t border-[#E5E5E5] lg:border-t-0 pt-10 lg:pt-12 pb-10 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
@@ -146,17 +168,31 @@ export const Footer: React.FC = () => {
             Be the first to know about <span className="text-brand-primary">new collections</span>{" "}
             and <span className="text-brand-primary">exclusive offers!</span>
           </p>
-          <div className="relative w-full max-w-xl">
+          <form onSubmit={handleSubscribe} className="relative w-full max-w-xl">
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="your@gmail.com"
+              required
               suppressHydrationWarning={true}
               className="w-full bg-[#F7A503]/10 border border-black/35 rounded-full py-3.5 px-6 pr-32 sm:pr-36 font-poppins text-brand-brown focus:outline-none focus:ring-1 focus:ring-brand-primary text-sm"
             />
-            <button className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-green-light text-white px-5 md:px-6 py-2 rounded-full font-poppins text-xs md:text-sm hover:bg-opacity-90 transition-all font-semibold">
-              Subscribe
+            <button
+              type="submit"
+              disabled={status.type === "loading"}
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-green-light text-white px-5 md:px-6 py-2 rounded-full font-poppins text-xs md:text-sm hover:bg-opacity-90 transition-all font-semibold disabled:bg-gray-400"
+            >
+              {status.type === "loading" ? "Subscribing..." : "Subscribe"}
             </button>
-          </div>
+          </form>
+          {status.message && (
+            <p className={
+              status.type === "success" ? "text-brand-green text-sm font-poppins font-medium mt-2" : "text-red-500 text-sm font-poppins font-medium mt-2"
+            }>
+              {status.message}
+            </p>
+          )}
         </div>
 
         <div className="pt-8 lg:pt-0 border-t lg:border-t-0 border-[#A69797] flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
