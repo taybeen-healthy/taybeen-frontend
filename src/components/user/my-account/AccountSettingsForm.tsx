@@ -7,6 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { useToast } from "@/hooks";
 import { AccountProfileForm, BillingAddressForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";
 import { getCountryOptions, getStateOptions } from "@/lib/utils/geo";
@@ -163,6 +164,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
   onSaveProfile,
   onSaveBilling,
 }) => {
+  const toast = useToast();
   const [profileForm, setProfileForm] = useState<AccountProfileForm>({ ...profile });
   const [profileErrors, setProfileErrors] = useState<Record<string, string>>({});
   const [profileSuccess, setProfileSuccess] = useState(false);
@@ -285,7 +287,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
       setTimeout(() => setProfileSuccess(false), 4000);
     } catch (err) {
       console.error("Failed to save profile or upload avatar:", err);
-      alert("An error occurred while saving profile changes. Please try again.");
+      toast.error("An error occurred while saving profile changes. Please try again.");
     } finally {
       setIsUploadingAvatar(false);
     }

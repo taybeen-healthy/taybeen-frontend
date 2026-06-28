@@ -4,6 +4,7 @@ import { OrderDetail, AccountProfileForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";
 import { loadRazorpayScript } from "@/lib/utils/loadScript";
 import { AxiosError } from "axios";
+import { useToast } from "@/hooks";
 
 interface OrderDetailViewProps {
   orderId: string;
@@ -29,7 +30,7 @@ interface ApiOrderItem {
   price: number;
   quantity: number;
   weight?: string;
-  image: string;
+  image?: string;
 }
 
 interface ApiOrder {
@@ -49,9 +50,12 @@ interface ApiOrder {
   billingAddress?: ApiAddress;
   shippingAddress?: ApiAddress;
   items?: ApiOrderItem[];
+  confirmedOn?: string;
+  shippedOn?: string;
+  deliveredOn?: string;
 }
 
-const mapApiToOrderDetail = (apiOrder: ApiOrder): OrderDetail => {
+const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
   const getProgressSteps = (status: string) => {
     const steps = [
       { label: "Ordered", stepNumber: "1", completed: true },
@@ -117,13 +121,14 @@ const mapApiToOrderDetail = (apiOrder: ApiOrder): OrderDetail => {
       price: item.price,
       quantity: item.quantity,
       weight: item.weight || "",
-      image: item.image,
+      image: item.image || "",
     })),
     progressSteps: getProgressSteps(apiOrder.status),
   };
 };
 
 export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBack }) => {
+  const toast = useToast();
   const [order, setOrder] = useState<OrderDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -174,7 +179,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
             });
             const updatedOrder = verifyRes.data?.data || verifyRes.data;
             if (updatedOrder) {
-              alert("Payment successful!");
+              toast.success("Payment successful!");
               setOrder(mapApiToOrderDetail(updatedOrder));
             }
           } catch (err) {

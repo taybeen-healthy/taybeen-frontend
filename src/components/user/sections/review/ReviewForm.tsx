@@ -3,12 +3,14 @@ import Image from "next/image";
 import { Star, Upload, X, ArrowRight, Loader2 } from "lucide-react";
 import { Select } from "@/components/ui/Select";
 import { apiClient } from "@/lib/apiClient";
+import { useToast } from "@/hooks";
 
 interface ReviewFormProps {
   onSubmitSuccess: () => void;
 }
 
 export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
+  const toast = useToast();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [productPurchased, setProductPurchased] = useState("");
@@ -82,11 +84,11 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
 
       selectedFiles.forEach((file) => {
         if (!file.type.startsWith("image/")) {
-          alert("Only image files are allowed.");
+          toast.error("Only image files are allowed.");
           return;
         }
         if (file.size > 5 * 1024 * 1024) {
-          alert(`File ${file.name} exceeds the 5MB size limit.`);
+          toast.error(`File ${file.name} exceeds the 5MB size limit.`);
           return;
         }
         validFiles.push(file);

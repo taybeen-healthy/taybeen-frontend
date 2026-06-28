@@ -184,6 +184,9 @@ const productListSchema = {
   ],
 };
 
+import { ToastProvider } from "@/context/ToastContext";
+import { ConfirmationProvider } from "@/context/ConfirmationContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -218,7 +221,9 @@ export default function RootLayout({
             __html: JSON.stringify(productListSchema),
           }}
         />
-        {children}
+        <ConfirmationProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ConfirmationProvider>
       </body>
     </html>
   );

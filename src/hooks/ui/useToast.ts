@@ -1,45 +1,15 @@
-import { useState, useCallback } from "react";
-
-export interface ToastMessage {
-  id: string;
-  message: string;
-  type: "success" | "error" | "info" | "warning";
-}
-
-interface UseToastReturn {
-  toasts: ToastMessage[];
-  showToast: (message: string, type?: ToastMessage["type"]) => void;
-  removeToast: (id: string) => void;
-}
+import { useContext } from "react";
+import { ToastContext } from "@/context/ToastContext";
 
 /**
- * Custom hook to dispatch temporary toast messages.
+ * Hook to consume the global Toast Notification system.
  */
-export function useToast(): UseToastReturn {
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
-
-  const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
-
-  const showToast = useCallback(
-    (message: string, type: ToastMessage["type"] = "success") => {
-      const id = Math.random().toString(36).substring(2, 9);
-      setToasts((prev) => [...prev, { id, message, type }]);
-
-      // Auto dismiss after 3 seconds
-      setTimeout(() => {
-        removeToast(id);
-      }, 3000);
-    },
-    [removeToast]
-  );
-
-  return {
-    toasts,
-    showToast,
-    removeToast,
-  };
+export function useToast() {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error("useToast must be used within a ToastProvider");
+  }
+  return context;
 }
 
 export default useToast;

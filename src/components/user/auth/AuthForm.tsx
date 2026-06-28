@@ -18,12 +18,14 @@ import {
 
 import { apiClient } from "@/lib/apiClient";
 import { setCookie } from "@/lib/utils/cookie";
+import { useToast } from "@/hooks";
 
 interface AuthFormProps {
   type: "signup" | "signin";
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
+  const toast = useToast();
   const isSignUp = type === "signup";
   const router = useRouter();
 
@@ -108,7 +110,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
           })
         );
 
-        alert(isSignUp ? "Account created successfully!" : "Signed in successfully!");
+        toast.success(isSignUp ? "Account created successfully!" : "Signed in successfully!");
         router.push("/my-account");
       } catch (err: any) {
         console.error("Auth error:", err);
