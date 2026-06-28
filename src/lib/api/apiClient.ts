@@ -70,7 +70,8 @@ apiClient.interceptors.response.use(
         const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
           refreshResponse.data.data?.tokens || refreshResponse.data.tokens;
 
-        const rememberMe = typeof window !== "undefined" && localStorage.getItem("taybeen_remember_me") === "true";
+        const rememberMe =
+          typeof window !== "undefined" && localStorage.getItem("taybeen_remember_me") === "true";
         const accessExpiry = rememberMe ? 1 : 1;
         const refreshExpiry = rememberMe ? 30 : 7;
 

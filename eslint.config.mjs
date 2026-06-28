@@ -8,8 +8,8 @@ export default [
       "**/*.config.ts",
       "**/node_modules/",
       "**/.next/",
-      "**/dist/"
-    ]
+      "**/dist/",
+    ],
   },
   {
     plugins: {
@@ -21,8 +21,8 @@ export default [
     },
     settings: {
       next: {
-        rootDir: "taybeen-frontend/"
-      }
-    }
-  }
+        rootDir: "taybeen-frontend/",
+      },
+    },
+  },
 ];

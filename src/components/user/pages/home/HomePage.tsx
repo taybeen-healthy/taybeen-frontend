@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/user/sections/home/Hero";
 import { FeaturesBar } from "@/components/user/sections/home/FeaturesBar";
