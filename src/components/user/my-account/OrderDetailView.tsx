@@ -1,15 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
-import { OrderDetail } from "@/types/myAccount";
+import { OrderDetail, AccountProfileForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";
 import { loadRazorpayScript } from "@/lib/utils/loadScript";
+import { AxiosError } from "axios";
 
 interface OrderDetailViewProps {
   orderId: string;
   onBack: () => void;
 }
 
-const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
+interface ApiAddress {
+  firstName?: string;
+  lastName?: string;
+  streetAddress?: string;
+  street?: string;
+  city?: string;
+  stateProvince?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  email?: string;
+  phone?: string;
+}
+
+interface ApiOrderItem {
+  name: string;
+  price: number;
+  quantity: number;
+  weight?: string;
+  image: string;
+}
+
+interface ApiOrder {
+  id: string;
+  hexId?: string;
+  placedOn?: string;
+  date?: string;
+  total: number;
+  status: string;
+  paymentMethod: string;
+  paymentStatus?: string;
+  subtotal: number;
+  gst?: number;
+  tax?: number;
+  shippingCost?: number;
+  shipping?: number;
+  billingAddress?: ApiAddress;
+  shippingAddress?: ApiAddress;
+  items?: ApiOrderItem[];
+}
+
+const mapApiToOrderDetail = (apiOrder: ApiOrder): OrderDetail => {
   const getProgressSteps = (status: string) => {
     const steps = [
       { label: "Ordered", stepNumber: "1", completed: true },
@@ -40,7 +82,7 @@ const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
     return steps;
   };
 
-  const formatAddress = (addr: any) => {
+  const formatAddress = (addr?: ApiAddress) => {
     if (!addr) return { name: "", addressLine: "", email: "", phone: "" };
     const street = addr.streetAddress || addr.street || "";
     const city = addr.city || "";
@@ -70,7 +112,7 @@ const mapApiToOrderDetail = (apiOrder: any): OrderDetail => {
     shippingCost: apiOrder.shippingCost || apiOrder.shipping,
     billingAddress: formatAddress(apiOrder.billingAddress),
     shippingAddress: formatAddress(apiOrder.shippingAddress),
-    items: (apiOrder.items || []).map((item: any) => ({
+    items: (apiOrder.items || []).map((item: ApiOrderItem) => ({
       name: item.name,
       price: item.price,
       quantity: item.quantity,
@@ -107,7 +149,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
       const paymentOrder = res.data?.data || res.data;
 
       const storedProfileStr = localStorage.getItem("taybeen_profile");
-      let profileData: any = null;
+      let profileData: AccountProfileForm | null = null;
       if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
 
       const options = {
@@ -117,7 +159,11 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         name: "Taybeen Premium Dates",
         description: `Retry Payment for Order #${paymentOrder.hexId}`,
         order_id: paymentOrder.razorpayOrderId,
-        handler: async (response: any) => {
+        handler: async (response: {
+          razorpay_payment_id: string;
+          razorpay_order_id: string;
+          razorpay_signature: string;
+        }) => {
           setIsRetrying(true);
           try {
             const verifyRes = await apiClient.post("/payments/verify", {
@@ -131,8 +177,9 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               alert("Payment successful!");
               setOrder(mapApiToOrderDetail(updatedOrder));
             }
-          } catch (err: any) {
-            setRetryError(err.response?.data?.message || "Payment verification failed.");
+          } catch (err) {
+            const axiosError = err as AxiosError<{ message?: string }>;
+            setRetryError(axiosError.response?.data?.message || "Payment verification failed.");
           } finally {
             setIsRetrying(false);
           }
@@ -153,11 +200,12 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         },
       };
 
-      const rzp = new (window as any).Razorpay(options);
+      const rzp = new window.Razorpay(options);
       rzp.open();
-    } catch (err: any) {
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message?: string }>;
       console.error("Retry payment error:", err);
-      setRetryError(err.response?.data?.message || "Failed to initiate retry payment.");
+      setRetryError(axiosError.response?.data?.message || "Failed to initiate retry payment.");
       setIsRetrying(false);
     }
   };
@@ -173,10 +221,11 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         if (active && apiOrder) {
           setOrder(mapApiToOrderDetail(apiOrder));
         }
-      } catch (err: any) {
+      } catch (err) {
+        const axiosError = err as AxiosError<{ message?: string }>;
         console.error("Failed to load order details:", err);
         if (active) {
-          setError(err.response?.data?.message || "Failed to load order details.");
+          setError(axiosError.response?.data?.message || "Failed to load order details.");
         }
       } finally {
         if (active) {

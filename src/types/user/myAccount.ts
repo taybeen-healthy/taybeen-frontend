@@ -1,5 +1,6 @@
 export interface OrderHistoryItem {
   id: string;
+  hexId?: string;
   date: string;
   total: number;
   status: string;

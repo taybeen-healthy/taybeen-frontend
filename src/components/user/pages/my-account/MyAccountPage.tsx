@@ -7,8 +7,41 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
 import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData";
-import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
+import {
+  AccountProfileForm,
+  BillingAddressForm,
+  OrderHistoryItem,
+  AffiliateDashboardInfo,
+} from "@/types";
 import { Hero } from "@/components/layout/Hero";
+
+interface RawAffiliateOrder {
+  id: string;
+  hexId?: string;
+  createdAt: string;
+  items?: Array<{ name: string; quantity: number }>;
+  total: number;
+  paymentStatus: string;
+}
+
+interface RawAffiliateData {
+  status: string;
+  email: string;
+  phone: string;
+  name: string;
+  city?: string;
+  occupation?: string;
+  joinedDate?: string;
+  ordersCount?: number;
+  couponCode?: string;
+  discountOffered?: string;
+  refLink?: string;
+  salesAmount?: number;
+  orders: RawAffiliateOrder[];
+  expiredCouponCode?: string;
+  expiredCouponDiscount?: number;
+  expiredCouponExpiryDate?: string;
+}
 import { apiClient } from "@/lib/apiClient";
 import { removeCookie } from "@/lib/utils/cookie";
 import {
@@ -46,8 +79,8 @@ export const MyAccountPage: React.FC = () => {
   });
 
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
-  const [orders, setOrders] = useState<any[]>([]);
-  const [affiliateData, setAffiliateData] = useState<any>(null);
+  const [orders, setOrders] = useState<OrderHistoryItem[]>([]);
+  const [affiliateData, setAffiliateData] = useState<RawAffiliateData | null>(null);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [loadingAffiliate, setLoadingAffiliate] = useState(true);
 
@@ -156,7 +189,10 @@ export const MyAccountPage: React.FC = () => {
         : "N/A",
       ordersPlaced: affiliateData.ordersCount ?? 0,
       couponCode: affiliateData.couponCode || "Not generated",
-      couponStatus: affiliateData.status === "Approved" ? "Active" : "Inactive",
+      couponStatus: (affiliateData.status === "Approved" ? "Active" : "Inactive") as
+        | "Active"
+        | "Inactive"
+        | "Pending",
       couponDescription: affiliateData.discountOffered || "10% off for anyone who uses your code",
       referralLink: affiliateData.refLink || "",
       details: {
@@ -174,7 +210,7 @@ export const MyAccountPage: React.FC = () => {
           : "N/A",
       },
       orders: Array.isArray(affiliateData.orders)
-        ? affiliateData.orders.map((ord: any) => ({
+        ? affiliateData.orders.map((ord: RawAffiliateOrder) => ({
             orderId: ord.hexId || ord.id,
             date: new Date(ord.createdAt).toLocaleDateString("en-IN", {
               day: "numeric",
@@ -182,7 +218,9 @@ export const MyAccountPage: React.FC = () => {
               year: "numeric",
             }),
             item:
-              ord.items?.map((i: any) => `${i.name} x${i.quantity}`).join(", ") || "Dates Package",
+              ord.items
+                ?.map((i: { name: string; quantity: number }) => `${i.name} x${i.quantity}`)
+                .join(", ") || "Dates Package",
             amount: ord.total ?? 0,
             paymentStatus: ord.paymentStatus || "Pending",
           }))
@@ -192,7 +230,7 @@ export const MyAccountPage: React.FC = () => {
       expiredCouponExpiryDate: affiliateData.expiredCouponExpiryDate,
     };
 
-    return <AffiliateDashboard data={mappedData as any} />;
+    return <AffiliateDashboard data={mappedData} />;
   };
 
   useEffect(() => {
@@ -266,13 +304,23 @@ export const MyAccountPage: React.FC = () => {
               : [];
 
         console.log("Resolved ordersList array:", ordersList);
-        const mappedOrders = ordersList.map((ord: any) => ({
-          id: ord.id || ord._id?.toString(),
-          hexId: ord.hexId || ord.id,
-          date: ord.placedOn || ord.date || "Just now",
-          total: typeof ord.total === "number" ? ord.total : Number(ord.total) || 0,
-          status: ord.status,
-        }));
+        const mappedOrders = ordersList.map(
+          (ord: {
+            id: string;
+            _id?: { toString: () => string };
+            hexId?: string;
+            placedOn?: string;
+            date?: string;
+            total?: string | number;
+            status: string;
+          }) => ({
+            id: ord.id || ord._id?.toString() || "",
+            hexId: ord.hexId || ord.id,
+            date: ord.placedOn || ord.date || "Just now",
+            total: typeof ord.total === "number" ? ord.total : Number(ord.total) || 0,
+            status: ord.status,
+          })
+        );
         console.log("Mapped orders for UI state:", mappedOrders);
         setOrders(mappedOrders);
       })

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Package, CheckCircle, Clock, Copy, Share2 } from "lucide-react";
-import { AffiliateDashboardInfo } from "@/types/myAccount";
+import { AffiliateDashboardInfo } from "@/types";
 import { formatIndianCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 

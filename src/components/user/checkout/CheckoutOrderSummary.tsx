@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { CartItem } from "@/types";
-import { CheckoutStep } from "@/types/checkout";
+import { CartItem, CheckoutStep } from "@/types";
 import { formatIndianCurrency } from "@/lib/utils";
 
 interface CheckoutOrderSummaryProps {

@@ -2,7 +2,7 @@ import React from "react";
 import { AccountProfileCard } from "./AccountProfileCard";
 import { BillingAddressCard } from "./BillingAddressCard";
 import { RecentOrderHistory } from "./RecentOrderHistory";
-import { OrderHistoryItem } from "@/types/myAccount";
+import { OrderHistoryItem } from "@/types";
 
 interface AccountDashboardProps {
   profile: {

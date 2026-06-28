@@ -4,7 +4,7 @@ import {
   BillingAddress,
   OrderDetail,
   AffiliateDashboardInfo,
-} from "@/types/myAccount";
+} from "@/types";
 
 export const userProfile: UserProfile = {
   name: "Maryam Ali",

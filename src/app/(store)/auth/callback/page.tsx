@@ -35,6 +35,12 @@ function AuthCallbackHandler() {
           avatarUrl,
         })
       );
+
+      // Clean query parameters from browser history to prevent token leakage
+      if (typeof window !== "undefined") {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+
       router.push("/my-account");
     } else {
       router.push("/signin");

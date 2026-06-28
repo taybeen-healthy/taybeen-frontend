@@ -1,5 +1,5 @@
 import React from "react";
-import BasePhoneInput from "react-phone-number-input";
+import BasePhoneInput, { Country } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Select } from "@/components/ui/Select";
 import { cn } from "@/lib/utils";
@@ -136,7 +136,7 @@ const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
 export interface PhoneInputProps {
   value: string;
   onChange: (value: string) => void;
-  defaultCountry?: any;
+  defaultCountry?: Country;
   placeholder?: string;
   disabled?: boolean;
   error?: string;

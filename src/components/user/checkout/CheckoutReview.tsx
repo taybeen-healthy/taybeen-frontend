@@ -1,7 +1,7 @@
 import React from "react";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { CheckoutAddressForm } from "@/types/checkout";
+import { CheckoutAddressForm } from "@/types";
 
 interface CheckoutReviewProps {
   shippingForm: CheckoutAddressForm;

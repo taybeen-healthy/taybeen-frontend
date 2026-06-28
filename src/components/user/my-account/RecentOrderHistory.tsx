@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderHistoryItem } from "@/types/myAccount";
+import { OrderHistoryItem } from "@/types";
 import { Tag } from "@/components/ui/Tag";
 
 interface RecentOrderHistoryProps {
@@ -62,7 +62,7 @@ export const RecentOrderHistory: React.FC<RecentOrderHistoryProps> = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
-            {displayedOrders.map((order: any) => (
+            {displayedOrders.map((order: OrderHistoryItem) => (
               <tr key={order.id} className="hover:bg-black/[0.01] transition-colors">
                 <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
                   {order.hexId || order.id}

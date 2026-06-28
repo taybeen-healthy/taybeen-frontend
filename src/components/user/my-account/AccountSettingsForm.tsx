@@ -7,7 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { AccountProfileForm, BillingAddressForm } from "@/types/myAccount";
+import { AccountProfileForm, BillingAddressForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";
 import { getCountryOptions, getStateOptions } from "@/lib/utils/geo";
 import {

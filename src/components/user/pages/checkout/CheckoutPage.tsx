@@ -6,10 +6,28 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/context/CartContext";
-import { CheckoutAddressForm, CheckoutStep } from "@/types/checkout";
+import { CheckoutAddressForm, CheckoutStep } from "@/types";
 import { Hero } from "@/components/layout/Hero";
 import { apiClient } from "@/lib/apiClient";
 import { loadRazorpayScript } from "@/lib/utils/loadScript";
+import { AxiosError } from "axios";
+import { AccountProfileForm } from "@/types";
+
+interface CreatedOrder {
+  id: string;
+  hexId: string;
+  placedOn?: string;
+  itemsCount?: number;
+  paymentStatus?: string;
+}
+
+interface RazorpayOrderData {
+  keyId: string;
+  amount: number;
+  currency: string;
+  hexId: string;
+  razorpayOrderId: string;
+}
 import {
   CheckoutForm,
   CheckoutReview,
@@ -37,7 +55,7 @@ export const CheckoutPage: React.FC = () => {
   const [step, setStep] = useState<CheckoutStep>("form");
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
-  const [createdOrder, setCreatedOrder] = useState<any | null>(null);
+  const [createdOrder, setCreatedOrder] = useState<CreatedOrder | null>(null);
   const [isBillingSame, setIsBillingSame] = useState(true);
   const [giftMessageOpen, setGiftMessageOpen] = useState(false);
   const [giftMessageText, setGiftMessageText] = useState("");
@@ -204,8 +222,8 @@ export const CheckoutPage: React.FC = () => {
         const storedProfileStr = localStorage.getItem("taybeen_profile");
         const storedBillingStr = localStorage.getItem("taybeen_billing");
 
-        let profileData: any = null;
-        let billingData: any = null;
+        let profileData: AccountProfileForm | null = null;
+        let billingData: CheckoutAddressForm | null = null;
 
         if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
         if (storedBillingStr) billingData = JSON.parse(storedBillingStr);
@@ -369,8 +387,9 @@ export const CheckoutPage: React.FC = () => {
         setCouponError(validationData?.message || "Invalid coupon code");
         return false;
       }
-    } catch (err: any) {
-      setCouponError(err.response?.data?.message || "Failed to validate coupon code");
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message?: string }>;
+      setCouponError(axiosError.response?.data?.message || "Failed to validate coupon code");
       return false;
     }
   };
@@ -442,7 +461,7 @@ export const CheckoutPage: React.FC = () => {
     return Object.keys(sErrors).length === 0 && Object.keys(bErrors).length === 0;
   };
 
-  const initiateRazorpayPayment = async (orderId: string, razorpayOrder: any) => {
+  const initiateRazorpayPayment = async (orderId: string, razorpayOrder: RazorpayOrderData) => {
     const scriptLoaded = await loadRazorpayScript();
     if (!scriptLoaded) {
       setPaymentError("Failed to load Razorpay SDK. Please check your connection.");
@@ -451,7 +470,7 @@ export const CheckoutPage: React.FC = () => {
     }
 
     const storedProfileStr = localStorage.getItem("taybeen_profile");
-    let profileData: any = null;
+    let profileData: AccountProfileForm | null = null;
     if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
 
     const options = {
@@ -461,7 +480,11 @@ export const CheckoutPage: React.FC = () => {
       name: "Taybeen Premium Dates",
       description: `Order #${razorpayOrder.hexId}`,
       order_id: razorpayOrder.razorpayOrderId,
-      handler: async (response: any) => {
+      handler: async (response: {
+        razorpay_payment_id: string;
+        razorpay_order_id: string;
+        razorpay_signature: string;
+      }) => {
         setIsProcessingPayment(true);
         try {
           const verifyRes = await apiClient.post("/payments/verify", {
@@ -496,8 +519,9 @@ export const CheckoutPage: React.FC = () => {
             clearCart();
             router.push("/order-confirmed");
           }
-        } catch (err: any) {
-          setPaymentError(err.response?.data?.message || "Payment verification failed.");
+        } catch (err) {
+          const axiosError = err as AxiosError<{ message?: string }>;
+          setPaymentError(axiosError.response?.data?.message || "Payment verification failed.");
         } finally {
           setIsProcessingPayment(false);
         }
@@ -520,7 +544,7 @@ export const CheckoutPage: React.FC = () => {
       },
     };
 
-    const rzp = new (window as any).Razorpay(options);
+    const rzp = new window.Razorpay(options);
     rzp.open();
   };
 
@@ -571,9 +595,12 @@ export const CheckoutPage: React.FC = () => {
       } else {
         setSaveSuccessMsg("Address saved locally! Log in to sync to your profile.");
       }
-    } catch (err: any) {
+    } catch (err) {
+      const axiosError = err as AxiosError<{ message?: string }>;
       console.error("Failed to save address:", err);
-      setSaveErrorMsg(err.response?.data?.message || "Failed to save address. Please try again.");
+      setSaveErrorMsg(
+        axiosError.response?.data?.message || "Failed to save address. Please try again."
+      );
     } finally {
       setIsSavingAddress(false);
     }
@@ -591,11 +618,11 @@ export const CheckoutPage: React.FC = () => {
       setPaymentError(null);
 
       const storedProfileStr = localStorage.getItem("taybeen_profile");
-      let profileData: any = null;
+      let profileData: AccountProfileForm | null = null;
       if (storedProfileStr) profileData = JSON.parse(storedProfileStr);
 
       try {
-        let order = createdOrder;
+        let order: CreatedOrder | null = createdOrder;
 
         if (!order) {
           const orderPayload = {
@@ -638,6 +665,10 @@ export const CheckoutPage: React.FC = () => {
           setCreatedOrder(order);
         }
 
+        if (!order) {
+          throw new Error("Order creation failed");
+        }
+
         if (paymentMethod === "Cash on Delivery") {
           const lastOrderInfo = {
             id: order.hexId || order.id,
@@ -667,9 +698,10 @@ export const CheckoutPage: React.FC = () => {
         const paymentOrder = paymentOrderResponse.data?.data || paymentOrderResponse.data;
 
         await initiateRazorpayPayment(order.id, paymentOrder);
-      } catch (err: any) {
+      } catch (err) {
+        const axiosError = err as AxiosError<{ message?: string }>;
         setPaymentError(
-          err.response?.data?.message || "Failed to initiate payment. Please try again."
+          axiosError.response?.data?.message || "Failed to initiate payment. Please try again."
         );
         setIsProcessingPayment(false);
       }
