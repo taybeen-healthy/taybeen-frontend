@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { useCustomization } from "@/context/CustomizationContext";
