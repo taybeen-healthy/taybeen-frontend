@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
     { name: "Gift Hampers" },
     { name: "Corporate Gifting" },
     { name: "Wellness Boxes" },
-    { name: "Custom Orders" }
+    { name: "Custom Orders" },
   ]);
 
   useEffect(() => {
@@ -132,7 +132,10 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/terms-and-conditions" className="hover:text-brand-primary link-underline">
+                <Link
+                  href="/terms-and-conditions"
+                  className="hover:text-brand-primary link-underline"
+                >
                   Terms & Conditions
                 </Link>
               </li>
@@ -160,7 +163,10 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/shipping-and-delivery" className="hover:text-brand-primary link-underline">
+                <Link
+                  href="/shipping-and-delivery"
+                  className="hover:text-brand-primary link-underline"
+                >
                   Shipping & Returns
                 </Link>
               </li>

@@ -118,9 +118,7 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.itemsLabel}
             </span>
-            <p className="text-base font-poppins font-semibold text-typo1 mt-0.5">
-              {itemsText}
-            </p>
+            <p className="text-base font-poppins font-semibold text-typo1 mt-0.5">{itemsText}</p>
           </div>
         </div>
 

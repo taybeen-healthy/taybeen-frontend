@@ -76,9 +76,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
       >
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-typo2">
-              Total sales via your code
-            </p>
+            <p className="text-xs sm:text-sm font-medium text-typo2">Total sales via your code</p>
             <p className="text-xl sm:text-2xl font-bold text-typo1 font-poppins">
               ₹{formatIndianCurrency(data.totalSales)}
             </p>
@@ -284,12 +282,8 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                     <td className="py-4 px-4 font-semibold text-typo1 align-middle">
                       {order.orderId}
                     </td>
-                    <td className="py-4 px-4 font-medium text-typo2 align-middle">
-                      {order.date}
-                    </td>
-                    <td className="py-4 px-4 font-medium text-typo1 align-middle">
-                      {order.item}
-                    </td>
+                    <td className="py-4 px-4 font-medium text-typo2 align-middle">{order.date}</td>
+                    <td className="py-4 px-4 font-medium text-typo1 align-middle">{order.item}</td>
                     <td className="py-4 px-4 font-semibold text-typo1 align-middle">
                       ₹{formatIndianCurrency(order.amount)}
                     </td>

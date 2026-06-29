@@ -127,7 +127,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                 <div className="flex justify-between items-center text-xs font-poppins mb-2">
                   <span className="text-typo2 font-normal">
                     {remainingForFreeShipping > 0
-                       ? `Add ₹${remainingForFreeShipping} more for free shipping`
+                      ? `Add ₹${remainingForFreeShipping} more for free shipping`
                       : "You have unlocked free shipping!"}
                   </span>
                   <span className="text-typo2 font-normal">

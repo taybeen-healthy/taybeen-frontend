@@ -305,9 +305,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
       </div>
 
       <div className="bg-[#F6F1E9]/40 border border-[#C4A482]/20 rounded-2xl p-5 sm:p-6 mb-6">
-        <h3 className="font-serif text-sm sm:text-base font-bold text-typo1 mb-6">
-          Order Status
-        </h3>
+        <h3 className="font-serif text-sm sm:text-base font-bold text-typo1 mb-6">Order Status</h3>
         {order.status === "Cancelled" && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200/50 rounded-xl flex items-center justify-between text-left">
             <div>
@@ -395,12 +393,10 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           </p>
           <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-typo2">
             <p>
-              Email:{" "}
-              <span className="font-semibold text-typo1">{order.shippingAddress.email}</span>
+              Email: <span className="font-semibold text-typo1">{order.shippingAddress.email}</span>
             </p>
             <p>
-              Phone:{" "}
-              <span className="font-semibold text-typo1">{order.shippingAddress.phone}</span>
+              Phone: <span className="font-semibold text-typo1">{order.shippingAddress.phone}</span>
             </p>
           </div>
         </div>
@@ -417,12 +413,10 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           </p>
           <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-typo2">
             <p>
-              Email:{" "}
-              <span className="font-semibold text-typo1">{order.billingAddress.email}</span>
+              Email: <span className="font-semibold text-typo1">{order.billingAddress.email}</span>
             </p>
             <p>
-              Phone:{" "}
-              <span className="font-semibold text-typo1">{order.billingAddress.phone}</span>
+              Phone: <span className="font-semibold text-typo1">{order.billingAddress.phone}</span>
             </p>
           </div>
         </div>
@@ -458,9 +452,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                         <span className="font-semibold text-typo1">{item.name}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-4 align-middle font-medium text-typo2">
-                      {item.weight}
-                    </td>
+                    <td className="py-4 px-4 align-middle font-medium text-typo2">{item.weight}</td>
                     <td className="py-4 px-4 align-middle font-medium text-typo2">
                       ₹{(item.price || 0).toFixed(2)}
                     </td>
@@ -524,9 +516,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
               {order.gst !== undefined && (
                 <div className="flex justify-between font-medium">
                   <span>GST</span>
-                  <span className="font-semibold text-typo1">
-                    ₹{(order.gst || 0).toFixed(2)}
-                  </span>
+                  <span className="font-semibold text-typo1">₹{(order.gst || 0).toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between font-medium">
@@ -538,9 +528,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                 </span>
               </div>
               <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-baseline">
-                <span className="font-serif text-sm sm:text-base font-bold text-typo1">
-                  Total
-                </span>
+                <span className="font-serif text-sm sm:text-base font-bold text-typo1">Total</span>
                 <span className="font-poppins text-base sm:text-lg font-bold text-typo1">
                   ₹{(order.total || 0).toFixed(2)}
                 </span>
@@ -553,9 +541,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                   <CreditCard size={15} />
                   <span>Payment Method</span>
                 </div>
-                <p className="text-typo2 pl-6 font-medium leading-relaxed">
-                  {order.paymentMethod}
-                </p>
+                <p className="text-typo2 pl-6 font-medium leading-relaxed">{order.paymentMethod}</p>
               </div>
               {order.paymentStatus && (
                 <div className="space-y-1 border-t border-[#C4A482]/20 pt-2">

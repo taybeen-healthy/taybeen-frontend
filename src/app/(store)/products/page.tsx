@@ -13,11 +13,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-brand-bg flex items-center justify-center font-poppins text-brand-brown">
-        Loading catalog...
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-brand-bg flex items-center justify-center font-poppins text-brand-brown">
+          Loading catalog...
+        </div>
+      }
+    >
       <ProductsPage />
     </Suspense>
   );
