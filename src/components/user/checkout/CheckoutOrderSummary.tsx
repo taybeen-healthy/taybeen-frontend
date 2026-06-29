@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { Info } from "lucide-react";
 import { CartItem, CheckoutStep } from "@/types";
 import { formatIndianCurrency } from "@/lib/utils";
 
@@ -29,6 +30,8 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
   gstCost = 0,
   gstPercent = 5,
 }) => {
+  const [showGstInfo, setShowGstInfo] = useState(false);
+  const combinedShipping = shippingCost + gstCost;
   return (
     <div className="w-full bg-[#FDFAF3] border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm text-left font-poppins">
       <h3 className="font-serif text-base sm:text-lg font-bold text-brand-brown tracking-wide mb-5 border-b border-[#C4A482]/15 pb-3">
@@ -77,16 +80,20 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
             <span>- ₹{formatIndianCurrency(discount)}</span>
           </div>
         )}
-        {gstCost > 0 && (
-          <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
-            <span>GST ({gstPercent}%)</span>
-            <span className="font-semibold text-[#3A2418]">₹{formatIndianCurrency(gstCost)}</span>
-          </div>
-        )}
         <div className="flex justify-between items-center text-xs sm:text-sm text-[#7D6B5E]">
-          <span>Shipping & Handling</span>
+          <div className="flex items-center gap-1.5">
+            <span>Shipping & Handling</span>
+            <button
+              type="button"
+              onClick={() => setShowGstInfo(true)}
+              className="text-[#7D6B5E] hover:text-brand-brown transition-colors focus:outline-none flex items-center justify-center p-0.5 rounded hover:bg-[#F6F1E9]"
+              aria-label="Shipping tax information"
+            >
+              <Info size={14} />
+            </button>
+          </div>
           <span className="font-semibold text-[#3A2418]">
-            {shippingCost === 0 ? "Free" : `₹${shippingCost}`}
+            {combinedShipping === 0 ? "Free" : `₹${formatIndianCurrency(combinedShipping)}`}
           </span>
         </div>
 
@@ -124,6 +131,26 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
             </div>
           </div>
         </>
+      )}
+
+      {showGstInfo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-[#FDFAF3] border border-[#C4A482] rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl text-center relative animate-in zoom-in duration-200">
+            <h4 className="font-serif text-lg font-bold text-brand-brown mb-2">
+              Shipping & Handling
+            </h4>
+            <p className="text-sm text-[#7D6B5E] leading-relaxed mb-6">
+              This charge is inclusive of all taxes, including Goods and Services Tax (GST).
+            </p>
+            <Button
+              onClick={() => setShowGstInfo(false)}
+              variant="primary"
+              className="w-full py-2.5 text-xs font-bold uppercase tracking-wider"
+            >
+              Close
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

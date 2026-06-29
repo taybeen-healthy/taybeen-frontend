@@ -21,7 +21,13 @@ export const BestSellers: React.FC = () => {
     let active = true;
     const fetchBestSellers = async () => {
       try {
-        const response = await apiClient.get("/products");
+        const response = await apiClient.get("/products", {
+          params: {
+            sortBy: "totalSold",
+            sortOrder: "asc",
+            limit: 4,
+          },
+        });
         const prodData = response.data?.data?.data || response.data?.data || response.data || [];
         if (active && prodData.length > 0) {
           const mappedProducts = prodData.map((p: any) => ({

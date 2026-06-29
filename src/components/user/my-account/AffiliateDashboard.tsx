@@ -12,9 +12,10 @@ interface AffiliateDashboardProps {
 
 export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) => {
   const [copied, setCopied] = useState(false);
+  const cleanReferralLink = (data.referralLink || "").replace("?ref=", "");
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(data.referralLink);
+    navigator.clipboard.writeText(cleanReferralLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -25,7 +26,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         await navigator.share({
           title: "Become a Taybeen Affiliate",
           text: `Check out Taybeen Premium Dates and use my coupon code ${data.couponCode} for 10% off!`,
-          url: `https://${data.referralLink}`,
+          url: cleanReferralLink.startsWith("http") ? cleanReferralLink : `https://${cleanReferralLink}`,
         });
       } catch (err) {
         console.log("Error sharing", err);
@@ -177,7 +178,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                   <input
                     type="text"
                     readOnly
-                    value={data.referralLink}
+                    value={cleanReferralLink}
                     className="bg-[#FDFAF3] border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-xs text-[#3A2418] font-poppins focus:outline-none flex-1 truncate select-all"
                   />
                   <div className="flex gap-2">
