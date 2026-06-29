@@ -26,7 +26,9 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         await navigator.share({
           title: "Become a Taybeen Affiliate",
           text: `Check out Taybeen Premium Dates and use my coupon code ${data.couponCode} for 10% off!`,
-          url: cleanReferralLink.startsWith("http") ? cleanReferralLink : `https://${cleanReferralLink}`,
+          url: cleanReferralLink.startsWith("http")
+            ? cleanReferralLink
+            : `https://${cleanReferralLink}`,
         });
       } catch (err) {
         console.log("Error sharing", err);
