@@ -103,7 +103,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             <div className="px-6 py-5 flex items-center justify-between border-b border-[#5A3E2B]/15 bg-white">
               <div className="flex items-center text-brand-brown gap-2.5">
                 <ShoppingCart size={22} strokeWidth={2} />
-                <span className="font-poppins font-bold text-lg sm:text-xl text-[#3A2418]">
+                <span className="font-poppins font-bold text-lg sm:text-xl text-typo1">
                   Your Cart
                 </span>
                 {cartCount > 0 && (
@@ -115,7 +115,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
               <button
                 onClick={onClose}
-                className="bg-white rounded-full w-10 h-10 shadow-sm border border-[#F2EADA] flex items-center justify-center text-[#3A2418] hover:bg-gray-50 focus:outline-none transition-all cursor-pointer"
+                className="bg-white rounded-full w-10 h-10 shadow-sm border border-[#F2EADA] flex items-center justify-center text-typo1 hover:bg-gray-50 focus:outline-none transition-all cursor-pointer"
                 aria-label="Close cart drawer"
               >
                 <X size={18} strokeWidth={2} />
@@ -125,12 +125,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             {cartItems.length > 0 && (
               <div className="bg-[#FDFAF3] px-6 py-4 border-b border-[#5A3E2B]/10">
                 <div className="flex justify-between items-center text-xs font-poppins mb-2">
-                  <span className="text-brand-green-light font-normal">
+                  <span className="text-typo2 font-normal">
                     {remainingForFreeShipping > 0
-                      ? `Add ₹${remainingForFreeShipping} more for free shipping`
+                       ? `Add ₹${remainingForFreeShipping} more for free shipping`
                       : "You have unlocked free shipping!"}
                   </span>
-                  <span className="text-brand-green-light font-normal">
+                  <span className="text-typo2 font-normal">
                     ₹{subtotal} / ₹{shippingThreshold}
                   </span>
                 </div>
@@ -154,17 +154,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                   priority
                 />
 
-                <h3 className="font-poppins font-semibold text-xl text-[#3A2418] mb-2">
+                <h3 className="font-poppins font-semibold text-xl text-typo1 mb-2">
                   Your cart is empty
                 </h3>
 
-                <p className="font-poppins text-brand-green-light font-normal text-sm sm:text-base max-w-xs mb-8">
+                <p className="font-poppins text-typo2 font-normal text-sm sm:text-base max-w-xs mb-8">
                   Discover our premium date varieties and gift hampers.
                 </p>
 
                 <button
-                  onClick={onClose}
-                  className="w-full max-w-[280px] bg-[#5A3E2B] font-poppins font-semibold text-base text-[#FDFAF3] py-3.5 px-6 rounded-xl hover:bg-[#432E20] transition-colors cursor-pointer"
+                  onClick={() => {
+                    onClose();
+                    router.push("/products");
+                  }}
+                  className="w-full max-w-[280px] bg-typo1 font-poppins font-semibold text-base text-btnText py-3.5 px-6 rounded-xl hover:bg-[#443200] transition-colors cursor-pointer"
                 >
                   Browse Collection
                 </button>
@@ -196,10 +199,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                       </div>
 
                       <div className="flex-1 flex flex-col text-left">
-                        <h4 className="font-poppins font-bold text-sm sm:text-base text-[#3A2418] pr-6">
+                        <h4 className="font-poppins font-bold text-sm sm:text-base text-typo1 pr-6">
                           {displayName}
                         </h4>
-                        <span className="text-xs font-poppins text-brand-green-light font-semibold mt-0.5">
+                        <span className="text-xs font-poppins text-typo2 font-semibold mt-0.5">
                           {item.selectedWeight}
                         </span>
 
@@ -236,7 +239,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                             </button>
                           </div>
 
-                          <span className="font-poppins font-bold text-sm sm:text-base text-[#3A2418]">
+                          <span className="font-poppins font-bold text-sm sm:text-base text-typo1">
                             ₹{formatIndianCurrency(itemPrice)}
                           </span>
                         </div>
@@ -258,23 +261,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             {cartItems.length > 0 && (
               <div className="border-t border-[#5A3E2B]/10 bg-white px-6 py-5 space-y-4">
                 <div className="space-y-2.5">
-                  <div className="flex justify-between items-center font-poppins text-sm text-[#7D6B5E]">
+                  <div className="flex justify-between items-center font-poppins text-sm text-typo1">
                     <span>Subtotal</span>
-                    <span className="font-semibold text-[#3A2418]">
+                    <span className="font-semibold text-typo1">
                       ₹{formatIndianCurrency(subtotal)}
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center font-poppins text-sm text-[#7D6B5E]">
+                  <div className="flex justify-between items-center font-poppins text-sm text-typo1">
                     <span>Shipping</span>
-                    <span className="font-semibold text-[#3A2418]">
+                    <span className="font-semibold text-typo1">
                       {shippingCost === 0 ? "Free" : `₹${shippingCost}`}
                     </span>
                   </div>
 
                   <div className="border-t border-[#5A3E2B]/10 my-2 pt-2.5 flex justify-between items-center font-poppins">
-                    <span className="text-base font-bold text-[#3A2418]">Total</span>
-                    <span className="text-lg font-bold text-[#3A2418]">
+                    <span className="text-base font-bold text-typo1">Total</span>
+                    <span className="text-lg font-bold text-typo1">
                       ₹{formatIndianCurrency(total)}
                     </span>
                   </div>
@@ -282,12 +285,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-4 rounded-xl font-poppins font-bold text-sm tracking-wide shadow-md cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
+                  className="w-full bg-typo1 hover:bg-[#443200] transition-colors text-btnText py-4 rounded-xl font-poppins font-bold text-sm tracking-wide shadow-md cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
                 >
                   Proceed to Checkout
                 </button>
 
-                <p className="text-[10px] sm:text-xs text-brand-green-light font-poppins font-medium text-center">
+                <p className="text-[10px] sm:text-xs text-typo2 font-poppins font-medium text-center">
                   Secure checkout · COD available · Pan-India delivery
                 </p>
               </div>

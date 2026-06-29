@@ -43,7 +43,7 @@ export const CouponCard: React.FC<CouponCardProps> = ({
 
       {!appliedCoupon ? (
         <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
               placeholder="Enter coupon code"
@@ -52,13 +52,13 @@ export const CouponCard: React.FC<CouponCardProps> = ({
                 setInputValue(e.target.value);
                 if (couponError) setCouponError(null);
               }}
-              className="flex-1 bg-white border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-sm text-[#3A2418] placeholder-[#7D6B5E]/50 focus:outline-none focus:ring-1 focus:ring-brand-primary"
+              className="w-full sm:flex-1 bg-white border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-sm text-[#3A2418] placeholder-[#7D6B5E]/50 focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
             <Button
               type="submit"
               variant="outline"
               size="sm"
-              className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm tracking-wide uppercase flex-shrink-0"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm tracking-wide uppercase flex-shrink-0"
             >
               Apply
             </Button>

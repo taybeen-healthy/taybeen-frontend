@@ -34,7 +34,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
   const combinedShipping = shippingCost + gstCost;
   return (
     <div className="w-full bg-[#FDFAF3] border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm text-left font-poppins">
-      <h3 className="font-serif text-base sm:text-lg font-bold text-brand-brown tracking-wide mb-5 border-b border-[#C4A482]/15 pb-3">
+      <h3 className="font-serif text-xl font-bold text-brand-brown tracking-wide mb-5 border-b border-[#C4A482]/15 pb-3">
         Order Summary
       </h3>
 
@@ -86,7 +86,7 @@ export const CheckoutOrderSummary: React.FC<CheckoutOrderSummaryProps> = ({
             <button
               type="button"
               onClick={() => setShowGstInfo(true)}
-              className="text-[#7D6B5E] hover:text-brand-brown transition-colors focus:outline-none flex items-center justify-center p-0.5 rounded hover:bg-[#F6F1E9]"
+              className="text-[#7D6B5E] hover:text-brand-brown transition-colors focus:outline-none flex items-center justify-center p-0.5 rounded"
               aria-label="Shipping tax information"
             >
               <Info size={14} />

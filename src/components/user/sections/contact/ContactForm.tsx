@@ -61,15 +61,15 @@ export const ContactForm: React.FC = () => {
         <div className="w-14 h-14 rounded-full bg-green-50 text-green-600 flex items-center justify-center border border-green-100 shadow-sm mb-6 animate-in zoom-in duration-300">
           <CheckCircle size={30} />
         </div>
-        <h2 className="text-2xl font-serif font-bold text-[#5A3E2B] mb-3">Message Sent!</h2>
-        <p className="text-[#768C3A] text-sm leading-relaxed mb-6 max-w-sm">
+        <h2 className="text-2xl font-serif font-bold text-typo1 mb-3">Message Sent!</h2>
+        <p className="text-typo2 text-sm leading-relaxed mb-6 max-w-sm">
           Thank you for reaching out to Taybeen. We have received your message and will get back to
           you shortly.
         </p>
         <button
           type="button"
           onClick={() => setIsSuccess(false)}
-          className="px-6 py-2.5 bg-[#5A3E2B] hover:bg-[#432E20] text-[#FDFAF3] rounded-lg font-poppins font-bold text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer"
+          className="px-6 py-2.5 bg-typo1 hover:bg-[#443200] text-btnText rounded-lg font-poppins font-bold text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer"
         >
           Send Another Message
         </button>
@@ -80,7 +80,7 @@ export const ContactForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="w-full lg:w-[50%] space-y-6">
       <div className="space-y-2.5 text-left">
-        <label className="block font-poppins font-medium text-xs sm:text-sm text-[#3A2418]">
+        <label className="block font-poppins font-medium text-xs sm:text-sm text-typo1">
           Name*
         </label>
         <Input
@@ -94,7 +94,7 @@ export const ContactForm: React.FC = () => {
       </div>
 
       <div className="space-y-2.5 text-left">
-        <label className="block font-poppins font-medium text-xs sm:text-sm text-[#3A2418]">
+        <label className="block font-poppins font-medium text-xs sm:text-sm text-typo1">
           Email*
         </label>
         <Input
@@ -108,7 +108,7 @@ export const ContactForm: React.FC = () => {
       </div>
 
       <div className="space-y-2.5 text-left">
-        <label className="block font-poppins font-medium text-xs sm:text-sm text-[#3A2418]">
+        <label className="block font-poppins font-medium text-xs sm:text-sm text-typo1">
           Phone Number*
         </label>
         <PhoneInput
@@ -120,7 +120,7 @@ export const ContactForm: React.FC = () => {
       </div>
 
       <div className="space-y-2.5 text-left">
-        <label className="block font-poppins font-medium text-xs sm:text-sm text-[#3A2418]">
+        <label className="block font-poppins font-medium text-xs sm:text-sm text-typo1">
           Message*
         </label>
         <textarea
@@ -143,11 +143,11 @@ export const ContactForm: React.FC = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-[260px] bg-[#5A3E2B] hover:bg-[#432E20] disabled:bg-[#5A3E2B]/50 text-[#FDFAF3] py-4 rounded-lg font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+          className="w-full sm:w-[260px] bg-typo1 hover:bg-[#443200] disabled:bg-typo1/50 text-btnText py-4 rounded-lg font-poppins font-bold text-sm tracking-wider uppercase transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin text-white" />
+              <Loader2 className="w-4 h-4 animate-spin text-btnText" />
               <span>SUBMITTING...</span>
             </>
           ) : (

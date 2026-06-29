@@ -98,7 +98,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
                       setIsOpen(false);
                     }}
                     className={cn(
-                      "w-full text-left px-4 py-2.5 text-xs font-poppins transition-colors cursor-pointer",
+                      "w-full text-left px-4 py-2.5 text-xs font-poppins font-normal transition-colors cursor-pointer",
                       isSelected
                         ? "text-brand-green font-semibold bg-brand-green-pale/50"
                         : "text-brand-brown hover:bg-white hover:text-brand-brown-dark"

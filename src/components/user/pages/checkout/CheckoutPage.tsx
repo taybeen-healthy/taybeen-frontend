@@ -713,8 +713,9 @@ export const CheckoutPage: React.FC = () => {
       <div className="min-h-screen bg-brand-bg flex flex-col justify-between selection:bg-brand-primary/30">
         <div>
           <Navbar />
+          <Hero />
           <main className="max-w-[600px] mx-auto px-6 py-20 text-center font-poppins">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-brand-brown mb-3">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-typo1 mb-3">
               Your Cart is Empty
             </h2>
             <p className="text-[#7D6B5E] text-sm sm:text-base mb-8">

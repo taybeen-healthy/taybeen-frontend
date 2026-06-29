@@ -24,7 +24,7 @@ export const FeaturesBar: React.FC = () => {
               <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shrink-0">
                 {f.icon}
               </div>
-              <span className="text-brand-brown font-poppins font-semibold text-base sm:text-lg md:text-xl whitespace-nowrap">
+              <span className="text-brand-brown font-poppins font-medium text-base sm:text-md md:text-xl whitespace-nowrap">
                 {f.text}
               </span>
             </div>
@@ -38,7 +38,7 @@ export const FeaturesBar: React.FC = () => {
                 <div className="w-6 h-6 xl:w-7 xl:h-7 flex items-center justify-center shrink-0">
                   {f.icon}
                 </div>
-                <span className="text-brand-brown font-poppins font-semibold text-base lg:text-base xl:text-lg 2xl:text-xl whitespace-nowrap">
+                <span className="text-brand-brown font-poppins font-medium text-base lg:text-base xl:text-lg 2xl:text-xl whitespace-nowrap">
                   {f.text}
                 </span>
               </div>

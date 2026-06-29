@@ -10,18 +10,18 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ connect, service }) =>
   return (
     <div className="w-full lg:w-[42%] text-left space-y-12">
       <div>
-        <h2 className="text-xl sm:text-2xl font-poppins font-bold text-brand-brown mb-6">
+        <h2 className="text-xl sm:text-2xl font-poppins font-bold text-typo1 mb-6">
           {connect.title}
         </h2>
         <div className="space-y-4 font-poppins text-sm md:text-base text-[#3A2418]">
           <p className="leading-relaxed">
-            <span className="font-semibold text-brand-brown">Email:</span>{" "}
+            <span className="font-semibold text-typo1">Email:</span>{" "}
             <a href={`mailto:${connect.email}`} className="hover:underline">
               {connect.email}
             </a>
           </p>
           <p className="leading-relaxed">
-            <span className="font-semibold text-brand-brown">Call or WhatsApp:</span>{" "}
+            <span className="font-semibold text-typo1">Call or WhatsApp:</span>{" "}
             {connect.phones.map((phone, i) => (
               <React.Fragment key={i}>
                 <span className="font-medium">{phone}</span>
@@ -34,7 +34,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ connect, service }) =>
       </div>
 
       <div>
-        <h2 className="text-xl sm:text-2xl font-poppins font-bold text-brand-brown mb-6">
+        <h2 className="text-xl sm:text-2xl font-poppins font-bold text-typo1 mb-6">
           {service.title}
         </h2>
         <div className="space-y-3 font-poppins text-sm md:text-base text-[#3A2418] font-medium">

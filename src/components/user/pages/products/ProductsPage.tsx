@@ -12,6 +12,7 @@ import { Product } from "@/types";
 import { Pagination } from "@/components/ui/Pagination";
 import { Dropdown } from "@/components/ui/Dropdown";
 import { apiClient } from "@/lib/apiClient";
+import { useSearchParams } from "next/navigation";
 import {
   ProductsHero,
   ProductsHeader,
@@ -20,6 +21,9 @@ import {
 } from "@/components/user/sections/products";
 
 export default function ProductsPage() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -32,6 +36,10 @@ export default function ProductsPage() {
   const [categoryDetailsMap, setCategoryDetailsMap] =
     useState<Record<string, { title: string; description: string }>>(CATEGORY_DETAILS);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setSelectedCategory(categoryParam || "All Products");
+  }, [categoryParam]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -20,10 +20,10 @@ export const ContactHero: React.FC<ContactHeroProps> = ({ data }) => {
       </div>
 
       <section className="h-[46vh] min-h-[380px] lg:h-[48vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 pt-16 relative z-10">
-        <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] font-serif font-bold text-[#5A3E2B] leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] font-serif font-bold text-typo1 leading-tight">
           {data.title}
         </h1>
-        <p className="text-brand-green font-poppins text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mt-4">
+        <p className="text-typo2 font-poppins text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mt-4">
           {data.description}
         </p>
       </section>

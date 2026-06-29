@@ -115,7 +115,7 @@ export const homeData: HomeData = {
       farmToTableDesc: "Saudi · Jordan · Iran",
       energyTitle: "Natural energy",
       energyValue: "66 kcal",
-      energyDesc: "per 3 dates",
+      energyDesc: "per dates",
       premiumLabel: "Premium",
     },
   },

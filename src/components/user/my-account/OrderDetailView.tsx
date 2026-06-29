@@ -287,17 +287,17 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           >
             <ArrowLeft size={16} /> Back to List
           </button>
-          <h2 className="font-serif text-base sm:text-lg lg:text-xl font-bold text-brand-brown">
+          <h2 className="font-serif text-base sm:text-lg lg:text-xl font-bold text-typo1">
             Order ID: {order.id}
           </h2>
         </div>
-        <div className="text-left sm:text-right text-xs sm:text-sm text-[#7D6B5E]">
+        <div className="text-left sm:text-right text-xs sm:text-sm text-typo2">
           <p>
-            Date Placed: <span className="font-semibold text-[#3A2418]">{order.date}</span>
+            Date Placed: <span className="font-semibold text-typo1">{order.date}</span>
           </p>
           <p className="mt-0.5">
             Total Items:{" "}
-            <span className="font-semibold text-[#3A2418]">
+            <span className="font-semibold text-typo1">
               {order.items.reduce((acc, item) => acc + item.quantity, 0)}
             </span>
           </p>
@@ -305,7 +305,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
       </div>
 
       <div className="bg-[#F6F1E9]/40 border border-[#C4A482]/20 rounded-2xl p-5 sm:p-6 mb-6">
-        <h3 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-6">
+        <h3 className="font-serif text-sm sm:text-base font-bold text-typo1 mb-6">
           Order Status
         </h3>
         {order.status === "Cancelled" && (
@@ -365,7 +365,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                 <div className="flex flex-col md:items-center min-w-0">
                   <span
                     className={`text-xs sm:text-sm font-semibold truncate ${
-                      isCompleted ? "text-brand-brown font-bold" : "text-[#7D6B5E]/60"
+                      isCompleted ? "text-typo1 font-bold" : "text-typo2/60"
                     }`}
                   >
                     {step.label}
@@ -384,45 +384,45 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 shadow-sm text-left">
-          <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest uppercase block mb-3">
+          <span className="text-[10px] sm:text-xs font-bold text-typo2 tracking-widest uppercase block mb-3">
             Shipping Address
           </span>
-          <h4 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-1.5">
+          <h4 className="font-serif text-sm sm:text-base font-bold text-typo1 mb-1.5">
             {order.shippingAddress.name}
           </h4>
-          <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm text-typo1/80 leading-relaxed mb-4">
             {order.shippingAddress.addressLine}
           </p>
-          <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-[#7D6B5E]">
+          <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-typo2">
             <p>
               Email:{" "}
-              <span className="font-semibold text-[#3A2418]">{order.shippingAddress.email}</span>
+              <span className="font-semibold text-typo1">{order.shippingAddress.email}</span>
             </p>
             <p>
               Phone:{" "}
-              <span className="font-semibold text-[#3A2418]">{order.shippingAddress.phone}</span>
+              <span className="font-semibold text-typo1">{order.shippingAddress.phone}</span>
             </p>
           </div>
         </div>
 
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 shadow-sm text-left">
-          <span className="text-[10px] sm:text-xs font-bold text-brand-brown/70 tracking-widest uppercase block mb-3">
+          <span className="text-[10px] sm:text-xs font-bold text-typo2 tracking-widest uppercase block mb-3">
             Billing Address
           </span>
-          <h4 className="font-serif text-sm sm:text-base font-bold text-brand-brown mb-1.5">
+          <h4 className="font-serif text-sm sm:text-base font-bold text-typo1 mb-1.5">
             {order.billingAddress.name}
           </h4>
-          <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm text-typo1/80 leading-relaxed mb-4">
             {order.billingAddress.addressLine}
           </p>
-          <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-[#7D6B5E]">
+          <div className="border-t border-[#C4A482]/10 pt-3 space-y-1 text-xs text-typo2">
             <p>
               Email:{" "}
-              <span className="font-semibold text-[#3A2418]">{order.billingAddress.email}</span>
+              <span className="font-semibold text-typo1">{order.billingAddress.email}</span>
             </p>
             <p>
               Phone:{" "}
-              <span className="font-semibold text-[#3A2418]">{order.billingAddress.phone}</span>
+              <span className="font-semibold text-typo1">{order.billingAddress.phone}</span>
             </p>
           </div>
         </div>
@@ -435,7 +435,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
           <div className="hidden sm:block overflow-hidden border border-[#C4A482]/20 rounded-2xl bg-white">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
-                <tr className="bg-[#F6F1E9] text-brand-brown font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+                <tr className="bg-[#F6F1E9] text-typo1 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
                   <th className="py-3 px-4 border-b border-[#C4A482]/20">Product</th>
                   <th className="py-3 px-4 border-b border-[#C4A482]/20">Weight</th>
                   <th className="py-3 px-4 border-b border-[#C4A482]/20">Price</th>
@@ -443,7 +443,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                   <th className="py-3 px-4 border-b border-[#C4A482]/20 text-right">Total</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
+              <tbody className="divide-y divide-[#C4A482]/15 text-typo1">
                 {order.items.map((item, idx) => (
                   <tr key={idx} className="hover:bg-black/[0.005] transition-colors">
                     <td className="py-4 px-4 align-middle">
@@ -455,19 +455,19 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <span className="font-semibold text-brand-brown">{item.name}</span>
+                        <span className="font-semibold text-typo1">{item.name}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-4 align-middle font-medium text-[#7D6B5E]">
+                    <td className="py-4 px-4 align-middle font-medium text-typo2">
                       {item.weight}
                     </td>
-                    <td className="py-4 px-4 align-middle font-medium text-[#7D6B5E]">
+                    <td className="py-4 px-4 align-middle font-medium text-typo2">
                       ₹{(item.price || 0).toFixed(2)}
                     </td>
-                    <td className="py-4 px-4 align-middle font-semibold text-[#3A2418]">
+                    <td className="py-4 px-4 align-middle font-semibold text-typo1">
                       {item.quantity}
                     </td>
-                    <td className="py-4 px-4 align-middle font-bold text-brand-brown text-right">
+                    <td className="py-4 px-4 align-middle font-bold text-typo1 text-right">
                       ₹{((item.price || 0) * (item.quantity || 0)).toFixed(2)}
                     </td>
                   </tr>
@@ -486,17 +486,17 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-brand-brown text-xs line-clamp-2 leading-snug">
+                  <h4 className="font-semibold text-typo1 text-xs line-clamp-2 leading-snug">
                     {item.name}
                   </h4>
-                  <p className="text-[10px] text-[#7D6B5E] mt-1 font-medium">
-                    Weight: <span className="text-[#3A2418]">{item.weight}</span>
+                  <p className="text-[10px] text-typo2 mt-1 font-medium">
+                    Weight: <span className="text-typo1">{item.weight}</span>
                   </p>
                   <div className="flex items-center justify-between mt-2">
-                    <p className="text-[11px] text-[#7D6B5E] font-medium">
+                    <p className="text-[11px] text-typo2 font-medium">
                       ₹{(item.price || 0).toFixed(2)} × {item.quantity}
                     </p>
-                    <p className="text-xs font-bold text-brand-brown">
+                    <p className="text-xs font-bold text-typo1">
                       ₹{((item.price || 0) * (item.quantity || 0)).toFixed(2)}
                     </p>
                   </div>
@@ -507,41 +507,41 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
         </div>
 
         <div className="w-full lg:w-[320px] xl:w-[350px] shrink-0 space-y-4">
-          <h3 className="font-serif text-base font-bold text-brand-brown mb-1 lg:opacity-0 pointer-events-none select-none">
+          <h3 className="font-serif text-base font-bold text-typo1 mb-1 lg:opacity-0 pointer-events-none select-none">
             Summary Details
           </h3>
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 shadow-sm">
-            <h4 className="font-serif text-sm sm:text-base font-bold text-brand-brown pb-3 border-b border-[#C4A482]/10 mb-4">
+            <h4 className="font-serif text-sm sm:text-base font-bold text-typo1 pb-3 border-b border-[#C4A482]/10 mb-4">
               Order Summary
             </h4>
-            <div className="space-y-3 text-xs sm:text-sm text-[#7D6B5E]">
+            <div className="space-y-3 text-xs sm:text-sm text-typo2">
               <div className="flex justify-between font-medium">
                 <span>Subtotal</span>
-                <span className="font-semibold text-[#3A2418]">
+                <span className="font-semibold text-typo1">
                   ₹{(order.subtotal || 0).toFixed(2)}
                 </span>
               </div>
               {order.gst !== undefined && (
                 <div className="flex justify-between font-medium">
                   <span>GST</span>
-                  <span className="font-semibold text-[#3A2418]">
+                  <span className="font-semibold text-typo1">
                     ₹{(order.gst || 0).toFixed(2)}
                   </span>
                 </div>
               )}
               <div className="flex justify-between font-medium">
                 <span>Shipping</span>
-                <span className="font-semibold text-[#3A2418]">
+                <span className="font-semibold text-typo1">
                   {order.shippingCost === undefined || order.shippingCost === 0
                     ? "Free"
                     : `₹${(order.shippingCost || 0).toFixed(2)}`}
                 </span>
               </div>
               <div className="border-t border-[#C4A482]/10 pt-3 mt-3 flex justify-between items-baseline">
-                <span className="font-serif text-sm sm:text-base font-bold text-brand-brown">
+                <span className="font-serif text-sm sm:text-base font-bold text-typo1">
                   Total
                 </span>
-                <span className="font-poppins text-base sm:text-lg font-bold text-brand-brown">
+                <span className="font-poppins text-base sm:text-lg font-bold text-typo1">
                   ₹{(order.total || 0).toFixed(2)}
                 </span>
               </div>
@@ -549,17 +549,17 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
 
             <div className="bg-[#F6F1E9] rounded-xl p-3.5 mt-5 space-y-3 text-xs sm:text-sm">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-brand-brown font-semibold">
+                <div className="flex items-center gap-2 text-typo1 font-semibold">
                   <CreditCard size={15} />
                   <span>Payment Method</span>
                 </div>
-                <p className="text-[#7D6B5E] pl-6 font-medium leading-relaxed">
+                <p className="text-typo2 pl-6 font-medium leading-relaxed">
                   {order.paymentMethod}
                 </p>
               </div>
               {order.paymentStatus && (
                 <div className="space-y-1 border-t border-[#C4A482]/20 pt-2">
-                  <span className="text-brand-brown font-semibold pl-6 block text-[10px] uppercase tracking-wider">
+                  <span className="text-typo1 font-semibold pl-6 block text-[10px] uppercase tracking-wider">
                     Payment Status
                   </span>
                   <div className="pl-6 flex items-center gap-2 mt-1">
@@ -572,7 +572,7 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
                             : "bg-yellow-500 animate-pulse"
                       }`}
                     />
-                    <span className="font-bold text-brand-brown">{order.paymentStatus}</span>
+                    <span className="font-bold text-typo1">{order.paymentStatus}</span>
                   </div>
                 </div>
               )}

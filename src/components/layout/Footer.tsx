@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
@@ -12,6 +12,30 @@ export const Footer: React.FC = () => {
     type: "success" | "error" | "loading" | null;
     message: string;
   }>({ type: null, message: "" });
+
+  const [categories, setCategories] = useState<any[]>([
+    { name: "Plain Dates" },
+    { name: "Stuffed Dates" },
+    { name: "Gift Hampers" },
+    { name: "Corporate Gifting" },
+    { name: "Wellness Boxes" },
+    { name: "Custom Orders" }
+  ]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await apiClient.get("/categories");
+        const data = response.data?.data || response.data || [];
+        if (data.length > 0) {
+          setCategories(data);
+        }
+      } catch (e) {
+        console.error("Failed to fetch footer categories:", e);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +59,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-brand-bg border-t border-[#E5E5E5] lg:border-t-0 pt-10 lg:pt-12 pb-10 md:pb-12">
+    <footer className="bg-brand-bg pt-10 lg:pt-12 pb-10 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="hidden lg:block border-t border-[#A69797] mb-16" />
 
@@ -48,7 +72,7 @@ export const Footer: React.FC = () => {
                   alt="Taybeen Logo"
                   width={160}
                   height={80}
-                  className="h-20 lg:h-[72px] w-auto object-contain cursor-pointer"
+                  className="h-14 lg:h-[72px] w-auto object-contain cursor-pointer"
                 />
               </Link>
             </div>
@@ -58,8 +82,6 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex items-center justify-start gap-4">
               {[
-                { Icon: Facebook, url: "https://facebook.com/taybeen" },
-                { Icon: Twitter, url: "https://twitter.com/taybeen" },
                 { Icon: Instagram, url: "https://instagram.com/taybeen" },
                 { Icon: Youtube, url: "https://youtube.com/taybeen" },
               ].map(({ Icon, url }, i) => (
@@ -81,31 +103,16 @@ export const Footer: React.FC = () => {
               OUR PRODUCTS
             </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
-              <li>
-                <Link href="/products" className="hover:text-brand-primary">
-                  Premium Dates
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-brand-primary">
-                  Festive Hampers
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-brand-primary">
-                  Corporate Gifting
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-brand-primary">
-                  Wellness Boxes
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-brand-primary">
-                  Custom Orders
-                </Link>
-              </li>
+              {categories.map((cat, idx) => (
+                <li key={cat.id || cat._id || idx}>
+                  <Link
+                    href={`/products?category=${encodeURIComponent(cat.name)}`}
+                    className="hover:text-brand-primary link-underline"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -115,27 +122,27 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
               <li>
-                <Link href="/" className="hover:text-brand-primary">
+                <Link href="/" className="hover:text-brand-primary link-underline">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/our-story" className="hover:text-brand-primary">
+                <Link href="/our-story" className="hover:text-brand-primary link-underline">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link href="/terms-and-conditions" className="hover:text-brand-primary">
+                <Link href="/terms-and-conditions" className="hover:text-brand-primary link-underline">
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-brand-primary">
+                <Link href="/privacy-policy" className="hover:text-brand-primary link-underline">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/partnerships" className="hover:text-brand-primary">
+                <Link href="/partnerships" className="hover:text-brand-primary link-underline">
                   Affiliate & Coupons
                 </Link>
               </li>
@@ -148,22 +155,22 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-3 text-brand-brown font-poppins text-sm md:text-base">
               <li>
-                <Link href="/" className="hover:text-brand-primary">
+                <Link href="/our-story" className="hover:text-brand-primary link-underline">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/shipping-and-delivery" className="hover:text-brand-primary">
+                <Link href="/shipping-and-delivery" className="hover:text-brand-primary link-underline">
                   Shipping & Returns
                 </Link>
               </li>
               <li>
-                <Link href="/" className="hover:text-brand-primary">
+                <Link href="/my-account" className="hover:text-brand-primary link-underline">
                   Track Order
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-brand-primary">
+                <Link href="/contact" className="hover:text-brand-primary link-underline">
                   Contact Us
                 </Link>
               </li>
@@ -181,7 +188,7 @@ export const Footer: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@gmail.com"
+              placeholder="example@gmail.com"
               required
               suppressHydrationWarning={true}
               className="w-full bg-[#F7A503]/10 border border-black/35 rounded-full py-3.5 px-6 pr-32 sm:pr-36 font-poppins text-brand-brown focus:outline-none focus:ring-1 focus:ring-brand-primary text-sm"
@@ -217,9 +224,6 @@ export const Footer: React.FC = () => {
             </Link>
             <Link href="/terms-and-conditions" className="hover:underline">
               Terms of Service
-            </Link>
-            <Link href="/" className="hover:underline">
-              Cookie Policy
             </Link>
           </div>
         </div>

@@ -10,7 +10,12 @@ interface FounderNoteSectionProps {
 export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) => {
   return (
     <Section bg="cream" className="py-16 sm:py-20 md:py-24" id="founders-note">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 xl:gap-24 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-16 xl:gap-24 items-center">
+        {/* Mobile Heading - Rendered above the image on mobile/tablet */}
+        <h2 className="lg:hidden text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-brown leading-tight w-full text-left">
+          {data.title}
+        </h2>
+
         <div className="w-full relative pb-8 lg:pb-0">
           <div className="w-full max-w-[480px] mx-auto lg:max-w-none aspect-[10/11] sm:aspect-[4/5] rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-md relative border border-brand-brown/10">
             <Image
@@ -23,18 +28,19 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
             />
           </div>
 
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-6 lg:-right-6 bg-white border border-[#5A3E2B]/10 rounded-xl p-4 sm:p-5 shadow-premium z-10 text-left sm:min-w-[280px]">
-            <h4 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl leading-tight">
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-6 lg:-right-10 bg-white border border-[#5A3E2B]/10 rounded-xl p-4 sm:p-5 shadow-premium z-10 text-left w-[92%] sm:w-auto sm:min-w-[500px]">
+            <h4 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl leading-tight whitespace-nowrap">
               {data.name}
             </h4>
-            <p className="text-[#768C3A] font-poppins text-xs sm:text-sm font-semibold mt-1">
+            <p className="text-[#768C3A] font-poppins text-xs sm:text-sm font-semibold mt-1 whitespace-nowrap">
               {data.role}
             </p>
           </div>
         </div>
 
-        <div className="space-y-6 text-left mt-6 lg:mt-0">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-brown leading-tight">
+        <div className="space-y-2 text-left">
+          {/* Desktop Title - Hidden on mobile */}
+          <h2 className="hidden lg:block text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-brown leading-tight">
             {data.title}
           </h2>
 

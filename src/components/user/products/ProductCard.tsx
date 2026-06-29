@@ -20,6 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   variant = "default",
 }) => {
   const isCatalog = variant === "catalog";
+  const isOutOfStock = product.stock !== undefined && product.stock <= 0;
 
   const getBadgeVariant = () => {
     if (!product.badge) return "default";
@@ -44,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         }}
         className={
           className ||
-          "w-full bg-white rounded-2xl overflow-hidden flex flex-col h-full shadow-sm transition-all duration-300 border border-[#C4A482]/40 hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          `w-full bg-white rounded-2xl overflow-hidden flex flex-col h-full shadow-sm transition-all duration-300 border border-[#C4A482]/40 hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary ${isOutOfStock ? "opacity-75 grayscale-[30%]" : ""}`
         }
       >
         <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-white p-2">
@@ -59,14 +60,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             />
           </div>
 
-          {product.badge && (
+          {isOutOfStock ? (
+            <Badge
+              text="Out of Stock"
+              className="absolute top-4 left-4 bg-red-50 text-red-600 border border-red-200"
+            />
+          ) : product.badge ? (
             <Badge
               text={product.badge}
               variant={getBadgeVariant()}
               className="absolute top-4 left-4 hidden lg:block"
               style={product.badgeColor ? { backgroundColor: product.badgeColor } : undefined}
             />
-          )}
+          ) : null}
         </div>
 
         <div className="p-4 md:p-5 flex-1 flex flex-col justify-between">
@@ -116,7 +122,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       }}
       className={
         className ||
-        "w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+        `w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary ${isOutOfStock ? "opacity-75 grayscale-[30%]" : ""}`
       }
     >
       <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-[#F6F1E9] shadow-sm group-hover:shadow-md transition-shadow duration-300">
@@ -129,14 +135,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           priority
         />
 
-        {product.badge && (
+        {isOutOfStock ? (
+          <Badge
+            text="Out of Stock"
+            className="absolute top-3.5 left-3.5 bg-red-50 text-red-600 border border-red-200"
+          />
+        ) : product.badge ? (
           <Badge
             text={product.badge}
             variant={getBadgeVariant()}
             className="absolute top-3.5 left-3.5"
             style={product.badgeColor ? { backgroundColor: product.badgeColor } : undefined}
           />
-        )}
+        ) : null}
 
         <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-brand-brown text-[9px] md:text-[10px] font-poppins font-bold shadow-sm border border-white/30 select-none">
           {product.weight || "500g"}
@@ -200,9 +211,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onClick();
+              if (!isOutOfStock) {
+                onClick();
+              }
             }}
-            className="w-8 h-8 md:w-9 md:h-9 bg-brand-green text-white rounded-full flex items-center justify-center hover:bg-brand-green-light active:scale-95 transition-all duration-300 shadow-[0_4px_12px_rgba(74,94,40,0.15)] cursor-pointer group/btn"
+            disabled={isOutOfStock}
+            className="w-8 h-8 md:w-9 md:h-9 bg-brand-green text-white rounded-full flex items-center justify-center hover:bg-brand-green-light disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-not-allowed active:scale-95 transition-all duration-300 shadow-[0_4px_12px_rgba(74,94,40,0.15)] cursor-pointer group/btn"
             aria-label="Add to cart"
           >
             <ShoppingCart size={14} className="md:w-[16px] md:h-[16px]" />

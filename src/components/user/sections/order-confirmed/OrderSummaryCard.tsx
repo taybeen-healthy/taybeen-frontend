@@ -57,22 +57,6 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             {orderId}
           </p>
         </div>
-        <div className="text-center">
-          <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase block">
-            Payment Status
-          </span>
-          <span
-            className={`text-[10px] sm:text-xs font-poppins font-bold mt-1 px-3 py-0.5 rounded-full inline-block ${
-              paymentStatus === "Captured" || paymentStatus === "Paid"
-                ? "text-[#A2E043] bg-green-500/10 border border-green-500/20"
-                : paymentStatus === "Failed"
-                  ? "text-red-400 bg-red-500/10 border border-red-500/20"
-                  : "text-yellow-400 bg-yellow-500/10 border border-yellow-500/20"
-            }`}
-          >
-            {paymentStatus}
-          </span>
-        </div>
         <div className="text-right">
           <span className="text-[9px] sm:text-xs font-poppins font-medium text-white/60 tracking-wider uppercase">
             {labels.placedOnLabel}
@@ -89,10 +73,10 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Package size={18} strokeWidth={2} />
           </div>
           <div>
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.itemsLabel}
             </span>
-            <p className="text-sm font-poppins font-semibold text-[#3A2418] mt-0.5">{itemsText}</p>
+            <p className="text-sm font-poppins font-semibold text-typo1 mt-0.5">{itemsText}</p>
           </div>
         </div>
 
@@ -101,10 +85,10 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Mail size={18} strokeWidth={2} />
           </div>
           <div>
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.confirmationSentLabel}
             </span>
-            <p className="text-sm font-poppins font-semibold text-[#3A2418] mt-0.5">
+            <p className="text-sm font-poppins font-semibold text-typo1 mt-0.5">
               {labels.confirmationSentValue}
             </p>
           </div>
@@ -115,10 +99,10 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Truck size={18} strokeWidth={2} />
           </div>
           <div>
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.deliveryLabel}
             </span>
-            <p className="text-sm font-poppins font-semibold text-[#3A2418] mt-0.5">
+            <p className="text-sm font-poppins font-semibold text-typo1 mt-0.5">
               {labels.deliveryValue}
             </p>
           </div>
@@ -131,10 +115,10 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Package size={20} strokeWidth={2} />
           </div>
           <div className="ml-1">
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.itemsLabel}
             </span>
-            <p className="text-base font-poppins font-semibold text-[#3A2418] mt-0.5">
+            <p className="text-base font-poppins font-semibold text-typo1 mt-0.5">
               {itemsText}
             </p>
           </div>
@@ -145,10 +129,10 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Truck size={20} strokeWidth={2} />
           </div>
           <div className="ml-1">
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.deliveryLabel}
             </span>
-            <p className="text-base font-poppins font-semibold text-[#3A2418] mt-0.5">
+            <p className="text-base font-poppins font-semibold text-typo1 mt-0.5">
               {labels.deliveryValue}
             </p>
           </div>
@@ -159,17 +143,34 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             <Mail size={20} strokeWidth={2} />
           </div>
           <div className="ml-1">
-            <span className="text-[10px] font-poppins text-[#768C3A] tracking-wider uppercase font-semibold">
+            <span className="text-[10px] font-poppins text-typo2 tracking-wider uppercase font-semibold">
               {labels.confirmationSentLabel}
             </span>
-            <p className="text-base font-poppins font-semibold text-[#3A2418] mt-0.5">
+            <p className="text-base font-poppins font-semibold text-typo1 mt-0.5">
               {labels.confirmationSentValue}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+      {/* Payment Status Row */}
+      <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-3.5 flex justify-between items-center select-none">
+        <span className="text-xs font-poppins font-medium text-typo2">Payment Status</span>
+        <span
+          className={`text-[10px] sm:text-xs font-poppins font-bold px-2.5 py-0.5 rounded-full inline-block ${
+            paymentStatus === "Captured" || paymentStatus === "Paid"
+              ? "text-brand-green bg-brand-green-pale/40 border border-brand-green/20"
+              : paymentStatus === "Failed"
+                ? "text-red-600 bg-red-100 border border-red-200"
+                : "text-yellow-600 bg-yellow-100 border border-yellow-200"
+          }`}
+        >
+          {paymentStatus}
+        </span>
+      </div>
+
+      {/* Invoice Row */}
+      <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left">
         <div className="flex flex-col">
           <span className="text-sm font-poppins font-medium text-brand-brown">
             Need a copy of your invoice?
@@ -182,7 +183,7 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           type="button"
           onClick={handleDownloadInvoice}
           disabled={isDownloading}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all text-xs font-bold font-poppins cursor-pointer select-none shadow-sm hover:shadow active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-all text-xs font-bold font-poppins cursor-pointer select-none shadow-sm hover:shadow active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isDownloading ? (
             <>

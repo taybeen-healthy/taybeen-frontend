@@ -6,7 +6,7 @@ export const Gifting: React.FC = () => {
   const { gifting } = homeData;
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#24351F] text-white">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-16 bg-[#24351F] text-white">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
         <div className="grid grid-cols-12 gap-6 md:gap-8 h-auto lg:h-[480px] xl:h-[540px] 2xl:h-[600px]">
           <div className="col-span-12 lg:col-span-7 flex flex-col lg:h-full justify-between gap-6 lg:gap-8 lg:min-h-0">

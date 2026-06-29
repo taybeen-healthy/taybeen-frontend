@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
@@ -8,16 +9,17 @@ import { Tag } from "@/components/ui/Tag";
 import { useCustomization } from "@/context/CustomizationContext";
 
 export const Hero: React.FC = () => {
+  const router = useRouter();
   const { hero } = useCustomization();
 
   return (
     <Section
       bg="none"
       overflowHidden={true}
-      className="relative pt-24 sm:pt-24 md:pt-32 lg:pt-32 pb-8 sm:pb-8 md:pb-20 lg:pb-20"
+      className="relative pt-24 sm:pt-24 md:pt-32 lg:pt-32 pb-8 sm:pb-8 md:pb-12 lg:pb-12"
     >
-      <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-12 lg:gap-12 xl:gap-0">
-        <div className="flex-1 w-full lg:w-auto space-y-6 md:space-y-8 lg:space-y-6 xl:space-y-7 2xl:space-y-8 text-center lg:text-left lg:pr-4 xl:pr-8">
+      <div className="flex flex-col-reverse lg:flex-row items-start lg:items-start gap-12 lg:gap-12 xl:gap-0">
+        <div className="flex-1 w-full lg:w-auto space-y-6 md:space-y-8 lg:space-y-6 xl:space-y-7 2xl:space-y-8 text-left lg:text-left lg:pr-4 xl:pr-8">
           <Tag variant="primary-light" className="px-4 py-2 text-sm md:text-base">
             {hero.tag}
           </Tag>
@@ -28,7 +30,7 @@ export const Hero: React.FC = () => {
             <span className="text-brand-primary font-serif">Dates.</span>
           </h1>
 
-          <p className="max-w-md lg:max-w-md xl:max-w-lg 2xl:max-w-xl mx-auto lg:mx-0 text-base md:text-lg lg:text-base xl:text-base 2xl:text-lg font-poppins text-[#7E7D7A] leading-relaxed">
+          <p className="max-w-md lg:max-w-md xl:max-w-lg 2xl:max-w-xl lg:mx-0 text-base md:text-lg lg:text-base xl:text-base 2xl:text-lg font-poppins text-[#7E7D7A] leading-relaxed">
             {hero.description}
           </p>
 
@@ -36,11 +38,19 @@ export const Hero: React.FC = () => {
             {hero.tagline}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-5">
-            <Button variant="primary" className="w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 md:gap-5">
+            <Button
+              onClick={() => router.push("/products")}
+              variant="primary"
+              className="w-auto sm:w-auto px-6"
+            >
               {hero.buttons.primary}
             </Button>
-            <Button variant="outline" className="w-full sm:w-auto">
+            <Button
+              onClick={() => router.push("/products")}
+              variant="outline"
+              className="w-auto sm:w-auto px-6"
+            >
               {hero.buttons.outline}
             </Button>
           </div>

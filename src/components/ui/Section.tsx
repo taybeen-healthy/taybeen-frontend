@@ -26,7 +26,7 @@ export const Section: React.FC<SectionProps> = ({
     <section
       id={id}
       className={cn(
-        "py-12 sm:py-16 md:py-20 lg:py-24",
+        "py-8 md:py-20 lg:py-16",
         bgStyles[bg],
         overflowHidden && "overflow-hidden",
         className

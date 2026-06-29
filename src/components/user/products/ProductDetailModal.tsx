@@ -199,14 +199,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
           </div>
 
           <div className="flex-1 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col h-auto select-text text-left bg-[#FDFAF3] overflow-visible">
-            <h2 className="text-xl sm:text-2xl lg:text-[1.85rem] font-serif font-bold text-brand-brown leading-tight mb-3">
+            <h2 className="text-xl sm:text-2xl lg:text-[1.85rem] font-serif font-bold text-typo1 leading-tight mb-3">
               {detailedProduct.name}
             </h2>
 
             {(detailedProduct.reviewsCount || 0) > 0 && (
               <div className="flex items-center gap-3 mb-4">
                 <StarRating rating={detailedProduct.rating} size={16} />
-                <span className="text-xs sm:text-sm font-poppins text-brand-brown/80 font-semibold">
+                <span className="text-xs sm:text-sm font-poppins text-typo1/80 font-semibold">
                   {detailedProduct.rating} ({detailedProduct.reviewsCount} reviews)
                 </span>
               </div>
@@ -214,15 +214,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
 
             <div className="mb-5">
               <div className="flex items-baseline gap-3 flex-wrap">
-                <span className="text-[1.65rem] sm:text-3xl font-poppins font-bold text-brand-brown">
+                <span className="text-xl sm:text-2xl font-poppins font-bold text-typo1">
                   ₹{formatIndianCurrency(currentPrice, 2)}
                 </span>
                 {currentOriginalPrice && currentOriginalPrice > currentPrice && (
                   <>
-                    <span className="text-base sm:text-lg text-brand-brown/60 line-through font-poppins font-medium">
+                    <span className="text-sm sm:text-base text-typo1/60 line-through font-poppins font-medium">
                       ₹{formatIndianCurrency(currentOriginalPrice, 2)}
                     </span>
-                    <span className="text-xs sm:text-sm text-[#768C3A] font-poppins font-semibold">
+                    <span className="text-xs text-typo2 font-poppins font-semibold">
                       (
                       {Math.round(
                         ((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100
@@ -235,6 +235,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               <div className="text-xs sm:text-sm text-brand-green-light font-poppins mt-0.5">
                 Inclusive of all taxes
               </div>
+              {detailedProduct.stock !== undefined && detailedProduct.stock <= 0 && (
+                <div className="mt-3 px-4 py-2.5 bg-red-50 border border-red-200 rounded-xl text-red-600 font-poppins text-xs sm:text-sm font-semibold flex items-center gap-2">
+                  <span>⚠️ Currently Out of Stock</span>
+                </div>
+              )}
             </div>
 
             <div className="flex gap-6 mb-5 border-b border-[#5A3E2B]/15">
@@ -329,14 +334,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               ) : (
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 bg-[#5A3E2B] hover:bg-[#483122] transition-colors text-white py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
+                  className="flex-1 bg-typo1 hover:bg-[#443200] transition-colors text-btnText py-3.5 rounded-lg font-poppins font-semibold text-sm tracking-wide shadow-sm cursor-pointer text-center select-none active:scale-[0.98] focus:outline-none"
                 >
                   Add to cart
                 </button>
               )}
               <button
                 onClick={handleShare}
-                className="flex items-center justify-center gap-2 border border-[#5A3E2B]/30 hover:border-[#5A3E2B] hover:bg-[#5A3E2B]/5 text-brand-brown py-3.5 px-6 rounded-lg font-poppins font-semibold text-sm cursor-pointer transition-all select-none active:scale-[0.98] focus:outline-none"
+                className="flex items-center justify-center gap-2 border border-typo1/30 hover:border-typo1 hover:bg-typo1/5 text-typo1 py-3.5 px-6 rounded-lg font-poppins font-semibold text-sm cursor-pointer transition-all select-none active:scale-[0.98] focus:outline-none"
               >
                 <Share2 size={15} />
                 <span>{shareStatus}</span>
@@ -346,20 +351,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             <div className="grid grid-cols-3 gap-3 border-t border-[#5A3E2B]/10 pt-5 mt-4">
               <div className="flex flex-col items-center gap-1.5">
                 <Truck size={20} className="text-[#F7A503]" />
-                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                <span className="text-[9px] sm:text-[12px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
                   Free Shipping on
                   <br />₹{delivery.maximumAmount}+
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5">
                 <Award size={20} className="text-[#F7A503]" />
-                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                <span className="text-[9px] sm:text-[12px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
                   Premium Quality
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5">
                 <Sprout size={20} className="text-[#F7A503]" />
-                <span className="text-[9px] sm:text-[10px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
+                <span className="text-[9px] sm:text-[12px] font-poppins font-medium text-[#8D7F75] text-center leading-tight">
                   Rich in Fiber
                 </span>
               </div>

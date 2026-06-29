@@ -23,6 +23,9 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        typo1: "#5A4200",
+        typo2: "#768C3A",
+        btnText: "#FFEBBC",
         brand: {
           bg: "#FDFAF3",
           primary: "#F7A503",

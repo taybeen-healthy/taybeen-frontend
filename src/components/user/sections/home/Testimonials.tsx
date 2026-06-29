@@ -138,18 +138,18 @@ export const Testimonials: React.FC = () => {
         tagClassName="text-brand-brown"
         title={<span className="-tracking-[0.04em]">{homeData.testimonials.title}</span>}
         actions={
-          <div className="flex items-center justify-start md:justify-end gap-4 md:gap-6 w-full md:w-auto">
+          <div className="flex items-center justify-end gap-3 md:gap-6 w-full md:w-auto">
             <button
               onClick={prevTestimonial}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full border-[1.6px] border-brand-green-light flex items-center justify-center text-brand-green-light hover:bg-brand-green-light hover:text-white transition-all cursor-pointer"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border-[1.6px] border-brand-green-light flex items-center justify-center text-brand-green-light hover:bg-brand-green-light hover:text-white transition-all cursor-pointer"
             >
-              <ChevronLeft size={20} className="md:w-6 md:h-6" />
+              <ChevronLeft size={16} className="md:w-6 md:h-6" />
             </button>
             <button
               onClick={nextTestimonial}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full border-[1.6px] border-brand-green-light flex items-center justify-center text-brand-green-light hover:bg-brand-green-light hover:text-white transition-all cursor-pointer"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border-[1.6px] border-brand-green-light flex items-center justify-center text-brand-green-light hover:bg-brand-green-light hover:text-white transition-all cursor-pointer"
             >
-              <ChevronRight size={20} className="md:w-6 md:h-6" />
+              <ChevronRight size={16} className="md:w-6 md:h-6" />
             </button>
           </div>
         }

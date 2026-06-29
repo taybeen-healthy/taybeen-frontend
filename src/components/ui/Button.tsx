@@ -17,10 +17,10 @@ export const Button: React.FC<ButtonProps> = ({
     "inline-flex items-center justify-center font-poppins leading-none transition-all duration-200 rounded-lg";
 
   const variants = {
-    primary: "bg-brand-brown text-white hover:bg-opacity-90",
-    outline: "border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white",
+    primary: "bg-brand-brown text-btnText hover:bg-opacity-90",
+    outline: "border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-btnText",
     ghost: "text-brand-brown hover:bg-brand-brown hover:bg-opacity-5",
-    dark: "bg-brand-green text-white hover:bg-opacity-90",
+    dark: "bg-brand-green text-btnText hover:bg-opacity-90",
   };
 
   const sizes = {

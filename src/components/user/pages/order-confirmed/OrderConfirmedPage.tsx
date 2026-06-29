@@ -67,8 +67,8 @@ export const OrderConfirmedPage: React.FC = () => {
 
         <OrderConfirmedHeader />
 
-        <main className="relative z-20 px-6 md:px-12 lg:px-20 xl:px-24 pb-16 md:pb-0 -mt-4 sm:-mt-8">
-          <div className="max-w-[800px] mx-auto space-y-8">
+        <main className="relative z-20 px-6 md:px-12 lg:px-20 xl:px-24 pb-16 md:pb-0 -mt-4 sm:-mt-8 lg:mt-6">
+          <div className="max-w-[800px] mx-auto space-y-8 lg:space-y-12">
             <OrderSummaryCard
               orderId={orderInfo.id}
               placedOn={orderInfo.placedOn}

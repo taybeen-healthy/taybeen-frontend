@@ -50,7 +50,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
   return (
     <div className="flex flex-col gap-6 lg:gap-8 w-full text-left font-poppins">
       <div className="space-y-1.5">
-        <h1 className="font-serif font-bold text-[#5A3E2B] text-2xl sm:text-3xl md:text-4xl leading-tight">
+        <h1 className="font-serif font-bold text-typo1 text-2xl sm:text-3xl md:text-4xl leading-tight">
           Your affiliate dashboard
         </h1>
         <p className="text-brand-green/80 text-xs sm:text-sm md:text-base leading-relaxed">
@@ -76,13 +76,13 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
       >
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">
+            <p className="text-xs sm:text-sm font-medium text-typo2">
               Total sales via your code
             </p>
-            <p className="text-xl sm:text-2xl font-bold text-[#3A2418] font-poppins">
+            <p className="text-xl sm:text-2xl font-bold text-typo1 font-poppins">
               ₹{formatIndianCurrency(data.totalSales)}
             </p>
-            <p className="text-[10px] sm:text-xs text-[#7D6B5E]/70 font-medium">
+            <p className="text-[10px] sm:text-xs text-typo2/70 font-medium">
               Since {data.salesSince}
             </p>
           </div>
@@ -93,11 +93,11 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
         <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Orders placed</p>
-            <p className="text-xl sm:text-2xl font-bold text-[#3A2418] font-poppins">
+            <p className="text-xs sm:text-sm font-medium text-typo2">Orders placed</p>
+            <p className="text-xl sm:text-2xl font-bold text-typo1 font-poppins">
               {data.ordersPlaced}
             </p>
-            <p className="text-[10px] sm:text-xs text-[#7D6B5E]/70 font-medium">
+            <p className="text-[10px] sm:text-xs text-typo2/70 font-medium">
               {data.couponCode === "Not generated" || data.couponCode === "-"
                 ? "Across all active campaigns"
                 : `Using ${data.couponCode}`}
@@ -111,7 +111,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         {data.couponCode !== "Not generated" && data.couponCode !== "-" && (
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex items-center justify-between">
             <div className="space-y-2">
-              <p className="text-xs sm:text-sm font-medium text-[#7D6B5E]">Coupon status</p>
+              <p className="text-xs sm:text-sm font-medium text-typo2">Coupon status</p>
               <div className="pt-1">
                 <span className="px-3.5 py-1 text-xs font-bold text-green-700 bg-green-50/90 rounded-full border border-green-200">
                   {data.couponStatus}
@@ -126,7 +126,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
       </div>
 
       <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 md:p-8 shadow-sm">
-        <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl mb-4 pb-2 border-b border-[#C4A482]/15">
+        <h2 className="font-serif font-bold text-typo1 text-lg sm:text-xl mb-4 pb-2 border-b border-[#C4A482]/15">
           Your details
         </h2>
         <div className="space-y-1">
@@ -135,8 +135,8 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
               key={index}
               className="flex justify-between items-center py-3 sm:py-3.5 border-b border-[#C4A482]/10 last:border-b-0 last:pb-0"
             >
-              <span className="text-[#7D6B5E] text-xs sm:text-sm font-medium">{row.label}</span>
-              <span className="text-[#3A2418] text-xs sm:text-sm font-semibold text-right">
+              <span className="text-typo2 text-xs sm:text-sm font-medium">{row.label}</span>
+              <span className="text-typo1 text-xs sm:text-sm font-semibold text-right">
                 {row.value}
               </span>
             </div>
@@ -145,13 +145,13 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
       </div>
 
       <div className="space-y-4">
-        <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">Your coupon</h2>
+        <h2 className="font-serif font-bold text-typo1 text-lg sm:text-xl">Your coupon</h2>
         {data.couponCode === "Not generated" || data.couponCode === "-" ? (
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 text-center shadow-sm flex flex-col items-center justify-center gap-3">
             <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-500">
               <Clock size={24} className="stroke-[1.5]" />
             </div>
-            <p className="text-sm font-medium text-[#7D6B5E]">
+            <p className="text-sm font-medium text-typo2">
               Please wait till the admin generates a coupon for you.
             </p>
           </div>
@@ -166,7 +166,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
             <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex-1 w-full space-y-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-lg sm:text-xl font-bold text-[#3A2418] tracking-wide uppercase">
+                  <span className="text-lg sm:text-xl font-bold text-typo1 tracking-wide uppercase">
                     {data.couponCode}
                   </span>
                   <span className="px-2 py-0.5 text-[10px] font-bold text-green-700 bg-green-50 rounded-full border border-green-200">
@@ -174,20 +174,20 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#7D6B5E]/85">{data.couponDescription}</p>
+                <p className="text-xs sm:text-sm text-typo2/85">{data.couponDescription}</p>
 
                 <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
                   <input
                     type="text"
                     readOnly
                     value={cleanReferralLink}
-                    className="bg-[#FDFAF3] border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-xs text-[#3A2418] font-poppins focus:outline-none flex-1 truncate select-all"
+                    className="bg-[#FDFAF3] border border-[#C4A482]/35 rounded-xl px-4 py-2.5 text-xs text-typo1 font-poppins focus:outline-none flex-1 truncate select-all"
                   />
                   <div className="flex gap-2">
                     <Button
                       onClick={handleCopyLink}
                       variant="outline"
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-typo1 border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-typo1 rounded-xl"
                     >
                       <Copy size={14} />
                       <span>{copied ? "Copied!" : "Copy"}</span>
@@ -195,7 +195,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                     <Button
                       onClick={handleShareLink}
                       variant="outline"
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-[#5A3E2B] border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-[#5A3E2B] rounded-xl"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-typo1 border-[#C4A482]/40 bg-white hover:!bg-[#F6F1E9] hover:!text-typo1 rounded-xl"
                     >
                       <Share2 size={14} />
                       <span>Share</span>
@@ -219,7 +219,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
         {data.expiredCouponCode && (
           <div className="bg-white border border-[#C4A482]/25 rounded-2xl p-5 sm:p-6 shadow-sm mt-4">
-            <h3 className="text-xs sm:text-sm font-bold text-brand-brown/70 uppercase tracking-wider mb-3">
+            <h3 className="text-xs sm:text-sm font-bold text-typo2 uppercase tracking-wider mb-3">
               Last Expired Coupon History
             </h3>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -227,9 +227,9 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                 <p className="text-sm font-bold text-[#8D7F75] line-through uppercase tracking-wider">
                   {data.expiredCouponCode}
                 </p>
-                <p className="text-xs text-[#7D6B5E]">
+                <p className="text-xs text-typo2">
                   Discount Value:{" "}
-                  <span className="font-semibold text-brand-brown">
+                  <span className="font-semibold text-typo1">
                     {data.expiredCouponDiscount}% / ₹
                   </span>
                 </p>
@@ -239,7 +239,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                   <span className="px-2 py-0.5 text-[10px] font-bold text-red-700 bg-red-50 rounded-full border border-red-200">
                     Expired
                   </span>
-                  <p className="text-[11px] text-[#7D6B5E] mt-1.5">
+                  <p className="text-[11px] text-typo2 mt-1.5">
                     Expired on:{" "}
                     {new Date(data.expiredCouponExpiryDate).toLocaleDateString("en-IN", {
                       day: "numeric",
@@ -256,7 +256,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
 
       <div className="space-y-4">
         <div className="flex justify-between items-center pb-2 border-b border-[#C4A482]/15">
-          <h2 className="font-serif font-bold text-[#5A3E2B] text-lg sm:text-xl">
+          <h2 className="font-serif font-bold text-typo1 text-lg sm:text-xl">
             Orders placed using your code
           </h2>
           <span className="text-xs sm:text-sm text-brand-green font-medium font-poppins">
@@ -267,7 +267,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
         <div className="overflow-x-auto w-full border border-[#C4A482]/15 rounded-xl bg-white shadow-sm overflow-hidden">
           <table className="w-full min-w-[600px] border-collapse text-left text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#F6F1E9] text-brand-brown font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+              <tr className="bg-[#F6F1E9] text-typo1 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
                 <th className="py-3 px-4 rounded-l-lg border-b border-[#C4A482]/20">ORDER ID</th>
                 <th className="py-3 px-4 border-b border-[#C4A482]/20">DATE</th>
                 <th className="py-3 px-4 border-b border-[#C4A482]/20">ITEM</th>
@@ -277,20 +277,20 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#C4A482]/15 text-[#3A2418]">
+            <tbody className="divide-y divide-[#C4A482]/15 text-typo1">
               {data.orders.length > 0 ? (
                 data.orders.map((order, index) => (
                   <tr key={index} className="hover:bg-black/[0.01] transition-colors">
-                    <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
+                    <td className="py-4 px-4 font-semibold text-typo1 align-middle">
                       {order.orderId}
                     </td>
-                    <td className="py-4 px-4 font-medium text-[#7D6B5E] align-middle">
+                    <td className="py-4 px-4 font-medium text-typo2 align-middle">
                       {order.date}
                     </td>
-                    <td className="py-4 px-4 font-medium text-[#3A2418] align-middle">
+                    <td className="py-4 px-4 font-medium text-typo1 align-middle">
                       {order.item}
                     </td>
-                    <td className="py-4 px-4 font-semibold text-brand-brown align-middle">
+                    <td className="py-4 px-4 font-semibold text-typo1 align-middle">
                       ₹{formatIndianCurrency(order.amount)}
                     </td>
                     <td className="py-4 px-4 align-middle">
@@ -304,7 +304,7 @@ export const AffiliateDashboard: React.FC<AffiliateDashboardProps> = ({ data }) 
                 <tr>
                   <td
                     colSpan={5}
-                    className="py-8 px-4 text-center text-sm text-[#7D6B5E]/70 font-medium"
+                    className="py-8 px-4 text-center text-sm text-typo2/70 font-medium"
                   >
                     No orders have been placed using your coupon code yet.
                   </td>

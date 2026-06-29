@@ -45,25 +45,25 @@ export const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center space-x-12">
             <Link
               href="/"
-              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
             >
               Home
             </Link>
             <Link
               href="/our-story"
-              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
             >
               Our Story
             </Link>
             <Link
               href="/products"
-              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
             >
               Our Products
             </Link>
             <Link
               href="/contact"
-              className="font-poppins font-medium text-base xl:text-lg text-brand-brown/90 hover:text-brand-brown transition-colors duration-200"
+              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
             >
               Contact Us
             </Link>
@@ -72,14 +72,14 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4 md:space-x-8">
             <Link
               href="/my-account"
-              className="hidden lg:block text-brand-brown hover:text-brand-brown/70 transition-colors"
+              className="hidden lg:flex items-center justify-center text-brand-brown hover:text-brand-brown/70 transition-colors"
             >
               <CircleUserRound size={24} className="md:w-8 md:h-8" strokeWidth={2} />
             </Link>
-            <div className="hidden lg:block relative">
+            <div className="hidden lg:flex items-center justify-center relative">
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="text-brand-brown hover:text-brand-brown/70 transition-colors"
+                className="text-brand-brown hover:text-brand-brown/70 transition-colors flex items-center justify-center"
               >
                 <ShoppingCart size={24} className="md:w-8 md:h-8" strokeWidth={2} />
               </button>
@@ -125,10 +125,10 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
+                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-typo1 hover:text-typo1/80 transition-colors"
                 >
                   <span>Home</span>
-                  <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
+                  <ArrowRight size={20} className="text-typo1" strokeWidth={1.2} />
                 </Link>
 
                 <div className="border-t border-[#5A3E2B]/15" />
@@ -136,10 +136,10 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/our-story"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
+                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-typo1 hover:text-typo1/80 transition-colors"
                 >
                   <span>Our Story</span>
-                  <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
+                  <ArrowRight size={20} className="text-typo1" strokeWidth={1.2} />
                 </Link>
 
                 <div className="border-t border-[#5A3E2B]/15" />
@@ -147,10 +147,10 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/products"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
+                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-typo1 hover:text-typo1/80 transition-colors"
                 >
                   <span>Our Products</span>
-                  <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
+                  <ArrowRight size={20} className="text-typo1" strokeWidth={1.2} />
                 </Link>
 
                 <div className="border-t border-[#5A3E2B]/15" />
@@ -162,10 +162,10 @@ export const Navbar: React.FC = () => {
                     setIsMenuOpen(false);
                     setIsCartOpen(true);
                   }}
-                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-brand-brown hover:text-brand-brown/80 transition-colors"
+                  className="flex items-center justify-between py-5 font-poppins text-lg font-medium text-typo1 hover:text-typo1/80 transition-colors"
                 >
                   <span>Cart</span>
-                  <ArrowRight size={20} className="text-brand-brown" strokeWidth={1.2} />
+                  <ArrowRight size={20} className="text-typo1" strokeWidth={1.2} />
                 </a>
 
                 <div className="border-t border-[#5A3E2B]/15" />
@@ -175,7 +175,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/my-account"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center py-3.5 px-4 rounded-xl border border-[#5A3E2B]/40 font-poppins font-semibold text-sm text-[#5A3E2B] bg-[#FDFAF3] hover:bg-black/5 transition-colors text-center"
+                  className="flex items-center justify-center py-3.5 px-4 rounded-xl border border-typo1/40 font-poppins font-semibold text-sm text-typo1 bg-[#FDFAF3] hover:bg-black/5 transition-colors text-center"
                 >
                   My Account
                 </Link>
@@ -183,7 +183,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/contact"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#5A3E2B] font-poppins font-semibold text-sm text-[#FDFAF3] hover:bg-[#432E20] transition-colors text-center"
+                  className="flex items-center justify-center py-3.5 px-4 rounded-xl bg-typo1 font-poppins font-semibold text-sm text-btnText hover:bg-[#443200] transition-colors text-center"
                 >
                   Contact Us
                 </Link>

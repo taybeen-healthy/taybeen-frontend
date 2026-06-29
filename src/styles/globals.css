@@ -41,3 +41,24 @@
     background: #768c3a;
   }
 }
+
+@layer utilities {
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -1px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-out;
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
