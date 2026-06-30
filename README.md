@@ -1,8 +1,8 @@
 <!-- markdownlint-disable MD013 MD033 -->
 
-# Taybeen - Premium Dates & Gifts Platform
+# Taybeen - Premium Dates & Gifts Storefront
 
-E-commerce storefront and admin dashboard panel for high-quality organic dates, gift boxes, and festive hampers.
+Premium customer-facing e-commerce storefront for organic dates, gift boxes, and festive hampers.
 
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=white)](#tech-stack)
 [![Next.js](https://img.shields.io/badge/Next.js-16.x-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](#tech-stack)
@@ -11,90 +11,94 @@ E-commerce storefront and admin dashboard panel for high-quality organic dates, 
 [![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](#quick-start)
 [![pnpm](https://img.shields.io/badge/pnpm-Package_Manager-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](#tech-stack)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Functional%20MVP-blue?style=for-the-badge)](#roadmap)
+[![Status](https://img.shields.io/badge/Status-Storefront%20Active-success?style=for-the-badge)](#roadmap)
 
 ## Overview
 
-Taybeen is a premium e-commerce platform built for the **Smart Storefront & Admin Dashboard** assignment. Customers browse, filter, and purchase premium dates and corporate gift boxes through an interactive shop and checkout pipeline. Administrators log in to a secure dashboard to manage products catalog, audit customer orders, moderate reviews, configure hero banners, and approve affiliate partners with custom coupon generation/deletion workflows.
+Taybeen is a high-end customer-facing e-commerce platform designed for selling premium organic dates (such as Ajwa, Sukkari, and Mebroom), corporate gift boxes, and festive hampers.
 
-## Problem statement
+This repository containing the `taybeen-frontend` codebase represents **strictly the storefront application**. It includes full user navigation flows, category-based product filters, a responsive shopping cart, a regional checkout process with shipping fee calculators, a comprehensive customer profile dashboard (My Account), product reviews, and affiliate program registration.
 
-Standard template storefronts separate checkout and administrator management interfaces, making full-lifecycle validation complex. Taybeen models this entire workflow directly in a single repository: interactive cart context state management, checkout with regional shipping validations, role-based admin dashboard portals, responsive data grids, reviews audit controls, and real-time coupon code activation/expiration logic. The codebase is organized as a clean, standardized frontend application with highly reusable administrative layouts.
+Administrative operations (e.g., product updates, order audits, partner approvals) are segregated and run out of the sibling repository: [admin-taybeen](../admin-taybeen).
 
-## Live demo
+## Problem Statement
 
-| Item                    | Link                                                  |
-| ----------------------- | ----------------------------------------------------- |
-| Storefront (Hostinger)  | <https://taybeen.com>                                 |
-| Admin Panel (Hostinger) | <https://taybeen.com/admin>                           |
-| Source                  | <https://github.com/taybeen-healthy/taybeen-frontend> |
+Typical e-commerce platforms intertwine user-facing storefronts with back-office administration systems. This increases the customer-side JavaScript bundles and risks leaking access logic to standard client runtimes.
 
-### Try it — seeded credentials
+Taybeen separates these scopes by utilizing two distinct frontend repositories:
 
-Use any valid email structure and password to log in to the admin dashboard at <https://taybeen.com/admin/signin>:
+1. `taybeen-frontend`: An optimized, fast-loading, highly-styled customer storefront.
+2. `admin-taybeen`: A restricted, private portal for team coordination.
 
-| Role  | Email                 | Password    | What you'll see                                              |
-| ----- | --------------------- | ----------- | ------------------------------------------------------------ |
-| admin | `admin@taybeen.local` | `admin123!` | View statistics, order sheets, and manage affiliate partners |
+The storefront handles customer journeys securely via client cookies and localStorage caching, and links directly to the API endpoint for orders validation and payment orchestration.
 
----
+## Live Demo
 
-## Core features
+| Item                   | Link                                                  |
+| ---------------------- | ----------------------------------------------------- |
+| Storefront (Hostinger) | <https://taybeen.com>                                 |
+| Source                 | <https://github.com/taybeen-healthy/taybeen-frontend> |
 
-### Storefront Customer
+### Seeded Customer Access
 
-- Browse organic collections (Ajwa, Sukkari, Mebroom dates) by categories.
-- Cart drawer with real-time price updates and persistent local storage caching.
-- Checkout page verifying address lines, postal codes, and payment selection.
-- Info pages details (Our Story, FAQs, shipping and refund policies).
-- Responsive mobile drawer layout and touch-friendly buttons.
+To explore customer features (e.g. tracking orders, managing billing configurations, and viewing affiliate commission panels), sign in using the following credentials or create a new account in `/signup`:
 
-### Admin Dashboard
-
-- **KPI Metrics Overview**: Visualizes total order statistics, pending count, completed totals, and revenue aggregates.
-- **Product Management**: Create, edit, and audit dates products catalog with custom dropzone image uploads.
-- **Orders Administration**: Search, filter, and track orders; update shipment statuses (Pending → Processing → In Transit → Shipped → Completed → Cancelled).
-- **Affiliate & Coupon Generate**: View requests details, reject/approve affiliates, delete existing coupon codes to render them "Expired" (with line-through styling), and generate new codes conditionally.
-- **Customization Settings**: Live configurations of homepage hero sections, brand descriptions, and image slots.
+| View             | Path      | Email                    | Password       | What You Can Do                                                         |
+| ---------------- | --------- | ------------------------ | -------------- | ----------------------------------------------------------------------- |
+| Customer Profile | `/signin` | `customer@taybeen.local` | `customer123!` | View order progress charts, adjust addresses, check affiliate dashboard |
 
 ---
 
-## Tech stack
+## Core Features
 
-| Layer    | Tech                 | Version                               | Purpose                                     |
-| -------- | -------------------- | ------------------------------------- | ------------------------------------------- |
-| Frontend | React                | 19.2.x                                | View rendering and state component model    |
-| Frontend | Next.js (App Router) | 16.2.x                                | Production routing and SSR layout engine    |
-| Frontend | TypeScript           | 5.4.x                                 | Strict code type safety                     |
-| Frontend | Tailwind CSS         | 3.4.x                                 | Responsive class styles utility             |
-| Frontend | Lucide React         | 0.378.0                               | Interface layout icons                      |
-| Tooling  | Prettier             | 3.2.x                                 | Formatting rules                            |
-| Tooling  | ESLint               | 8.57.x                                | Code syntax checker                         |
-| Tooling  | pnpm                 | 10.30.0 (pinned via `packageManager`) | Package manager – single workspace lockfile |
+- **Interactive Product Catalog**: Browse collections (Ajwa, Sukkari, Mebroom, hampers) with dynamic clientside search, price sliders, and weight variation options.
+- **Cart Management Drawer**: Add/remove products with instant subtotal and tax recalculations, persisting data in clientside cookies and localStorage caches.
+- **Secure Regional Checkout**: Collects shipping and billing lines. Dynamically validates address formats, email details, and phone structures.
+- **Razorpay Payment Integration**: Integrated with the Razorpay payment gateway to authorize credit/debit cards, UPI payments, net banking, or choose Cash on Delivery.
+- **Customer My Account Dashboard**: Includes order history logs, dynamic shipment step visualizers (Order Received → Processing → On the Way → Delivered), shipping address cards, and a detailed affiliate commission dashboard.
+- **Product Reviews & Rating**: Submit ratings and testimonials for dates, gift boxes, and hampers.
+- **Affiliate Program Registration**: Application form for partners to register. Once approved, the dashboard displays active discount codes (e.g., `MARYAM10`) and referral tracking logs.
+- **Brand Info & Story Pages**: Structured informational routes describing sourcing practices (Our Story, FAQs, Terms, and Shipping/Refund Policies).
 
 ---
 
-## Architecture at a glance
+## Tech Stack
+
+| Layer       | Technology                 | Version         | Purpose                                       |
+| ----------- | -------------------------- | --------------- | --------------------------------------------- |
+| Frontend    | React                      | 19.2.x          | Component rendering and runtime engine        |
+| Frontend    | Next.js (App Router)       | 16.2.x          | Server-Side Rendering (SSR) and routing       |
+| Language    | TypeScript                 | 5.4.x           | Static typing and interfaces safety           |
+| Styling     | Tailwind CSS               | 3.4.x           | Responsive design and aesthetic system        |
+| Iconography | Lucide React & React Icons | 0.378.x / 5.6.x | Interface indicators and standard vectors     |
+| Client      | Axios                      | 1.17.x          | HTTP Client with automatic auth token headers |
+| Tooling     | Prettier & ESLint          | 3.2.x / 9.19.x  | Consistency linting and format constraints    |
+| Package Mgr | pnpm                       | 10.30.0         | High-performance lockfile manager             |
+
+---
+
+## Architecture at a Glance
+
+The storefront acts as a customer interface, relying on React Context for temporary session states and communicating with a decoupled backend API for checkout orchestration:
 
 ```mermaid
 flowchart TD
-  user((Customer / Admin))
-  user -->|Renders store & checkout| storefront[Storefront UI<br/>Next.js App Router]
-  user -->|Renders admin tools| admin[Admin Panel<br/>Standard shared widgets]
-  storefront -->|Stores items| localstorage[(Local Storage)]
-  admin -->|Retrieves list data| data[(Local Mock Databases)]
+  user((Store Customer)) -->|Browses & Buys| storefront[Storefront UI<br/>Next.js App Router]
+  storefront -->|Saves cart & tokens| clientstorage[(Cookies & LocalStorage)]
+  storefront -->|Payment processing| razorpay[Razorpay Gateway SDK]
+  storefront -->|Fetches products & processes order| backend[Taybeen Backend API]
 ```
 
-For more in-depth diagrams on request pipelines, ERDs, and the sequence flows, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For sequence details on payment signatures validation, routing structures, and data models, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
-## Quick start
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 10+ (`corepack enable && corepack prepare pnpm@latest --activate`)
+- **Node.js**: Version 20.x or higher
+- **pnpm**: Version 10+ (`corepack enable && corepack prepare pnpm@latest --activate`)
 
 ### Terminal Commands
 
@@ -110,161 +114,128 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) for the storefront or [http://localhost:3000/admin](http://localhost:3000/admin) for the admin portal.
+The server starts locally at [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Environment variables
+## Environment Variables
 
-Configure your local environment inside `.env.local` based on [.env.example](.env.example):
+Configure your local environment inside `.env.local` using the keys below:
 
-| Variable              | Required | Default                 | Purpose                                |
-| --------------------- | -------- | ----------------------- | -------------------------------------- |
-| `NEXT_PUBLIC_APP_URL` | Yes      | `http://localhost:3000` | Storefront application root URL        |
-| `NEXT_PUBLIC_API_URL` | No       | `http://localhost:5000` | Future backend connection API endpoint |
+| Variable              | Required | Default                        | Purpose                                        |
+| --------------------- | -------- | ------------------------------ | ---------------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | Yes      | `http://localhost:3000`        | Local or production domain storefront root URL |
+| `NEXT_PUBLIC_API_URL` | Yes      | `http://localhost:5000/api/v1` | Sibling Backend API server endpoint            |
 
 ---
 
-## Available scripts
+## Available Scripts
 
 Execute these scripts from the repository root:
 
-| Script         | Command             | Purpose                                          |
-| -------------- | ------------------- | ------------------------------------------------ |
-| `dev`          | `pnpm dev`          | Start dev server with fast refresh               |
-| `build`        | `pnpm build`        | Generate optimized production static files       |
-| `start`        | `pnpm start`        | Serve built assets locally                       |
-| `lint`         | `pnpm lint`         | Execute ESLint validation check                  |
-| `lint:fix`     | `pnpm lint:fix`     | Automatically resolve fixable linting issues     |
-| `format`       | `pnpm format`       | Format files using Prettier                      |
-| `format:check` | `pnpm format:check` | Validate formatting consistency                  |
-| `typecheck`    | `pnpm typecheck`    | Execute TypeScript compiler type verification    |
-| `check`        | `pnpm check`        | Run linting, format checks, typecheck, and tests |
+| Script         | Command             | Purpose                                                 |
+| -------------- | ------------------- | ------------------------------------------------------- |
+| `dev`          | `pnpm dev`          | Start development server with Turbopack fast refresh    |
+| `build`        | `pnpm build`        | Compile optimized production static assets              |
+| `start`        | `pnpm start`        | Serve production build files locally                    |
+| `lint`         | `pnpm lint`         | Execute static lint rules check                         |
+| `lint:fix`     | `pnpm lint:fix`     | Resolve all fixable syntax and styling lints            |
+| `format`       | `pnpm format`       | Auto-format codebase using Prettier                     |
+| `format:check` | `pnpm format:check` | Validate formatting compliance                          |
+| `typecheck`    | `pnpm typecheck`    | Execute TypeScript compiler verification                |
+| `check`        | `pnpm check`        | Pipeline checklist validation (lint, formatting, types) |
 
 ---
 
-## Quality tooling
+## Quality Tooling
 
-We lock code styles via automated pre-checks:
+We enforce codebase health checks via automated git hooks:
 
-| Tool              | Purpose                                                                  |
-| ----------------- | ------------------------------------------------------------------------ |
-| ESLint            | Checks react-hooks, accessibility parameters, and TypeScript rules       |
-| Prettier          | Unifies brace rules, spacing, and styling in all markdown, css, and json |
-| Commitlint        | Enforces Conventional Commits rules on branch messages                   |
-| lint-staged       | Restricts formatting checks only to modified staged files                |
-| GitHub Actions CI | Build, format, lint, and type check execution on pull requests           |
+- **ESLint**: Verifies react hooks rules, standard variables usage, and TS patterns.
+- **Prettier**: Validates indentation, semicolon preferences, and brace styles.
+- **Commitlint**: Restricts commits to Conventional Commits syntax.
+- **Lint-staged**: Runs lints and formatting only on staged files before commits.
+- **GitHub Actions CI**: Formats, lints, and compiles pages on every incoming Pull Request.
 
 ---
 
-## Project structure
+## Project Structure
 
 ```text
 taybeen-frontend/
-├─ .github/
-│  └─ workflows/ci.yml    GitHub Actions verification setup
-├─ docs/
-│  ├─ API.md              Storefront and admin routes index
-│  ├─ SETUP.md            Clerk & Stripe integration details
-│  └─ ADRs/               ADR architectural decisions
-├─ public/                Image assets & fonts
-├─ src/
-│  ├─ app/                App Router page views
-│  ├─ components/         UI Components library
-│  │  ├─ admin/shared     Reusable admin card widgets, badges, loaders
-│  │  ├─ layout/          Navbar, Footer structural zones
-│  │  └─ ui/              Storefront core primitives
-│  ├─ context/            CartContext state provider
-│  ├─ data/               Mock databases for orders, partners, and reviews
-│  ├─ lib/                Helper utilities
-│  ├─ styles/             Tailwind stylesheet entries
-│  ├─ types/              TypeScript type definitions
-│  └─ utils/              Form inputs validations
-├─ .editorconfig          Code spacing configurations
-├─ .gitattributes         Git file property controllers
-├─ .gitignore             File checkout ignore rules
-├─ .nvmrc                 Node runtime engine pinning
-├─ .prettierrc.json       Prettier formatting declarations
-├─ commitlint.config.cjs  Conventional commits specification
-└─ lint-staged.config.cjs Staged files checking rules
+├── .github/
+│   └── workflows/ci.yml       # CI build checklist on PR pushes
+├── docs/
+│   ├── API.md                 # Storefront pages and API reference mapping
+│   ├── SETUP.md               # Environment and Razorpay config instructions
+│   └── ADRs/
+│       └── 0001-frontend-only-architecture.md # Standalone storefront ADR decision
+├── public/                    # Image assets, SVG collections, and custom typography fonts
+└── src/
+    ├── app/                   # App Router pages and structure layouts
+    │   └── (store)/           # Storefront routes group (checkout, catalog, pages)
+    ├── components/            # Reusable storefront components
+    │   ├── layout/            # Navbar, footer, and float contact elements
+    │   ├── ui/                # Core primitives (buttons, inputs, sliders, overlays)
+    │   └── user/              # Specific user components (cart drawer, account view)
+    ├── context/               # React Context Providers (Cart, Toast, Customization)
+    ├── data/                  # Mock storefront content (categories, FAQs, story)
+    ├── lib/                   # API client configuration and tailwind merge helpers
+    ├── styles/                # CSS configuration files
+    └── types/                 # Type declaration files for user structures
 ```
 
 ---
 
-## API reference
+## Route Index Summary
 
-Page Routing reference maps:
+| Path             | Access   | Page Component / Purpose                                   |
+| ---------------- | -------- | ---------------------------------------------------------- |
+| `/`              | Public   | Store homepage, hero banners, special offers, gifting      |
+| `/products`      | Public   | Full products catalog grid, filtering, weight toggles      |
+| `/checkout`      | Public   | Shipping details entry, billing details, Razorpay payments |
+| `/my-account`    | Customer | Order logs, shipment progression tracker, affiliate panel  |
+| `/partnerships`  | Public   | Affiliate request registration application form            |
+| `/signin`        | Public   | Customer account credential authentication                 |
+| `/signup`        | Public   | New user registration                                      |
+| `/auth/callback` | Public   | Authentication redirect token-saving receiver              |
 
-| Path              | Protected | Purpose                                              |
-| ----------------- | --------- | ---------------------------------------------------- |
-| `/`               | No        | Homepage storefront, features, collection highlights |
-| `/products`       | No        | Product catalogue filter view                        |
-| `/checkout`       | No        | Customer shopping cart checkout address entry        |
-| `/admin/signin`   | No        | Admin authentication entry login form                |
-| `/admin`          | Yes       | Admin dashboard overview page showing KPI metrics    |
-| `/admin/orders`   | Yes       | Orders grid list and status modifiers                |
-| `/admin/partners` | Yes       | Affiliate partner validation and coupon generation   |
-| `/admin/reviews`  | Yes       | Moderation list panel for product customer reviews   |
-
-Detailed route directories: [docs/API.md](docs/API.md).
+For detailed parameters and request payloads, see [docs/API.md](docs/API.md).
 
 ---
 
 ## Deployment
 
-The application is deployed on **Hostinger** with automatic deployment hooks wired to git branch check-ins.
+The application is hosted on **Hostinger** and automatically deploys via Git check-in hooks.
 
-### Environment checklist
-
-1. Ensure `NEXT_PUBLIC_APP_URL` is set to the live domain URL.
-2. Verify all API references and Clerk/Stripe tokens are configured inside Hostinger Dashboard Environment settings.
+- Ensure `NEXT_PUBLIC_API_URL` is set to the production API server.
+- Ensure CORS configurations on the backend allow request pipelines originating from the storefront domain.
 
 ---
 
-## Scalability considerations
+## Scalability & Performance
 
-- **Layout Extraction**: The admin dashboard views utilize highly optimized layout shells ([AdminTableShell](file:///c:/Users/Admin/Desktop/Taybeen/taybeen-frontend/src/components/admin/shared/AdminTableShell.tsx), [AdminCard](file:///c:/Users/Admin/Desktop/Taybeen/taybeen-frontend/src/components/admin/shared/AdminCard.tsx)), reducing duplicated CSS bundles.
-- **Image Optimization**: Fully supports Next.js image loaders for automatic resizing, lazy loading, and modern format conversions.
-- **TypeScript Security**: Strict interfaces lock schema objects, reducing frontend run exceptions.
+- **Optimized Image Processing**: Employs Next.js dynamic image resizing and lazy loading to keep page speed optimal.
+- **Segregated Bundles**: Segmented components reduce JavaScript sent to clients.
+- **Axios Interceptor**: Axios client automatically captures expired sessions, requests token refresh sequences, and retries failed calls.
 
 ---
 
 ## Roadmap
 
-- **Mock database replacement**: Migrate `/src/data/` collections to real database tables via Prisma/Postgres backend APIs.
-- **Stripe Payment Gateway**: Connect checkout pipelines directly to payment gateway verification hooks.
-- **State stores transition**: Migrate local React Context states to a centralized Zustand store.
-- **Unit Testing Suite**: Add full automated unit tests using Vitest and React Testing Library.
-
----
-
-## Help wanted
-
-- We welcome first-time setup reviews! Check if [docs/SETUP.md](docs/SETUP.md) provides enough information to install and compile without errors.
+- **State Store Migration**: Move local React Context wrappers to Zustand for lighter component bindings.
+- **Offline Cart Capabilities**: Cache selected items locally so users retain their selections on network drops.
+- **Localization support**: Add multi-language translation bindings (Arabic/English) for storefront assets.
+- **Vitest Suite**: Add full automated client components test cases.
 
 ---
 
 ## Contributing
 
-Review [CONTRIBUTING.md](CONTRIBUTING.md) for Conventional Commits standard rules and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standard behavior guidelines.
-
----
-
-## Security
-
-Report vulnerabilities privately per [SECURITY.md](SECURITY.md). Admin UI elements must use portal-safe `z-index` triggers (`z-[100]` for modal dialogues and overlay backdrops) to enforce access barriers.
+Review [CONTRIBUTING.md](CONTRIBUTING.md) for Conventional Commits standards and branch naming structures.
 
 ---
 
 ## License
 
 Released under the [MIT License](LICENSE).
-
----
-
-## Acknowledgements / contact
-
-Built by **Taybeen Team** as an interactive dates and hampers storefront system.
-
-- GitHub: <https://github.com/taybeen-healthy/taybeen-frontend>
-- Website: <https://taybeen.com>

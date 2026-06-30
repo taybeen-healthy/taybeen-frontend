@@ -1,109 +1,118 @@
 # AGENTS.md - Developer & Agent Onboarding Guide
 
-This document provides a complete, end-to-end guide to the Taybeen Frontend codebase for AI coding agents and human developers.
+This document provides a complete onboarding reference for AI coding agents and developers working on the Taybeen Frontend Storefront repository.
 
 ---
 
 ## 1. Project Map & Folder Directory
 
-The codebase is organized as a standalone Next.js App Router application:
+The storefront is built as a decoupled, standalone Next.js App Router application:
 
 ```text
 taybeen-frontend/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml            # CI Pipeline configuration
+│       └── ci.yml            # CI Pipeline verification workflows
 ├── docs/
-│   ├── API.md                # Page routes and schemas reference
-│   ├── SETUP.md              # Mock setup and dependencies guide
+│   ├── API.md                # Page routes index and API schema reference
+│   ├── SETUP.md              # Env files and Razorpay integration guide
 │   └── ADRs/
-│       └── 0001-frontend-only-architecture.md # Standalone frontend architecture decision
+│       └── 0001-frontend-only-architecture.md # Standalone storefront ADR decision
 ├── public/
-│   ├── Playfair_Display/     # Typography font assets
-│   └── ...                   # Static storefront image assets
+│   ├── Playfair_Display/     # Brand serif font assets
+│   └── ...                   # Product images, graphics, and icon assets
 └── src/
-    ├── app/                  # Next.js Page routes
-    │   ├── admin/            # Admin Panel
-    │   │   ├── signin/       # Admin Sign In Form
-    │   │   └── (dashboard)/  # Admin Dashboard Panel (customers, orders, customization, etc.)
-    │   ├── (store)/          # E-commerce Storefront (checkout, cart, products catalog)
-    │   ├── layout.tsx        # Root HTML shell and layouts
+    ├── app/                  # Next.js page layout configurations
+    │   ├── (store)/          # Public and customer routes group
+    │   │   ├── auth/callback # Token receiver endpoint
+    │   │   ├── checkout/     # Cart validation and Razorpay entry
+    │   │   ├── my-account/   # Order status tracking and affiliate stats
+    │   │   ├── partnerships/ # Affiliate signup form
+    │   │   ├── products/     # Product search and filters
+    │   │   └── ...           # Informational, login, and policy pages
+    │   ├── layout.tsx        # Root HTML layout structure
     │   └── not-found.tsx     # Custom 404 handler page
-    ├── components/           # Reusable React components
-    │   ├── admin/            # Administrative UI components
-    │   │   └── shared/       # Standardized Admin UI widgets (headers, stat cards, shells)
-    │   ├── layout/           # App-wide structural layout (Navbar, Footer, WhatsApp float)
-    │   └── ui/               # Global primitive widgets (Button, Input, Select, Dropdown)
-    ├── context/              # Context State Providers (CartContext)
-    ├── data/                 # Static data configurations and local mock databases
-    ├── lib/                  # Library utilities (cn Tailwind class merger)
-    ├── styles/               # Global stylesheet entry points (globals.css)
-    ├── types/                # Strict TypeScript declaration interfaces
-    └── utils/                # Global validation and geo helper utilities
+    ├── components/           # Reusable UI component modules
+    │   ├── layout/           # App navbar, footer, and whatsapp float widget
+    │   ├── ui/               # Base design primitives (button, input, overlay)
+    │   └── user/             # Storefront parts (cart drawer, checkout review)
+    ├── context/              # Context Providers (Cart, Toast, Customization)
+    ├── data/                 # Static content JSONs (faqs, categories, home)
+    ├── lib/                  # Library wrappers (apiClient, tailwind utils)
+    ├── styles/               # Main CSS styles configuration (globals.css)
+    ├── types/                # Strict TypeScript declaration types
+    └── utils/                # Clientside verification helpers (validators, cookies)
 ```
 
 ---
 
 ## 2. Core Build & Development Commands
 
-Always run these commands from the root directory `taybeen-frontend/`:
+Execute all developer scripts from the repository root directory `taybeen-frontend/`:
 
-- **Start local server**: `pnpm dev`
-- **Create production build**: `pnpm build`
-- **Run type checker**: `pnpm typecheck`
-- **Execute ESLint check**: `pnpm lint`
-- **Prettier formatting check**: `pnpm format:check`
-- **Run Prettier formatter**: `pnpm format`
-- **Run full pipeline suite**: `pnpm check` (Executes linting, format check, typechecking, and mock tests)
+- **Start Development Server**: `pnpm dev` (Runs locally at `http://localhost:3000`)
+- **Build Production Assets**: `pnpm build` (Compiles static pages and checks types)
+- **Start Local Server**: `pnpm start` (Runs the built static version locally)
+- **TypeScript Verifier**: `pnpm typecheck` (Checks typings compilation)
+- **ESLint Checker**: `pnpm lint` (Validates linting rules compliance)
+- **Prettier Formatter**: `pnpm format` (Applies formatting changes code-wide)
+- **Formatting Auditor**: `pnpm format:check` (Checks if code requires formatting)
+- **Integrity Pipeline check**: `pnpm check` (Executes lint, format check, and typecheck in sequence)
 
 ---
 
 ## 3. Important Development Hot Paths
 
-### A. E-commerce Checkout Flow
+### A. Shopping Cart Context & Drawer
 
-- Path: `/src/app/(store)/checkout/page.tsx`
-- State: Uses `CartContext` (`/src/context/CartContext.tsx`) for reading items, pricing calculations, and totals.
-- Forms: Managed using React Hook Form with validation schemas.
+- **Context Provider**: `src/context/CartContext.tsx`
+  - Handles item additions, subtotals, GST, shipping estimations, and local storage caching.
+- **Drawer Trigger Component**: `src/components/user/cart/CartDrawer.tsx`
+  - Client side slider displaying quantities, coupons, checkout CTA buttons.
 
-### B. Admin Dashboard Statistics & Layouts
+### B. Checkout Page & Razorpay Integration
 
-- Path: `/src/app/admin/(dashboard)/page.tsx`
-- Shared Components: Uses [shared components](file:///c:/Users/Admin/Desktop/Taybeen/taybeen-frontend/src/components/admin/shared/) to display metrics:
-  - `AdminPageHeader.tsx`
-  - `AdminCard.tsx`
-  - `AdminListStatCard.tsx`
-  - `AdminDashboardStatCard.tsx`
-  - `AdminTableShell.tsx`
-  - `AdminPagination.tsx`
-  - `AdminStatusBadge.tsx`
-  - `AdminSpinner.tsx`
+- **Page Component**: `src/components/user/pages/checkout/CheckoutPage.tsx`
+  - Validates delivery inputs and launches the Razorpay window callback.
+- **SDK Loader**: `src/lib/utils/loadScript.ts`
+  - Asynchronously pulls `https://checkout.razorpay.com/v1/checkout.js` into the DOM.
+- **Payment Verification**: Triggers backend endpoint POST `/orders/validate-payment` with Razorpay signature details.
 
-### C. Admin Partner Coupon Management
+### C. Authentication Callback & API client
 
-- Path: `/src/components/admin/partners/PartnersList.tsx` & `/src/components/admin/partners/AffiliateDetailsModal.tsx`
-- State transitions: Clicking "Delete coupon" changes status to "Expired" (with timestamp & line-through). Regeneration forms collect coupon code, discount percentage, and generate an "Active" coupon.
+- **Axios HTTP Setup**: `src/lib/api/apiClient.ts`
+  - Automatically appends JWT bearer headers and intercepts expired `401` tokens to fetch new sessions.
+- **Auth Callback Page**: `src/app/(store)/auth/callback/page.tsx`
+  - Processes token parameters (`accessToken`, `refreshToken`) on redirect, saving them to secure cookies.
+
+### D. User Account & Order Progression
+
+- **Dashboard Component**: `src/components/user/my-account/OrderDetailView.tsx`
+  - Renders shipment step milestones dynamically using the active order status.
+- **Affiliate View**: `src/components/user/my-account/AffiliateDashboard.tsx`
+  - Visualizes sales stats, active coupons, and approved registration details.
 
 ---
 
 ## 4. Key Coding Conventions
 
-- **Conditional Classes**: Always merge tailwind classes using the `cn()` utility:
+- **Conditional Class Names**: Merge responsive CSS attributes safely with `cn()`:
 
   ```typescript
   import { cn } from "@/lib/utils";
 
-  className={cn("bg-white border border-[#C4A482]/20 rounded-2xl p-6", className)}
+  className={cn("bg-brand-bg border border-brand-primary/20 p-4", className)}
   ```
 
-- **Absolute Aliased Imports**: Never use relative parent chains (`../../..`). Use the `@/` prefix (e.g. `import { Button } from "@/components/ui/Button"`).
-- **Typing rules**: Set strict types for all component props. Avoid utilizing `any` or `@ts-ignore` bypass directives.
-- **Component exports**: Ensure files utilize named exports for React components.
+- **Absolute Aliased Imports**: Never use nested parent folder chains (`../../../`). Always use the path alias `@/` mapped to the `src` directory.
+- **Strict Typing Conventions**: Define type interfaces for React component props. Avoid standard fallback variables like `any` or `@ts-ignore` bypass controls.
+- **Named Component Exports**: Keep components structured as named exports inside codebase files.
 
 ---
 
 ## 5. Antipatterns & Guardrails to Enforce
 
-1. **Do Not Touch Storefront base UI**: Base UI elements in `src/components/ui/` (like `Button.tsx`, `Input.tsx`, `Select.tsx`) are shared with the public storefront. Do not change their padding/margins/colors directly to fix admin alignment bugs, as it will break the public store page visuals. Instead, pass custom classes via `className` prop to override them locally.
-2. **Do Not Append Dynamic Tailwind Names**: Do not concatenate class strings (e.g. `"bg-" + color`). Tailwind's compiler will prune them. Write complete class name maps instead.
-3. **Avoid Circular Imports**: Do not reference nested folder files inside barrel `index.ts` files to prevent circular reference compilation exceptions.
+1. **Protect UI Primitives**: Base elements under `src/components/ui/` (e.g. `Button.tsx`, `Input.tsx`, `Slider.tsx`) are globally shared across all storefront page types. Avoid modifying their core spacing, layout rules, or base color parameters. Overwrite them locally by passing props via `className`.
+2. **Prevent Dynamic Tailwind Generation**: Do not programmatically construct tailwind classes (e.g., `className={"p-" + size}`). Write the full, explicit class name tags so the tailwind compiler handles asset trees correctly.
+3. **Avoid Circular Imports**: Do not reference nested folder components inside root barrel index handlers to prevent dependency exceptions.
+4. **Never Commit Secrets**: Do not write API credentials or local keys directly in code blocks. Keep parameters configured in `.env.local` templates.

@@ -1,68 +1,77 @@
 <!-- markdownlint-disable MD013 MD033 -->
 
-# Developer Setup Guide
+# Developer Setup Guide - Taybeen Storefront
 
-This guide describes how to onboard and configure the local development environment for the Taybeen Frontend.
+This guide describes how to onboard, configure, and launch the Taybeen Storefront development environment.
 
 ---
 
 ## 1. Prerequisites
 
-Before setting up, ensure you have:
+Before starting the setup, ensure that your system has the following dependencies configured globally:
 
 - **Node.js**: Version 20.x (LTS) or higher.
-- **pnpm**: Version 9.x or higher.
-- **Git**: Installed and configured.
+- **pnpm**: Version 10.x or higher (`corepack enable && corepack prepare pnpm@latest --activate`).
+- **Git**: Version control CLI tool.
 
 ---
 
-## 2. Setting Up Third-Party Mock Services
+## 2. Environment Configurations
 
-Since this is currently a standalone frontend client, external systems are mocked in `/src/data/`. Once production API contracts are live, the following steps are required:
+The storefront relies on environment variables inside `.env.local` to resolve endpoints. Create a `.env.local` file by copying the base template:
 
-### Clerk Authentication (Future Integration)
+```bash
+cp .env.example .env.local
+```
 
-Configure Clerk authentication for secure customer login blocks:
+Modify the environment keys as follows:
 
-1. Navigate to the Clerk Dashboard: `https://dashboard.clerk.com`.
-2. Create an application and grab your API Publishable and Secret Keys.
-3. Add Clerk environment variables to your `.env.local`:
-   ```bash
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-   CLERK_SECRET_KEY=sk_test_...
-   ```
-   <!-- TODO: Clerk integration steps screenshot -->
+| Environment Key       | Category     | Default Value                  | Purpose                                 |
+| --------------------- | ------------ | ------------------------------ | --------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | Application  | `http://localhost:3000`        | Address of the storefront client server |
+| `NEXT_PUBLIC_API_URL` | API Endpoint | `http://localhost:5000/api/v1` | Sibling backend REST server address     |
 
-### Stripe Payments (Future Integration)
-
-To enable credit card, UPI, and COD flow confirmation online:
-
-1. Navigate to Stripe Developer dashboard: `https://dashboard.stripe.com/test/apikeys`.
-2. Grab the Publishable and Secret Keys.
-3. Configure your webhook endpoints to receive order events:
-   ```bash
-   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-   STRIPE_SECRET_KEY=sk_test_...
-   STRIPE_WEBHOOK_SECRET=whsec_...
-   ```
-   <!-- TODO: Stripe webhooks configuration screenshot -->
+> [!NOTE]
+> Make sure the backend server (typically running in the sibling folder [taybeen-backend-module1](../taybeen-backend-module1)) is active on the configured `NEXT_PUBLIC_API_URL` port to process authentication requests and orders checkout.
 
 ---
 
-## 3. Launching Locally
+## 3. Razorpay Payment Gateway Integration
 
-1. **Clone and Install**:
+The storefront uses Razorpay to secure credit card, debit card, and UPI operations.
+
+- **SDK Loading**: The client asynchronously requests the Razorpay script from `https://checkout.razorpay.com/v1/checkout.js` only when a customer reaches the checkout verification state or triggers a payment retry inside their account orders panel.
+- **Key Resolution**: To avoid exposing key parameters inside clientside environment bundles, the public key ID (`keyId`) is fetched dynamically from the backend server within the `POST /orders` response.
+- **Testing**: In development, Razorpay transactions use test mode coordinates. Real debit transactions are disabled, and payment success tokens can be simulated inside the Razorpay modal.
+
+---
+
+## 4. Local Installation and Server Launch
+
+1. **Clone and Navigate**:
+
    ```bash
    git clone https://github.com/taybeen-healthy/taybeen-frontend.git
    cd taybeen-frontend
+   ```
+
+2. **Install Dependencies**:
+
+   ```bash
    pnpm install
    ```
-2. **Launch Dev Mode**:
+
+3. **Start Local Development Server**:
+
    ```bash
    pnpm dev
    ```
-3. **Verify Everything Builds & Compiles**:
+
+   Open your browser to [http://localhost:3000](http://localhost:3000) to view the storefront landing page.
+
+4. **Verify Build Integrity**:
+   Run the static analysis check list before committing files:
    ```bash
    pnpm check
    ```
-   _(Executes ESLint checking, Prettier style audits, TypeScript compiler type-check, and mock tests)._
+   _(Executes ESLint validation checks, Prettier styling verification, and TypeScript compiler tests)._
