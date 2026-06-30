@@ -7,10 +7,12 @@ import { CircleUserRound, ShoppingCart, Menu, X, ArrowRight } from "lucide-react
 import { motion, AnimatePresence } from "framer-motion";
 import { CartDrawer } from "@/components/user/cart/CartDrawer";
 import { useCart } from "@/context/CartContext";
+import { usePathname } from "next/navigation";
 
 export const Navbar: React.FC = () => {
   const { isCartOpen, setIsCartOpen, cartCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isMenuOpen || isCartOpen) {
@@ -22,6 +24,13 @@ export const Navbar: React.FC = () => {
       document.body.style.overflow = "unset";
     };
   }, [isMenuOpen, isCartOpen]);
+
+  const getLinkClass = (path: string) => {
+    const active = path === "/" ? pathname === "/" : pathname.startsWith(path);
+    return `font-poppins font-normal text-[18px] transition-all duration-200 link-underline ${
+      active ? "text-[#5A4200] font-semibold" : "text-[#5A4200]/70 hover:text-[#5A4200]"
+    }`;
+  };
 
   return (
     <>
@@ -43,28 +52,16 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-12">
-            <Link
-              href="/"
-              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
-            >
+            <Link href="/" className={getLinkClass("/")}>
               Home
             </Link>
-            <Link
-              href="/our-story"
-              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
-            >
+            <Link href="/our-story" className={getLinkClass("/our-story")}>
               Our Story
             </Link>
-            <Link
-              href="/products"
-              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
-            >
+            <Link href="/products" className={getLinkClass("/products")}>
               Our Products
             </Link>
-            <Link
-              href="/contact"
-              className="font-poppins font-medium text-[18px] text-[#5A4200] link-underline transition-all duration-200"
-            >
+            <Link href="/contact" className={getLinkClass("/contact")}>
               Contact Us
             </Link>
           </div>

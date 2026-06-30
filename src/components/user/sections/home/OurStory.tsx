@@ -28,13 +28,13 @@ export const OurStory: React.FC = () => {
           </h2>
         </div>
 
-        <div className="w-full lg:flex-1 lg:max-w-[45%] relative flex justify-center lg:justify-start">
-          <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-[380px] xl:max-w-[420px] aspect-[4/5] sm:aspect-[10/11] lg:aspect-square rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg relative">
+        <div className="w-full lg:flex-1 lg:max-w-[50%] relative flex justify-center lg:justify-start">
+          <div className="w-full max-w-[400px] sm:max-w-[450px] lg:max-w-[480px] xl:max-w-[540px] aspect-[4/5] sm:aspect-[10/11] lg:aspect-square rounded-2xl lg:rounded-3xl overflow-hidden bg-gray-200 shadow-lg relative">
             <Image
               src={story.imageUrl}
               alt={story.title}
               fill
-              sizes="(max-width: 768px) 400px, (max-width: 1024px) 450px, 50vw"
+              sizes="(max-width: 768px) 400px, (max-width: 1024px) 480px, 50vw"
               className="object-cover"
             />
           </div>

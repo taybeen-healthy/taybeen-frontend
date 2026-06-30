@@ -13,6 +13,7 @@ function AuthCallbackHandler() {
   useEffect(() => {
     const accessToken = searchParams.get("accessToken");
     const refreshToken = searchParams.get("refreshToken");
+    const redirect = searchParams.get("redirect") || "/my-account";
     const name = searchParams.get("name") || "";
     const email = searchParams.get("email") || "";
     const avatarUrl = searchParams.get("avatarUrl") || undefined;
@@ -41,7 +42,7 @@ function AuthCallbackHandler() {
         window.history.replaceState({}, document.title, window.location.pathname);
       }
 
-      router.push("/my-account");
+      router.push(redirect);
     } else {
       router.push("/signin");
     }

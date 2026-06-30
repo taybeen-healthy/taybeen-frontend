@@ -13,7 +13,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ connect, service }) =>
         <h2 className="text-xl sm:text-2xl font-poppins font-bold text-typo1 mb-6">
           {connect.title}
         </h2>
-        <div className="space-y-4 font-poppins text-sm md:text-base text-[#3A2418]">
+        <div className="space-y-4 font-poppins text-sm md:text-base text-typo1">
           <p className="leading-relaxed">
             <span className="font-semibold text-typo1">Email:</span>{" "}
             <a href={`mailto:${connect.email}`} className="hover:underline">
@@ -37,7 +37,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({ connect, service }) =>
         <h2 className="text-xl sm:text-2xl font-poppins font-bold text-typo1 mb-6">
           {service.title}
         </h2>
-        <div className="space-y-3 font-poppins text-sm md:text-base text-[#3A2418] font-medium">
+        <div className="space-y-3 font-poppins text-sm md:text-base text-typo1 font-medium">
           {service.hours.map((hour, i) => (
             <p key={i} className="leading-relaxed">
               {hour}

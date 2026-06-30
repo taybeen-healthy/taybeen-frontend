@@ -45,7 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         }}
         className={
           className ||
-          `w-full bg-white rounded-2xl overflow-hidden flex flex-col h-full shadow-sm transition-all duration-300 border border-[#C4A482]/40 hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary ${isOutOfStock ? "opacity-75 grayscale-[30%]" : ""}`
+          `w-full bg-white rounded-2xl overflow-hidden flex flex-col h-full shadow-sm transition-all duration-300 border border-[#C4A482]/40 hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary`
         }
       >
         <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-white p-2">
@@ -55,7 +55,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               alt={product.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              className={`object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${isOutOfStock ? "grayscale opacity-60" : ""}`}
               priority
             />
           </div>
@@ -63,7 +63,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {isOutOfStock ? (
             <Badge
               text="Out of Stock"
-              className="absolute top-4 left-4 bg-red-50 text-red-600 border border-red-200"
+              className="absolute top-4 left-4"
+              style={{ backgroundColor: "#FEF2F2", color: "#DC2626" }}
             />
           ) : product.badge ? (
             <Badge
@@ -122,7 +123,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       }}
       className={
         className ||
-        `w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary ${isOutOfStock ? "opacity-75 grayscale-[30%]" : ""}`
+        `w-[280px] sm:w-[320px] md:w-[340px] lg:w-auto flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden flex flex-col h-auto lg:h-full shadow-sm transition-all duration-300 border border-[#F2EADA] hover:border-brand-primary/60 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary`
       }
     >
       <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-[#F6F1E9] shadow-sm group-hover:shadow-md transition-shadow duration-300">
@@ -131,14 +132,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          className={`object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${isOutOfStock ? "grayscale opacity-60" : ""}`}
           priority
         />
 
         {isOutOfStock ? (
           <Badge
             text="Out of Stock"
-            className="absolute top-3.5 left-3.5 bg-red-50 text-red-600 border border-red-200"
+            className="absolute top-3.5 left-3.5"
+            style={{ backgroundColor: "#FEF2F2", color: "#DC2626" }}
           />
         ) : product.badge ? (
           <Badge
@@ -164,7 +166,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {product.description}
             </p>
           )}
-          <div className="pt-1 flex items-center gap-2 flex-wrap">
+          {(product.reviewsCount || 0) > 0 ? (
+            <div className="flex items-center gap-1.5 pt-1">
+              <StarRating
+                rating={product.rating || 4.9}
+                size={12}
+                className="[&_svg]:!w-3 [&_svg]:md:!w-3.5 [&_svg]:!h-3 [&_svg]:md:!h-3.5"
+              />
+              <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
+                {product.rating || 4.9}{" "}
+                <span className="text-[#8D7F75] font-normal">
+                  ({formatIndianNumber(product.reviewsCount || 120)})
+                </span>
+              </span>
+            </div>
+          ) : (
+            <div className="h-[18px]" />
+          )}
+        </div>
+
+        <div className="mt-4 pt-3 border-t border-[#F5EDE0] flex items-center justify-between">
+          <div className="flex items-center gap-2 flex-wrap">
             {product.originalPrice && product.originalPrice > product.price ? (
               <>
                 <span className="text-sm sm:text-base text-brand-brown/60 line-through font-poppins font-medium">
@@ -187,26 +209,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             )}
           </div>
-        </div>
-
-        <div className="mt-4 pt-3 border-t border-[#F5EDE0] flex items-center justify-between">
-          {(product.reviewsCount || 0) > 0 ? (
-            <div className="flex items-center gap-1.5">
-              <StarRating
-                rating={product.rating || 4.9}
-                size={12}
-                className="[&_svg]:!w-3 [&_svg]:md:!w-3.5 [&_svg]:!h-3 [&_svg]:md:!h-3.5"
-              />
-              <span className="text-[11px] md:text-xs font-poppins text-brand-brown/80 font-medium">
-                {product.rating || 4.9}{" "}
-                <span className="text-[#8D7F75] font-normal">
-                  ({formatIndianNumber(product.reviewsCount || 120)})
-                </span>
-              </span>
-            </div>
-          ) : (
-            <div />
-          )}
 
           <button
             onClick={(e) => {

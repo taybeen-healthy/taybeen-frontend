@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { GoogleIcon } from "@/components/ui/Icons";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ForgotPasswordModal } from "./ForgotPasswordModal";
 import {
   validateFullName,
@@ -24,10 +24,12 @@ interface AuthFormProps {
   type: "signup" | "signin";
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
+const AuthFormInner: React.FC<AuthFormProps> = ({ type }) => {
   const toast = useToast();
   const isSignUp = type === "signup";
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectParam = searchParams.get("redirect");
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -111,7 +113,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         );
 
         toast.success(isSignUp ? "Account created successfully!" : "Signed in successfully!");
-        router.push("/my-account");
+        router.push(redirectParam || "/my-account");
       } catch (err: any) {
         console.error("Auth error:", err);
         setSubmitError(
@@ -262,7 +264,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         type="button"
         onClick={() => {
           const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
-          window.location.href = `${backendUrl}/auth/google`;
+          const stateParam = redirectParam ? `?state=${encodeURIComponent(redirectParam)}` : "";
+          window.location.href = `${backendUrl}/auth/google${stateParam}`;
         }}
         className="w-full bg-white border border-[#C4A482]/50 hover:bg-black/5 text-[#5A3E2B] py-3.5 px-6 rounded-full font-poppins font-semibold text-sm transition-all flex items-center justify-center gap-3 cursor-pointer shadow-sm"
       >
@@ -274,14 +277,24 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         {isSignUp ? (
           <>
             Already have an account?{" "}
-            <Link href="/signin" className="text-[#4A5E28] font-semibold hover:underline">
+            <Link
+              href={
+                redirectParam ? `/signin?redirect=${encodeURIComponent(redirectParam)}` : "/signin"
+              }
+              className="text-[#4A5E28] font-semibold hover:underline"
+            >
               Sign In
             </Link>
           </>
         ) : (
           <>
             Don&apos;t have an account?{" "}
-            <Link href="/signup" className="text-[#4A5E28] font-semibold hover:underline">
+            <Link
+              href={
+                redirectParam ? `/signup?redirect=${encodeURIComponent(redirectParam)}` : "/signup"
+              }
+              className="text-[#4A5E28] font-semibold hover:underline"
+            >
               Sign Up
             </Link>
           </>
@@ -293,6 +306,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         onClose={() => setIsForgotPasswordOpen(false)}
       />
     </div>
+  );
+};
+
+export const AuthForm: React.FC<AuthFormProps> = (props) => {
+  return (
+    <Suspense fallback={null}>
+      <AuthFormInner {...props} />
+    </Suspense>
   );
 };
 

@@ -42,7 +42,7 @@ export const BestSellers: React.FC = () => {
             reviewsCount: p.reviewsCount || 0,
             description: p.description || "",
             benefits: p.benefits || [],
-            stock: p.stock ?? 10,
+            stock: p.stock ?? 0,
             weight: p.weight || p.weightOptions?.[0] || "500g",
             weightOptions: p.weightOptions || ["500g", "1kg"],
             badge: p.badge || undefined,

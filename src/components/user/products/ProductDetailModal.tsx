@@ -22,6 +22,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   const { delivery } = useCustomization();
   const [detailedProduct, setDetailedProduct] = useState<Product>(product);
   const [isLoading, setIsLoading] = useState(true);
+  const isOutOfStock = detailedProduct.stock !== undefined && detailedProduct.stock <= 0;
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<"description" | "benefits">("description");
   const [selectedWeight, setSelectedWeight] = useState(
@@ -171,7 +172,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 src={productImages[selectedImageIndex] || detailedProduct.image}
                 alt={detailedProduct.name}
                 fill
-                className="object-cover select-none pointer-events-none"
+                className={`object-cover select-none pointer-events-none ${isOutOfStock ? "grayscale opacity-60" : ""}`}
                 priority
               />
             </div>
@@ -191,7 +192,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                     src={img}
                     alt={`${detailedProduct.name} view ${i + 1}`}
                     fill
-                    className="object-cover"
+                    className={`object-cover ${isOutOfStock ? "grayscale opacity-60" : ""}`}
                   />
                 </button>
               ))}
@@ -237,7 +238,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
               </div>
               {detailedProduct.stock !== undefined && detailedProduct.stock <= 0 && (
                 <div className="mt-3 px-4 py-2.5 bg-red-50 border border-red-200 rounded-xl text-red-600 font-poppins text-xs sm:text-sm font-semibold flex items-center gap-2">
-                  <span>⚠️ Currently Out of Stock</span>
+                  <span>Currently Out of Stock !</span>
                 </div>
               )}
             </div>
