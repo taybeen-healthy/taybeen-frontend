@@ -1,5 +1,5 @@
 import React from "react";
-import { Pencil } from "lucide-react";
+import { Pencil, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CheckoutAddressForm } from "@/types";
 
@@ -138,6 +138,17 @@ export const CheckoutReview: React.FC<CheckoutReviewProps> = ({
           );
         })}
       </div>
+
+      {paymentMethod === "Razorpay" && (
+        <div className="mb-6 p-4 rounded-xl bg-[#FDFAF3] border border-[#C4A482]/30 flex items-start gap-3 shadow-sm transition-all duration-300">
+          <Info className="w-5 h-5 text-[#C4A482] flex-shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-[#7D6B5E] leading-relaxed">
+            <span className="font-semibold text-brand-brown">Note:</span> Your bank statement or UPI
+            app may display <span className="font-bold text-brand-brown">Absolute Travel</span>, our
+            registered business entity for Taybeen.
+          </p>
+        </div>
+      )}
 
       <div className="mt-8 text-xs sm:text-sm text-[#7D6B5E] leading-relaxed border-t border-[#C4A482]/15 pt-4">
         By placing an order you agree to our{" "}
