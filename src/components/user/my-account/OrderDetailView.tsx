@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Check, CreditCard } from "lucide-react";
+import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
 import { BrandLoader } from "@/components/ui/BrandLoader";
 import { OrderDetail, AccountProfileForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";

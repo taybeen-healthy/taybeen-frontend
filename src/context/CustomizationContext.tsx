@@ -8,6 +8,7 @@ interface CustomizationContextProps {
   hero: any;
   story: any;
   offer: any;
+  gifting: any;
   delivery: {
     maximumAmount: number;
     deliveryCharges: number;
@@ -23,6 +24,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
   const [hero, setHero] = useState<any>(homeData.hero);
   const [story, setStory] = useState<any>(homeData.ourStory);
   const [offer, setOffer] = useState<any>(homeData.specialOffer);
+  const [gifting, setGifting] = useState<any>(homeData.gifting);
   const [delivery, setDelivery] = useState<any>({
     maximumAmount: 999,
     deliveryCharges: 79,
@@ -41,6 +43,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
             story: backendStory,
             offer: backendOffer,
             delivery: backendDelivery,
+            gifting: backendGifting,
           } = customizationData;
 
           // Merge backend properties, keeping local fields as fallbacks
@@ -48,9 +51,23 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
             setHero({
               ...homeData.hero,
               heading: backendHero.mainHeading || homeData.hero.heading,
+              heading2: backendHero.heading2 || "Dates.",
               description: backendHero.supportingText || homeData.hero.description,
-              tag: backendHero.highlights?.[0] || homeData.hero.tag,
-              ...backendHero,
+              tag: backendHero.tag || homeData.hero.tag,
+              tagline: backendHero.tagline || homeData.hero.tagline,
+              energyTitle: backendHero.energyTitle || homeData.hero.badges.energyTitle,
+              energyValue: backendHero.energyValue || homeData.hero.badges.energyValue,
+              energyDesc: backendHero.energyDesc || homeData.hero.badges.energyDesc,
+              farmTitle: backendHero.farmTitle || homeData.hero.badges.farmToTableTitle,
+              farmDesc: backendHero.farmDesc || homeData.hero.badges.farmToTableDesc,
+              heroImages: backendHero.heroImages && backendHero.heroImages.length === 4
+                ? backendHero.heroImages
+                : [
+                    homeData.hero.varieties.ajwa.image,
+                    homeData.hero.varieties.kalmi.image,
+                    homeData.hero.varieties.sukkary.image,
+                    homeData.hero.varieties.safawi.image,
+                  ],
             });
           }
 
@@ -76,7 +93,30 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
               tag: backendOffer.badgeText || homeData.specialOffer.tag,
               heading: backendOffer.heading || homeData.specialOffer.heading,
               description: backendOffer.description || homeData.specialOffer.description,
-              ...backendOffer,
+              imageUrl: backendOffer.imageUrl || homeData.specialOffer.imageUrl,
+            });
+          }
+
+          if (backendGifting) {
+            setGifting({
+              ...homeData.gifting,
+              tag: backendGifting.tag || homeData.gifting.tag,
+              heading: backendGifting.heading || homeData.gifting.heading,
+              mainCard: backendGifting.mainCard
+                ? {
+                    image: backendGifting.mainCard.image || homeData.gifting.mainCard.image,
+                    tag: backendGifting.mainCard.tag || homeData.gifting.mainCard.tag,
+                    category: backendGifting.mainCard.category || homeData.gifting.mainCard.category,
+                    title: backendGifting.mainCard.title || homeData.gifting.mainCard.title,
+                  }
+                : homeData.gifting.mainCard,
+              subCards: backendGifting.subCards
+                ? backendGifting.subCards.map((c: any, idx: number) => ({
+                    image: c.image || homeData.gifting.subCards[idx]?.image,
+                    tag: c.tag || homeData.gifting.subCards[idx]?.tag,
+                    title: c.title || homeData.gifting.subCards[idx]?.title,
+                  }))
+                : homeData.gifting.subCards,
             });
           }
 
@@ -104,7 +144,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <CustomizationContext.Provider value={{ hero, story, offer, delivery, isLoading }}>
+    <CustomizationContext.Provider value={{ hero, story, offer, gifting, delivery, isLoading }}>
       {children}
     </CustomizationContext.Provider>
   );
