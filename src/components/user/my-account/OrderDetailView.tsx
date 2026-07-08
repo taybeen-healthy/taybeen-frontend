@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Check, CreditCard, Loader2 } from "lucide-react";
+import { ArrowLeft, Check, CreditCard } from "lucide-react";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { OrderDetail, AccountProfileForm } from "@/types";
 import { apiClient } from "@/lib/apiClient";
 import { loadRazorpayScript } from "@/lib/utils/loadScript";
@@ -247,12 +248,11 @@ export const OrderDetailView: React.FC<OrderDetailViewProps> = ({ orderId, onBac
 
   if (isLoading) {
     return (
-      <div className="w-full bg-white border border-[#C4A482]/25 rounded-2xl p-20 flex flex-col items-center justify-center shadow-sm select-none">
-        <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B] mb-3" />
-        <p className="font-poppins text-[#5A3E2B]/80 text-sm font-medium">
-          Loading order details...
-        </p>
-      </div>
+      <BrandLoader
+        fullPage={false}
+        text="Loading order details..."
+        className="w-full bg-white border border-[#C4A482]/25 rounded-2xl min-h-[350px]"
+      />
     );
   }
 

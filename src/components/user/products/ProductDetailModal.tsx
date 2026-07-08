@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Share2, Truck, Award, Sprout, Plus, Minus, Loader2 } from "lucide-react";
+import { X, Share2, Truck, Award, Sprout, Plus, Minus } from "lucide-react";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { Product } from "@/types";
 import { Modal } from "@/components/ui/Modal";
 import { StarRating } from "@/components/ui/StarRating";
@@ -160,10 +161,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
       </button>
 
       {isLoading ? (
-        <div className="w-full flex flex-col items-center justify-center py-32 px-4 bg-[#FDFAF3] min-h-[400px]">
-          <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-          <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading product details...</p>
-        </div>
+        <BrandLoader
+          fullPage={false}
+          text="Loading product details..."
+          className="w-full bg-[#FDFAF3] min-h-[400px] py-20"
+        />
       ) : (
         <>
           <div className="w-full lg:w-[45%] flex flex-col p-4 sm:p-5 md:p-6 lg:p-8 bg-[#FDFAF3] border-b lg:border-b-0 lg:border-r border-[#F2EADA] h-auto flex-shrink-0">

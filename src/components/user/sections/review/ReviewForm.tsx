@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Star, Upload, X, ArrowRight, Loader2 } from "lucide-react";
+import { Star, Upload, X, ArrowRight } from "lucide-react";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { Select } from "@/components/ui/Select";
 import { apiClient } from "@/lib/apiClient";
 import { useToast } from "@/hooks";
@@ -172,10 +173,11 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
 
   if (isLoading) {
     return (
-      <div className="min-h-[300px] flex flex-col items-center justify-center bg-white border border-[#C4A482]/25 rounded-2xl p-8">
-        <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-        <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading review form...</p>
-      </div>
+      <BrandLoader
+        fullPage={false}
+        text="Loading review form..."
+        className="min-h-[300px] bg-white border border-[#C4A482]/25 rounded-2xl p-8"
+      />
     );
   }
 

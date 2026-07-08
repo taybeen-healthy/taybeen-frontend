@@ -6,6 +6,7 @@ import { LogOut, Loader2, Users, Clock, AlertCircle } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Modal } from "@/components/ui/Modal";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { orderHistory, affiliateDashboardData } from "@/data/user/myAccountData";
 import {
   AccountProfileForm,
@@ -101,9 +102,7 @@ export const MyAccountPage: React.FC = () => {
   const renderAffiliateTab = () => {
     if (loadingAffiliate) {
       return (
-        <div className="flex justify-center items-center py-12">
-          <Loader2 className="w-8 h-8 animate-spin text-[#5A3E2B]" />
-        </div>
+        <BrandLoader fullPage={false} text="Loading affiliate dashboard..." />
       );
     }
 

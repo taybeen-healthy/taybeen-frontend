@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { SlidersHorizontal, Loader2 } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -183,12 +184,11 @@ export default function ProductsPage() {
               />
 
               {isLoading ? (
-                <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-[#C4A482]/25">
-                  <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-                  <p className="font-poppins text-brand-brown text-sm font-semibold">
-                    Loading premium dates...
-                  </p>
-                </div>
+                <BrandLoader
+                  fullPage={false}
+                  text="Loading premium dates..."
+                  className="bg-white rounded-2xl border border-[#C4A482]/25 min-h-[350px]"
+                />
               ) : displayedProducts.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
                   {displayedProducts.map((product) => (

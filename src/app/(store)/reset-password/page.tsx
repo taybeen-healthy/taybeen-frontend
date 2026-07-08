@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Eye, EyeOff, CheckCircle, Loader2 } from "lucide-react";
+import { Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
+import { BrandLoader } from "@/components/ui/BrandLoader";
 import { Footer } from "@/components/layout/Footer";
 import { AuthBackground } from "@/components/user/auth";
 import { Input } from "@/components/ui/Input";
@@ -171,10 +172,11 @@ export default function ResetPasswordPage() {
       <main className="flex-1 flex items-center justify-center px-4 sm:px-6 md:px-8 md:py-0 py-28 md:pt-32 lg:pt-36 z-10 relative">
         <Suspense
           fallback={
-            <div className="w-full max-w-[480px] bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 md:p-10 shadow-premium flex flex-col items-center justify-center text-center">
-              <Loader2 className="w-10 h-10 animate-spin text-[#5A3E2B] mb-4" />
-              <p className="font-poppins text-[#5A3E2B]/80 font-medium">Loading form...</p>
-            </div>
+            <BrandLoader
+              fullPage={false}
+              text="Loading form..."
+              className="w-full max-w-[480px] bg-white border border-[#C4A482]/25 rounded-2xl p-6 sm:p-8 md:p-10 shadow-premium min-h-[300px]"
+            />
           }
         >
           <ResetPasswordForm />
