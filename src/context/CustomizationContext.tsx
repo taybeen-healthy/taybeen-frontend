@@ -60,14 +60,15 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
               energyDesc: backendHero.energyDesc || homeData.hero.badges.energyDesc,
               farmTitle: backendHero.farmTitle || homeData.hero.badges.farmToTableTitle,
               farmDesc: backendHero.farmDesc || homeData.hero.badges.farmToTableDesc,
-              heroImages: backendHero.heroImages && backendHero.heroImages.length === 4
-                ? backendHero.heroImages
-                : [
-                    homeData.hero.varieties.ajwa.image,
-                    homeData.hero.varieties.kalmi.image,
-                    homeData.hero.varieties.sukkary.image,
-                    homeData.hero.varieties.safawi.image,
-                  ],
+              heroImages:
+                backendHero.heroImages && backendHero.heroImages.length === 4
+                  ? backendHero.heroImages
+                  : [
+                      homeData.hero.varieties.ajwa.image,
+                      homeData.hero.varieties.kalmi.image,
+                      homeData.hero.varieties.sukkary.image,
+                      homeData.hero.varieties.safawi.image,
+                    ],
             });
           }
 
@@ -106,7 +107,8 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
                 ? {
                     image: backendGifting.mainCard.image || homeData.gifting.mainCard.image,
                     tag: backendGifting.mainCard.tag || homeData.gifting.mainCard.tag,
-                    category: backendGifting.mainCard.category || homeData.gifting.mainCard.category,
+                    category:
+                      backendGifting.mainCard.category || homeData.gifting.mainCard.category,
                     title: backendGifting.mainCard.title || homeData.gifting.mainCard.title,
                   }
                 : homeData.gifting.mainCard,

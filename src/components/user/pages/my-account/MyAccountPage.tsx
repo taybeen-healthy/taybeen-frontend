@@ -101,9 +101,7 @@ export const MyAccountPage: React.FC = () => {
 
   const renderAffiliateTab = () => {
     if (loadingAffiliate) {
-      return (
-        <BrandLoader fullPage={false} text="Loading affiliate dashboard..." />
-      );
+      return <BrandLoader fullPage={false} text="Loading affiliate dashboard..." />;
     }
 
     if (!affiliateData) {

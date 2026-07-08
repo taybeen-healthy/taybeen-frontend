@@ -112,7 +112,8 @@ const AuthFormInner: React.FC<AuthFormProps> = ({ type }) => {
           })
         );
 
-        const lastVisited = typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
+        const lastVisited =
+          typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
         toast.success(isSignUp ? "Account created successfully!" : "Signed in successfully!");
         router.push(redirectParam || lastVisited || "/my-account");
       } catch (err: any) {
@@ -265,7 +266,8 @@ const AuthFormInner: React.FC<AuthFormProps> = ({ type }) => {
         type="button"
         onClick={() => {
           const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
-          const lastVisited = typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
+          const lastVisited =
+            typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
           const finalRedirect = redirectParam || lastVisited || "/my-account";
           const stateParam = `?state=${encodeURIComponent(finalRedirect)}`;
           window.location.href = `${backendUrl}/auth/google${stateParam}`;

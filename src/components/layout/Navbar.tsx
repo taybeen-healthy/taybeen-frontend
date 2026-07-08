@@ -149,7 +149,10 @@ export const Navbar: React.FC = () => {
 
           <div className="flex items-center space-x-4 md:space-x-8">
             {isLoggedIn ? (
-              <div className="hidden lg:flex items-center justify-center relative" id="profile-dropdown-container">
+              <div
+                className="hidden lg:flex items-center justify-center relative"
+                id="profile-dropdown-container"
+              >
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center justify-center text-brand-brown hover:text-brand-brown/70 transition-colors focus:outline-none"
@@ -168,14 +171,16 @@ export const Navbar: React.FC = () => {
                     >
                       {userProfile && (
                         <div className="px-3 py-2 border-b border-[#C4A482]/15 mb-2 select-none">
-                          <p className="text-[10px] font-bold text-[#8D7F75]/80 uppercase tracking-wider">Signed in as</p>
+                          <p className="text-[10px] font-bold text-[#8D7F75]/80 uppercase tracking-wider">
+                            Signed in as
+                          </p>
                           <p className="text-sm font-bold text-brand-brown truncate">
                             {userProfile.firstName} {userProfile.lastName}
                           </p>
                           <p className="text-xs text-[#7D6B5E] truncate">{userProfile.email}</p>
                         </div>
                       )}
-                      
+
                       <ul className="space-y-1">
                         <li>
                           <Link

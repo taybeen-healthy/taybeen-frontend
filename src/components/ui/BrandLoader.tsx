@@ -25,7 +25,11 @@ export const BrandLoader: React.FC<BrandLoaderProps> = ({
       >
         <div className="flex flex-col items-center gap-6 animate-pulse">
           <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-white rounded-full border border-[#C4A482]/20 shadow-premium">
-            <img src="/LogoInitial.svg" className="w-16 h-16 md:w-22 md:h-22 object-contain select-none" alt="Taybeen Logo" />
+            <img
+              src="/LogoInitial.svg"
+              className="w-16 h-16 md:w-22 md:h-22 object-contain select-none"
+              alt="Taybeen Logo"
+            />
           </div>
 
           <div className="text-center space-y-1.5">
@@ -45,7 +49,11 @@ export const BrandLoader: React.FC<BrandLoaderProps> = ({
     <div className={`flex flex-col items-center justify-center p-6 ${className}`}>
       <div className="animate-pulse flex flex-col items-center gap-3">
         <div className="relative w-14 h-14 flex items-center justify-center bg-[#FDFAF3] rounded-full border border-[#C4A482]/15 shadow-sm">
-          <img src="/LogoInitial.svg" className="w-9 h-9 object-contain select-none" alt="Taybeen Logo" />
+          <img
+            src="/LogoInitial.svg"
+            className="w-9 h-9 object-contain select-none"
+            alt="Taybeen Logo"
+          />
         </div>
         {text && (
           <p className="font-poppins text-xs font-semibold text-[#5A3E2B]/80 tracking-wider text-center max-w-[200px]">
