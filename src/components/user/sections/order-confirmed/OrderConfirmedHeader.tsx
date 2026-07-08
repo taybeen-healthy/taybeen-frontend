@@ -8,7 +8,7 @@ export const OrderConfirmedHeader: React.FC = () => {
     <>
       <div className="absolute top-0 left-0 right-0 h-[46vh] min-h-[400px] lg:h-[48vh] z-0 select-none pointer-events-none border-b border-[#5A3E2B]/10 bg-[#FDFAF3]">
         <Image
-          src="/authBg.png"
+          src="/authBG.webp"
           alt="Botanical Background"
           fill
           className="object-cover object-[90%_top] md:object-cover md:object-top opacity-100"

@@ -30,7 +30,7 @@ export const ourStoryData: OurStoryData = {
     description:
       "Inspired by the desert's most treasured fruit — TAYBEEN brings premium dates and date-based creations to everyday life.",
     tagline: "A Gift from the Desert, shared with the world.",
-    imagePath: "/ComingSoon Dates.png",
+    imagePath: "/OurStoryimage_hero.webp",
   },
   whyDates: {
     pillText: "The Fruit Behind the Brand",
@@ -39,13 +39,13 @@ export const ourStoryData: OurStoryData = {
       "Because no other natural food does what a date does. One or two a day and you've covered your quick energy, your fibre, your iron, and your potassium — with zero processing involved.",
       "Dates aren't a trend. They're one of the oldest cultivated fruits on earth. We just think it's time more people in India discovered how extraordinary a really good date can taste.",
     ],
-    imagePath: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
+    imagePath: "/Ourstory_why_dates.webp",
   },
   mission: {
     pillText: "OUR MISSION",
     title:
       "To help people rediscover dates — not only as a symbol of tradition and generosity, but as a wholesome part of modern living.",
-    imagePath: "/Image (Premium dates on a plate).png",
+    imagePath: "/OurStory_Section3.webp",
   },
   founder: {
     title: "Founder's Note",
@@ -58,6 +58,6 @@ export const ourStoryData: OurStoryData = {
     ],
     name: "Mohd Arif",
     role: "Founder & CEO, Taybeen Pure Energy",
-    imagePath: "/Image (Pile of premium dates).png",
+    imagePath: "/Founders note.webp",
   },
 };

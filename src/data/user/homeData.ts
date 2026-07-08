@@ -95,19 +95,19 @@ export const homeData: HomeData = {
     varieties: {
       ajwa: {
         name: "Ajwa Dates",
-        image: "/Image (Dates in wooden bowl).png",
+        image: "/Home_Hero1.webp",
       },
       kalmi: {
         name: "Kalmi Dates",
-        image: "/Image (Premium dates on a plate).png",
+        image: "/Kalmi Dates.webp",
       },
       sukkary: {
         name: "Sukkary Dates",
-        image: "/7844d57c9be79ee5e7b88ccbc592df37 1.png",
+        image: "/Sukkary dates.webp",
       },
       safawi: {
         name: "Safawi Dates",
-        image: "/Image (Pile of premium dates).png",
+        image: "/Home_Hero2.webp",
       },
     },
     badges: {
@@ -131,7 +131,7 @@ export const homeData: HomeData = {
     description:
       "At healthy snack store we believe that smart snacking is the key to a balanced life. We curate the finest natural ingredients to create satisfying, nutrients rich snacks that fuel your body and delight your taste buds without compromise. No artificial additives, just pure, wholesome energy to keep you going strong.",
     buttonText: "Learn More About Us",
-    imageUrl: "/OurStory.png",
+    imageUrl: "/Home_Ourstory.webp",
     highlights: [
       { title: "Mindfully Sourced", desc: "Premium non-GMO ingredients" },
       { title: "Balanced Nutrition", desc: "Diverse range of snack types" },
@@ -143,25 +143,25 @@ export const homeData: HomeData = {
     heading: "Unlock upto 50% on your first order",
     description:
       "Join 8,000+ health-conscious Indian families. Get exclusive early access to new varieties, seasonal hampers, and wellness content — straight to your inbox.",
-    imageUrl: "/Offer.png",
+    imageUrl: "/Offersection_Home.webp",
   },
   gifting: {
     tag: "Gifting and Occasions",
     heading: "The Art of Premium Gifting",
     mainCard: {
-      image: "/Gift1.png",
+      image: "/Hamper1.webp",
       tag: "Most Popular",
       category: "CELEBRATE WITH SWEETNESS",
       title: "Festive Diwali Hamper",
     },
     subCards: [
       {
-        image: "/Gift2.png",
+        image: "/Hamper 2.webp",
         tag: "Best Seller",
         title: "Premium Date Collection",
       },
       {
-        image: "/Gift3.png",
+        image: "/Hamper 3.webp",
         tag: "New",
         title: "Curated Wellness Box",
       },

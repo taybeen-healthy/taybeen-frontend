@@ -74,7 +74,7 @@ export const orderDetailsData: Record<string, OrderDetail> = {
         price: 245.0,
         quantity: 2,
         weight: "250g",
-        image: "/Image (Dates in wooden bowl).png",
+        image: "/Mejdool.webp",
       },
     ],
     progressSteps: [
@@ -148,7 +148,7 @@ export const orderDetailsData: Record<string, OrderDetail> = {
         price: 245.0,
         quantity: 2,
         weight: "250g",
-        image: "/Image (Premium dates on a plate).png",
+        image: "/Mebroom.webp",
       },
     ],
     progressSteps: [
@@ -185,7 +185,7 @@ export const orderDetailsData: Record<string, OrderDetail> = {
         price: 490.0,
         quantity: 1,
         weight: "500g",
-        image: "/Image (Dates in wooden bowl).png",
+        image: "/Sukkary.webp",
       },
     ],
     progressSteps: [

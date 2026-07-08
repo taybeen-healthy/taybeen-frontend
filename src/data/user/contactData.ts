@@ -26,7 +26,7 @@ export const contactData: ContactData = {
     title: "We're just a message away!",
     description:
       "Whether you have a question about our dates, gifting options, orders, or simply want to say hello, we'd love to hear from you",
-    backgroundImage: "/authBg.png",
+    backgroundImage: "/authBG.webp",
   },
   connect: {
     title: "Quick Connect",
