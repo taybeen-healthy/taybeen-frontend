@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LogOut, Loader2, Users, Clock, AlertCircle } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -54,9 +54,23 @@ import {
 } from "@/components/user/my-account";
 
 export const MyAccountPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>("dashboard");
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+
+  const [activeTab, setActiveTab] = useState<string>(
+    tabParam && ["dashboard", "orders", "affiliate", "settings"].includes(tabParam)
+      ? tabParam
+      : "dashboard"
+  );
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (tabParam && ["dashboard", "orders", "affiliate", "settings"].includes(tabParam)) {
+      setActiveTab(tabParam);
+      setSelectedOrderId(null);
+    }
+  }, [tabParam]);
 
   const [profile, setProfile] = useState<AccountProfileForm>({
     firstName: "",
@@ -393,6 +407,7 @@ export const MyAccountPage: React.FC = () => {
     } else {
       setActiveTab(tab);
       setSelectedOrderId(null);
+      router.push(`/my-account?tab=${tab}`);
     }
   };
 
