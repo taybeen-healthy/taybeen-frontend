@@ -13,7 +13,8 @@ export function proxy(request: NextRequest) {
   if (isProtected && !accessToken && !refreshToken) {
     const url = request.nextUrl.clone();
     url.pathname = "/signin";
-    url.searchParams.set("redirect", pathname);
+    const originalUrl = pathname + (request.nextUrl.search || "");
+    url.searchParams.set("redirect", originalUrl);
     return NextResponse.redirect(url);
   }
 

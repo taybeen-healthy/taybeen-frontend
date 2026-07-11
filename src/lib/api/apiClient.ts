@@ -89,7 +89,8 @@ apiClient.interceptors.response.use(
         removeCookie("taybeen_access_token");
         removeCookie("taybeen_refresh_token");
         if (typeof window !== "undefined") {
-          window.location.href = "/signin";
+          const currentPath = window.location.pathname + window.location.search;
+          window.location.href = `/signin?redirect=${encodeURIComponent(currentPath)}`;
         }
         return Promise.reject(refreshError);
       } finally {

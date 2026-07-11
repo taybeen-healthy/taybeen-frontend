@@ -269,6 +269,9 @@ const AuthFormInner: React.FC<AuthFormProps> = ({ type }) => {
           const lastVisited =
             typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
           const finalRedirect = redirectParam || lastVisited || "/my-account";
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("taybeen_google_redirect", finalRedirect);
+          }
           const stateParam = `?state=${encodeURIComponent(finalRedirect)}`;
           window.location.href = `${backendUrl}/auth/google${stateParam}`;
         }}

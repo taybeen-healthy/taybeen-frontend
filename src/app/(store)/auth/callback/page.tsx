@@ -13,7 +13,14 @@ function AuthCallbackHandler() {
   useEffect(() => {
     const accessToken = searchParams.get("accessToken");
     const refreshToken = searchParams.get("refreshToken");
-    const redirect = searchParams.get("redirect") || "/my-account";
+    
+    const redirectFromParam = searchParams.get("redirect");
+    const redirectFromSession =
+      typeof window !== "undefined" ? sessionStorage.getItem("taybeen_google_redirect") : null;
+    const lastVisited =
+      typeof window !== "undefined" ? sessionStorage.getItem("taybeen_last_visited") : null;
+    const redirect = redirectFromParam || redirectFromSession || lastVisited || "/my-account";
+
     const name = searchParams.get("name") || "";
     const email = searchParams.get("email") || "";
     const avatarUrl = searchParams.get("avatarUrl") || undefined;
@@ -40,6 +47,7 @@ function AuthCallbackHandler() {
       // Clean query parameters from browser history to prevent token leakage
       if (typeof window !== "undefined") {
         window.history.replaceState({}, document.title, window.location.pathname);
+        sessionStorage.removeItem("taybeen_google_redirect");
       }
 
       router.push(redirect);
