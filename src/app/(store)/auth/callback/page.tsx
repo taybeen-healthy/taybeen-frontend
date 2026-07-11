@@ -13,7 +13,7 @@ function AuthCallbackHandler() {
   useEffect(() => {
     const accessToken = searchParams.get("accessToken");
     const refreshToken = searchParams.get("refreshToken");
-    
+
     const redirectFromParam = searchParams.get("redirect");
     const redirectFromSession =
       typeof window !== "undefined" ? sessionStorage.getItem("taybeen_google_redirect") : null;
