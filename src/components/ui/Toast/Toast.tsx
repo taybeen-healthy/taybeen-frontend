@@ -23,7 +23,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
   // Premium configurations for Left Accent Strip style
   const styles = {
     success: {
-      wrapper: "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
+      wrapper:
+        "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
       accentText: "text-green-700",
       messageText: "text-brand-brown/90",
       indicatorBg: "bg-green-600",
@@ -33,7 +34,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       statusIconLarge: <Check size={16} strokeWidth={2.5} />,
     },
     error: {
-      wrapper: "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
+      wrapper:
+        "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
       accentText: "text-red-700",
       messageText: "text-brand-brown/90",
       indicatorBg: "bg-red-500",
@@ -43,7 +45,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       statusIconLarge: <AlertCircle size={16} strokeWidth={2.5} />,
     },
     warning: {
-      wrapper: "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
+      wrapper:
+        "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
       accentText: "text-amber-700",
       messageText: "text-brand-brown/90",
       indicatorBg: "bg-amber-500",
@@ -53,7 +56,8 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       statusIconLarge: <AlertTriangle size={16} strokeWidth={2.5} />,
     },
     info: {
-      wrapper: "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
+      wrapper:
+        "relative overflow-hidden flex items-start gap-4 p-4 pr-5 pl-7 rounded-r-xl rounded-l-none border border-l-0 border-[#C4A482]/20 bg-[#FDFAF3] shadow-premium",
       accentText: "text-blue-700",
       messageText: "text-brand-brown/90",
       indicatorBg: "bg-blue-500",
@@ -77,13 +81,17 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       <div className={`absolute left-0 top-0 bottom-0 w-[6px] ${styles.indicatorBg}`} />
 
       {/* Large status badge container */}
-      <div className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${styles.badgeBg} shadow-sm select-none`}>
+      <div
+        className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${styles.badgeBg} shadow-sm select-none`}
+      >
         {styles.statusIconLarge}
       </div>
 
       {/* Message Info */}
       <div className="flex-1 min-w-0 pt-0.5 select-text text-left">
-        <h4 className={`font-serif text-xs font-bold uppercase tracking-wider mb-0.5 ${styles.accentText}`}>
+        <h4
+          className={`font-serif text-xs font-bold uppercase tracking-wider mb-0.5 ${styles.accentText}`}
+        >
           {type === "info" ? "Notification" : type}
         </h4>
         <p className={`text-xs font-medium leading-relaxed ${styles.messageText}`}>{message}</p>

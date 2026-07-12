@@ -653,16 +653,16 @@ export const CheckoutPage: React.FC = () => {
             billingAddress: isBillingSame
               ? undefined
               : {
-                firstName: billingForm.firstName,
-                lastName: billingForm.lastName,
-                streetAddress: billingForm.streetAddress,
-                city: billingForm.city,
-                stateProvince: billingForm.stateProvince,
-                postalCode: billingForm.postalCode,
-                country: billingForm.country,
-                phone: billingForm.phone,
-                email: profileData?.email || "customer@taybeen.local",
-              },
+                  firstName: billingForm.firstName,
+                  lastName: billingForm.lastName,
+                  streetAddress: billingForm.streetAddress,
+                  city: billingForm.city,
+                  stateProvince: billingForm.stateProvince,
+                  postalCode: billingForm.postalCode,
+                  country: billingForm.country,
+                  phone: billingForm.phone,
+                  email: profileData?.email || "customer@taybeen.local",
+                },
             giftMessage: giftMessageOpen ? giftMessageText : undefined,
           };
 
@@ -781,7 +781,6 @@ export const CheckoutPage: React.FC = () => {
                   onProceed={handleProceedAction}
                   paymentMethod={paymentMethod}
                   gstCost={gstCost}
-                  gstPercent={gstPercent}
                 />
                 <CouponCard
                   appliedCoupon={appliedCoupon}
@@ -838,7 +837,6 @@ export const CheckoutPage: React.FC = () => {
                 onProceed={handleProceedAction}
                 paymentMethod={paymentMethod}
                 gstCost={gstCost}
-                gstPercent={gstPercent}
               />
               <CouponCard
                 appliedCoupon={appliedCoupon}
