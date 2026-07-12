@@ -361,8 +361,14 @@ export const CheckoutPage: React.FC = () => {
   const shippingThreshold = delivery.maximumAmount;
   const shippingCost = discountedSubtotal >= shippingThreshold ? 0 : delivery.deliveryCharges;
 
-  const gstPercent = delivery.gstPercent || 5;
-  const gstCost = Math.round(((discountedSubtotal * gstPercent) / 100) * 100) / 100;
+  const discountRatio = subtotal > 0 ? discountedSubtotal / subtotal : 0;
+  const rawGstCost = cartItems.reduce((sum, item) => {
+    const itemGst = item.product.gstPercent ?? 0;
+    const itemTotal = item.priceAtSelection * item.quantity;
+    const taxableItemAmount = itemTotal * discountRatio;
+    return sum + (taxableItemAmount * itemGst) / 100;
+  }, 0);
+  const gstCost = Math.round(rawGstCost * 100) / 100;
   const total = Math.max(0, discountedSubtotal + shippingCost + gstCost);
 
   const handleApplyCoupon = async (code: string): Promise<boolean> => {
@@ -647,16 +653,16 @@ export const CheckoutPage: React.FC = () => {
             billingAddress: isBillingSame
               ? undefined
               : {
-                  firstName: billingForm.firstName,
-                  lastName: billingForm.lastName,
-                  streetAddress: billingForm.streetAddress,
-                  city: billingForm.city,
-                  stateProvince: billingForm.stateProvince,
-                  postalCode: billingForm.postalCode,
-                  country: billingForm.country,
-                  phone: billingForm.phone,
-                  email: profileData?.email || "customer@taybeen.local",
-                },
+                firstName: billingForm.firstName,
+                lastName: billingForm.lastName,
+                streetAddress: billingForm.streetAddress,
+                city: billingForm.city,
+                stateProvince: billingForm.stateProvince,
+                postalCode: billingForm.postalCode,
+                country: billingForm.country,
+                phone: billingForm.phone,
+                email: profileData?.email || "customer@taybeen.local",
+              },
             giftMessage: giftMessageOpen ? giftMessageText : undefined,
           };
 

@@ -15,6 +15,7 @@ export interface Product {
   benefits?: string[];
   weightOptions?: string[];
   stock?: number;
+  gstPercent?: number;
 }
 
 export interface Testimonial {
