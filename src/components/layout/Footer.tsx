@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex items-center justify-start gap-4">
               {[
-                { Icon: Instagram, url: "https://instagram.com/taybeen" },
+                { Icon: Instagram, url: "https://instagram.com/_taybeen_" },
                 { Icon: Youtube, url: "https://youtube.com/taybeen" },
               ].map(({ Icon, url }, i) => (
                 <a
