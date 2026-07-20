@@ -69,23 +69,23 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex-1 w-full max-w-[340px] sm:max-w-[380px] md:max-w-[540px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[700px] mx-auto relative min-h-[420px] sm:min-h-[460px] md:h-[480px] lg:h-[515px] xl:h-[570px] 2xl:h-[620px] mt-6 lg:mt-0">
-          <div className="absolute top-0 left-[20px] w-[80px] h-[80px] rounded-[16px] border-[1.6px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:top-[20px] md:left-[170px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:top-[21px] lg:left-[182px] lg:w-[86px] lg:h-[86px] lg:rounded-[22px] xl:top-[24px] xl:left-[201px] xl:w-[95px] xl:h-[95px] xl:rounded-[24px] 2xl:top-[26px] 2xl:left-[220px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[26px]">
+        <div className="flex-1 w-full max-w-[360px] sm:max-w-[400px] md:max-w-[540px] lg:max-w-[580px] xl:max-w-[640px] 2xl:max-w-[700px] mx-auto relative min-h-[460px] sm:min-h-[500px] md:h-[480px] lg:h-[515px] xl:h-[570px] 2xl:h-[620px] mt-6 lg:mt-0">
+          <div className="absolute top-0 left-0 w-[105px] h-[105px] sm:w-[115px] sm:h-[115px] rounded-[22px] border-[2px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:top-[20px] md:left-[170px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:top-[21px] lg:left-[182px] lg:w-[86px] lg:h-[86px] lg:rounded-[22px] xl:top-[24px] xl:left-[201px] xl:w-[95px] xl:h-[95px] xl:rounded-[24px] 2xl:top-[26px] 2xl:left-[220px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[26px]">
             <Image
               src={ajwaImage}
               alt={homeData.hero.varieties.ajwa.name}
               fill
-              sizes="(max-width: 768px) 80px, (max-width: 1024px) 86px, 104px"
+              sizes="(max-width: 768px) 115px, (max-width: 1024px) 86px, 104px"
               className="object-cover"
             />
           </div>
 
-          <div className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[220px] h-[300px] rounded-[24px] border-[1.6px] border-[#FFDA8C] shadow-premium z-10 overflow-hidden md:translate-x-0 md:left-auto md:right-[10px] md:top-[20px] md:w-[240px] md:h-[340px] md:rounded-[36px] md:border-[2px] lg:top-[21px] lg:right-[11px] lg:w-[258px] lg:h-[365px] lg:rounded-[40px] xl:top-[24px] xl:right-[12px] xl:w-[284px] xl:h-[404px] xl:rounded-[44px] 2xl:top-[26px] 2xl:right-[13px] 2xl:w-[310px] 2xl:h-[440px] 2xl:rounded-[48px]">
+          <div className="absolute top-[28px] left-1/2 -translate-x-1/2 w-[285px] sm:w-[320px] h-[390px] sm:h-[420px] rounded-[36px] sm:rounded-[40px] border-[2px] border-[#FFDA8C] shadow-premium z-10 overflow-hidden md:translate-x-0 md:left-auto md:right-[10px] md:top-[20px] md:w-[240px] md:h-[340px] md:rounded-[36px] md:border-[2px] lg:top-[21px] lg:right-[11px] lg:w-[258px] lg:h-[365px] lg:rounded-[40px] xl:top-[24px] xl:right-[12px] xl:w-[284px] xl:h-[404px] xl:rounded-[44px] 2xl:top-[26px] 2xl:right-[13px] 2xl:w-[310px] 2xl:h-[440px] 2xl:rounded-[48px]">
             <Image
               src={kalmiImage}
               alt={homeData.hero.varieties.kalmi.name}
               fill
-              sizes="(max-width: 640px) 220px, (max-width: 768px) 240px, (max-width: 1024px) 258px, 310px"
+              sizes="(max-width: 640px) 285px, (max-width: 768px) 320px, (max-width: 1024px) 258px, 310px"
               className="object-cover"
               priority
             />
@@ -120,12 +120,12 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="absolute bottom-2 right-[20px] w-[80px] h-[80px] rounded-[16px] border-[1.6px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:bottom-[80px] md:right-[-30px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:bottom-[86px] lg:right-[-32px] lg:w-[86px] lg:h-[86px] lg:rounded-[18px] xl:bottom-[95px] xl:right-[-35px] xl:w-[95px] xl:h-[95px] xl:rounded-[20px] 2xl:bottom-[104px] 2xl:right-[-38px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[22px]">
+          <div className="absolute bottom-0 right-0 w-[105px] h-[105px] sm:w-[115px] sm:h-[115px] rounded-[22px] border-[2px] border-[#FFDA8C] shadow-sm z-20 overflow-hidden md:bottom-[80px] md:right-[-30px] md:w-[80px] md:h-[80px] md:rounded-[20px] md:border-[2px] lg:bottom-[86px] lg:right-[-32px] lg:w-[86px] lg:h-[86px] lg:rounded-[18px] xl:bottom-[95px] xl:right-[-35px] xl:w-[95px] xl:h-[95px] xl:rounded-[20px] 2xl:bottom-[104px] 2xl:right-[-38px] 2xl:w-[104px] 2xl:h-[104px] 2xl:rounded-[22px]">
             <Image
               src={safawiImage}
               alt={homeData.hero.varieties.safawi.name}
               fill
-              sizes="(max-width: 768px) 80px, (max-width: 1024px) 86px, 104px"
+              sizes="(max-width: 768px) 115px, (max-width: 1024px) 86px, 104px"
               className="object-cover"
             />
           </div>
@@ -134,7 +134,7 @@ export const Hero: React.FC = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="absolute bottom-2 left-[15px] bg-brand-bg/95 backdrop-blur-sm border border-[#EADFC9] rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg z-30 md:bottom-[40px] md:left-[290px] md:px-4 md:py-2 md:right-auto lg:bottom-[64px] lg:left-[311px] xl:bottom-[71px] xl:left-[344px] 2xl:bottom-[78px] 2xl:left-[377px]"
+            className="absolute bottom-3 left-1 bg-brand-bg/95 backdrop-blur-sm border border-[#EADFC9] rounded-xl px-3.5 py-2 flex items-center gap-2 shadow-lg z-30 md:bottom-[40px] md:left-[290px] md:px-4 md:py-2 md:right-auto lg:bottom-[64px] lg:left-[311px] xl:bottom-[71px] xl:left-[344px] 2xl:bottom-[78px] 2xl:left-[377px]"
           >
             <div className="text-xl lg:text-xl xl:text-2xl">🌴</div>
             <div>
@@ -151,7 +151,7 @@ export const Hero: React.FC = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="absolute top-[80px] right-[10px] w-24 bg-[#2C3A1A] rounded-xl p-2 text-center shadow-xl z-30 md:top-[80px] md:right-[-30px] md:w-[110px] md:h-[80px] md:flex md:flex-col md:justify-center lg:top-[86px] lg:right-[-32px] lg:w-[118px] lg:h-[90px] xl:top-[95px] xl:right-[-35px] xl:w-[130px] xl:h-[90px] 2xl:top-[104px] 2xl:right-[-38px]"
+            className="absolute top-[48px] right-0 w-[110px] sm:w-[120px] bg-[#2C3A1A] rounded-[18px] p-2.5 text-center shadow-xl z-30 md:top-[80px] md:right-[-30px] md:w-[110px] md:h-[80px] md:flex md:flex-col md:justify-center lg:top-[86px] lg:right-[-32px] lg:w-[118px] lg:h-[90px] xl:top-[95px] xl:right-[-35px] xl:w-[130px] xl:h-[90px] 2xl:top-[104px] 2xl:right-[-38px]"
           >
             <p className="text-white/70 font-poppins font-medium text-[8px] md:text-[9px] lg:text-[10px] xl:text-[11px] 2xl:text-[12px] leading-tight">
               {energyTitle}
