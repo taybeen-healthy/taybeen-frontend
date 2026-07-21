@@ -50,10 +50,13 @@ export const Testimonials: React.FC = () => {
             image: item.selectedImage || item.images?.[0] || undefined,
           }));
           setTestimonialsList(mapped);
+        } else {
+          setTestimonialsList(mockTestimonials.slice(0, 3));
         }
       })
       .catch((e) => {
-        console.warn("Failed to fetch dynamic reviews, falling back to mock data:", e);
+        console.warn("Failed to fetch dynamic reviews, falling back to 3 mock items:", e);
+        setTestimonialsList(mockTestimonials.slice(0, 3));
       });
   }, []);
 

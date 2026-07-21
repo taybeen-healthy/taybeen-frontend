@@ -84,7 +84,7 @@ export interface HomeData {
 export const homeData: HomeData = {
   hero: {
     tag: "100% Natural & Organic",
-    heading: "Rediscover the Power of Dates.",
+    heading: "Rediscover the Power of",
     description:
       "Exceptional dates, naturally nurtured to perfection. Pure sweetness with no compromise on quality. A luxurious and healthier alternative to refined sugar.",
     tagline: "One date a day. A lifetime of difference.",

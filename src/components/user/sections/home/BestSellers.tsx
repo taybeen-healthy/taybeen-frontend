@@ -23,6 +23,7 @@ export const BestSellers: React.FC = () => {
       try {
         const response = await apiClient.get("/products", {
           params: {
+            type: "catalog",
             sortBy: "totalSold",
             sortOrder: "asc",
             limit: 4,
@@ -66,6 +67,10 @@ export const BestSellers: React.FC = () => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
+
+  if (productsList.length === 0) {
+    return null;
+  }
 
   return (
     <Section bg="cream">

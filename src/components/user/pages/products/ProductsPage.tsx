@@ -47,7 +47,7 @@ export default function ProductsPage() {
       try {
         setIsLoading(true);
         const [prodRes, catRes] = await Promise.all([
-          apiClient.get("/products"),
+          apiClient.get("/products", { params: { type: "catalog" } }),
           apiClient.get("/categories"),
         ]);
 

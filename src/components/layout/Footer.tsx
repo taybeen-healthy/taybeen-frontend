@@ -13,14 +13,7 @@ export const Footer: React.FC = () => {
     message: string;
   }>({ type: null, message: "" });
 
-  const [categories, setCategories] = useState<any[]>([
-    { name: "Plain Dates" },
-    { name: "Stuffed Dates" },
-    { name: "Gift Hampers" },
-    { name: "Corporate Gifting" },
-    { name: "Wellness Boxes" },
-    { name: "Custom Orders" },
-  ]);
+  const [categories, setCategories] = useState<any[]>([{ name: "All Products" }]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -29,9 +22,12 @@ export const Footer: React.FC = () => {
         const data = response.data?.data || response.data || [];
         if (data.length > 0) {
           setCategories(data);
+        } else {
+          setCategories([{ name: "All Products" }]);
         }
       } catch (e) {
         console.error("Failed to fetch footer categories:", e);
+        setCategories([{ name: "All Products" }]);
       }
     };
     fetchCategories();
@@ -106,7 +102,11 @@ export const Footer: React.FC = () => {
               {categories.map((cat, idx) => (
                 <li key={cat.id || cat._id || idx}>
                   <Link
-                    href={`/products?category=${encodeURIComponent(cat.name)}`}
+                    href={
+                      cat.name === "All Products"
+                        ? "/products"
+                        : `/products?category=${encodeURIComponent(cat.name)}`
+                    }
                     className="hover:text-brand-primary link-underline"
                   >
                     {cat.name}
