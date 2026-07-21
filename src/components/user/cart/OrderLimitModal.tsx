@@ -90,7 +90,7 @@ export const OrderLimitModal: React.FC<OrderLimitModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: "spring", duration: 0.4, bounce: 0.1 }}
-            className="relative z-10 w-full max-w-[400px] bg-[#FDFAF3] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#F2EADA] flex flex-col items-center text-center select-text overflow-hidden"
+            className="relative z-10 w-full max-w-[400px] bg-[#FDFAF3] rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#F2EADA] flex flex-col items-center text-center select-text overflow-hidden scrollbar-none"
           >
             <button
               onClick={onClose}

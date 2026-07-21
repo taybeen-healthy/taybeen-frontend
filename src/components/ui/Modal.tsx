@@ -75,7 +75,7 @@ export const Modal: React.FC<ModalProps> = ({
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ type: "spring", duration: 0.5, bounce: 0.12 }}
         className={cn(
-          "relative z-10 w-full max-h-[85vh] md:max-h-[96vh] bg-white rounded-2xl overflow-y-auto shadow-premium flex flex-col border border-[#F2EADA] select-text",
+          "relative z-10 w-full max-h-[85vh] md:max-h-[96vh] bg-white rounded-2xl overflow-y-auto scrollbar-none shadow-premium flex flex-col border border-[#F2EADA] select-text",
           sizeClasses,
           flexClasses,
           className

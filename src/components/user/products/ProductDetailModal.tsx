@@ -138,7 +138,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
       isOpen={true}
       onClose={onClose}
       flexRowDirection="row"
-      className="max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl lg:h-auto overflow-y-auto"
+      className="max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl lg:h-auto overflow-y-auto scrollbar-none"
     >
       <button
         onClick={onClose}

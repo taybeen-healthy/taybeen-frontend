@@ -39,7 +39,7 @@ export const ComingSoonModal: React.FC<ComingSoonModalProps> = ({ product, onClo
         />
       </div>
 
-      <div className="flex-1 p-5 sm:p-8 lg:p-10 xl:p-14 overflow-y-auto flex flex-col justify-center items-center text-center h-auto lg:h-full select-text">
+      <div className="flex-1 p-5 sm:p-8 lg:p-10 xl:p-14 overflow-y-auto scrollbar-none flex flex-col justify-center items-center text-center h-auto lg:h-full select-text">
         <Image
           src="/TaybeenLogo.png"
           alt="Taybeen Logo"
