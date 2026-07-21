@@ -46,7 +46,6 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
             gifting: backendGifting,
           } = customizationData;
 
-          // Merge backend properties, keeping local fields as fallbacks
           if (backendHero) {
             setHero({
               ...homeData.hero,

@@ -11,7 +11,6 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
   return (
     <Section bg="cream" className="py-16 sm:py-20 md:py-24" id="founders-note">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-6 lg:gap-16 xl:gap-24 items-center">
-        {/* Mobile Heading - Rendered above the image on mobile/tablet */}
         <h2 className="lg:hidden text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-brown leading-tight w-full text-left">
           {data.title}
         </h2>
@@ -39,7 +38,6 @@ export const FounderNoteSection: React.FC<FounderNoteSectionProps> = ({ data }) 
         </div>
 
         <div className="space-y-2 text-left">
-          {/* Desktop Title - Hidden on mobile */}
           <h2 className="hidden lg:block text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-brand-brown leading-tight">
             {data.title}
           </h2>

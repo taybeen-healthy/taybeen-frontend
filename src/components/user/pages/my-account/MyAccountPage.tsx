@@ -188,7 +188,6 @@ export const MyAccountPage: React.FC = () => {
       );
     }
 
-    // Status is Approved or Expired, render dashboard with mapped data
     const mappedData = {
       totalSales: affiliateData.salesAmount ?? 0,
       salesSince: affiliateData.joinedDate
@@ -245,7 +244,6 @@ export const MyAccountPage: React.FC = () => {
   };
 
   useEffect(() => {
-    // Fetch customer profile & billing info
     apiClient
       .get("/customers/me")
       .then((res) => {
@@ -285,7 +283,7 @@ export const MyAccountPage: React.FC = () => {
       })
       .catch((err) => {
         console.error("Error fetching customer profile:", err);
-        // Fallback to local storage
+
         try {
           const storedProfile = localStorage.getItem("taybeen_profile");
           if (storedProfile) {
@@ -300,7 +298,6 @@ export const MyAccountPage: React.FC = () => {
         }
       });
 
-    // Fetch customer orders
     console.log("Fetching customer orders...");
     apiClient
       .get("/orders")
@@ -338,7 +335,6 @@ export const MyAccountPage: React.FC = () => {
       .catch((err) => console.error("Error fetching orders:", err))
       .finally(() => setLoadingOrders(false));
 
-    // Fetch affiliate dashboard
     apiClient
       .get("/affiliates/my-dashboard")
       .then((res) => {

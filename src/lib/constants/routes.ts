@@ -1,6 +1,3 @@
-/**
- * Application route constants for the taybeen-frontend store.
- */
 export const ROUTES = {
   HOME: "/",
   SIGNIN: "/signin",

@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 
-/**
- * Custom hook to manage values in local storage with automatic serialization.
- */
 export function useLocalStorage<T>(
   key: string,
   initialValue: T

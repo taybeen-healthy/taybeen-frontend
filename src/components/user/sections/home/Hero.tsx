@@ -13,13 +13,11 @@ export const Hero: React.FC = () => {
   const router = useRouter();
   const { hero } = useCustomization();
 
-  // Map 4 customization images with fallback values
   const ajwaImage = hero.heroImages?.[0] || homeData.hero.varieties.ajwa.image;
   const kalmiImage = hero.heroImages?.[1] || homeData.hero.varieties.kalmi.image;
   const sukkaryImage = hero.heroImages?.[2] || homeData.hero.varieties.sukkary.image;
   const safawiImage = hero.heroImages?.[3] || homeData.hero.varieties.safawi.image;
 
-  // Retrieve badging configurations
   const farmTitle = hero.farmTitle || homeData.hero.badges.farmToTableTitle;
   const farmDesc = hero.farmDesc || homeData.hero.badges.farmToTableDesc;
   const energyTitle = hero.energyTitle || homeData.hero.badges.energyTitle;

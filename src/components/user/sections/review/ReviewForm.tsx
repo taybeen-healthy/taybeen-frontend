@@ -33,7 +33,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Prefill profile
     try {
       const storedProfile = localStorage.getItem("taybeen_profile");
       if (storedProfile) {
@@ -45,7 +44,6 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmitSuccess }) => {
       console.error(e);
     }
 
-    // Fetch active products
     apiClient
       .get("/products?limit=100")
       .then((res) => {

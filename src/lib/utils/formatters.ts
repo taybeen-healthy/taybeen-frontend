@@ -22,7 +22,7 @@ export function formatIndianCurrency(amount: number, minimumFractionDigits = 0):
 export function getWeightInGrams(weightStr: string): number {
   if (!weightStr) return 0;
   const clean = weightStr.toLowerCase().replace(/\s+/g, "");
-  
+
   if (clean === "kg" || clean === "kilogram") return 1000;
   if (clean === "g" || clean === "gram" || clean === "grams") return 1;
 
@@ -34,4 +34,3 @@ export function getWeightInGrams(weightStr: string): number {
   }
   return Math.round(value);
 }
-

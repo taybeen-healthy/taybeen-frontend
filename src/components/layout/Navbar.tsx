@@ -55,7 +55,6 @@ export const Navbar: React.FC = () => {
     }
   }, [pathname]);
 
-  // Track session history for signin redirection
   useEffect(() => {
     const authRoutes = ["/signin", "/signup", "/reset-password", "/auth/callback"];
     const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
@@ -64,7 +63,6 @@ export const Navbar: React.FC = () => {
     }
   }, [pathname]);
 
-  // Close dropdown on click outside
   useEffect(() => {
     if (!isDropdownOpen) return;
     const handleOutsideClick = (e: MouseEvent) => {

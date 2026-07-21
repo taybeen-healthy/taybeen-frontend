@@ -90,7 +90,7 @@ const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       const selectionEnd = target.selectionEnd ?? 0;
       const selectedText = value.substring(selectionStart, selectionEnd);
       const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
-      const currentDigitsCount = digits.length - 2; // exclude 91
+      const currentDigitsCount = digits.length - 2;
       const netDigitsCount = currentDigitsCount - selectedDigitsCount;
 
       if (netDigitsCount >= 10) {
@@ -113,7 +113,7 @@ const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
 
     const currentDigits = value.replace(/\D/g, "");
-    const currentDigitsCount = currentDigits.length - 2; // exclude 91
+    const currentDigitsCount = currentDigits.length - 2;
 
     const netDigitsCount = currentDigitsCount - selectedDigitsCount;
     const remainingDigits = 10 - netDigitsCount;

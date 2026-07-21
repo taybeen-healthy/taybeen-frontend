@@ -24,7 +24,6 @@ const processQueue = (error: any, token: string | null = null) => {
   failedQueue = [];
 };
 
-// Request interceptor to attach access token
 apiClient.interceptors.request.use(
   (config) => {
     const token = getCookie("taybeen_access_token");
@@ -36,7 +35,6 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor to handle token refresh on 401
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -62,7 +60,6 @@ apiClient.interceptors.response.use(
           throw new Error("No refresh token available");
         }
 
-        // Call the refresh endpoint
         const refreshResponse = await axios.post(`${BASE_URL}/auth/refresh`, {
           refreshToken,
         });
@@ -85,7 +82,7 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError, null);
-        // Invalidate session on refresh failure
+
         removeCookie("taybeen_access_token");
         removeCookie("taybeen_refresh_token");
         if (typeof window !== "undefined") {

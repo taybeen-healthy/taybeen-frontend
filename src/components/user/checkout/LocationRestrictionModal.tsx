@@ -60,7 +60,6 @@ export const LocationRestrictionModal: React.FC<LocationRestrictionModalProps> =
             transition={{ type: "spring", duration: 0.4, bounce: 0.1 }}
             className="relative z-10 w-full max-w-[420px] bg-[#FDFAF3] rounded-[28px] overflow-hidden shadow-2xl border border-[#F2EADA] flex flex-col items-center text-center select-text scrollbar-none"
           >
-            {/* Top Header Banner with animated delivery truck emoji */}
             <div className="w-full bg-[#F4EBDC] pt-6 pb-5 px-6 relative flex flex-col items-center justify-center border-b border-[#EADFCF]">
               <button
                 onClick={onClose}
@@ -71,9 +70,7 @@ export const LocationRestrictionModal: React.FC<LocationRestrictionModalProps> =
               </button>
 
               <div className="relative w-full flex flex-col items-center justify-center pt-1">
-                {/* Truck driving container */}
                 <div className="flex items-center justify-center gap-2">
-                  {/* Motion trail lines */}
                   <motion.div
                     animate={{ opacity: [0.2, 0.8, 0.2], x: [-3, 0, -3] }}
                     transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
@@ -82,7 +79,6 @@ export const LocationRestrictionModal: React.FC<LocationRestrictionModalProps> =
                     <span>≡</span>
                   </motion.div>
 
-                  {/* Delivery truck emoji with driving vibration */}
                   <motion.div
                     animate={{
                       x: [-14, 14, -14],
@@ -98,47 +94,39 @@ export const LocationRestrictionModal: React.FC<LocationRestrictionModalProps> =
                   </motion.div>
                 </div>
 
-                {/* Subtle Road Line */}
                 <div className="w-40 h-[2.5px] bg-[#E2D2BC] rounded-full mt-1 opacity-80" />
               </div>
             </div>
 
-            {/* Modal Body Content */}
             <div className="p-6 sm:p-8 flex flex-col items-center w-full">
-              {/* Dark Brown Circle Location Icon Badge */}
               <div className="w-12 h-12 bg-[#4B3F05] rounded-full flex items-center justify-center mb-3.5 shadow-sm">
                 <MapPin size={22} className="text-white" strokeWidth={2.5} />
               </div>
 
-              {/* Title */}
               <h3 className="font-serif font-bold text-3xl sm:text-[32px] text-[#4B3F05] leading-tight mb-1">
                 Oops!
               </h3>
 
-              {/* Subtitle with dynamic location */}
               <p className="font-poppins text-sm sm:text-base text-[#78883B] mb-4">
                 Looks like you&apos;re in{" "}
                 <strong className="font-bold text-[#4B3F05] uppercase">{displayLocation}</strong>
               </p>
 
-              {/* Centered Split Divider Line */}
               <div className="flex items-center justify-center gap-3 w-full max-w-[260px] my-1">
                 <div className="flex-1 h-[1px] bg-[#E8DEC8]" />
                 <div className="flex-1 h-[1px] bg-[#E8DEC8]" />
               </div>
 
-              {/* Delivery restriction notice */}
               <p className="font-poppins text-sm sm:text-base text-[#4B3F05] mt-4 mb-1.5 font-medium">
                 We currently deliver only within{" "}
                 <strong className="font-bold text-[#6B7D2F]">Delhi NCR</strong>
               </p>
 
-              {/* Support sub-text */}
               <p className="font-poppins text-xs sm:text-sm text-[#8C7D6D] max-w-[280px] mb-6 leading-relaxed">
-                If you&apos;re ordering from another location, drop us a message and we&apos;ll sort it out!
+                If you&apos;re ordering from another location, drop us a message and we&apos;ll sort
+                it out!
               </p>
 
-              {/* WhatsApp Primary Button */}
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -149,7 +137,6 @@ export const LocationRestrictionModal: React.FC<LocationRestrictionModalProps> =
                 <span>Chat on WhatsApp</span>
               </a>
 
-              {/* Secondary Continue Browsing Link */}
               <button
                 onClick={onClose}
                 className="mt-4 font-poppins font-medium text-xs sm:text-sm text-[#9C8B76] underline hover:text-[#4B3F05] transition-colors cursor-pointer focus:outline-none"

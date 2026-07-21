@@ -8,7 +8,6 @@ import { useCustomization } from "@/context/CustomizationContext";
 export const Gifting: React.FC = () => {
   const { gifting } = useCustomization();
 
-  // Smart splitting for header styling to match brand aesthetic (making the last two words gold)
   const heading = gifting?.heading || "The Art of Premium Gifting";
   const words = heading.split(" ");
   let mainText = "The Art of";
@@ -22,7 +21,6 @@ export const Gifting: React.FC = () => {
     highlightedText = words.join(" ");
   }
 
-  // Fallback structures
   const mainCard = gifting?.mainCard || homeData.gifting.mainCard;
   const subCards = gifting?.subCards || homeData.gifting.subCards;
 
@@ -68,7 +66,6 @@ export const Gifting: React.FC = () => {
           </div>
 
           <div className="col-span-12 lg:col-span-5 flex flex-col gap-6 lg:h-full justify-between lg:min-h-0">
-            {/* Subcard 1 */}
             <div className="bg-brand-primary rounded-2xl overflow-hidden relative group w-full h-[220px] sm:h-[260px] lg:h-full lg:flex-1 lg:min-h-0">
               <Image
                 src={subCards[0]?.image || homeData.gifting.subCards[0].image}
@@ -87,7 +84,6 @@ export const Gifting: React.FC = () => {
               </h3>
             </div>
 
-            {/* Subcard 2 */}
             <div className="bg-brand-primary rounded-2xl overflow-hidden relative group w-full h-[220px] sm:h-[260px] lg:h-full lg:flex-1 lg:min-h-0">
               <Image
                 src={subCards[1]?.image || homeData.gifting.subCards[1].image}

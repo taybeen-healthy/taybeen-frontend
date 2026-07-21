@@ -136,11 +136,7 @@ export const isDelhiNCR = (address: {
   const state = (address.stateProvince || "").toLowerCase().trim();
   const pin = (address.postalCode || "").trim();
 
-  if (
-    state.includes("delhi") ||
-    state.includes("nct") ||
-    state === "dl"
-  ) {
+  if (state.includes("delhi") || state.includes("nct") || state === "dl") {
     return true;
   }
 
@@ -183,4 +179,3 @@ export const isDelhiNCR = (address: {
 
   return false;
 };
-

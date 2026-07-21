@@ -108,7 +108,7 @@ const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       const selectionEnd = target.selectionEnd ?? 0;
       const selectedText = value.substring(selectionStart, selectionEnd);
       const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
-      const currentDigitsCount = digits.length - 2; // exclude 91
+      const currentDigitsCount = digits.length - 2;
       const netDigitsCount = currentDigitsCount - selectedDigitsCount;
 
       if (netDigitsCount >= 10) {
@@ -131,7 +131,7 @@ const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const selectedDigitsCount = selectedText.replace(/\D/g, "").length;
 
     const currentDigits = value.replace(/\D/g, "");
-    const currentDigitsCount = currentDigits.length - 2; // exclude 91
+    const currentDigitsCount = currentDigits.length - 2;
 
     const netDigitsCount = currentDigitsCount - selectedDigitsCount;
     const remainingDigits = 10 - netDigitsCount;
@@ -220,7 +220,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
-      // Set temporary local URL for quick visual feedback
+
       const localUrl = URL.createObjectURL(file);
       setProfileForm((prev) => ({ ...prev, avatarUrl: localUrl }));
       setImageError(false);
@@ -272,7 +272,7 @@ export const AccountSettingsForm: React.FC<AccountSettingsFormProps> = ({
         const url = response.data?.url || response.data?.data?.url;
         if (url) {
           finalAvatarUrl = url;
-          // Sync form state
+
           setProfileForm((prev) => ({ ...prev, avatarUrl: url }));
         }
       }

@@ -27,7 +27,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isOrderLimitModalOpen, setIsOrderLimitModalOpen] = useState(false);
-  const [attemptedOrderInfo, setAttemptedOrderInfo] = useState<AttemptedOrderInfo | undefined>(undefined);
+  const [attemptedOrderInfo, setAttemptedOrderInfo] = useState<AttemptedOrderInfo | undefined>(
+    undefined
+  );
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -189,4 +191,3 @@ export const useCart = () => {
   }
   return context;
 };
-

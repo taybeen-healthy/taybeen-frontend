@@ -44,7 +44,6 @@ function AuthCallbackHandler() {
         })
       );
 
-      // Clean query parameters from browser history to prevent token leakage
       if (typeof window !== "undefined") {
         window.history.replaceState({}, document.title, window.location.pathname);
         sessionStorage.removeItem("taybeen_google_redirect");

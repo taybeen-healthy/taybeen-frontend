@@ -3,9 +3,6 @@
 import { useContext } from "react";
 import { ConfirmationContext } from "@/context/ConfirmationContext";
 
-/**
- * Hook to consume the global Confirmation Dialog system.
- */
 export function useConfirm() {
   const context = useContext(ConfirmationContext);
   if (!context) {

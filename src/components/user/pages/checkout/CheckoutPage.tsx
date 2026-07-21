@@ -121,7 +121,6 @@ export const CheckoutPage: React.FC = () => {
           }
         }
 
-        // Helper to check address validity
         const checkAddressValid = (addr: CheckoutAddressForm) => {
           return (
             !validateFirstName(addr.firstName) &&
@@ -149,7 +148,6 @@ export const CheckoutPage: React.FC = () => {
           return;
         }
 
-        // If no drafts, try to load from backend API first
         try {
           const res = await apiClient.get("/customers/me");
           const cust = res.data?.data || res.data;
@@ -192,14 +190,12 @@ export const CheckoutPage: React.FC = () => {
               phone: cust.billingAddress?.phone || cust.phone || "",
             };
 
-            // Align shipping and billing if only one was returned in DB
             if (cust.billingAddress && !cust.shippingAddress) {
               shippingAddr = { ...billingAddr };
             } else if (cust.shippingAddress && !cust.billingAddress) {
               billingAddr = { ...shippingAddr };
             }
 
-            // Sync with local storage if from DB
             if (cust.billingAddress) {
               localStorage.setItem("taybeen_billing", JSON.stringify(billingAddr));
             }
@@ -223,7 +219,6 @@ export const CheckoutPage: React.FC = () => {
           );
         }
 
-        // Fallback to local storage if API fails or isn't logged in
         const storedProfileStr = localStorage.getItem("taybeen_profile");
         const storedBillingStr = localStorage.getItem("taybeen_billing");
 
@@ -621,7 +616,8 @@ export const CheckoutPage: React.FC = () => {
     if (e) e.preventDefault();
 
     if (!isDelhiNCR(shippingForm)) {
-      const cityLoc = shippingForm.city?.trim() || shippingForm.stateProvince?.trim() || "your location";
+      const cityLoc =
+        shippingForm.city?.trim() || shippingForm.stateProvince?.trim() || "your location";
       setUserCityLocation(cityLoc);
       setIsLocationRestrictionOpen(true);
       return;

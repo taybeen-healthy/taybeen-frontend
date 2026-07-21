@@ -151,7 +151,6 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
         </div>
       </div>
 
-      {/* Payment Status Row */}
       <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-3.5 flex justify-between items-center select-none">
         <span className="text-xs font-poppins font-medium text-typo2">Payment Status</span>
         <span
@@ -167,7 +166,6 @@ export const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
         </span>
       </div>
 
-      {/* Invoice Row */}
       <div className="bg-[#FDFAF3] border-t border-[#C4A482]/20 px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left">
         <div className="flex flex-col">
           <span className="text-sm font-poppins font-medium text-brand-brown">

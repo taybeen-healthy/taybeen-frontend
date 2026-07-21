@@ -11,7 +11,7 @@ interface PortalDropdownProps {
   triggerRef: React.RefObject<HTMLElement | null>;
   children: React.ReactNode;
   className?: string;
-  width?: number; // width in pixels
+  width?: number;
   align?: "left" | "right";
 }
 

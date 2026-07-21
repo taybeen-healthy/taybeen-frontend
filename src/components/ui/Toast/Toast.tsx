@@ -20,7 +20,6 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
     return () => clearTimeout(timer);
   }, [id, duration, onClose]);
 
-  // Premium configurations for Left Accent Strip style
   const styles = {
     success: {
       wrapper:
@@ -77,17 +76,14 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
       className={`${styles.wrapper} max-w-sm w-full font-poppins text-sm`}
       role="alert"
     >
-      {/* Thick vertical color indicator strip on left edge */}
       <div className={`absolute left-0 top-0 bottom-0 w-[6px] ${styles.indicatorBg}`} />
 
-      {/* Large status badge container */}
       <div
         className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${styles.badgeBg} shadow-sm select-none`}
       >
         {styles.statusIconLarge}
       </div>
 
-      {/* Message Info */}
       <div className="flex-1 min-w-0 pt-0.5 select-text text-left">
         <h4
           className={`font-serif text-xs font-bold uppercase tracking-wider mb-0.5 ${styles.accentText}`}
@@ -97,7 +93,6 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
         <p className={`text-xs font-medium leading-relaxed ${styles.messageText}`}>{message}</p>
       </div>
 
-      {/* Close button */}
       <button
         onClick={() => onClose(id)}
         className={`shrink-0 p-1 rounded-lg transition-colors cursor-pointer ${styles.closeBtn}`}
@@ -106,7 +101,6 @@ export const Toast: React.FC<ToastProps> = ({ toast, onClose }) => {
         <CloseIcon size={14} strokeWidth={2.5} />
       </button>
 
-      {/* Progress track line */}
       <motion.div
         initial={{ width: "100%" }}
         animate={{ width: "0%" }}

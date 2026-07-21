@@ -8,9 +8,6 @@ interface UseModalReturn<T> {
   setData: React.Dispatch<React.SetStateAction<T | null>>;
 }
 
-/**
- * Custom hook for managing overlay states and data bindings.
- */
 export function useModal<T = any>(initialOpen = false): UseModalReturn<T> {
   const [isOpen, setIsOpen] = useState(initialOpen);
   const [data, setData] = useState<T | null>(null);

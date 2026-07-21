@@ -1,7 +1,3 @@
-/**
- * Utility functions to manage browser cookies client-side.
- */
-
 export function setCookie(name: string, value: string, days?: number | null) {
   if (typeof window === "undefined") return;
   let expires = "";

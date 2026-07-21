@@ -22,7 +22,6 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     setSubmitError(null);
 
-    // Validate phone number
     const phoneError = validatePhone(phone);
     if (phoneError) {
       setSubmitError(phoneError);

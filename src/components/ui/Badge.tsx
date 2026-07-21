@@ -22,13 +22,13 @@ export const Badge: React.FC<BadgeProps> = ({
       case "rare":
         return { backgroundColor: "#5A3E2B" };
       case "success":
-        return { backgroundColor: "#4A5E28" }; // Matches brand-green
+        return { backgroundColor: "#4A5E28" };
       case "pending":
-        return { backgroundColor: "#F59E0B" }; // Matches amber-500
+        return { backgroundColor: "#F59E0B" };
       case "error":
-        return { backgroundColor: "#EF4444" }; // Matches red-500
+        return { backgroundColor: "#EF4444" };
       case "info":
-        return { backgroundColor: "#3B82F6" }; // Matches blue-500
+        return { backgroundColor: "#3B82F6" };
       default:
         return { backgroundColor: "#768C3A" };
     }
