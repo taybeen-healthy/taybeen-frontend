@@ -18,3 +18,20 @@ export function formatIndianCurrency(amount: number, minimumFractionDigits = 0):
     minimumFractionDigits > 0 ? rounded.toFixed(minimumFractionDigits) : rounded.toString();
   return formatIndianNumber(formatted);
 }
+
+export function getWeightInGrams(weightStr: string): number {
+  if (!weightStr) return 0;
+  const clean = weightStr.toLowerCase().replace(/\s+/g, "");
+  
+  if (clean === "kg" || clean === "kilogram") return 1000;
+  if (clean === "g" || clean === "gram" || clean === "grams") return 1;
+
+  const value = parseFloat(clean);
+  if (isNaN(value)) return 0;
+
+  if (clean.includes("kg") || clean.includes("kilogram")) {
+    return Math.round(value * 1000);
+  }
+  return Math.round(value);
+}
+

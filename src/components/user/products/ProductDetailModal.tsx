@@ -10,7 +10,7 @@ import { StarRating } from "@/components/ui/StarRating";
 import { Select } from "@/components/ui/Select";
 import { useCart } from "@/context/CartContext";
 import { useCustomization } from "@/context/CustomizationContext";
-import { formatIndianCurrency } from "@/lib/utils";
+import { formatIndianCurrency, getWeightInGrams } from "@/lib/utils";
 import { apiClient } from "@/lib/apiClient";
 
 interface ProductDetailModalProps {
@@ -86,20 +86,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
     "High source of dietary fiber",
   ];
 
-  const getWeightInGrams = (weightStr: string): number => {
-    if (!weightStr) return 0;
-    const clean = weightStr.toLowerCase().replace(/\s+/g, "");
-    if (clean === "kg" || clean === "kilogram") return 1000;
-    if (clean === "g" || clean === "gram" || clean === "grams") return 1;
-
-    const value = parseFloat(clean);
-    if (isNaN(value)) return 0;
-    if (clean.includes("kg") || clean.includes("kilogram")) {
-      return value * 1000;
-    }
-    return value;
-  };
-
   const getPriceForWeight = (option: string, baseWeight: string, basePrice: number) => {
     const optionWeight = getWeightInGrams(option);
     const baseWeightInGrams = getWeightInGrams(baseWeight);
@@ -140,9 +126,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
   };
 
   const handleAddToCart = () => {
-    addToCart(detailedProduct, selectedWeight, quantity);
-    onClose();
-    setIsCartOpen(true);
+    const added = addToCart(detailedProduct, selectedWeight, quantity);
+    if (added) {
+      onClose();
+      setIsCartOpen(true);
+    }
   };
 
   return (

@@ -2,16 +2,23 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product, CartItem } from "@/types";
+import { getWeightInGrams } from "@/lib/utils";
+import { OrderLimitModal, AttemptedOrderInfo } from "@/components/user/cart/OrderLimitModal";
+
+const MAX_ORDER_WEIGHT_GRAMS = 2000;
 
 interface CartContextType {
   cartItems: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
-  addToCart: (product: Product, weight: string, quantity: number) => void;
+  isOrderLimitModalOpen: boolean;
+  setIsOrderLimitModalOpen: (isOpen: boolean) => void;
+  addToCart: (product: Product, weight: string, quantity: number) => boolean;
   removeFromCart: (productId: string, weight: string) => void;
-  updateQuantity: (productId: string, weight: string, quantity: number) => void;
+  updateQuantity: (productId: string, weight: string, quantity: number) => boolean;
   clearCart: () => void;
   cartCount: number;
+  totalWeightGrams: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -19,6 +26,8 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isOrderLimitModalOpen, setIsOrderLimitModalOpen] = useState(false);
+  const [attemptedOrderInfo, setAttemptedOrderInfo] = useState<AttemptedOrderInfo | undefined>(undefined);
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -43,16 +52,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cartItems, isInitialized]);
 
-  const getWeightInGrams = (weightStr: string): number => {
-    if (!weightStr) return 0;
-    const clean = weightStr.toLowerCase().replace(/\s+/g, "");
-    const value = parseFloat(clean);
-    if (isNaN(value)) return 0;
-    if (clean.includes("kg")) {
-      return value * 1000;
-    }
-    return value;
+  const calculateTotalWeightGrams = (items: CartItem[]): number => {
+    return items.reduce((acc, item) => {
+      const itemWeight = getWeightInGrams(item.selectedWeight || item.product.weight);
+      return acc + itemWeight * item.quantity;
+    }, 0);
   };
+
+  const totalWeightGrams = calculateTotalWeightGrams(cartItems);
 
   const getPriceForWeight = (option: string, baseWeight: string, basePrice: number) => {
     const optionWeight = getWeightInGrams(option);
@@ -63,7 +70,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return Math.round(basePrice * ratio);
   };
 
-  const addToCart = (product: Product, weight: string, quantity: number) => {
+  const addToCart = (product: Product, weight: string, quantity: number): boolean => {
+    const itemWeightInGrams = getWeightInGrams(weight || product.weight);
+    const additionalWeight = itemWeightInGrams * quantity;
+    const currentTotalWeight = calculateTotalWeightGrams(cartItems);
+
+    if (currentTotalWeight + additionalWeight > MAX_ORDER_WEIGHT_GRAMS) {
+      setAttemptedOrderInfo({
+        cartItems: cartItems,
+        attemptedProduct: product,
+        attemptedWeight: weight,
+        attemptedQuantity: quantity,
+      });
+      setIsOrderLimitModalOpen(true);
+      return false;
+    }
+
     const priceAtSelection = getPriceForWeight(weight, product.weight, product.price);
 
     setCartItems((prevItems) => {
@@ -79,6 +101,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return [...prevItems, { product, selectedWeight: weight, quantity, priceAtSelection }];
       }
     });
+
+    return true;
   };
 
   const removeFromCart = (productId: string, weight: string) => {
@@ -87,10 +111,32 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
-  const updateQuantity = (productId: string, weight: string, quantity: number) => {
+  const updateQuantity = (productId: string, weight: string, quantity: number): boolean => {
     if (quantity <= 0) {
       removeFromCart(productId, weight);
-      return;
+      return true;
+    }
+
+    const existingItem = cartItems.find(
+      (item) => item.product.id === productId && item.selectedWeight === weight
+    );
+
+    if (existingItem && quantity > existingItem.quantity) {
+      const itemWeightInGrams = getWeightInGrams(weight || existingItem.product.weight);
+      const diffQuantity = quantity - existingItem.quantity;
+      const additionalWeight = itemWeightInGrams * diffQuantity;
+      const currentTotalWeight = calculateTotalWeightGrams(cartItems);
+
+      if (currentTotalWeight + additionalWeight > MAX_ORDER_WEIGHT_GRAMS) {
+        setAttemptedOrderInfo({
+          cartItems: cartItems,
+          attemptedProduct: existingItem.product,
+          attemptedWeight: weight,
+          attemptedQuantity: quantity,
+        });
+        setIsOrderLimitModalOpen(true);
+        return false;
+      }
     }
 
     setCartItems((prevItems) =>
@@ -100,6 +146,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           : item
       )
     );
+
+    return true;
   };
 
   const clearCart = () => {
@@ -114,14 +162,22 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         cartItems,
         isCartOpen,
         setIsCartOpen,
+        isOrderLimitModalOpen,
+        setIsOrderLimitModalOpen,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
         cartCount,
+        totalWeightGrams,
       }}
     >
       {children}
+      <OrderLimitModal
+        isOpen={isOrderLimitModalOpen}
+        onClose={() => setIsOrderLimitModalOpen(false)}
+        attemptedInfo={attemptedOrderInfo}
+      />
     </CartContext.Provider>
   );
 };
@@ -133,3 +189,4 @@ export const useCart = () => {
   }
   return context;
 };
+
