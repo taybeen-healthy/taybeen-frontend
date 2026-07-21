@@ -123,3 +123,64 @@ export const validateCity = (city: string): string | null => {
   }
   return null;
 };
+
+export const isDelhiNCR = (address: {
+  city?: string;
+  stateProvince?: string;
+  postalCode?: string;
+  country?: string;
+}): boolean => {
+  if (!address) return false;
+
+  const city = (address.city || "").toLowerCase().trim();
+  const state = (address.stateProvince || "").toLowerCase().trim();
+  const pin = (address.postalCode || "").trim();
+
+  if (
+    state.includes("delhi") ||
+    state.includes("nct") ||
+    state === "dl"
+  ) {
+    return true;
+  }
+
+  const ncrCities = [
+    "delhi",
+    "new delhi",
+    "noida",
+    "greater noida",
+    "ghaziabad",
+    "gurgaon",
+    "gurugram",
+    "faridabad",
+    "sonipat",
+    "sonepat",
+    "bahadurgarh",
+    "jhajjar",
+    "rohtak",
+    "palwal",
+    "rewari",
+    "panipat",
+    "dadri",
+    "hapur",
+    "gautam buddh nagar",
+    "gautam buddha nagar",
+  ];
+
+  if (ncrCities.some((c) => city.includes(c) || c.includes(city))) {
+    return true;
+  }
+
+  if (
+    pin.startsWith("110") ||
+    pin.startsWith("122") ||
+    pin.startsWith("121") ||
+    pin.startsWith("2013") ||
+    pin.startsWith("2010")
+  ) {
+    return true;
+  }
+
+  return false;
+};
+

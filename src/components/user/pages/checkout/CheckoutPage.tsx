@@ -33,6 +33,7 @@ import {
   CheckoutReview,
   CheckoutOrderSummary,
   CouponCard,
+  LocationRestrictionModal,
 } from "@/components/user/checkout";
 import {
   validateFirstName,
@@ -43,6 +44,7 @@ import {
   validateStateProvince,
   validatePostalCode,
   validatePhone,
+  isDelhiNCR,
 } from "@/lib/utils/validation";
 
 import { useCustomization } from "@/context/CustomizationContext";
@@ -63,6 +65,9 @@ export const CheckoutPage: React.FC = () => {
   const [isSavingAddress, setIsSavingAddress] = useState(false);
   const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
   const [saveErrorMsg, setSaveErrorMsg] = useState<string | null>(null);
+
+  const [isLocationRestrictionOpen, setIsLocationRestrictionOpen] = useState(false);
+  const [userCityLocation, setUserCityLocation] = useState("");
 
   const [shippingForm, setShippingForm] = useState<CheckoutAddressForm>({
     firstName: "",
@@ -615,6 +620,13 @@ export const CheckoutPage: React.FC = () => {
   const handleProceedAction = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
+    if (!isDelhiNCR(shippingForm)) {
+      const cityLoc = shippingForm.city?.trim() || shippingForm.stateProvince?.trim() || "your location";
+      setUserCityLocation(cityLoc);
+      setIsLocationRestrictionOpen(true);
+      return;
+    }
+
     if (step === "form") {
       if (validateForm()) {
         setStep("review");
@@ -853,6 +865,11 @@ export const CheckoutPage: React.FC = () => {
       </div>
 
       <Footer />
+      <LocationRestrictionModal
+        isOpen={isLocationRestrictionOpen}
+        onClose={() => setIsLocationRestrictionOpen(false)}
+        locationName={userCityLocation}
+      />
     </div>
   );
 };
