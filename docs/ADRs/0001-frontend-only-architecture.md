@@ -1,5 +1,10 @@
 # ADR 0001: Standalone Storefront-Only Frontend Repository Layout
 
+- **Author / Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base Endpoint**: <https://api.taybeen.com/api/v1>
+
 ## Status
 
 Approved

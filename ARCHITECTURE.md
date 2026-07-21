@@ -1,21 +1,24 @@
-<!-- markdownlint-disable MD013 MD033 -->
-
 # System Architecture - Taybeen Storefront
 
 Detailed overview of routing patterns, rendering pipelines, request sequences, and conceptual schema models for the Taybeen Customer Storefront.
+
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base Endpoint**: <https://api.taybeen.com/api/v1>
 
 ---
 
 ## 1. System Context Diagram
 
-The following diagram maps interactions between storefront pages, user session caches, the backend API, and external platforms (Razorpay payment gateway):
+The following diagram maps interactions between storefront pages, user session caches, the backend API (`https://api.taybeen.com/api/v1`), and external platforms (Razorpay payment gateway):
 
 ```mermaid
 graph TD
-    User([Store Customer Browser]) -->|HTTP Requests| Storefront[Taybeen Storefront<br/>Next.js App Router]
+    User([Store Customer Browser]) -->|HTTPS Requests: taybeen.com| Storefront[Taybeen Storefront<br/>Next.js App Router]
     Storefront -->|Interactive Components| ClientJS[React 19 / Client Hydration]
     ClientJS -->|Auth cookies / Cart| LocalStore[(Cookies & LocalStorage)]
-    ClientJS -->|HTTPS API Requests| SiblingAPI[Taybeen Backend API]
+    ClientJS -->|HTTPS API Requests| SiblingAPI[Taybeen Backend API<br/>api.taybeen.com/api/v1]
     ClientJS -->|Dynamically requests scripts| RazorpaySDK[Razorpay Checkout SDK]
 ```
 

@@ -1,11 +1,20 @@
-<!-- markdownlint-disable MD013 MD033 -->
-
 # Changelog
 
 All notable changes to the Taybeen Storefront project will be documented in this file.
 
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base**: <https://api.taybeen.com/api/v1>
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.1] - 2026-07-22
+
+### Changed
+
+- **Documentation Synchronization**: Updated all project markdown documentation with lead developer metadata (Aaditya Gunjal, `aadigunjal0975@gmail.com`) and production service endpoints (`https://taybeen.com/`, `https://admin.taybeen.com/`, `https://api.taybeen.com/api/v1`).
 
 ## [0.1.0] - 2026-06-30
 

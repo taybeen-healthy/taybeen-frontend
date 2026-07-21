@@ -21,6 +21,11 @@ This repository containing the `taybeen-frontend` codebase represents **strictly
 
 Administrative operations (e.g., product updates, order audits, partner approvals) are segregated and run out of the sibling repository: [admin-taybeen](../admin-taybeen).
 
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base**: <https://api.taybeen.com/api/v1>
+
 ## Problem Statement
 
 Typical e-commerce platforms intertwine user-facing storefronts with back-office administration systems. This increases the customer-side JavaScript bundles and risks leaking access logic to standard client runtimes.
@@ -30,14 +35,16 @@ Taybeen separates these scopes by utilizing two distinct frontend repositories:
 1. `taybeen-frontend`: An optimized, fast-loading, highly-styled customer storefront.
 2. `admin-taybeen`: A restricted, private portal for team coordination.
 
-The storefront handles customer journeys securely via client cookies and localStorage caching, and links directly to the API endpoint for orders validation and payment orchestration.
+The storefront handles customer journeys securely via client cookies and localStorage caching, and links directly to the API endpoint (`https://api.taybeen.com/api/v1`) for orders validation and payment orchestration.
 
-## Live Demo
+## Live Demo & System Endpoints
 
-| Item                   | Link                                                  |
+| Service / Item         | Link / Endpoint                                       |
 | ---------------------- | ----------------------------------------------------- |
-| Storefront (Hostinger) | <https://taybeen.com>                                 |
-| Source                 | <https://github.com/taybeen-healthy/taybeen-frontend> |
+| Storefront (Live App)  | <https://taybeen.com/>                                |
+| Admin Dashboard Portal | <https://admin.taybeen.com/>                          |
+| Backend API Endpoint   | <https://api.taybeen.com/api/v1>                      |
+| Frontend Source Code   | <https://github.com/taybeen-healthy/taybeen-frontend> |
 
 ### Seeded Customer Access
 
@@ -230,9 +237,14 @@ The application is hosted on **Hostinger** and automatically deploys via Git che
 
 ---
 
-## Contributing
+## Developer & Maintainer
 
-Review [CONTRIBUTING.md](CONTRIBUTING.md) for Conventional Commits standards and branch naming structures.
+- **Developer**: Aaditya Gunjal
+- **Email**: [aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com)
+- **Live System Services**:
+  - **Storefront Application**: <https://taybeen.com/>
+  - **Admin Management Portal**: <https://admin.taybeen.com/>
+  - **Backend API Service**: <https://api.taybeen.com/api/v1>
 
 ---
 

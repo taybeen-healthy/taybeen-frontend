@@ -1,8 +1,11 @@
-<!-- markdownlint-disable MD013 MD033 -->
-
 # Developer Setup Guide - Taybeen Storefront
 
 This guide describes how to onboard, configure, and launch the Taybeen Storefront development environment.
+
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront Application**: <https://taybeen.com/>
+- **Production Admin Management Portal**: <https://admin.taybeen.com/>
+- **Production Backend API Service**: <https://api.taybeen.com/api/v1>
 
 ---
 
@@ -26,13 +29,13 @@ cp .env.example .env.local
 
 Modify the environment keys as follows:
 
-| Environment Key       | Category     | Default Value                  | Purpose                                 |
-| --------------------- | ------------ | ------------------------------ | --------------------------------------- |
-| `NEXT_PUBLIC_APP_URL` | Application  | `http://localhost:3000`        | Address of the storefront client server |
-| `NEXT_PUBLIC_API_URL` | API Endpoint | `http://localhost:5000/api/v1` | Sibling backend REST server address     |
+| Environment Key       | Category     | Development Default            | Production Endpoint              | Purpose                                 |
+| --------------------- | ------------ | ------------------------------ | -------------------------------- | --------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | Application  | `http://localhost:3000`        | `https://taybeen.com/`           | Address of the storefront client server |
+| `NEXT_PUBLIC_API_URL` | API Endpoint | `http://localhost:5000/api/v1` | `https://api.taybeen.com/api/v1` | Sibling backend REST server address     |
 
 > [!NOTE]
-> Make sure the backend server (typically running in the sibling folder [taybeen-backend-module1](../taybeen-backend-module1)) is active on the configured `NEXT_PUBLIC_API_URL` port to process authentication requests and orders checkout.
+> Make sure the backend server (typically running in the sibling folder [taybeen-backend-module1](../../taybeen-backend-module1) or hosted at `https://api.taybeen.com/api/v1`) is active on the configured `NEXT_PUBLIC_API_URL` port to process authentication requests and orders checkout.
 
 ---
 

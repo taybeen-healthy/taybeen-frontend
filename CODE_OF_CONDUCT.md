@@ -1,6 +1,11 @@
-<!-- markdownlint-disable MD013 MD033 -->
-
 # Contributor Covenant Code of Conduct
+
+- **Lead Developer & Community Leader**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base**: <https://api.taybeen.com/api/v1>
+
+---
 
 ## Our Pledge
 
@@ -52,6 +57,5 @@ an individual is officially representing the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-**security@taybeen.com**. All complaints will be reviewed and investigated
+reported directly to Lead Developer Aaditya Gunjal at **aadigunjal0975@gmail.com** or **security@taybeen.com**. All complaints will be reviewed and investigated
 promptly and fairly.

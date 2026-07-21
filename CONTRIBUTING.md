@@ -1,8 +1,11 @@
-<!-- markdownlint-disable MD013 MD033 -->
-
 # Contributing to Taybeen Storefront
 
 Thank you for contributing to Taybeen Storefront! To maintain code quality, styling consistency, and prevent layout regressions, please follow these guidelines.
+
+- **Lead Developer & Maintainer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base**: <https://api.taybeen.com/api/v1>
 
 ---
 

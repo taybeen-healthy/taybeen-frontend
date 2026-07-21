@@ -2,6 +2,11 @@
 
 This document maps all public pages, client-protected pages, and JSON API request/response contracts for the Taybeen Storefront.
 
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base Endpoint**: <https://api.taybeen.com/api/v1>
+
 ---
 
 ## 1. Storefront Pages Index
@@ -123,7 +128,7 @@ export interface Order {
 
 ## 3. Backend REST Endpoint Contacts
 
-All request URLs prefix with the base config: `${NEXT_PUBLIC_API_URL}` (which defaults to `http://localhost:5000/api/v1`).
+All request URLs prefix with the base config: `${NEXT_PUBLIC_API_URL}` (which defaults to `http://localhost:5000/api/v1` in local development and `https://api.taybeen.com/api/v1` in production).
 
 ### A. Authentication Endpoints
 

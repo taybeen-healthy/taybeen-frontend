@@ -2,6 +2,11 @@
 
 This document provides a complete onboarding reference for AI coding agents and developers working on the Taybeen Frontend Storefront repository.
 
+- **Lead Developer**: Aaditya Gunjal ([aadigunjal0975@gmail.com](mailto:aadigunjal0975@gmail.com))
+- **Production Storefront**: <https://taybeen.com/>
+- **Production Admin Portal**: <https://admin.taybeen.com/>
+- **Production API Base**: <https://api.taybeen.com/api/v1>
+
 ---
 
 ## 1. Project Map & Folder Directory
